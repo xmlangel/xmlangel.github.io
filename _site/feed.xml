@@ -1,4 +1,252 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-03-05T14:36:29+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though….. 그럼에도 불구하고 열심히</title><entry><title type="html">나의 첫 블로그!</title><link href="http://localhost:4000/jekyll/update/2017/03/05/first.html" rel="alternate" type="text/html" title="나의 첫 블로그!" /><published>2017-03-05T14:31:13+09:00</published><updated>2017-03-05T14:31:13+09:00</updated><id>http://localhost:4000/jekyll/update/2017/03/05/first</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/03/05/first.html">&lt;p&gt;Jekyll 을 이용해서 블로그를 시도해보려고한다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-03-13T01:53:22+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though….. 그럼에도 불구하고 열심히</title><entry><title type="html">Docker registry 로 개인 Docker 구축해보기</title><link href="http://localhost:4000/jekyll/update/2017/03/11/docker_registry_with_vagrant.html" rel="alternate" type="text/html" title="Docker registry 로 개인 Docker 구축해보기" /><published>2017-03-11T08:49:43+09:00</published><updated>2017-03-11T08:49:43+09:00</updated><id>http://localhost:4000/jekyll/update/2017/03/11/docker_registry_with_vagrant</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/03/11/docker_registry_with_vagrant.html">&lt;p&gt;도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.&lt;/p&gt;
+
+&lt;p&gt;그래서 할때 Docker registry 를 이용할수 있다.&lt;/p&gt;
+
+&lt;p&gt;관련 링크는 아래에서 확인가능하다.&lt;/p&gt;
+
+&lt;p&gt;그럼 시작해보겠다.&lt;/p&gt;
+
+&lt;p&gt;먼저 내가 사용환경은 Vagrant, docker,docker-compoose 를 이용하할것이다.&lt;/p&gt;
+
+&lt;p&gt;OS는 편한 Ubuntu 14.04 에서 설치를 진행하려고한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;vagrant-설정&quot;&gt;&lt;a href=&quot;#vagrant&quot;&gt;vagrant 설정&lt;/a&gt;&lt;/h1&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# -*- mode: ruby -*-&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# vi: set ft=ruby :&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Vagrant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;box&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;opscode-ubuntu-14.04&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;network&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;private_network&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;ip: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;11.168.20.1&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;network&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;public_network&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;bridge: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;en0: Wi-Fi (AirPort)&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#vagrant 에서 data 폴더를 공유해서사용 &lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;synced_folder&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;./data&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/vagrant_data&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;provision&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;shell&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;inline: &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;SHELL&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+   #한글 및 사용편위를 위한 패키지설치
+   sudo sed -i 's/us.archive.ubuntu.com/ftp.daum.net/g' /etc/apt/sources.list
+   sudo sed -i 's/security.archive.ubuntu.com/ftp.daum.net/g' /etc/apt/sources.list
+   sudo apt-get update
+   sudo apt-get install -y vim screen curl
+   
+   #Docker 설치
+   sudo apt-get install apt-transport-https ca-certificates
+   sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+   echo &quot;deb https://apt.dockerproject.org/repo ubuntu-trusty main&quot;&amp;gt;/etc/apt/sources.list.d/docker.list
+   sudo apt-get update
+   sudo apt-get install docker-engine -y
+   sudo service docker start
+
+   #Docker Compose 설치
+   sudo apt-get -y install python-pip
+   sudo pip install docker-compose
+
+   #apache2-utils에 있는 htpasswd 를 사용하기위한 패키지 다운로드
+   apt-get -y install apache2-utils
+
+&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;   SHELL&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;우분투의 다른 버전이라면 docker.list파일에 아래의 내용으로 변경해서 설치하면된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;### ubuntu 12.04&lt;/span&gt;
+deb https://apt.dockerproject.org/repo ubuntu-precise main
+
+&lt;span class=&quot;c&quot;&gt;### ubuntu 14.04&lt;/span&gt;
+deb https://apt.dockerproject.org/repo ubuntu-trusty main
+
+&lt;span class=&quot;c&quot;&gt;### ubuntu 15.10&lt;/span&gt;
+deb https://apt.dockerproject.org/repo ubuntu-wily main
+
+&lt;span class=&quot;c&quot;&gt;### ubuntu 16.04&lt;/span&gt;
+deb https://apt.dockerproject.org/repo ubuntu-xenial main&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;docker-composeyml-에-nginx-와-registry-설정을한다&quot;&gt;docker-compose.yml 에 nginx 와 registry 설정을한다.&lt;/h1&gt;
+
+&lt;p&gt;vagrant 에서 vagrant_data 로 연결하였으므로, vagrant_data 에서 작업을 한다.&lt;/p&gt;
+
+&lt;p&gt;디랙토리 구조를 아래와같이 해준다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant# &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /vagrant_data
+&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant_data# &lt;/span&gt;tree
+.
+|-- data
+|-- docker-compose.yml
+|-- nginx
+    |-- registry.conf&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;data 디랙토리와 nginx 디랙토리를 만들어준다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant_data# &lt;/span&gt;mkdir data
+&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant_data# &lt;/span&gt;mkdir nginx&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;data 디랙토리는 registry의 data 경로로 이용하고, nginx 는 nginx 설정파일이 저장될 위치이다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;docker-compose.yml&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;ss&quot;&gt;nginx:
+  image: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;nginx:1.9&quot;&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;ports:
+    &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5043&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;443&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;links:
+    &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:registry&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;volumes:
+     &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nginx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nginx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;d&lt;/span&gt;
+
+&lt;span class=&quot;ss&quot;&gt;registry:
+    image: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;registry:2&quot;&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;ports:
+        &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;127&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;environment:
+        &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/data
+    volumes:
+        - ./&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;registry.conf&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;upstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;443&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myregistrydomain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# SSL&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# ssl on;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# ssl_certificate /etc/nginx/conf.d/domain.crt;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# ssl_certificate_key /etc/nginx/conf.d/domain.key;&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# disable any limits to avoid HTTP 413 for large image uploads&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;client_max_body_size&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# required to avoid HTTP 411: see Issue #1486 (https://github.com/docker/docker/issues/1486)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;chunked_transfer_encoding&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/v2/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Do not allow connections from docker 1.5 and earlier&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# docker pre-1.6.0 did not properly set the user agent on ping, catch &quot;Go *&quot; user agents&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vg&quot;&gt;$http_user_agent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;^(docker&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\/&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;(3|4|5(?!&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;[0-9]-dev))|Go ).*$&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# To add basic authentication to v2 use auth_basic setting plus add_header&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# auth_basic &quot;registry.localhost&quot;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# auth_basic_user_file /etc/nginx/conf.d/registry.password;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# add_header 'Docker-Distribution-Api-Version' 'registry/2.0' always;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;proxy_pass&lt;/span&gt;                          &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:/&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;proxy_set_header&lt;/span&gt;  &lt;span class=&quot;no&quot;&gt;Host&lt;/span&gt;              &lt;span class=&quot;vg&quot;&gt;$http_host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# required for docker client's sake&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;proxy_set_header&lt;/span&gt;  &lt;span class=&quot;no&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Real&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;IP&lt;/span&gt;         &lt;span class=&quot;vg&quot;&gt;$remote_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# pass on real client's IP&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;proxy_set_header&lt;/span&gt;  &lt;span class=&quot;no&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Forwarded&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;For&lt;/span&gt;   &lt;span class=&quot;vg&quot;&gt;$proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;proxy_set_header&lt;/span&gt;  &lt;span class=&quot;no&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Forwarded&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Proto&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$scheme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;proxy_read_timeout&lt;/span&gt;                  &lt;span class=&quot;mi&quot;&gt;900&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;docker-compose 를 이용해서 docker 를 띄운후 결과를 확인해본다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;registry 에서 확인결과&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant_data# &lt;/span&gt;docker-compose up
+&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant_data# &lt;/span&gt;curl http://localhost:5000/v2/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;Output
+&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;nginx에서 확인결과&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant_data# &lt;/span&gt;docker-compose up
+&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant_data# &lt;/span&gt;curl http://127.0.0.1:5043/v2/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;Output
+&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;이제 정상적으로 동작하는것을 확인해보았다.&lt;/p&gt;
+
+&lt;p&gt;그럼 한번 Push 를 해보겠다.&lt;/p&gt;
+
+&lt;p&gt;내부에서 테스트를 해보려면.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo docker run hello-world
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo docker tag hello-world 127.0.0.1:5043/hello-world
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo docker push 127.0.0.1:5043/hello-world&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;다른 클라이언트에서 접속해서하려면.(vagrant 이므로 11.168.20.1 로 아이피가 지정되어있으므로 해당 아이피로 host 머신에서 접속테스트해보면된다.)&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo docker run hello-world
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo docker tag hello-world 11.168.20.1:5043/hello-world
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo docker push 127.0.0.1:5043/hello-world
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo pull 11.168.20.1:5043/hello-world&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;setting-up-authentication&quot;&gt;Setting Up Authentication&lt;/h2&gt;
+&lt;p&gt;누구나 접근이 가능하게 하면 이또한 문제 그래서 htpasswd utlity 를 이용해서 접속하게 하는 방법을 해보겠다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/docker-registry/nginx
+htpasswd -c registry.password USERNAME&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Username을 입력후 비빌번호를 입력해준다.
+그런후&lt;/p&gt;
+
+&lt;p&gt;registry.conf를 변경해준다. 이미 위에서 입력한내용을 주석으로 풀어준다.
+아래 내용의 주석을 풀어주면된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;# To add basic authentication to v2 use auth_basic setting plus add_header&lt;/span&gt;
+auth_basic &lt;span class=&quot;s2&quot;&gt;&quot;registry.localhost&quot;&lt;/span&gt;;
+auth_basic_user_file /etc/nginx/conf.d/registry.password;
+add_header &lt;span class=&quot;s1&quot;&gt;'Docker-Distribution-Api-Version'&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'registry/2.0'&lt;/span&gt; always;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;그런후 다시 실행해주면 인증이 필요하다고 한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;root@vagrant:/vagrant_data/#docker-compose down
+root@vagrant:/vagrant_data/#docker-compose up -d 
+&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant_data# &lt;/span&gt;curl http://localhost:5043/v2/
+&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;401 Authorization Required&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
+&amp;lt;body &lt;span class=&quot;nv&quot;&gt;bgcolor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;white&quot;&lt;/span&gt;&amp;gt;
+&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;401 Authorization Required&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;
+&amp;lt;hr&amp;gt;&amp;lt;center&amp;gt;nginx/1.9.15&amp;lt;/center&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;생성한 아이디와 패스워드를 입력하면 정상적으로 되는것을 확인할수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant_data# &lt;/span&gt;curl http://USERNAME:PASSWORD@localhost:5043/v2/
+&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;%&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;https  설정까지는 현재까지는 필요없어&lt;/p&gt;
+
+&lt;p&gt;일단 http 를 통해 사용자인증이 되는 환경까지는 구성됐다.&lt;/p&gt;
+
+&lt;p&gt;이제 이용하면 될것 같다..&lt;/p&gt;
+
+&lt;p&gt;https 는 다음을 위해 남겨놓고 오늘은 여기까지…&lt;/p&gt;
+
+&lt;h4 id=&quot;참고자료&quot;&gt;참고자료&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.digitalocean.com/community/tutorials/how-to-set-up-a-private-docker-registry-on-ubuntu-14-04&quot;&gt;How To Set Up a Private Docker Registry on Ubuntu 14.04
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;!-- http://gyus.me/?p=546 --&gt;
+
+&lt;!-- 
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+ --&gt;</content><author><name></name></author><summary type="html">도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.</summary></entry><entry><title type="html">나의 첫 블로그!</title><link href="http://localhost:4000/jekyll/update/2017/03/05/first.html" rel="alternate" type="text/html" title="나의 첫 블로그!" /><published>2017-03-05T14:31:13+09:00</published><updated>2017-03-05T14:31:13+09:00</updated><id>http://localhost:4000/jekyll/update/2017/03/05/first</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/03/05/first.html">&lt;p&gt;Jekyll 을 이용해서 블로그를 시도해보려고한다.&lt;/p&gt;
 
 &lt;p&gt;기존에 github 위키를 이용해서 정리 하던걸 이걸로 해볼예정이다..&lt;/p&gt;
 
@@ -10,16 +258,4 @@
   &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><summary type="html">Jekyll 을 이용해서 블로그를 시도해보려고한다.</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2017/03/05/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2017-03-05T14:24:13+09:00</published><updated>2017-03-05T14:24:13+09:00</updated><id>http://localhost:4000/jekyll/update/2017/03/05/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/03/05/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
-
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
-
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><summary type="html">Jekyll 을 이용해서 블로그를 시도해보려고한다.</summary></entry></feed>
