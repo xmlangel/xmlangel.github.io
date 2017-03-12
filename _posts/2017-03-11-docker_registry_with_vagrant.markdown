@@ -9,10 +9,13 @@ categories: jekyll update
 
 하지만 private registry 를 이용하면 어느정도는 극복할수 있다.
 
+사용할 환경은 
+- Vagrant
+- docker
+- docker-compoose
+- Ubuntu 14.04
 
-먼저 내가 사용환경은 Vagrant, docker,docker-compoose 를 이용 할것이다.
-
-OS는 편한 Ubuntu 14.04 에서 설치를 진행하려고한다.
+vagrant 를 이용하면 쉽게 구성이 가능하다.
 
 # [vagrant 설정](#vagrant)
 
@@ -55,7 +58,7 @@ Vagrant.configure(2) do |config|
 end
 {% endhighlight %}
 
-우분투의 다른 버전이라면 docker.list파일에 아래의 내용으로 변경해서 설치하면된다.
+ubuntu의 다른 버전이라면 docker.list파일에 아래의 내용으로 변경해서 설치하면된다.
 
 {% highlight shell %}
 ### ubuntu 12.04
@@ -75,7 +78,7 @@ deb https://apt.dockerproject.org/repo ubuntu-xenial main
 
 vagrant 에서 vagrant_data 로 연결하였으므로, vagrant_data 에서 작업을 한다.
 
-디랙토리 구조를 아래와같이 해준다.
+작업할 디랙토리 구조느 아래와 같다.
 
 {% highlight shell %}
 root@vagrant:/vagrant# cd /vagrant_data
