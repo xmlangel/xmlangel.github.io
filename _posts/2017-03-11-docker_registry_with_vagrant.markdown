@@ -7,14 +7,10 @@ categories: jekyll update
 
 도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.
 
-그래서 할때 Docker registry 를 이용할수 있다.
+하지만 private registry 를 이용하면 어느정도는 극복할수 있다.
 
 
-관련 링크는 아래에서 확인가능하다.
-
-그럼 시작해보겠다.
-
-먼저 내가 사용환경은 Vagrant, docker,docker-compoose 를 이용하할것이다.
+먼저 내가 사용환경은 Vagrant, docker,docker-compoose 를 이용 할것이다.
 
 OS는 편한 Ubuntu 14.04 에서 설치를 진행하려고한다.
 
