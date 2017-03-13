@@ -1,80 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
   <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Docker registry 로 개인 Docker 구축해보기 – Even Though ... 그럼에도 불구하고 열심히 – 작은 끄적거림</title>
 
-  <title>Docker registry 로 개인 Docker 구축해보기</title>
-  <meta name="description" content="도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.">
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
-  <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/jekyll/update/2017/03/11/docker_registry_with_vagrant.html">
-  <link rel="alternate" type="application/rss+xml" title="Even Though..... 그럼에도 불구하고 열심히" href="/feed.xml">
-  
-  
-</head>
+    
+    <meta name="description" content="도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.
 
+" />
+    <meta property="og:description" content="도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.
+
+" />
+    
+    <meta name="author" content="Even Though ... 그럼에도 불구하고 열심히" />
+
+    
+    <meta property="og:title" content="Docker registry 로 개인 Docker 구축해보기" />
+    <meta property="twitter:title" content="Docker registry 로 개인 Docker 구축해보기" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Even Though ... 그럼에도 불구하고 열심히 - 작은 끄적거림" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
 
   <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/jekyll-logo.png" /></a>
 
-    <header class="site-header" role="banner">
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Even Though ... 그럼에도 불구하고 열심히</a></h1>
+            <p class="site-description">작은 끄적거림</p>
+          </div>
 
-  <div class="wrapper">
-
-    <a class="site-title" href="/">Even Though..... 그럼에도 불구하고 열심히</a>
-
-    <nav class="site-nav">
-      <span class="menu-icon">
-        <svg viewBox="0 0 18 15" width="18px" height="15px">
-          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-        </svg>
-      </span>
-
-      <div class="trigger">
-        
-          
-          <a class="page-link" href="/about/">About</a>
-          
-        
-          
-        
-          
-        
-          
-        
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
       </div>
-    </nav>
+    </div>
 
-  </div>
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>Docker registry 로 개인 Docker 구축해보기</h1>
 
-</header>
-
-
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Docker registry 로 개인 Docker 구축해보기</h1>
-    <p class="post-meta"><time datetime="2017-03-11T08:49:43+09:00" itemprop="datePublished">Mar 11, 2017</time></p>
-  </header>
-
-  <div class="post-content" itemprop="articleBody">
+  <div class="entry">
     <p>도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.</p>
 
-<p>그래서 할때 Docker registry 를 이용할수 있다.</p>
+<p>하지만 private registry 를 이용하면 어느정도는 극복할수 있다.</p>
 
-<p>관련 링크는 아래에서 확인가능하다.</p>
+<p>사용할 환경은</p>
+<ul>
+  <li>Vagrant</li>
+  <li>docker</li>
+  <li>docker-compoose</li>
+  <li>Ubuntu 14.04</li>
+</ul>
 
-<p>그럼 시작해보겠다.</p>
-
-<p>먼저 내가 사용환경은 Vagrant, docker,docker-compoose 를 이용하할것이다.</p>
-
-<p>OS는 편한 Ubuntu 14.04 에서 설치를 진행하려고한다.</p>
+<p>vagrant 를 이용하면 쉽게 구성이 가능하다.</p>
 
 <h1 id="vagrant-설정"><a href="#vagrant">vagrant 설정</a></h1>
 
@@ -115,7 +110,7 @@
 </span><span class="no">   SHELL</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>우분투의 다른 버전이라면 docker.list파일에 아래의 내용으로 변경해서 설치하면된다.</p>
+<p>ubuntu의 다른 버전이라면 docker.list파일에 아래의 내용으로 변경해서 설치하면된다.</p>
 
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c">### ubuntu 12.04</span>
 deb https://apt.dockerproject.org/repo ubuntu-precise main
@@ -133,7 +128,7 @@ deb https://apt.dockerproject.org/repo ubuntu-xenial main</code></pre></figure>
 
 <p>vagrant 에서 vagrant_data 로 연결하였으므로, vagrant_data 에서 작업을 한다.</p>
 
-<p>디랙토리 구조를 아래와같이 해준다.</p>
+<p>작업할 디랙토리 구조느 아래와 같다.</p>
 
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">root@vagrant:/vagrant# </span><span class="nb">cd</span> /vagrant_data
 <span class="gp">root@vagrant:/vagrant_data# </span>tree
@@ -316,56 +311,36 @@ root@vagrant:/vagrant_data/#docker-compose up -d
 
   </div>
 
+  <div class="date">
+    Written on March 11, 2017
+  </div>
+
   
 </article>
 
-      </div>
-    </main>
+    </div>
 
-    <footer class="site-footer">
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Even Though..... 그럼에도 불구하고 열심히</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>
-            
-              Even Though..... 그럼에도 불구하고 열심히
-            
-            </li>
-            
-            <li><a href="mailto:kwangmyung.kim@gmail.com">kwangmyung.kim@gmail.com</a></li>
-            
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
           
-          <li>
-            <a href="https://github.com/xmlangel"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
-</span><span class="username">xmlangel</span></a>
+<a href="mailto:kwangmyung.kim@gmail.com"><i class="svg-icon email"></i></a>
 
-          </li>
-          
 
-          
-        </ul>
-      </div>
+<a href="https://github.com/xmlangel"><i class="svg-icon github"></i></a>
 
-      <div class="footer-col footer-col-3">
-        <p></p>
+
+
+
+
+
+
+
+        </footer>
       </div>
     </div>
 
-  </div>
-
-</footer>
-
+    
 
   </body>
-
 </html>

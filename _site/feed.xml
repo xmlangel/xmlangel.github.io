@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-03-13T01:53:22+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though….. 그럼에도 불구하고 열심히</title><entry><title type="html">Docker registry 로 개인 Docker 구축해보기</title><link href="http://localhost:4000/jekyll/update/2017/03/11/docker_registry_with_vagrant.html" rel="alternate" type="text/html" title="Docker registry 로 개인 Docker 구축해보기" /><published>2017-03-11T08:49:43+09:00</published><updated>2017-03-11T08:49:43+09:00</updated><id>http://localhost:4000/jekyll/update/2017/03/11/docker_registry_with_vagrant</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/03/11/docker_registry_with_vagrant.html">&lt;p&gt;도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-03-14T06:59:26+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though … 그럼에도 불구하고 열심히</title><subtitle>작은 끄적거림</subtitle><entry><title type="html">Docker registry 로 개인 Docker 구축해보기</title><link href="http://localhost:4000/docker_registry_with_vagrant/" rel="alternate" type="text/html" title="Docker registry 로 개인 Docker 구축해보기" /><published>2017-03-11T08:49:43+09:00</published><updated>2017-03-11T08:49:43+09:00</updated><id>http://localhost:4000/docker_registry_with_vagrant</id><content type="html" xml:base="http://localhost:4000/docker_registry_with_vagrant/">&lt;p&gt;도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.&lt;/p&gt;
 
-&lt;p&gt;그래서 할때 Docker registry 를 이용할수 있다.&lt;/p&gt;
+&lt;p&gt;하지만 private registry 를 이용하면 어느정도는 극복할수 있다.&lt;/p&gt;
 
-&lt;p&gt;관련 링크는 아래에서 확인가능하다.&lt;/p&gt;
+&lt;p&gt;사용할 환경은&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Vagrant&lt;/li&gt;
+  &lt;li&gt;docker&lt;/li&gt;
+  &lt;li&gt;docker-compoose&lt;/li&gt;
+  &lt;li&gt;Ubuntu 14.04&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;그럼 시작해보겠다.&lt;/p&gt;
-
-&lt;p&gt;먼저 내가 사용환경은 Vagrant, docker,docker-compoose 를 이용하할것이다.&lt;/p&gt;
-
-&lt;p&gt;OS는 편한 Ubuntu 14.04 에서 설치를 진행하려고한다.&lt;/p&gt;
+&lt;p&gt;vagrant 를 이용하면 쉽게 구성이 가능하다.&lt;/p&gt;
 
 &lt;h1 id=&quot;vagrant-설정&quot;&gt;&lt;a href=&quot;#vagrant&quot;&gt;vagrant 설정&lt;/a&gt;&lt;/h1&gt;
 
@@ -49,7 +51,7 @@
 &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;   SHELL&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;우분투의 다른 버전이라면 docker.list파일에 아래의 내용으로 변경해서 설치하면된다.&lt;/p&gt;
+&lt;p&gt;ubuntu의 다른 버전이라면 docker.list파일에 아래의 내용으로 변경해서 설치하면된다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;### ubuntu 12.04&lt;/span&gt;
 deb https://apt.dockerproject.org/repo ubuntu-precise main
@@ -67,7 +69,7 @@ deb https://apt.dockerproject.org/repo ubuntu-xenial main&lt;/code&gt;&lt;/pre&g
 
 &lt;p&gt;vagrant 에서 vagrant_data 로 연결하였으므로, vagrant_data 에서 작업을 한다.&lt;/p&gt;
 
-&lt;p&gt;디랙토리 구조를 아래와같이 해준다.&lt;/p&gt;
+&lt;p&gt;작업할 디랙토리 구조느 아래와 같다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant# &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /vagrant_data
 &lt;span class=&quot;gp&quot;&gt;root@vagrant:/vagrant_data# &lt;/span&gt;tree
@@ -246,7 +248,7 @@ root@vagrant:/vagrant_data/#docker-compose up -d
 &lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
- --&gt;</content><author><name></name></author><summary type="html">도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.</summary></entry><entry><title type="html">나의 첫 블로그!</title><link href="http://localhost:4000/jekyll/update/2017/03/05/first.html" rel="alternate" type="text/html" title="나의 첫 블로그!" /><published>2017-03-05T14:31:13+09:00</published><updated>2017-03-05T14:31:13+09:00</updated><id>http://localhost:4000/jekyll/update/2017/03/05/first</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/03/05/first.html">&lt;p&gt;Jekyll 을 이용해서 블로그를 시도해보려고한다.&lt;/p&gt;
+ --&gt;</content><author><name></name></author><summary type="html">도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.</summary></entry><entry><title type="html">나의 첫 블로그!</title><link href="http://localhost:4000/first/" rel="alternate" type="text/html" title="나의 첫 블로그!" /><published>2017-03-05T14:31:13+09:00</published><updated>2017-03-05T14:31:13+09:00</updated><id>http://localhost:4000/first</id><content type="html" xml:base="http://localhost:4000/first/">&lt;p&gt;Jekyll 을 이용해서 블로그를 시도해보려고한다.&lt;/p&gt;
 
 &lt;p&gt;기존에 github 위키를 이용해서 정리 하던걸 이걸로 해볼예정이다..&lt;/p&gt;
 
