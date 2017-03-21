@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>dpkg 를 사용하여 소프트웨어 관리하기와 덤으로 openvpn 설치해보기 – Even Though ... 그럼에도 불구하고 열심히 – 작은 끄적거림</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="나의 메인 OS는 mac OS 이다. 업무용으로 ubuntu 14.04 을 쓴다. 사실 회사에서의 일만 아니면 쓸일이 없다.
+
+" />
+    <meta property="og:description" content="나의 메인 OS는 mac OS 이다. 업무용으로 ubuntu 14.04 을 쓴다. 사실 회사에서의 일만 아니면 쓸일이 없다.
+
+" />
+    
+    <meta name="author" content="Even Though ... 그럼에도 불구하고 열심히" />
+
+    
+    <meta property="og:title" content="dpkg 를 사용하여 소프트웨어 관리하기와 덤으로 openvpn 설치해보기" />
+    <meta property="twitter:title" content="dpkg 를 사용하여 소프트웨어 관리하기와 덤으로 openvpn 설치해보기" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Even Though ... 그럼에도 불구하고 열심히 - 작은 끄적거림" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="/images/xmlangel.jpg" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Even Though ... 그럼에도 불구하고 열심히</a></h1>
+            <p class="site-description">작은 끄적거림</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>dpkg 를 사용하여 소프트웨어 관리하기와 덤으로 openvpn 설치해보기</h1>
+
+  <div class="entry">
+    <p>나의 메인 OS는 mac OS 이다. 업무용으로 ubuntu 14.04 을 쓴다. 사실 회사에서의 일만 아니면 쓸일이 없다.</p>
+
+<p>I Love Windows.</p>
+
+<p>업무적으로 쓰는 package를 관리하기 위해 .deb 파일을 쓴다.</p>
+
+<p>.deb는 dpkg 명령으로 설치할수 있다.</p>
+
+<p>설치에 앞서 테스트에 사용할 패키지파일을 받아보겠다.</p>
+
+<p>ubuntu 에서는 시스템에 필요한 소프트웨어 패키지 설치, 검색, 다운로드, 업그레이드등을 apt를 이용해서 관리한다.</p>
+
+<p>그럼 apt 를 이용해서 openvpn을 받아보겠다.</p>
+
+<p>-d 명령어를 쓰면 설치하지 않고, deb 파일을 다운받는다.</p>
+
+<p>다운받은 파일은 /var/cache/apt/archives 에 저장된다.</p>
+
+<p>디스크 공간 확보를 위해 디랙토리에 캐시되어 있는 패키지를 삭제하려면 clean 을 입력하면된다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">apt-get clean</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">.
+|-- lock
+<span class="sb">`</span>-- partial</code></pre></figure>
+
+<p>나의 경우 pogopulg를 심심풀이로 가지고 노는데 용량이 부족한경우가 많아 종종 위의 명령어를 이용한다.</p>
+
+<p>그럼 패키지파일을 다운받아보겠다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /var/cache/apt/archives
+apt-get -d install openvpn easy-rsa
+
+tree
+.
+|-- easy-rsa_2.2.2-1_all.deb
+|-- lock
+|-- openvpn_2.3.2-7ubuntu3.1_amd64.deb
+<span class="sb">`</span>-- partial</code></pre></figure>
+
+<p>openvpn_2.3.2-7ubuntu3.1_amd64.deb 과 easy-rsa_2.2.2-1_all.deb 파일을 볼수있다.</p>
+
+<p>아직설치는 안된상태이다.</p>
+
+<p>설치를 해보겠다.</p>
+
+<p>설치는 -i 명령어를 이용하면된다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -i &lt;.deb file&gt;</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -i openvpn_2.3.2-7ubuntu3.1_amd64.deb</code></pre></figure>
+
+<p>설치가 되었는지 보겠다. -l 명령어를 이용하면된다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -l &lt; package Name&gt;</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -l | grep openvpn
+ii  openvpn                          2.3.2-7ubuntu3.1                    amd64        virtual private network daemon</code></pre></figure>
+
+<p>패키지 삭제는 -r 옵션을 이용하면된다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -r &lt; package Name &gt;</code></pre></figure>
+
+<p>그럼 다운받은 .deb 파일을 풀어보겠다.</p>
+
+<p>패키지를 푸는것은 -x 를 이용하면된다.</p>
+
+<p>데비안 우분투 패키지는 .deb라는 단일 파일로 묶여있다. 각각의 .deb 파일은 그 내부에 빌드된 파일들을 풀어서 어떤 파일들으 있는지 확인 가능하다.</p>
+
+<p>/tmp/openvpn 폴더에 풀어서 보겠다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -x openvpn_2.3.2-7ubuntu3.1_amd64.deb /tmp/openvpn</code></pre></figure>
+
+<p>.deb의 내부 제어 스크립트파일은 -e 명령어로 풀수있다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -e openvpn_2.3.2-7ubuntu3.1_amd64.deb /tmp/<span class="nv">$RANDOM</span></code></pre></figure>
+
+<p>설치된 리스트 확인은 -L 명령을 이용하면 된다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">dpkg -L openvpn</code></pre></figure>
+
+<h1 id="deb-패키지만들기">deb 패키지만들기</h1>
+
+<p>Random 으로 만든파일을 debian 폴더로 변경후 /tmp/openvpn 에 넣어준다.</p>
+
+<p>아래와 같은 구조가 되겠다.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">.
+|-- debian
+|-- etc
+|   |-- bash_completion.d
+|   |-- default
+|   |-- init.d
+|   |-- network
+|   |   |-- <span class="k">if</span>-down.d
+|   |   <span class="sb">`</span>-- <span class="k">if</span>-up.d
+|   <span class="sb">`</span>-- openvpn
+<span class="sb">`</span>-- usr
+    |-- include
+    |   <span class="sb">`</span>-- openvpn
+    |-- lib
+    |   <span class="sb">`</span>-- openvpn
+    |-- sbin
+    <span class="sb">`</span>-- share
+        |-- doc
+        |   <span class="sb">`</span>-- openvpn
+        |       <span class="sb">`</span>-- examples
+        |           |-- sample-config-files
+        |           |-- sample-keys
+        |           <span class="sb">`</span>-- sample-scripts
+        |-- man
+        |   <span class="sb">`</span>-- man8
+        <span class="sb">`</span>-- openvpn</code></pre></figure>
+
+
+  </div>
+
+  <div class="date">
+    Written on March 17, 2017
+  </div>
+  <div class="comments">
+	  
+  </div>
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:kwangmyung.kim@gmail.com"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/xmlangel"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>
