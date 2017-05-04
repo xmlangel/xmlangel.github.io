@@ -1,8 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-03-22T07:18:19+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though … 그럼에도 불구하고 열심히</title><subtitle>작은 끄적거림</subtitle><entry><title type="html">openvpn 설치해보기</title><link href="http://localhost:4000/openvpn/" rel="alternate" type="text/html" title="openvpn 설치해보기" /><published>2017-03-17T14:00:13+09:00</published><updated>2017-03-17T14:00:13+09:00</updated><id>http://localhost:4000/openvpn</id><content type="html" xml:base="http://localhost:4000/openvpn/">apt-get install openvpn easy-rsa
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-04T10:48:41+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though … 그럼에도 불구하고 열심히</title><subtitle>작은 끄적거림</subtitle><entry><title type="html">SoapUI-Cookbook을 읽기 시작함</title><link href="http://localhost:4000/soapui/" rel="alternate" type="text/html" title="SoapUI-Cookbook을 읽기 시작함" /><published>2017-05-04T10:00:13+09:00</published><updated>2017-05-04T10:00:13+09:00</updated><id>http://localhost:4000/soapui</id><content type="html" xml:base="http://localhost:4000/soapui/">https://www.packtpub.com/web-development/soapui-cookbook
+
+&lt;br&gt;
+
+https://www.packtpub.com/web-development/mastering-soapui
+
+&lt;br&gt;
+
+
+Mastering SoapUI 와 SoapUI Cookbook 둘중하나중 어느것을 볼까 하다가 SoapUI Cookbook 을 읽기 시작했다.
+
+&lt;br&gt;
+
+
+언제까지볼까나.. 
+
+&lt;br&gt;
+
+
+일단 소스를 받아야겠다. 
+
+&lt;br&gt;
+
+
+https://github.com/PacktPublishing/SoapUI-Cookbook 
+
+&lt;br&gt;
+ &lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+소스는 역시 github 에서 받으면된다.
+
+&lt;br&gt;
+
+* 목차
+{:toc}</content><author><name></name></author><summary type="html">https://www.packtpub.com/web-development/soapui-cookbook</summary></entry><entry><title type="html">openvpn 설치해보기</title><link href="http://localhost:4000/openvpn/" rel="alternate" type="text/html" title="openvpn 설치해보기" /><published>2017-03-17T14:00:13+09:00</published><updated>2017-03-17T14:00:13+09:00</updated><id>http://localhost:4000/openvpn</id><content type="html" xml:base="http://localhost:4000/openvpn/">apt-get install openvpn easy-rsa
 
 make-cadir /home/vagrant/openvpn-ca
 cd /home/vagrant/openvpn-ca
-source vars</content><author><name></name></author><summary type="html">apt-get install openvpn easy-rsa</summary></entry><entry><title type="html">dpkg 를 사용하여 소프트웨어 관리하기와 덤으로 openvpn 설치해보기</title><link href="http://localhost:4000/debian.dpkg/" rel="alternate" type="text/html" title="dpkg 를 사용하여 소프트웨어 관리하기와 덤으로 openvpn 설치해보기" /><published>2017-03-17T14:00:13+09:00</published><updated>2017-03-17T14:00:13+09:00</updated><id>http://localhost:4000/debian.dpkg</id><content type="html" xml:base="http://localhost:4000/debian.dpkg/">&lt;p&gt;나의 메인 OS는 mac OS 이다. 업무용으로 ubuntu 14.04 을 쓴다. 사실 회사에서의 일만 아니면 쓸일이 없다.&lt;/p&gt;
+source vars</content><author><name></name></author><summary type="html">apt-get install openvpn easy-rsa</summary></entry><entry><title type="html">dpkg 를 사용하여 소프트웨어 관리해보기</title><link href="http://localhost:4000/debian.dpkg/" rel="alternate" type="text/html" title="dpkg 를 사용하여 소프트웨어 관리해보기" /><published>2017-03-17T14:00:13+09:00</published><updated>2017-03-17T14:00:13+09:00</updated><id>http://localhost:4000/debian.dpkg</id><content type="html" xml:base="http://localhost:4000/debian.dpkg/">&lt;p&gt;나의 메인 OS는 mac OS 이다. 업무용으로 ubuntu 14.04 을 쓴다. 사실 회사에서의 일만 아니면 쓸일이 없다.&lt;/p&gt;
 
 &lt;p&gt;I Love Windows.&lt;/p&gt;
 
