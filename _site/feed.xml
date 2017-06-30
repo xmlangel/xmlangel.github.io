@@ -1,4 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-06-30T23:19:28+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though … 그럼에도 불구하고 열심히</title><subtitle>작은 끄적거림</subtitle><entry><title type="html">SoapUI-Cookbook을 읽기 시작함</title><link href="http://localhost:4000/soapui/" rel="alternate" type="text/html" title="SoapUI-Cookbook을 읽기 시작함" /><published>2017-05-04T10:00:13+09:00</published><updated>2017-05-04T10:00:13+09:00</updated><id>http://localhost:4000/soapui</id><content type="html" xml:base="http://localhost:4000/soapui/">https://www.packtpub.com/web-development/soapui-cookbook
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-06-30T23:39:25+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though … 그럼에도 불구하고 열심히</title><subtitle>작은 끄적거림</subtitle><entry><title type="html">Jmeter 어떻게 쓰지?</title><link href="http://localhost:4000/How-Can-I-Use-Jmeter/" rel="alternate" type="text/html" title="Jmeter 어떻게 쓰지?" /><published>2017-06-28T00:02:49+09:00</published><updated>2017-06-28T00:02:49+09:00</updated><id>http://localhost:4000/How-Can-I-Use-Jmeter</id><content type="html" xml:base="http://localhost:4000/How-Can-I-Use-Jmeter/">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#jmeter-사용해보기&quot; id=&quot;markdown-toc-jmeter-사용해보기&quot;&gt;Jmeter 사용해보기&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#간단한-테스트-해보기&quot; id=&quot;markdown-toc-간단한-테스트-해보기&quot;&gt;간단한 테스트 해보기&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#처음화면&quot; id=&quot;markdown-toc-처음화면&quot;&gt;처음화면&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#threads&quot; id=&quot;markdown-toc-threads&quot;&gt;Threads&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ip-spooping-하는법&quot; id=&quot;markdown-toc-ip-spooping-하는법&quot;&gt;IP Spooping 하는법&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#alias-하기&quot; id=&quot;markdown-toc-alias-하기&quot;&gt;alias 하기&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#alias-삭제&quot; id=&quot;markdown-toc-alias-삭제&quot;&gt;alias 삭제&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#csv-data-set-config&quot; id=&quot;markdown-toc-csv-data-set-config&quot;&gt;CSV Data Set Config&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;jmeter-사용해보기&quot;&gt;Jmeter 사용해보기&lt;/h1&gt;
+
+&lt;p&gt;웹테스트를 진행하다가 동시 사용자 몇명까지 처리가 가능한지 또는 부하를 주고 싶을경우 Jmeter 를 이용하면 손쉽게 테스트를 할수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;간단한-테스트-해보기&quot;&gt;간단한 테스트 해보기&lt;/h2&gt;
+
+&lt;h4 id=&quot;처음화면&quot;&gt;처음화면&lt;/h4&gt;
+&lt;p&gt;Jmeter 를 실행하면 아래와 같은 화면이 나타난다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-01.png&quot; alt=&quot;Jmeter-01&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;threads&quot;&gt;Threads&lt;/h4&gt;
+&lt;p&gt;Test 를 수행할때 제일 먼재 해줘야 하는 부분이 Threads(User)를 만들어주는 부분이다 모든 시작은 여기서 부터 해준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-02.png&quot; alt=&quot;Jmeter-02&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Thread Group 이 만들어진다.&lt;/p&gt;
+
+&lt;p&gt;여기서 수행할 사람수 일반적으로 user 라고 한다. 그리고 반복할 획수를 지정할수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-03.png&quot; alt=&quot;Jmeter-03&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;여기서는 10 명의 User 가 3 회 반복으로 총 30회 반복을 수행하는것으로 설정한것이다.&lt;/p&gt;
+
+&lt;h1 id=&quot;ip-spooping-하는법&quot;&gt;IP Spooping 하는법&lt;/h1&gt;
+
+&lt;p&gt;Mac 을 이용해서 다른부분은 일단 Pass 하고 mac 에서 하는법&lt;/p&gt;
+
+&lt;h4 id=&quot;alias-하기&quot;&gt;alias 하기&lt;/h4&gt;
+&lt;p&gt;ifconfig 로 아이피확인후 비슷한 아이피대역으로 alias 를 걸어주면된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ifconfig&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;en0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;192&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;168&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-ipspooping.png&quot; alt=&quot;Jmeter-ipspooping&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;alias-삭제&quot;&gt;alias 삭제&lt;/h4&gt;
+&lt;p&gt;alias 삭제하는 법은 아래와같다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ifconfig&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;en0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;192&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;168&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;IP 를 추가했으므로, 이제 Jmeter 에서 IP 를 지정해서 테스트를 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;HTTP Request 의 Advanced 에서 아이피를 지정 하면 된다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-ipspooping-01.png&quot; alt=&quot;Jmeter-ipspooping-01&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;csv-data-set-config&quot;&gt;CSV Data Set Config&lt;/h4&gt;
+&lt;p&gt;CSV 를 이용해서 할 수도 있다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-ipspooping-02.png&quot; alt=&quot;Jmeter-ipspooping-02&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;먼저 CSV 파일을 생성해놓는다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-ipspooping-03.png&quot; alt=&quot;Jmeter-ipspooping-03&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;CSV Data Set Config 설정을 한다. 
+File 경로와 변수설정을 해놓는다. 여기서는 변수가 IP 이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-ipspooping-04.png&quot; alt=&quot;Jmeter-ipspooping-04&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;설정한 변수를 HTTPS Request 의 IP 에 할당한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-ipspooping-05.png&quot; alt=&quot;Jmeter-ipspooping-05&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;테스트를 실행하면 Request 에 설정한 값들로 IP 가 적용된것을 확인 해볼 수 있다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-ipspooping-06.png&quot; alt=&quot;Jmeter-ipspooping-06&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">SoapUI-Cookbook을 읽기 시작함</title><link href="http://localhost:4000/soapui/" rel="alternate" type="text/html" title="SoapUI-Cookbook을 읽기 시작함" /><published>2017-05-04T10:00:13+09:00</published><updated>2017-05-04T10:00:13+09:00</updated><id>http://localhost:4000/soapui</id><content type="html" xml:base="http://localhost:4000/soapui/">https://www.packtpub.com/web-development/soapui-cookbook
 
 &lt;br&gt;
 
