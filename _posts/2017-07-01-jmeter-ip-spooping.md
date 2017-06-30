@@ -4,10 +4,12 @@ title:  "Jmeter-IP Spooping"
 date:   2017-07-01 06:02:49 +0900
 categories: jekyll update
 ---
+스푸핑(Spoofing)의 사전적 의미는 '속이다'이다. 테스트 진행시 IP 를 변경해서 테스트를 진행하고 싶을경우 어떻게 진행해야 할까?
+
 * 목차
 {:toc}
-# IP Spooping 하는법
 
+# IP Spooping 하는법
 Mac 을 이용해서 다른부분은 일단 Pass 하고 mac 에서 하는법
 
 #### alias 하기
