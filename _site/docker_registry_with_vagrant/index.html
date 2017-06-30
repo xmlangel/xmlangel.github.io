@@ -9,11 +9,9 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
     
-    <meta name="description" content="도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.
-
+    <meta name="description" content="
 " />
-    <meta property="og:description" content="도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.
-
+    <meta property="og:description" content="
 " />
     
     <meta name="author" content="Even Though ... 그럼에도 불구하고 열심히" />
@@ -57,7 +55,18 @@
   <h1>Docker registry 로 개인 Docker 구축해보기</h1>
 
   <div class="entry">
-    <p>도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.</p>
+    <ul id="markdown-toc">
+  <li><a href="#vagrant-설정" id="markdown-toc-vagrant-설정"><a href="#vagrant">vagrant 설정</a></a></li>
+  <li><a href="#docker-composeyml-에-nginx-와-registry-설정을한다" id="markdown-toc-docker-composeyml-에-nginx-와-registry-설정을한다">docker-compose.yml 에 nginx 와 registry 설정을한다.</a>    <ul>
+      <li><a href="#setting-up-authentication" id="markdown-toc-setting-up-authentication">Setting Up Authentication</a>        <ul>
+          <li><a href="#참고자료" id="markdown-toc-참고자료">참고자료</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>도커를 이용하면서 도커허브에 올리면 좋겠지만 내부에서 이용 하려고 할때 Open할수 없는 정보들이 있을수 있다.</p>
 
 <p>하지만 private registry 를 이용하면 어느정도는 극복할수 있다.</p>
 
