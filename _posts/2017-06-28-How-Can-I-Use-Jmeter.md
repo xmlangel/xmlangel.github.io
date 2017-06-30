@@ -1,83 +1,108 @@
 ---
 layout: post
-title:  "Jmeter 어떻게 쓰지?"
+title:  "Jmeter 어떻게 쓰지?-01"
 date:   2017-06-28 00:02:49 +0900
 categories: jekyll update
 ---
+
+웹테스트를 진행하다가 동시 사용자 몇명까지 처리가 가능한지 또는 부하를 주고 싶을경우 Jmeter 를 이용하면 손쉽게 테스트를 할수 있다.
+
 * 목차
 {:toc}
 
 # Jmeter 사용해보기
 
-웹테스트를 진행하다가 동시 사용자 몇명까지 처리가 가능한지 또는 부하를 주고 싶을경우 Jmeter 를 이용하면 손쉽게 테스트를 할수 있다.
+## 테스트 환경
+
+부하 발생을 목적으로 하는 프로그램으로(물론 일반 웹시나리오 테스트들도 이용이 가능하다.) 외부로 테스트를 수행하면 네트워크에 무리가 갈수 있으므로 내가 사용하고 있는 PC 에서 환경을 만들어 테스트를 해보고자 한다.
+
+간단히 테스트 해보기 위해 Spring PetShop 을 이용해보겠다. 
+
+해당 프로젝트는 아래에서 확인 가능하다.
+
+<https://github.com/spring-projects/spring-petclinic>
+
+{% highlight git %}
+git clone https://github.com/spring-projects/spring-petclinic.git
+cd spring-petclinic
+./mvnw spring-boot:run
+{% endhighlight %}
+build 후 java 로 실행도 가능하다.
+
+{% highlight shell %}
+java -jar spring-petclinic-1.5.1.jar --server.port=8080 &
+{% endhighlight %}
+
+
+
+http://localhost:8080 으로 접속하면  개새끼 한마리랑 냥이 한마리가 보일것이다.
+
+![petshop]({{ site.url }}/assets/images/petshopforspring.png){: width="100%" height="100%"}
 
 ## 간단한 테스트 해보기
+Jmeter 에서는 테스트 스크립트를 Test Plan 이라고 표현한다. 
+
+처음 만들어볼 Test Plan 은 3 Step 으로 진행해보려고 한다. 
+
+1. Pet Shop 페이지 진입
+2. Find Owner 페이지에 접속
+3. Error 발생 페이지 접속
+
+* Pet Shop 페이지 진입
+![petshop]({{ site.url }}/assets/images/petshopforspring.png){: width="100%" height="100%"}
+
+* Find Owner 페이지에 접속
+![petshop-01]({{ site.url }}/assets/images/petshop-01.png){: width="100%" height="100%"}
+
+* Error 발생 페이지 접속 
+![petshop-02]({{ site.url }}/assets/images/petshop-02.png){: width="100%" height="100%"}
 
 #### 처음화면
-Jmeter 를 실행하면 아래와 같은 화면이 나타난다.
+Jmeter 를 처음 실행하면 Test Plan 이라는 아래와 같은 화면이 나타난다.
 
 ![Jmeter-01]({{ site.url }}/assets/images/jmeter-01.png){: width="100%" height="100%"}
 
-#### Threads 
+#### Threads>Thread Group 
 Test 를 수행할때 제일 먼재 해줘야 하는 부분이 Threads(User)를 만들어주는 부분이다 모든 시작은 여기서 부터 해준다.
-
+Add>Threads>Thread Group
 ![Jmeter-02]({{ site.url }}/assets/images/jmeter-02.png){: width="50%" height="50%"}
 
 Thread Group 이 만들어진다.
 
-여기서 수행할 사람수 일반적으로 user 라고 한다. 그리고 반복할 획수를 지정할수 있다.
+여기서 수행할 사람수 일반적으로 user 라고 한다. 그리고 반복할 횟수를 지정할수 있다.
 
 ![Jmeter-03]({{ site.url }}/assets/images/jmeter-03.png){: width="100%" height="100%"}
 
 여기서는 10 명의 User 가 3 회 반복으로 총 30회 반복을 수행하는것으로 설정한것이다.
 
-# IP Spooping 하는법
+#### Sampler>Http Request Sampler
+테스트 리스트를 생성하기위해 Http Request Sampler 를 추가해준다.
 
-Mac 을 이용해서 다른부분은 일단 Pass 하고 mac 에서 하는법
+![HttpREquest]({{ site.url }}/assets/images/Httprequest.png){: width="100%" height="100%"}
 
-#### alias 하기
-ifconfig 로 아이피확인후 비슷한 아이피대역으로 alias 를 걸어주면된다.
+추가후 Server Name 에 localhost Port number 에 8080 을 입력해준다.
+![Httprequest-02]({{ site.url }}/assets/images/jmeter-04.png){: width="100%" height="100%"}
+#### Listner>View Result Tree
+정상 동작하는지 보고싶지 않은가? 그냥 하면 동작하는지 알수 없다.  
+Listner 를 추가해줘야 한다.
 
-{% highlight ruby %}
-sudo ifconfig en0 alias 192.168.0.12 255.255.255.0
+View Result Tree Listner 를 추가해준후 실행을 하면 결과를 볼 수 있다.
+![viewResultTree-01]({{ site.url }}/assets/images/jmeter-05.png){: width="100%" height="100%"}
 
-{% endhighlight %}
+Result 를 보면 정상으로 처리된걸 볼수 있다.
+![viewResultTree-02]({{ site.url }}/assets/images/jmeter-06.png){: width="100%" height="100%"}
 
+### Config Element>Http Request Defaults
+여러개의 스텝을 넣어야 하는데 URL만 같고 뒤의 path 만 다르다. 이럴경우 Config Element 를 이용해서 쉽게 설정이 가능하다.
 
-![Jmeter-ipspooping]({{ site.url }}/assets/images/jmeter-ipspooping.png){: width="100%" height="100%"}
-
-#### alias 삭제
-alias 삭제하는 법은 아래와같다.
-{% highlight ruby %}
-sudo ifconfig en0 -alias 192.168.0.12
-
-{% endhighlight %}
-
-IP 를 추가했으므로, 이제 Jmeter 에서 IP 를 지정해서 테스트를 할 수 있다.
-
-HTTP Request 의 Advanced 에서 아이피를 지정 하면 된다.
-![Jmeter-ipspooping-01]({{ site.url }}/assets/images/jmeter-ipspooping-01.png){: width="100%" height="100%"}
-
-#### CSV Data Set Config
-CSV 를 이용해서 할 수도 있다.
-![Jmeter-ipspooping-02]({{ site.url }}/assets/images/jmeter-ipspooping-02.png){: width="100%" height="100%"}
-
-먼저 CSV 파일을 생성해놓는다.
-
-![Jmeter-ipspooping-03]({{ site.url }}/assets/images/jmeter-ipspooping-03.png){: width="50%" height="50%"}
-
-CSV Data Set Config 설정을 한다. 
-File 경로와 변수설정을 해놓는다. 여기서는 변수가 IP 이다.
-
-![Jmeter-ipspooping-04]({{ site.url }}/assets/images/jmeter-ipspooping-04.png){: width="100%" height="100%"}
-
-설정한 변수를 HTTPS Request 의 IP 에 할당한다.
-
-![Jmeter-ipspooping-05]({{ site.url }}/assets/images/jmeter-ipspooping-05.png){: width="100%" height="100%"}
-
-테스트를 실행하면 Request 에 설정한 값들로 IP 가 적용된것을 확인 해볼 수 있다.
-![Jmeter-ipspooping-06]({{ site.url }}/assets/images/jmeter-ipspooping-06.png){: width="100%" height="100%"}
-
+Http Request Defaults 를 이용하면 URL 만 넣고, Sampler 에서는 Path 만 지정해서 사용가능하다.
+![HttpRequestDefault-01]({{ site.url }}/assets/images/jmeter-07.png){: width="100%" height="100%"}
+Server Name 과 Port 정보에 공통으로 사용할 정보들을 넣어준다.
+![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-08.png){: width="100%" height="100%"}
+그리고 기존에 Http Request 에서는 해당부분을 삭제해준다.
+![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-09.png){: width="100%" height="100%"}
+실행후 결과를 보면 공통으로 적용된 부분을 볼 수 있다.
+![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-10.png){: width="100%" height="100%"}
 
 {% highlight ruby %}
 
