@@ -121,12 +121,15 @@ Thread Group 에서 테스트 시간에 따른 Thread 숫자를 그래프로 볼
 
 점진적으로 증가하는 것은 테스트 할수 없다.
 
-만약 10개의 Thread 로 1분 동안 테스트 하고, 다시 10개의 Thread 를 차가해서 20개의 Thread 로 1분동안 테스트하도록 설저한다면 Thread Group의 Ramp-Up Period 로는 테스트 할 수 없다.(뭐 Thread Group 을 추가로 생성해서 StartUp Delay 를 각각 1분씩 추가하는 꼼수를 부릴수는 있겠다.)
+### Threads>Stepping Thread Group
+
+만약 10개의 Thread 로 1분 동안 테스트 하고, 다시 10개의 Thread 를 추가해서 20개의 Thread 로 1분동안 테스트하도록 설정한다면 Thread Group의 Ramp-Up Period 로는 테스트 할 수 없다.(뭐 Thread Group 을 추가로 생성해서 StartUp Delay 를 각각 1분씩 추가하는 꼼수를 부릴수는 있겠다.)
 
 이럴경우 추가로 플러그인은 추가해서 사용하는방법들이 있을 수 있다.
 아래는 jp@gc - Stepping Thread Group 을 추가해서 테스트를 기본 Thread Group 을 삭제하고 옮겨봤다.
 ![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-16.png){: width="100%" height="100%"}
-100명의 유저를 10 명씩 추가되는화면을 볼수 있다.
+
+Threads Scheduling Parameters 에서 설정한데로 100명의 유저를 10 명씩 추가되는화면을 볼수 있다.
 ![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-17.png){: width="100%" height="100%"}
 
 간단하게 적으려고 했는데 적다보니 길어졌다. 
