@@ -104,6 +104,38 @@ Server Name 과 Port 정보에 공통으로 사용할 정보들을 넣어준다.
 실행후 결과를 보면 공통으로 적용된 부분을 볼 수 있다.
 ![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-10.png){: width="100%" height="100%"}
 
+나머지 부분도 Http Request 를 만들고 이름을 변경해서 정리해준후 결과를 보면 아래와 같이 모두 정상적으로 수행된 결과를 볼 수 있다.
+![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-11.png){: width="100%" height="100%"}
+
+Thread Group 에서 테스트 시간에 따른 Thread 숫자를 그래프로 볼수도 있다.
+
+![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-12.png){: width="100%" height="100%"}.
+10개의 Thread 를 60초동안 생성했으므로 계단처럼 단계적으로 생성된것처럼 보인다.
+
+![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-13.png){: width="100%" height="100%"}
+
+하지만 기본으로 제공되는 Thread Group 의 Ramp-Up Period 는 정교하지 못하다. Thread 를 100으로 설정해보겠다.
+![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-14.png){: width="100%" height="100%"}
+선형으로 나타난것을 볼수 있다.
+![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-15.png){: width="100%" height="100%"}
+
+점진적으로 증가하는 것은 테스트 할수 없다.
+
+만약 10개의 Thread 로 1분 동안 테스트 하고, 다시 10개의 Thread 를 차가해서 20개의 Thread 로 1분동안 테스트하도록 설저한다면 Thread Group의 Ramp-Up Period 로는 테스트 할 수 없다.(뭐 Thread Group 을 추가로 생성해서 StartUp Delay 를 각각 1분씩 추가하는 꼼수를 부릴수는 있겠다.)
+
+이럴경우 추가로 플러그인은 추가해서 사용하는방법들이 있을 수 있다.
+아래는 jp@gc - Stepping Thread Group 을 추가해서 테스트를 기본 Thread Group 을 삭제하고 옮겨봤다.
+![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-16.png){: width="100%" height="100%"}
+100명의 유저를 10 명씩 추가되는화면을 볼수 있다.
+![HttpRequestDefault-02]({{ site.url }}/assets/images/jmeter-17.png){: width="100%" height="100%"}
+
+간단하게 적으려고 했는데 적다보니 길어졌다. 
+
+좀더 정리해가면서 적고 오늘은 여기시 그만.........
+
+간만에 쓰려니 역시 이것저것 써보면서 해봐야겠다.
+
+
 {% highlight ruby %}
 
 {% endhighlight %}
