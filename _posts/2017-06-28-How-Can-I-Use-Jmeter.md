@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Jmeter 어떻게 쓰지?-01"
+title:  "Jmeter-어떻게 쓰지?-01"
 date:   2017-06-28 00:02:49 +0900
 categories: jekyll update
 ---
