@@ -4,12 +4,10 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
+사소하게 끄적거리고, 머리의 메모리가 휘발성이라 여기에 기록합니다.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[kwangmyung.kim@gmail.com](mailto:kwangmyung.kim@gmail.com)
+~
+~
