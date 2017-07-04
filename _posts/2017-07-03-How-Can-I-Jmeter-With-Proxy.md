@@ -3,6 +3,8 @@ layout: post
 title:  "Jmeter-어떻게 쓰지-02"
 date:   2017-07-03 19:02:49 +0900
 categories: jekyll update
+tags:
+- Jmeter
 ---
 여러 URL 을 테스트할 경우 각각의 Http Request를 생성 하려면 시간이 많이 걸립니다. Http Request를 자동으로 생성 작성할 수는 없을까요?
 * 목차

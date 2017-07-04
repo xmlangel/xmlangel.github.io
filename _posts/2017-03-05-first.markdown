@@ -23,3 +23,6 @@ end
 print_hi('Tom')
 #=> prints 'Hi, Tom' to STDOUT.
 {% endhighlight %}
+
+작업일지
+- 2017.07.04 Tag 추가 :  https://hyesun03.github.io/2016/12/05/jekyllTag/

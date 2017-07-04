@@ -3,6 +3,8 @@ layout: post
 title:  "Jmeter-IP Spooping"
 date:   2017-07-01 06:02:49 +0900
 categories: jekyll update
+tags:
+- Jmeter
 ---
 스푸핑(Spoofing)의 사전적 의미는 '속이다'이다. 테스트 진행시 IP 를 변경해서 테스트를 진행하고 싶을경우 어떻게 진행해야 할까?
 

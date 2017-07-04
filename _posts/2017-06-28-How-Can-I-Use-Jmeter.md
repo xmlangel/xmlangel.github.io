@@ -3,6 +3,8 @@ layout: post
 title:  "Jmeter-어떻게 쓰지?-01"
 date:   2017-06-28 00:02:49 +0900
 categories: jekyll update
+tags:
+- Jmeter
 ---
 
 웹테스트를 진행하다가 동시 사용자 몇명까지 처리가 가능한지 또는 부하를 주고 싶을경우 Jmeter 를 이용하면 손쉽게 테스트를 할수 있다.
