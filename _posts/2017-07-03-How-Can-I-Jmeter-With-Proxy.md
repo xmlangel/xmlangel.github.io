@@ -35,9 +35,39 @@ Recoding Controller 를 추가해준다.
 Start 를 누르면 레코딩이 시작된다.
 ![Jmeter-Test-Script-Recoder]({{ site.url }}/assets/images/jmeter-21.png){: width="100%" height="100%"}
 
-작성중.....
-작성중.....
-작성중.....
+인증서가 나오면 확인을 하면된다.
+
+![Jmeter-Test-Script-Recoder]({{ site.url }}/assets/images/jmeter-23.png){: width="100%" height="100%"}
+
+IE 에서는 proxy 설정이 쉬으므로 패스 그리고 지금은 Mac 이라서 IE 를 쓸수 없다. 
+
+크롬에서 녹화를 해보겠다.
+
+크롬에서 녹화를 하기위해서 proxy 설정을 해보겠다.
+
+확장프로그램은 Quick & Dirty Proxy Flipper 를 이용해보겠다.
+쓰고싶은 다른 프로그램이 있으면 이용해도 된다.
+
+확장프로그램은 알아서 받아서 설치한다.
+
+![Chrome-Proxy]({{ site.url }}/assets/images/Chrome_proxy.png){: width="50%" height="50%"}
+
+Jmeter 에서 8888 을 설정해놔서 http://localhost:8888 으로 설정해준다.
+
+![Chrome-Proxy]({{ site.url }}/assets/images/Chrome_proxy-01.png){: width="50%" height="50%"}
+
+이제 여기저기 돌아다녀본다. 돌아다닌후 Proxy 설정을 원래대로 바꿔주고 Jmeter 에서 녹화된것을 확인 해본다. 뭔가가 많다.
+
+![Jmeter-Test-Script-Recoder]({{ site.url }}/assets/images/jmeter-24.png){: width="50%" height="50%"}
+
+png, css 등 불필요한 파일들은 삭제해준다. 그러면 수동으로 설정한것과 같이 녹화된 것을 확인 할 수 있다.
+
+![Jmeter-Test-Script-Recoder]({{ site.url }}/assets/images/jmeter-25.png){: width="100%" height="100%"}
+
+Threads Group를 추가하고, 녹화된 파일을 붙여준후 실행해주면 된다.
+
+오늘은 여기까지 다음엔 뭘더볼까..ㅎㅎ
+
 {% highlight ruby %}
 
 {% endhighlight %}
