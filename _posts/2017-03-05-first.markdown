@@ -26,3 +26,5 @@ print_hi('Tom')
 
 작업일지
 - 2017.07.04 Tag 추가 :  https://hyesun03.github.io/2016/12/05/jekyllTag/
+
+- 2017.07.20 Recents 추가 : http://demun.github.io/jekyll/newpost/

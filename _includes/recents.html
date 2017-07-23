@@ -1,0 +1,14 @@
+<h3>Recent</h3>
+{% for post in site.posts | limit:3 %}
+  <article class="featured-list">
+    <header class="featured-header">
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </header>
+    <div class="featured-post">
+      {{ post.content | strip_html | strip_newlines | truncate: 50 }}
+    </div>
+    <footer>
+      <a href="{{ post.url }}" class="button">Read more...</a>
+    </footer>
+  </article>
+{% endfor %}
