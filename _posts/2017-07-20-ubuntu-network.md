@@ -31,17 +31,37 @@ root@local-vm-ubuntu:~# ip link show
     link/ether 08:00:27:8f:3c:58 brd ff:ff:ff:ff:ff:ff
 {% endhighlight %}
 
-# 고정아이피 설정
+# Ip Setting
+
 우분투를 처음 설치하면 다른 리눅스 배포판과 마찬가지로 유동아이피로 설정되어 있다.
 
 아이피를 변경하기 위해서는 아래 파일을 변경해야 한다.
 
-### interface 변경
+## interface 변경
 
 {% highlight bash %}
 /etc/network/ interfaces
 {% endhighlight %}
 
+### DHCP 설정
+{% highlight bash %}
+auto eth0
+iface eth0 inet dhcp
+{% endhighlight %}
+만약 2개의 NIC 를 이용하면 하나의 NIC 에는 Default gateway 설정을 해준다.
+
+{% highlight bash %}
+auto eth0
+iface eth0 inet dhcp
+post-up route add default gw 192.168.0.1
+
+auto eth1
+iface eth1 inet dhcp
+
+{% endhighlight %}
+
+
+### 고정아이피 설정
 
 {% highlight bash %}
 auto eth0
@@ -54,7 +74,8 @@ dns-nameservers xxx.xxx.xxx.xxx
 
 {% endhighlight %}
 
-### 네트워크 설정 재시작
+
+## 네트워크 설정 재시작
 설정파일을 편집했으면 네트워크를 재시작해야 한다.
 
 
