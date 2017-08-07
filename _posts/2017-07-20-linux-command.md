@@ -70,3 +70,6 @@ grep make_ /var/opt/ignite/recovery/latest/recovery.log  <-- HP ignite백업
 grep -i -e error -e fail /var/adm/syslog/syslog.log   <-- HP syslog
 tail -f /var/adm/rc.log    <-- HP 부팅 후 프로세스가 정상수행됐는지..
 {% endhighlight %}
+
+## Crontab 주기
+크론tab의 주기를 볼수 있는 웹페이지 [crontab](https://crontab.guru/)
