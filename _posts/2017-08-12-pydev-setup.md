@@ -54,6 +54,75 @@ virtualenv --python=python3.5 python3.5
 {% highlight ruby %}
  (python3.5) $ 
 {% endhighlight %}
+## 다른방법(virtualEnv Wrapper의 설치
+virtual Env 의 다른방법으로는 Virtualenvwrapper 를 이용하는 방법도 있다.
+
+아래와 같이 설치해주면 virtualenv 도 함께 설치된다.
+
+{% highlight ruby %}
+pip install virtualenvwrapper
+{% endhighlight %}
+
+가상 환경을 저장할 디렉토리를 생성하고, 환경변수에 등록하면된다.
+
+{% highlight ruby %}
+
+mkdir ~/.python_virtual_envs
+ 
+# 아래 내용을 ~/.bashrc 에 마지막에 저장한다.
+export WORKON_HOME=~/.python_virtual_envs
+source /usr/local/bin/virtualenvwrapper.sh # 각종 PATH 등을 설정해줌.
+{% endhighlight %}
+
+### 가상 환경 생성
+{% highlight ruby %}
+mkvirtualenv 가상환경이름 # 기본 생성
+mkvirtualenv --python=python2.6 가상환경이름 # 특정 파이썬 버전 지정해서 생성
+{% endhighlight %}
+
+-  가상환경을 생성/확성화하면 $VIRTUAL_ENV 환경 변수에 디렉토리명이 들어간다.
+
+### 특정 가상환경 선택
+{% highlight ruby %}
+workon 가상환경이름 # <tab>키 누르면 자동 완성됨
+{% endhighlight %}
+
+### 가상환경 종료
+{% highlight ruby %}
+
+deactivate
+{% endhighlight %}
+
+### 가상환경 디렉토리로 이동
+{% highlight ruby %}
+
+cdvirtualenv
+{% endhighlight %}
+
+### 현재 가상환경의 써드 파티 패키지 전체 삭제
+{% highlight ruby %}
+
+wipeenv
+{% endhighlight %}
+
+### 가상환경 목록
+{% highlight ruby %}
+
+lsvirtualenv
+{% endhighlight %}
+
+### 가상환경 삭제
+{% highlight ruby %}
+
+rmvirtualenv
+{% endhighlight %}
+
+### 모든 가상환경에 대한 명령 실행
+{% highlight ruby %}
+
+# allvirtualenv command with arguments
+allvirtualenv pip install -U pip
+{% endhighlight %}
 
 # Django 설치
 Django 는 python 에서 유명한 framework 이다.
