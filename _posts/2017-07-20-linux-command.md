@@ -73,3 +73,16 @@ tail -f /var/adm/rc.log    <-- HP 부팅 후 프로세스가 정상수행됐는�
 
 ## Crontab 주기
 크론tab의 주기를 볼수 있는 웹페이지 [crontab](https://crontab.guru/)
+
+## Ubuntu repo 변경
+느린 외국 repo 가 아닌 한국 repo로 변경
+archive.ubuntu.com(또는 kr.archive.ubuntu.com) 로 되어있는것을 ftp.daumkakao.com 로 바꿔면된다.
+
+{% highlight bash %}
+sudo sed -i 's/archive.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
+sudo sed -i 's/security.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
+sudo sed -i 's/extras.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
+apt-get clean
+apt-get update
+{% endhighlight %}  
+       
