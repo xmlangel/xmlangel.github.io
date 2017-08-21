@@ -52,6 +52,15 @@ vgdisplay -v vg_ora1 | egrep 'Name|Size'
 du -sk ./* | sort -nr
 {% endhighlight %}
 
+## 디랙토리별 파일의 용량확인
+어느 디렉토리에서 용량을 많이 사용하고 있는지 궁금할 때가 있다. 이 때 각 디렉토리별 용량을 확인하기 위해 필요한 명령어다.
+{% highlight bash %}
+du -h --max-depth=1
+{% endhighlight %}
+
+
+
+
 ## ps -ef 확인
 pid 값 확인
 
