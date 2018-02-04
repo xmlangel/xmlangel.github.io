@@ -14,7 +14,6 @@ tags:
 
 {:toc}
 
-
 centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.
 
 본글은 아래 링크를 따라하면서 만든것입니다.
@@ -47,8 +46,6 @@ gpgcheck=0
 {% endhighlight %}
 
 ## 설치
-
-Install Kubernetes, etcd and flannel on all hosts - centos-{master,minion-n}. This will also pull in docker and cadvisor.
 
 ## hosts 파일내용추가
 /etc/hosts
@@ -83,9 +80,6 @@ KUBE_MASTER="--master=http://centos-master:8080"
 #방화벽 해제
 모든 노드에 방화벽을 해제해준다.
 
-Disable the firewall on the master and all the nodes, as docker does not play well with other firewall rule managers. CentOS won’t let you disable the firewall as long as SELinux is enforcing, so that needs to be disabled first.
-
-If you disable SELinux, make sure you reboot your machine before continuing to more steps.
 {% highlight ruby %}
 setenforce 0
 systemctl disable iptables-services firewalld
@@ -94,11 +88,7 @@ systemctl stop iptables-services firewalld
 
 # Master 설정변경
 
-Configure the Kubernetes services on the master.
-
-왜하는지 찾아봐야겠음.
-
-Edit /etc/etcd/etcd.conf to appear as such:
+/etc/etcd/etcd.conf 파일을 수정해준다.
 
 {% highlight ruby %}
 # [member]
@@ -134,7 +124,7 @@ KUBE_API_ARGS=""
 
 ## ETCD 시작
 
-Start ETCD and configure it to hold the network overlay configuration on master: Warning This network must be unused in your network infrastructure! 172.30.0.0/16 is free in our network.
+ETCD 를시작해준다. Network overy 설정을 해주는것이고, Network overy 는 172.30.0.0 네트워크를 사용한다.
 
 {% highlight ruby %}
 systemctl start etcd
@@ -142,7 +132,9 @@ etcdctl mkdir /kube-centos/network
 etcdctl mk /kube-centos/network/config "{ \"Network\": \"172.30.0.0/16\", \"SubnetLen\": 24, \"Backend\": { \"Type\": \"vxlan\" } }"
 {% endhighlight %}
 
-Configure flannel to overlay Docker network in /etc/sysconfig/flanneld on the master (also in the nodes as we’ll see):
+flannel overlay Docker network 설정을 해준다.
+
+/etc/sysconfig/flanneld
 
 {% highlight ruby %}
 
@@ -170,9 +162,12 @@ done
 
 # Node 설정변경
 
-We need to configure the kubelet and start the kubelet and proxy
+/etc/kubernetes/kubelet 설정변경
 
-Edit /etc/kubernetes/kubelet to appear as such:
+먼져 centos-minion-1 node 에서 설정을 해준다.
+
+KUBELET_HOSTNAME 만 변경하면 되는 사하으로 크게 어려움은 없을듯.
+
 {% highlight ruby %}
 
 # The address for the info server to serve on
@@ -183,7 +178,7 @@ KUBELET_PORT="--port=10250"
 
 # You may leave this blank to use the actual hostname
 # Check the node number!
-KUBELET_HOSTNAME="--hostname-override=centos-minion-n"
+KUBELET_HOSTNAME="--hostname-override=centos-minion-1"
 
 # Location of the api-server
 KUBELET_API_SERVER="--api-servers=http://centos-master:8080"
@@ -192,7 +187,31 @@ KUBELET_API_SERVER="--api-servers=http://centos-master:8080"
 KUBELET_ARGS=""
 {% endhighlight %}
 
-Configure flannel to overlay Docker network in /etc/sysconfig/flanneld (in all the nodes)
+다음은 centos-mast-minion-2 노드에서 설정을 해준다.
+
+{% highlight ruby %}
+
+# The address for the info server to serve on
+KUBELET_ADDRESS="--address=0.0.0.0"
+
+# The port for the info server to serve on
+KUBELET_PORT="--port=10250"
+
+# You may leave this blank to use the actual hostname
+# Check the node number!
+KUBELET_HOSTNAME="--hostname-override=centos-minion-2"
+
+# Location of the api-server
+KUBELET_API_SERVER="--api-servers=http://centos-master:8080"
+
+# Add your own!
+KUBELET_ARGS=""
+{% endhighlight %}
+
+두 노드에서 모두 설절을 변경해준다.
+
+flannel to overlay Docker network  설정변경
+ /etc/sysconfig/flanneld
 
 {% highlight ruby %}
 # Flanneld configuration options
@@ -210,7 +229,7 @@ FLANNEL_ETCD_PREFIX="/kube-centos/network"
 
 {% endhighlight %}
 
-Start the appropriate services on node (centos-minion-n).
+각노드에서 kube-proxy 설정을 해준다.
 
 {% highlight ruby %}
 
@@ -220,7 +239,8 @@ for SERVICES in kube-proxy kubelet flanneld docker; do
     systemctl status $SERVICES
 done
 {% endhighlight %}
-Configure kubectl
+
+kubectl 설정
 
 {% highlight ruby %}
 
