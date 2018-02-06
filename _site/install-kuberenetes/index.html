@@ -13,14 +13,10 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
     
-    <meta name="description" content="
-  목차
-
+    <meta name="description" content="centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.
 
 " />
-    <meta property="og:description" content="
-  목차
-
+    <meta property="og:description" content="centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.
 
 " />
     
@@ -79,10 +75,40 @@
             <p class="site-description">작은 끄적거림</p>
           </div>
         </header>
+        
+        <!-- 추가 코드 -->
+  <div id="toc" hidden>
+  </div>
+  <!-- 추가 코드 -->
       </div>
     </div>
+    
+    <!-- 추가 코드 -->
+<script type="text/javascript">
+  $(document).ready(function(){
+     var tag = null;
+     $("h1,h2,h3,h4,h5,h6").not(".subtitle").not(".post-title").not(".index").each(function(i,item){
+       tag = $(item).get(0).localName;
+       $(item).attr("id","content_"+i);
+       $("#toc").append('<a class="new'+tag+'" href="#content_'+i+'">'+$(this).text()+'</a></br>');
+     });
+ 
+     if(tag !=null ){
+       $(".newh1").css("margin-left",0);
+       $(".newh2").css("margin-left",20);
+       $(".newh3").css("margin-left",40);
+       $(".newh4").css("margin-left",60);
+       $(".newh5").css("margin-left",80);
+       $(".newh6").css("margin-left",100);
+ 
+       $("#toc").attr('hidden', false);
+     }
+  });
+ </script>
+ <!-- 추가 코드 -->
     <div id="s_left">
-<div style="border:1px dashed; padding:5px;" ><h3>Tags</h3>
+<div style="border:1px dashed; padding:5px;" ><font size=3>Tags</font>  
+<!-- <h3>Tags</h3> -->
 <ul class="tag-cloud">
 
   <span style="font-size: 83%">
@@ -219,14 +245,16 @@
 
 </ul></div>
 <p>
-<div style="border:1px dashed; padding:5px;"><h3>Recent</h3>
+<div style="border:1px dashed; padding:5px;"><font size=3>Recents</font>  
+
+<!-- <h3>Recent</h3> -->
 
   <article class="featured-list">
     <header class="featured-header">
       <a href="/install-kuberenetes/">Centos 에서 Kuberenetes 설치하기</a>
     </header>
     <div class="featured-post">
-        목차centos 에 설치하기 위해서는 master node 와 minion 에 모...
+      centos 에 설치하기 위해서는 master node 와 minion 에 모두 ce...
     </div>
     <footer>
       <a href="/install-kuberenetes/" class="button">Read more...</a>
@@ -259,14 +287,11 @@
 </div>
 </div>
 <div id="main" role="main" class="container" ><article class="post">
-  <h1>Centos 에서 Kuberenetes 설치하기</h1>
+    <font color=tomato size=6>Centos 에서 Kuberenetes 설치하기</font>  
+  <!-- <h1>Centos 에서 Kuberenetes 설치하기</h1> -->
 
   <div class="entry">
-    <ul>
-  <li>목차</li>
-</ul>
-
-<p>centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.</p>
+    <p>centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.</p>
 
 <p>본글은 아래 링크를 따라하면서 만든것입니다.</p>
 
@@ -281,7 +306,7 @@ virtualbox 등의 아이피를 설정해주면 된다.</p>
 <span class="c1">#centos-minion-1 = 10.128.29.102</span>
 <span class="c1">#centos-minion-2 = 110.128.29.104</span></code></pre></figure>
 
-<h1 id="a">a</h1>
+<h1 id="설치">설치</h1>
 
 <p>그럼 본격적으로 설치를 시작해보겠다.</p>
 
@@ -294,7 +319,7 @@ virtualbox 등의 아이피를 설정해주면 된다.</p>
 <span class="n">baseurl</span><span class="o">=</span><span class="n">http</span><span class="ss">:/</span><span class="o">/</span><span class="n">cbs</span><span class="p">.</span><span class="nf">centos</span><span class="p">.</span><span class="nf">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">virt7</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">common</span><span class="o">-</span><span class="n">release</span><span class="o">/</span><span class="n">x86_64</span><span class="o">/</span><span class="n">os</span><span class="o">/</span>
 <span class="n">gpgcheck</span><span class="o">=</span><span class="mi">0</span></code></pre></figure>
 
-<h2 id="설치">설치</h2>
+<h2 id="설치-1">설치</h2>
 
 <h2 id="hosts-파일내용추가">hosts 파일내용추가</h2>
 <p>/etc/hosts</p>

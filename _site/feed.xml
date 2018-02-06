@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-06T11:19:59+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though … 그럼에도 불구하고 열심히</title><subtitle>작은 끄적거림</subtitle><entry><title type="html">Centos 에서 Kuberenetes 설치하기</title><link href="http://localhost:4000/install-kuberenetes/" rel="alternate" type="text/html" title="Centos 에서 Kuberenetes 설치하기" /><published>2018-02-03T11:11:13+09:00</published><updated>2018-02-03T11:11:13+09:00</updated><id>http://localhost:4000/install-kuberenetes</id><content type="html" xml:base="http://localhost:4000/install-kuberenetes/">&lt;ul&gt;
-  &lt;li&gt;목차&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-06T12:12:21+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though … 그럼에도 불구하고 열심히</title><subtitle>작은 끄적거림</subtitle><entry><title type="html">Centos 에서 Kuberenetes 설치하기</title><link href="http://localhost:4000/install-kuberenetes/" rel="alternate" type="text/html" title="Centos 에서 Kuberenetes 설치하기" /><published>2018-02-03T11:11:13+09:00</published><updated>2018-02-03T11:11:13+09:00</updated><id>http://localhost:4000/install-kuberenetes</id><content type="html" xml:base="http://localhost:4000/install-kuberenetes/">&lt;p&gt;centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.&lt;/p&gt;
 
 &lt;p&gt;본글은 아래 링크를 따라하면서 만든것입니다.&lt;/p&gt;
 
@@ -17,7 +13,7 @@ virtualbox 등의 아이피를 설정해주면 된다.&lt;/p&gt;
 &lt;span class=&quot;c1&quot;&gt;#centos-minion-1 = 10.128.29.102&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#centos-minion-2 = 110.128.29.104&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h1 id=&quot;a&quot;&gt;a&lt;/h1&gt;
+&lt;h1 id=&quot;설치&quot;&gt;설치&lt;/h1&gt;
 
 &lt;p&gt;그럼 본격적으로 설치를 시작해보겠다.&lt;/p&gt;
 
@@ -30,7 +26,7 @@ virtualbox 등의 아이피를 설정해주면 된다.&lt;/p&gt;
 &lt;span class=&quot;n&quot;&gt;baseurl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:/&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cbs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;centos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;repos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;virt7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;common&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x86_64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;gpgcheck&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
+&lt;h2 id=&quot;설치-1&quot;&gt;설치&lt;/h2&gt;
 
 &lt;h2 id=&quot;hosts-파일내용추가&quot;&gt;hosts 파일내용추가&lt;/h2&gt;
 &lt;p&gt;/etc/hosts&lt;/p&gt;
@@ -219,7 +215,7 @@ KUBE_MASTER=”–master=http://centos-master:8080”&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;https://kubernetes.io/docs/getting-started-guides/centos/centos_manual_config/&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="docker" /><category term="kuberenetes" /><category term="K8s" /><summary type="html">목차</summary></entry><entry><title type="html">sublim 에서 vs code 로</title><link href="http://localhost:4000/vscode/" rel="alternate" type="text/html" title="sublim 에서 vs code 로 " /><published>2017-09-17T11:20:13+09:00</published><updated>2017-09-17T11:20:13+09:00</updated><id>http://localhost:4000/vscode</id><content type="html" xml:base="http://localhost:4000/vscode/">&lt;p&gt;Sublime  에서 vs code 로 넘어왔다.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="docker" /><category term="kuberenetes" /><category term="K8s" /><summary type="html">centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.</summary></entry><entry><title type="html">sublim 에서 vs code 로</title><link href="http://localhost:4000/vscode/" rel="alternate" type="text/html" title="sublim 에서 vs code 로 " /><published>2017-09-17T11:20:13+09:00</published><updated>2017-09-17T11:20:13+09:00</updated><id>http://localhost:4000/vscode</id><content type="html" xml:base="http://localhost:4000/vscode/">&lt;p&gt;Sublime  에서 vs code 로 넘어왔다.&lt;/p&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#vscode-터미널에서-바로실행&quot; id=&quot;markdown-toc-vscode-터미널에서-바로실행&quot;&gt;vscode 터미널에서 바로실행&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;

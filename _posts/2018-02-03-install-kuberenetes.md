@@ -9,10 +9,6 @@ tags:
 - K8s
 ---
 
-* 목차
-
-{:toc}
-
 centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.
 
 본글은 아래 링크를 따라하면서 만든것입니다.
@@ -29,9 +25,11 @@ virtualbox 등의 아이피를 설정해주면 된다.
 #centos-minion-1 = 10.128.29.102
 #centos-minion-2 = 110.128.29.104
 {% endhighlight %}
-# a
+
+# 설치
 
 그럼 본격적으로 설치를 시작해보겠다.
+
 
 ## repo추가
 

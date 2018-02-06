@@ -73,10 +73,40 @@
             <p class="site-description">작은 끄적거림</p>
           </div>
         </header>
+        
+        <!-- 추가 코드 -->
+  <div id="toc" hidden>
+  </div>
+  <!-- 추가 코드 -->
       </div>
     </div>
+    
+    <!-- 추가 코드 -->
+<script type="text/javascript">
+  $(document).ready(function(){
+     var tag = null;
+     $("h1,h2,h3,h4,h5,h6").not(".subtitle").not(".post-title").not(".index").each(function(i,item){
+       tag = $(item).get(0).localName;
+       $(item).attr("id","content_"+i);
+       $("#toc").append('<a class="new'+tag+'" href="#content_'+i+'">'+$(this).text()+'</a></br>');
+     });
+ 
+     if(tag !=null ){
+       $(".newh1").css("margin-left",0);
+       $(".newh2").css("margin-left",20);
+       $(".newh3").css("margin-left",40);
+       $(".newh4").css("margin-left",60);
+       $(".newh5").css("margin-left",80);
+       $(".newh6").css("margin-left",100);
+ 
+       $("#toc").attr('hidden', false);
+     }
+  });
+ </script>
+ <!-- 추가 코드 -->
     <div id="s_left">
-<div style="border:1px dashed; padding:5px;" ><h3>Tags</h3>
+<div style="border:1px dashed; padding:5px;" ><font size=3>Tags</font>  
+<!-- <h3>Tags</h3> -->
 <ul class="tag-cloud">
 
   <span style="font-size: 83%">
@@ -213,14 +243,16 @@
 
 </ul></div>
 <p>
-<div style="border:1px dashed; padding:5px;"><h3>Recent</h3>
+<div style="border:1px dashed; padding:5px;"><font size=3>Recents</font>  
+
+<!-- <h3>Recent</h3> -->
 
   <article class="featured-list">
     <header class="featured-header">
       <a href="/install-kuberenetes/">Centos 에서 Kuberenetes 설치하기</a>
     </header>
     <div class="featured-post">
-      * 목차{:toc}centos 에 설치하기 위해서는 master node 와 mini...
+      centos 에 설치하기 위해서는 master node 와 minion 에 모두 ce...
     </div>
     <footer>
       <a href="/install-kuberenetes/" class="button">Read more...</a>
@@ -253,7 +285,8 @@
 </div>
 </div>
 <div id="main" role="main" class="container" ><article class="post">
-  <h1>나의 첫 블로그!</h1>
+    <font color=tomato size=6>나의 첫 블로그!</font>  
+  <!-- <h1>나의 첫 블로그!</h1> -->
 
   <div class="entry">
     
@@ -279,7 +312,43 @@
   <li>
     <p>2017.07.20 Recents 추가 : http://demun.github.io/jekyll/newpost/</p>
   </li>
+  <li>
+    <p>2018.02.05 목차 추가 : http://dveamer.github.io/homepage/JekyllOnGithubPages.html</p>
+  </li>
 </ul>
+
+<p>기존에 잘되던건데 안돼서 다른것으로 변경함귀찬아..</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="sr">/div&gt;
+  &lt;!-- 추가 코드 --&gt;
+      &lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/div&gt;
+    
+    &lt;!-- 추가 코드 --&gt;
+
+&lt;script type="text/</span><span class="n">javascript</span><span class="s2">"&gt;
+  $(document).ready(function(){
+     var tag = null;
+     $("</span><span class="n">h1</span><span class="p">,</span><span class="n">h2</span><span class="p">,</span><span class="n">h3</span><span class="p">,</span><span class="n">h4</span><span class="p">,</span><span class="n">h5</span><span class="p">,</span><span class="n">h6</span><span class="s2">").not("</span><span class="p">.</span><span class="nf">subtitle</span><span class="s2">").not("</span><span class="p">.</span><span class="nf">post</span><span class="o">-</span><span class="n">title</span><span class="s2">").not("</span><span class="p">.</span><span class="nf">index</span><span class="s2">").each(function(i,item){
+       tag = $(item).get(0).localName;
+       $(item).attr("</span><span class="nb">id</span><span class="s2">","</span><span class="n">content_</span><span class="s2">"+i);
+       $("</span><span class="c1">#toc").append('&lt;a class="new'+tag+'" href="#content_'+i+'"&gt;'+$(this).text()+'&lt;/a&gt;&lt;/br&gt;');</span>
+     <span class="p">});</span>
+ 
+     <span class="k">if</span><span class="p">(</span><span class="n">tag</span> <span class="o">!=</span><span class="n">null</span> <span class="p">){</span>
+       <span class="err">$</span><span class="p">(</span><span class="s2">".newh1"</span><span class="p">).</span><span class="nf">css</span><span class="p">(</span><span class="s2">"margin-left"</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+       <span class="err">$</span><span class="p">(</span><span class="s2">".newh2"</span><span class="p">).</span><span class="nf">css</span><span class="p">(</span><span class="s2">"margin-left"</span><span class="p">,</span><span class="mi">20</span><span class="p">);</span>
+       <span class="err">$</span><span class="p">(</span><span class="s2">".newh3"</span><span class="p">).</span><span class="nf">css</span><span class="p">(</span><span class="s2">"margin-left"</span><span class="p">,</span><span class="mi">40</span><span class="p">);</span>
+       <span class="err">$</span><span class="p">(</span><span class="s2">".newh4"</span><span class="p">).</span><span class="nf">css</span><span class="p">(</span><span class="s2">"margin-left"</span><span class="p">,</span><span class="mi">60</span><span class="p">);</span>
+       <span class="err">$</span><span class="p">(</span><span class="s2">".newh5"</span><span class="p">).</span><span class="nf">css</span><span class="p">(</span><span class="s2">"margin-left"</span><span class="p">,</span><span class="mi">80</span><span class="p">);</span>
+       <span class="err">$</span><span class="p">(</span><span class="s2">".newh6"</span><span class="p">).</span><span class="nf">css</span><span class="p">(</span><span class="s2">"margin-left"</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+ 
+       <span class="err">$</span><span class="p">(</span><span class="s2">"#toc"</span><span class="p">).</span><span class="nf">attr</span><span class="p">(</span><span class="s1">'hidden'</span><span class="p">,</span> <span class="kp">false</span><span class="p">);</span>
+     <span class="p">}</span>
+  <span class="p">});</span>
+ <span class="o">&lt;</span><span class="sr">/script&gt;
+ &lt;!-- 추가 코드 --&gt;
+ </span></code></pre></figure>
 
   </div>
   <img src="/images/tag.png" alt="Tags: " class="tag-img"/><div class="post-tags">
