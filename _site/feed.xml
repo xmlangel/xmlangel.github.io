@@ -1,0 +1,1489 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-06T11:19:59+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though … 그럼에도 불구하고 열심히</title><subtitle>작은 끄적거림</subtitle><entry><title type="html">Centos 에서 Kuberenetes 설치하기</title><link href="http://localhost:4000/install-kuberenetes/" rel="alternate" type="text/html" title="Centos 에서 Kuberenetes 설치하기" /><published>2018-02-03T11:11:13+09:00</published><updated>2018-02-03T11:11:13+09:00</updated><id>http://localhost:4000/install-kuberenetes</id><content type="html" xml:base="http://localhost:4000/install-kuberenetes/">&lt;ul&gt;
+  &lt;li&gt;목차&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.&lt;/p&gt;
+
+&lt;p&gt;본글은 아래 링크를 따라하면서 만든것입니다.&lt;/p&gt;
+
+&lt;p&gt;오류가 있을시 아래 링크 참고하시면 될거 같습니다.&lt;/p&gt;
+
+&lt;p&gt;https://kubernetes.io/docs/getting-started-guides/centos/centos_manual_config/&lt;/p&gt;
+
+&lt;p&gt;설치할 Hosts 정보와 아이피는 아래와같다.
+virtualbox 등의 아이피를 설정해주면 된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#centos-master = 10.128.29.105&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#centos-minion-1 = 10.128.29.102&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#centos-minion-2 = 110.128.29.104&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;a&quot;&gt;a&lt;/h1&gt;
+
+&lt;p&gt;그럼 본격적으로 설치를 시작해보겠다.&lt;/p&gt;
+
+&lt;h2 id=&quot;repo추가&quot;&gt;repo추가&lt;/h2&gt;
+
+&lt;p&gt;echo /etc/yum.repos.d/virt7-docker-common-release.repo&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;virt7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;common&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;virt7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;common&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;baseurl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:/&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cbs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;centos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;repos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;virt7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;common&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x86_64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gpgcheck&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
+
+&lt;h2 id=&quot;hosts-파일내용추가&quot;&gt;hosts 파일내용추가&lt;/h2&gt;
+&lt;p&gt;/etc/hosts&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;mf&quot;&gt;10.128&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;29.105&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;centos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;master&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;10.128&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;29.102&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;centos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;10.128&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;29.104&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;centos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;kubernetes-환경설정&quot;&gt;kubernetes 환경설정&lt;/h2&gt;
+&lt;p&gt;/etc/kubernetes/config 파일을 수정해준다.&lt;/p&gt;
+
+&lt;p&gt;모두 기본값이고 호스트에 추가한 부분만 수정해주면 된다.
+KUBE_MASTER=”–master=http://centos-master:8080”&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# logging to stderr means we get it in the systemd journal&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBE_LOGTOSTDERR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--logtostderr=true&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# journal message level, 0 is debug&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBE_LOG_LEVEL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--v=0&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Should this cluster be allowed to run privileged docker containers&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBE_ALLOW_PRIV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--allow-privileged=false&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# How the replication controller and scheduler find the kube-apiserver&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBE_MASTER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--master=http://centos-master:8080&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;#방화벽 해제
+모든 노드에 방화벽을 해제해준다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;setenforce&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;systemctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;disable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iptables&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;services&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firewalld&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;systemctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iptables&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;services&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firewalld&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;master-설정변경&quot;&gt;Master 설정변경&lt;/h1&gt;
+
+&lt;p&gt;/etc/etcd/etcd.conf 파일을 수정해준다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# [member]&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ETCD_NAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ETCD_DATA_DIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/var/lib/etcd/default.etcd&quot;&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ETCD_LISTEN_CLIENT_URLS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://0.0.0.0:2379&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#[cluster]&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ETCD_ADVERTISE_CLIENT_URLS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://0.0.0.0:2379&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Edit /etc/kubernetes/apiserver to appear as such:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# The address on the local server to listen to.&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBE_API_ADDRESS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--address=0.0.0.0&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# The port on the local server to listen on.&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBE_API_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--port=8080&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Port kubelets listen on&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--kubelet-port=10250&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Comma separated list of nodes in the etcd cluster&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBE_ETCD_SERVERS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--etcd-servers=http://centos-master:2379&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Address range to use for services&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBE_SERVICE_ADDRESSES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--service-cluster-ip-range=10.254.0.0/16&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Add your own!&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBE_API_ARGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;etcd-시작&quot;&gt;ETCD 시작&lt;/h2&gt;
+
+&lt;p&gt;ETCD 를시작해준다. Network overy 설정을 해주는것이고, Network overy 는 172.30.0.0 네트워크를 사용한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;systemctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;etcd&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;etcdctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/kube-centos/ne&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;twork&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;etcdctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mk&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/kube-centos/ne&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;twork&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;{ &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Network&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;172.30.0.0/16&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;, &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;SubnetLen&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;: 24, &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Backend&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;: { &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;vxlan&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; } }&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;flannel overlay Docker network 설정을 해준다.&lt;/p&gt;
+
+&lt;p&gt;/etc/sysconfig/flanneld&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Flanneld configuration options&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# etcd url location.  Point this to the server where etcd runs&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;FLANNEL_ETCD_ENDPOINTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://centos-master:2379&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# etcd config key.  This is the configuration key that flannel queries&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# For address range assignment&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;FLANNEL_ETCD_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/kube-centos/network&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Any additional options that you want to pass&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#FLANNEL_OPTIONS=&quot;&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Start the appropriate services on master:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SERVICES&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;etcd&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kube&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;apiserver&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kube&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;manager&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kube&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scheduler&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flanneld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;systemctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;restart&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$SERVICES&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;systemctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;enable&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$SERVICES&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;systemctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$SERVICES&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;node-설정변경&quot;&gt;Node 설정변경&lt;/h1&gt;
+
+&lt;p&gt;/etc/kubernetes/kubelet 설정변경&lt;/p&gt;
+
+&lt;p&gt;먼져 centos-minion-1 node 에서 설정을 해준다.&lt;/p&gt;
+
+&lt;p&gt;KUBELET_HOSTNAME 만 변경하면 되는 사하으로 크게 어려움은 없을듯.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# The address for the info server to serve on&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_ADDRESS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--address=0.0.0.0&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# The port for the info server to serve on&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--port=10250&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# You may leave this blank to use the actual hostname&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Check the node number!&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_HOSTNAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--hostname-override=centos-minion-1&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Location of the api-server&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_API_SERVER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--api-servers=http://centos-master:8080&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Add your own!&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_ARGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;다음은 centos-mast-minion-2 노드에서 설정을 해준다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# The address for the info server to serve on&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_ADDRESS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--address=0.0.0.0&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# The port for the info server to serve on&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--port=10250&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# You may leave this blank to use the actual hostname&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Check the node number!&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_HOSTNAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--hostname-override=centos-minion-2&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Location of the api-server&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_API_SERVER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--api-servers=http://centos-master:8080&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Add your own!&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;KUBELET_ARGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;두 노드에서 모두 설절을 변경해준다.&lt;/p&gt;
+
+&lt;p&gt;flannel to overlay Docker network  설정변경
+ /etc/sysconfig/flanneld&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Flanneld configuration options&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# etcd url location.  Point this to the server where etcd runs&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;FLANNEL_ETCD_ENDPOINTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://centos-master:2379&quot;&lt;/span&gt;
+
+
+&lt;span class=&quot;c1&quot;&gt;# etcd config key.  This is the configuration key that flannel queries&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# For address range assignment&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;FLANNEL_ETCD_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/kube-centos/network&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Any additional options that you want to pass&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#FLANNEL_OPTIONS=&quot;&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;각노드에서 kube-proxy 설정을 해준다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SERVICES&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kube&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kubelet&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flanneld&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;systemctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;restart&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$SERVICES&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;systemctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;enable&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$SERVICES&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;systemctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$SERVICES&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;kubectl 설정&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;kubectl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cluster&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cluster&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:/&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;master&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;kubectl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cluster&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cluster&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;admin&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;kubectl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;master에서-동작확인&quot;&gt;Master에서 동작확인.&lt;/h1&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kubectl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodes&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@localhost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# kubectl get nodes&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;NAME&lt;/span&gt;              &lt;span class=&quot;no&quot;&gt;STATUS&lt;/span&gt;    &lt;span class=&quot;no&quot;&gt;AGE&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;centos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;   &lt;span class=&quot;no&quot;&gt;Ready&lt;/span&gt;     &lt;span class=&quot;mi&quot;&gt;57&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;centos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;no&quot;&gt;Ready&lt;/span&gt;     &lt;span class=&quot;mi&quot;&gt;54&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;참고한 URL&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;http://www.popit.kr/kubernetes-introduction/&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;https://kubernetes.io/docs/getting-started-guides/centos/centos_manual_config/&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="docker" /><category term="kuberenetes" /><category term="K8s" /><summary type="html">목차</summary></entry><entry><title type="html">sublim 에서 vs code 로</title><link href="http://localhost:4000/vscode/" rel="alternate" type="text/html" title="sublim 에서 vs code 로 " /><published>2017-09-17T11:20:13+09:00</published><updated>2017-09-17T11:20:13+09:00</updated><id>http://localhost:4000/vscode</id><content type="html" xml:base="http://localhost:4000/vscode/">&lt;p&gt;Sublime  에서 vs code 로 넘어왔다.&lt;/p&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#vscode-터미널에서-바로실행&quot; id=&quot;markdown-toc-vscode-터미널에서-바로실행&quot;&gt;vscode 터미널에서 바로실행&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;vscode-터미널에서-바로실행&quot;&gt;vscode 터미널에서 바로실행&lt;/h1&gt;
+
+&lt;p&gt;Mac OS X 를 이용중. sublime 을 이용하다가 다른 사람들은 안그런데 나만 버벅된다. 
+그래서 vscode 로 변경 조금 쉽게 이용하기위해  그냥 sublime 에서 하는거처럼. sublim 파일이름 형식…으로 하는거.&lt;/p&gt;
+
+&lt;p&gt;.bash_profile 파일에 추가. 하지만 난 ohmy zsh 를 쓰니 .zshrc 에다가 추가했다..&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;EOF&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.zshrc
+# Add Visual Studio Code (code)
+export PATH=&quot;$PATH:/&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Applications&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Visual&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Studio&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Contents&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;
+EOF&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;이제, 편집하고자 하는 파일이 있는 어느 폴더에서든지 간단히 code . 를 타이핑하면 된다.&lt;/p&gt;</content><author><name></name></author><category term="vscode" /><summary type="html">Sublime 에서 vs code 로 넘어왔다.</summary></entry><entry><title type="html">virtualenv로 Pydev 와 Django 설정 하기</title><link href="http://localhost:4000/pydev-setup/" rel="alternate" type="text/html" title="virtualenv로 Pydev 와 Django 설정 하기" /><published>2017-08-12T00:20:13+09:00</published><updated>2017-08-12T00:20:13+09:00</updated><id>http://localhost:4000/pydev-setup</id><content type="html" xml:base="http://localhost:4000/pydev-setup/">&lt;p&gt;Eclipes 플러그인인 PyDev 를 이용한 Django 설정을 하는 법입니다.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#virtualenv-설정&quot; id=&quot;markdown-toc-virtualenv-설정&quot;&gt;virtualenv 설정&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#virtualenv-설치&quot; id=&quot;markdown-toc-virtualenv-설치&quot;&gt;virtualenv 설치&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#activate&quot; id=&quot;markdown-toc-activate&quot;&gt;activate&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#다른방법virtualenv-wrapper의-설치&quot; id=&quot;markdown-toc-다른방법virtualenv-wrapper의-설치&quot;&gt;다른방법(virtualEnv Wrapper의 설치&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#가상-환경-생성&quot; id=&quot;markdown-toc-가상-환경-생성&quot;&gt;가상 환경 생성&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#특정-가상환경-선택&quot; id=&quot;markdown-toc-특정-가상환경-선택&quot;&gt;특정 가상환경 선택&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#가상환경-종료&quot; id=&quot;markdown-toc-가상환경-종료&quot;&gt;가상환경 종료&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#가상환경-디렉토리로-이동&quot; id=&quot;markdown-toc-가상환경-디렉토리로-이동&quot;&gt;가상환경 디렉토리로 이동&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#현재-가상환경의-써드-파티-패키지-전체-삭제&quot; id=&quot;markdown-toc-현재-가상환경의-써드-파티-패키지-전체-삭제&quot;&gt;현재 가상환경의 써드 파티 패키지 전체 삭제&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#가상환경-목록&quot; id=&quot;markdown-toc-가상환경-목록&quot;&gt;가상환경 목록&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#가상환경-삭제&quot; id=&quot;markdown-toc-가상환경-삭제&quot;&gt;가상환경 삭제&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#모든-가상환경에-대한-명령-실행&quot; id=&quot;markdown-toc-모든-가상환경에-대한-명령-실행&quot;&gt;모든 가상환경에 대한 명령 실행&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#django-설치&quot; id=&quot;markdown-toc-django-설치&quot;&gt;Django 설치&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pydev-설치&quot; id=&quot;markdown-toc-pydev-설치&quot;&gt;PyDev 설치&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#pydev-plugin-설치&quot; id=&quot;markdown-toc-pydev-plugin-설치&quot;&gt;PyDev plugin 설치&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#interpreter-설정&quot; id=&quot;markdown-toc-interpreter-설정&quot;&gt;Interpreter 설정&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#django-project-생성&quot; id=&quot;markdown-toc-django-project-생성&quot;&gt;Django Project 생성&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;자주 설정하지 않아 한번 설정할때마다 여기저기 검색하는 시간이 오래걸리는 이상한 현상….설정1시간 작업10분…&lt;/p&gt;
+
+&lt;p&gt;다음의 설정 시간을 줄이기위해 기록해놓는다.&lt;/p&gt;
+
+&lt;h1 id=&quot;virtualenv-설정&quot;&gt;virtualenv 설정&lt;/h1&gt;
+&lt;p&gt;virtualenv 는 가상의 python 환경을 만들어줌으로써, 독림된 python 환경을 이용할때 이용하는거 같다.&lt;/p&gt;
+
+&lt;p&gt;테스트 환경과 운영환경의 버전이 다르거나 할때 오류가 발생하니 버전이 달라 동일한 환경을 만들거나 할때 유용할듯..&lt;/p&gt;
+
+&lt;p&gt;자세한건 &lt;a href=&quot;https://virtualenv.pypa.io/en/stable/&quot;&gt;Virtualenv&lt;/a&gt; 여기로&lt;/p&gt;
+
+&lt;h2 id=&quot;virtualenv-설치&quot;&gt;virtualenv 설치&lt;/h2&gt;
+&lt;p&gt;설치는 pip 로 설치하면 간단히 설치된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;virtualenv&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;virtualenv라는 폴더를 생성해 여기에 자체 파이썬 및 pip 를 저장하고, 파이선 패키지를 설치하기 위한 위치도 저장한다.&lt;/p&gt;
+
+&lt;p&gt;디렉토리를 만들고 virtualenv 명령을 이용해서 가상의 환경을 만들어준다.
+여기서는 python3.5 버전을 python3.5 디랙토리에 생성한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;virtualenv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;python3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;activate&quot;&gt;activate&lt;/h3&gt;
+&lt;p&gt;디랙토리를 만들고 설정을 완료하면 이제 이용이 가능하다. 이용을 하려면 activate 를 해줘야 한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;python3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activate&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;설정을 완료하면 아래와 같이 ()로 표시되서 변경된것을확인 가능하다&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;다른방법virtualenv-wrapper의-설치&quot;&gt;다른방법(virtualEnv Wrapper의 설치&lt;/h2&gt;
+&lt;p&gt;virtual Env 의 다른방법으로는 Virtualenvwrapper 를 이용하는 방법도 있다.&lt;/p&gt;
+
+&lt;p&gt;아래와 같이 설치해주면 virtualenv 도 함께 설치된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;virtualenvwrapper&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;가상 환경을 저장할 디렉토리를 생성하고, 환경변수에 등록하면된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.python_virtual_envs
+ 
+# 아래 내용을 ~/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bashrc&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;에&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;마지막에&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;저장한다&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;WORKON_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.python_virtual_envs
+source /us&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;virtualenvwrapper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sh&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 각종 PATH 등을 설정해줌.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;가상-환경-생성&quot;&gt;가상 환경 생성&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;mkvirtualenv&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;가상환경이름&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 기본 생성&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;mkvirtualenv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;가상환경이름&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 특정 파이썬 버전 지정해서 생성&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;가상환경을 생성/확성화하면 $VIRTUAL_ENV 환경 변수에 디렉토리명이 들어간다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;특정-가상환경-선택&quot;&gt;특정 가상환경 선택&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;workon&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;가상환경이름&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# &amp;lt;tab&amp;gt;키 누르면 자동 완성됨&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;가상환경-종료&quot;&gt;가상환경 종료&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;deactivate&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;가상환경-디렉토리로-이동&quot;&gt;가상환경 디렉토리로 이동&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;cdvirtualenv&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;현재-가상환경의-써드-파티-패키지-전체-삭제&quot;&gt;현재 가상환경의 써드 파티 패키지 전체 삭제&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;wipeenv&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;가상환경-목록&quot;&gt;가상환경 목록&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;lsvirtualenv&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;가상환경-삭제&quot;&gt;가상환경 삭제&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;rmvirtualenv&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;모든-가상환경에-대한-명령-실행&quot;&gt;모든 가상환경에 대한 명령 실행&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# allvirtualenv command with arguments&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;allvirtualenv&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;U&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;django-설치&quot;&gt;Django 설치&lt;/h1&gt;
+&lt;p&gt;Django 는 python 에서 유명한 framework 이다.
+설치역시 pip 로 가능하다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;pip&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;django&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;pydev-설치&quot;&gt;PyDev 설치&lt;/h1&gt;
+&lt;h2 id=&quot;pydev-plugin-설치&quot;&gt;PyDev plugin 설치&lt;/h2&gt;
+&lt;p&gt;Eclipes 마켓이나 url경로를 넣어서 설치 가능하다.&lt;/p&gt;
+
+&lt;p&gt;Help -&amp;gt; Install New Software PyDev 사이트를 추가 한후 설치하면 된다. ( Location은 http://pydev.org/updates )&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/pydev-01.png&quot; alt=&quot;pydev-01&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;설정한후 pydev 체크후 다운로드 받아 설치 하면된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/pydev-02.png&quot; alt=&quot;pydev-02&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;설치완료후 재시작하면 PyDev 사용이 가능하다.&lt;/p&gt;
+&lt;h2 id=&quot;interpreter-설정&quot;&gt;Interpreter 설정&lt;/h2&gt;
+&lt;p&gt;환경설정&amp;gt;PyDev&amp;gt;Interpreters&amp;gt;Python Interpreter 설정에서 인터프리터 설정을 해준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/pydev-03.png&quot; alt=&quot;pydev-03&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;virtualenv 폴더의 bin 경로를 지정해준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/pydev-04.png&quot; alt=&quot;pydev-04&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+virtualenv 폴더의 bin 경로를 지정해준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/pydev-05.png&quot; alt=&quot;pydev-05&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;자동으로 python들을 잡아준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/pydev-06.png&quot; alt=&quot;pydev-06&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;django-project-생성&quot;&gt;Django Project 생성&lt;/h1&gt;
+&lt;p&gt;Project 를 생성하고 interpreter 설정을해주면 vittualenv 환경으로 된 Django 프로잭트이용이 가능하다.
+&lt;img src=&quot;http://localhost:4000/assets/images/pydev-07.png&quot; alt=&quot;pydev-07&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="PyDev" /><category term="virtualenv" /><category term="Python" /><summary type="html">Eclipes 플러그인인 PyDev 를 이용한 Django 설정을 하는 법입니다.</summary></entry><entry><title type="html">python file download</title><link href="http://localhost:4000/python-download/" rel="alternate" type="text/html" title="python file download" /><published>2017-08-05T12:10:13+09:00</published><updated>2017-08-05T12:10:13+09:00</updated><id>http://localhost:4000/python-download</id><content type="html" xml:base="http://localhost:4000/python-download/">&lt;p&gt;내가 이글을 적는 이유는 웹사이트에 있는 특정 정보를 추출하기 위해 스크레이핑(Scraping)을 하기 위해서이다.&lt;/p&gt;
+
+&lt;p&gt;가장먼저 python 을 이용해서 다운로드 하는 부분을 알아보고 있다.&lt;/p&gt;
+
+&lt;p&gt;urllib.request 를 통해서 다운로드먼져..&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#다운로드-하기&quot; id=&quot;markdown-toc-다운로드-하기&quot;&gt;다운로드 하기&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#urllibrequest&quot; id=&quot;markdown-toc-urllibrequest&quot;&gt;urllib.request&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#파일로-저장urlretrieve&quot; id=&quot;markdown-toc-파일로-저장urlretrieve&quot;&gt;파일로 저장:urlretrieve()&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#메모리로-저장--urlopen&quot; id=&quot;markdown-toc-메모리로-저장--urlopen&quot;&gt;메모리로 저장 : urlopen()&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#스크레이핑-하기scraping--하기&quot; id=&quot;markdown-toc-스크레이핑-하기scraping--하기&quot;&gt;스크레이핑 하기(Scraping)  하기&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#beautifulsoup&quot; id=&quot;markdown-toc-beautifulsoup&quot;&gt;BeautifulSoup&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#find&quot; id=&quot;markdown-toc-find&quot;&gt;find()&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#find_all&quot; id=&quot;markdown-toc-find_all&quot;&gt;find_all()&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#사용예시&quot; id=&quot;markdown-toc-사용예시&quot;&gt;사용예시&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;다운로드-하기&quot;&gt;다운로드 하기&lt;/h1&gt;
+
+&lt;h2 id=&quot;urllibrequest&quot;&gt;urllib.request&lt;/h2&gt;
+
+&lt;h3 id=&quot;파일로-저장urlretrieve&quot;&gt;파일로 저장:urlretrieve()&lt;/h3&gt;
+&lt;p&gt;urlretrieve()  함수를 이용해서 파일을 직접 다운로드 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;웹상에 있는 jpg 파일을 download.jpg 로 저장하는 예&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib.request&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# URL 저장 경로 지정하기&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://xmlangel.github.io/images/xmlangel.jpg&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 저장할 파일이름&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;download.jpg&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 다운로드&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlretrieve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;저장완료&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;메모리로-저장--urlopen&quot;&gt;메모리로 저장 : urlopen()&lt;/h3&gt;
+&lt;p&gt;urlopen() 함수를 이용해서 메모리에 저장할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;웹상에 있는 jpg 파일을 메모리에 로드후 download2.jpg 로 저장하는 예&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib.request&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# URL 저장 경로 지정하기&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://xmlangel.github.io/images/xmlangel.jpg&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 저장할 파일이름&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;download2.jpg&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;##다운로드&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;memory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlopen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;memory 에 저장&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#파일로 저장&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;저장완료&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;스크레이핑-하기scraping--하기&quot;&gt;스크레이핑 하기(Scraping)  하기&lt;/h1&gt;
+&lt;h2 id=&quot;beautifulsoup&quot;&gt;BeautifulSoup&lt;/h2&gt;
+&lt;p&gt;BeautifulSoup 은 HTML 과 XML 을 분석해주는 라이브러리 이다.&lt;/p&gt;
+
+&lt;p&gt;자세한 설명은 아래에서
+https://www.crummy.com/software/BeautifulSoup/&lt;/p&gt;
+
+&lt;p&gt;pip를 이용해서 간단히 설치가 가능하다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pip install beautifulsoup4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;find&quot;&gt;find()&lt;/h3&gt;
+&lt;p&gt;요소추출&lt;/p&gt;
+
+&lt;h3 id=&quot;find_all&quot;&gt;find_all()&lt;/h3&gt;
+&lt;p&gt;여러요소추출&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;bs4&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;html_doc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;The Dormouse's story&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;p class=&quot;title&quot;&amp;gt;&amp;lt;b&amp;gt;The Dormouse's story&amp;lt;/b&amp;gt;&amp;lt;/p&amp;gt;
+
+&amp;lt;p class=&quot;story&quot;&amp;gt;Once upon a time there were three little sisters; and their names were
+&amp;lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&amp;gt;Elsie&amp;lt;/a&amp;gt;,
+&amp;lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&amp;gt;Lacie&amp;lt;/a&amp;gt; and
+&amp;lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&amp;gt;Tillie&amp;lt;/a&amp;gt;;
+and they lived at the bottom of a well.&amp;lt;/p&amp;gt;
+
+&amp;lt;p class=&quot;story&quot;&amp;gt;...&amp;lt;/p&amp;gt;
+&quot;&quot;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html_doc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'html.parser'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#기본&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;title1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 1개요소&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 여러개&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;links&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 링크목록&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;heaf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attrs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'href'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heaf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;결과
+&amp;lt;&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@python&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# python beautifulsoup-find.py&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dormouse&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'s story&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;The Dormouse'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;story&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elsie&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Elsie&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lacie&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Lacie&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tillie&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tillie&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;사용예시&quot;&gt;사용예시&lt;/h1&gt;
+&lt;p&gt;&lt;span style=&quot;color:blue&quot;&gt;
+기상청에 있는 RSS 데이터를 이용해서 지역의 예보데이터를 가져오는 예제를 만들어 보겠다.
+편의를 위해 지역명을 입력받는 형식으로 만든다.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;기상청의 RSS 사이트는 아래 경로에서 확인 가능하다.&lt;/p&gt;
+
+&lt;p&gt;홈 &amp;gt; 날씨 &amp;gt; 생활과 산업 &amp;gt; 서비스 &amp;gt; 인터넷 &amp;gt; 웹&lt;/p&gt;
+
+&lt;p&gt;URL 은 아래와 같다.
+http://www.kma.go.kr/weather/lifenindustry/sevice_rss.jsp&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=133&quot;&gt;충청남도&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=109&quot;&gt;서울&lt;/a&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root@python:/home# pip install beautifulsoup4
+Collecting beautifulsoup4
+Installing collected packages: beautifulsoup4
+Successfully installed beautifulsoup4-4.6.0&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib.request&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib.parse&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;bs4&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 지역명을 입력받는다.(지역명이 없을경우 Error 를 보여준다.)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Error: 지역이름을 입력하세요&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;regionNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#RSS Site 주소&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;siteURL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 지역명이름을 위한 변수&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;'stnId'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;regionNumber&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 매개변수를 URL 인코딩을 해준다.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlencode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# RSS URL을 파라미터와 조합&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;RSSurl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;siteURL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;?&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;url=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSSurl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#RSS 정보를 메모리에 저장&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sitedata&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlopen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSSurl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# utf-8 형식으로 decode&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;RSStext&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sitedata&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# BeautifulSoup 으로 분석&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSStext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;html.parser&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#정보추출&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;title_list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;wf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;sitetitle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sitetitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="python" /><category term="download" /><category term="urllib" /><summary type="html">내가 이글을 적는 이유는 웹사이트에 있는 특정 정보를 추출하기 위해 스크레이핑(Scraping)을 하기 위해서이다.</summary></entry><entry><title type="html">docker link</title><link href="http://localhost:4000/docker-link/" rel="alternate" type="text/html" title="docker link" /><published>2017-07-28T05:50:13+09:00</published><updated>2017-07-28T05:50:13+09:00</updated><id>http://localhost:4000/docker-link</id><content type="html" xml:base="http://localhost:4000/docker-link/">&lt;p&gt;docker 관련유용한 링크&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;https://www.slideshare.net/larrycai/learn-docker-in-90-minutes&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="docker" /><summary type="html">docker 관련유용한 링크 https://www.slideshare.net/larrycai/learn-docker-in-90-minutes</summary></entry><entry><title type="html">Chef 명령어!</title><link href="http://localhost:4000/chef/" rel="alternate" type="text/html" title="Chef 명령어!" /><published>2017-07-23T14:31:13+09:00</published><updated>2017-07-23T14:31:13+09:00</updated><id>http://localhost:4000/chef</id><content type="html" xml:base="http://localhost:4000/chef/">&lt;p&gt;셰프는(Chef, http://www.opscode.com/chef)는 OPSCODE(http://www.opscode.com)에서 만든 오픈 소스 시스템 관리 프레임워크다. 루비(Ruby)로 작성된 프레임워크를 이용한다.&lt;/p&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chef&quot; id=&quot;markdown-toc-chef&quot;&gt;Chef&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#create-the-cookbook&quot; id=&quot;markdown-toc-create-the-cookbook&quot;&gt;Create the cookbook&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#upload-cookbook&quot; id=&quot;markdown-toc-upload-cookbook&quot;&gt;Upload cookbook&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#bootstrap-your-node&quot; id=&quot;markdown-toc-bootstrap-your-node&quot;&gt;Bootstrap your node&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#의존cookbook이-있을경우-berks-로&quot; id=&quot;markdown-toc-의존cookbook이-있을경우-berks-로&quot;&gt;의존cookbook이 있을경우 berks 로&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#recipe-추가&quot; id=&quot;markdown-toc-recipe-추가&quot;&gt;recipe 추가&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#file-추가&quot; id=&quot;markdown-toc-file-추가&quot;&gt;file 추가&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#attribute-추가&quot; id=&quot;markdown-toc-attribute-추가&quot;&gt;attribute 추가&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#template-추가&quot; id=&quot;markdown-toc-template-추가&quot;&gt;template 추가&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#knife&quot; id=&quot;markdown-toc-knife&quot;&gt;Knife&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#chef-server-를-local-에-설치한-경우-해줘야하는-사항&quot; id=&quot;markdown-toc-chef-server-를-local-에-설치한-경우-해줘야하는-사항&quot;&gt;Chef Server 를 Local 에 설치한 경우 해줘야하는 사항&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#cookbook의-버전을-확일할때&quot; id=&quot;markdown-toc-cookbook의-버전을-확일할때&quot;&gt;cookbook의 버전을 확일할때&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#role-파일을-upload&quot; id=&quot;markdown-toc-role-파일을-upload&quot;&gt;role 파일을 upload&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#등록--등록된-서버의-ssh-키가-등록되어있을경우에동작함-없을-경우-키를-등록하거나-키를-삽입해서-사용해야함&quot; id=&quot;markdown-toc-등록--등록된-서버의-ssh-키가-등록되어있을경우에동작함-없을-경우-키를-등록하거나-키를-삽입해서-사용해야함&quot;&gt;등록 : 등록된 서버의 ssh 키가 등록되어있을경우에동작함 없을 경우 키를 등록하거나 키를 삽입해서 사용해야함.&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#등록확인&quot; id=&quot;markdown-toc-등록확인&quot;&gt;등록확인&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#node-검색&quot; id=&quot;markdown-toc-node-검색&quot;&gt;node 검색&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#node-에-레시피-등록&quot; id=&quot;markdown-toc-node-에-레시피-등록&quot;&gt;node 에 레시피 등록&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#chef-client-실행--원격에서-노드의-클라이언트를-수행&quot; id=&quot;markdown-toc-chef-client-실행--원격에서-노드의-클라이언트를-수행&quot;&gt;chef-client 실행 : 원격에서 노드의 클라이언트를 수행&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#kitchen&quot; id=&quot;markdown-toc-kitchen&quot;&gt;kitchen&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#쿡북을-생성하고&quot; id=&quot;markdown-toc-쿡북을-생성하고&quot;&gt;쿡북을 생성하고&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#kitchenyml-수정&quot; id=&quot;markdown-toc-kitchenyml-수정&quot;&gt;.kitchen.yml 수정&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#list--현재-상태를-확인-가능함&quot; id=&quot;markdown-toc-list--현재-상태를-확인-가능함&quot;&gt;list : 현재 상태를 확인 가능함&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#create---vm-이생성되고kitchenyml-에서-설정한값으로&quot; id=&quot;markdown-toc-create---vm-이생성되고kitchenyml-에서-설정한값으로&quot;&gt;create :  VM 이생성되고(kitchen.yml 에서 설정한값으로)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#login--생성한-vm-에-접속&quot; id=&quot;markdown-toc-login--생성한-vm-에-접속&quot;&gt;login : 생성한 VM 에 접속&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#converge--chef의-파일이-적용됨&quot; id=&quot;markdown-toc-converge--chef의-파일이-적용됨&quot;&gt;converge : Chef의 파일이 적용됨.&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#destroy--vm이-삭제됨&quot; id=&quot;markdown-toc-destroy--vm이-삭제됨&quot;&gt;destroy : VM이 삭제됨.&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#bash&quot; id=&quot;markdown-toc-bash&quot;&gt;bash&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#remote_filewget&quot; id=&quot;markdown-toc-remote_filewget&quot;&gt;remote_file(wget)&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#dpkg_packagedpkg&quot; id=&quot;markdown-toc-dpkg_packagedpkg&quot;&gt;dpkg_package(dpkg)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#apt-get-update&quot; id=&quot;markdown-toc-apt-get-update&quot;&gt;Apt-get Update&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#packageapt-get-install-yum-install&quot; id=&quot;markdown-toc-packageapt-get-install-yum-install&quot;&gt;package(apt-get install, yum install)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#python-pip&quot; id=&quot;markdown-toc-python-pip&quot;&gt;python pip&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#template-에서-변수설정&quot; id=&quot;markdown-toc-template-에서-변수설정&quot;&gt;template 에서 변수설정&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#export-debian_frontendnoninteractive&quot; id=&quot;markdown-toc-export-debian_frontendnoninteractive&quot;&gt;export DEBIAN_FRONTEND=noninteractive&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;셰프(Chef, http://www.opscode.com/chef)는 OPSCODE(http://www.opscode.com)에서 만든 오픈 소스 시스템 관리 프레임워크다.&lt;/p&gt;
+
+&lt;p&gt;셰프는 루비(Ruby)로 작성된 프레임워크를 이용한다. 
+단점으로는 일부 유닉스/리눅스, Mac OS X 계열만 지원한다는 것이다(윈도우에서도 되기는 하지만 일부 제약이 있는거 같다.)&lt;/p&gt;
+
+&lt;p&gt;기타 배경및 및 프레임워크에 대한 자세한 것은 아래내용참고하길&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;https://www.ibm.com/developerworks/community/blogs/9e635b49-09e9-4c23-8999-a4d461aeace2/entry/215?lang=en&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;내가 이해하는 바는 시스템 배포를 자동화하고 손쉽게 관리 할수 있는 것 정도로 이해한다.&lt;/p&gt;
+
+&lt;p&gt;간단한 명령어들을 나열해보려고한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;chef&quot;&gt;Chef&lt;/h1&gt;
+
+&lt;h2 id=&quot;create-the-cookbook&quot;&gt;Create the cookbook&lt;/h2&gt;
+&lt;p&gt;Cookbook 을 만들수 있다. chef 명령어로 생성할 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;chef-repo
+mkdir cookbooks 
+chef generate cookbook cookbooks/cookbookname&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;기본 수정은 default.rb 에서 작성하면된다.
+Edit default.rb&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/chef-repo/cookbooks/cookbookname/recipes/default.rb&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;upload-cookbook&quot;&gt;Upload cookbook&lt;/h2&gt;
+&lt;p&gt;Upload 는 knife 를 이용한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;knife cookbook upload cookbookname
+knife cookbook list&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;bootstrap-your-node&quot;&gt;Bootstrap your node&lt;/h2&gt;
+&lt;p&gt;identity file 이용&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;knife bootstrap AddressIP  &lt;span class=&quot;nt&quot;&gt;-N&lt;/span&gt; nodeName--ssh-user root &lt;span class=&quot;nt&quot;&gt;--sudo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--identity-file&lt;/span&gt; ~/.ssh/my.pem &lt;span class=&quot;nt&quot;&gt;--node-name&lt;/span&gt; node1 &lt;span class=&quot;nt&quot;&gt;--run-list&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'recipe[cookbookname]'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;id/pw 이용&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife bootstrap AddressIP &lt;span class=&quot;nt&quot;&gt;-N&lt;/span&gt; nodeName &lt;span class=&quot;nt&quot;&gt;-x&lt;/span&gt; userID &lt;span class=&quot;nt&quot;&gt;-P&lt;/span&gt; userPassword &lt;span class=&quot;nt&quot;&gt;--sudo&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;의존cookbook이-있을경우-berks-로&quot;&gt;의존cookbook이 있을경우 berks 로&lt;/h2&gt;
+&lt;p&gt;cookbook 함께 upload 가능
+cookbook recipe 폴더에서&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;berks install
+berks upload --ssl-verify=false
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;recipe-추가&quot;&gt;recipe 추가&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chef generate recipe cookbooks/cookbookname recipename
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;file-추가&quot;&gt;file 추가&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chef generate file cookbooks/cookbookname filename
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;attribute-추가&quot;&gt;attribute 추가&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chef generate attribute cookbooks/cookbookname default
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;template-추가&quot;&gt;template 추가&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chef generate template cookbooks/cookbookname templatename
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;knife&quot;&gt;Knife&lt;/h1&gt;
+&lt;p&gt;Knife 는 Chef 에서 이용할수 있는 툴임.&lt;/p&gt;
+
+&lt;h2 id=&quot;chef-server-를-local-에-설치한-경우-해줘야하는-사항&quot;&gt;Chef Server 를 Local 에 설치한 경우 해줘야하는 사항&lt;/h2&gt;
+&lt;p&gt;Chef 서버를 직접 구축해서 운영하면 SSL 인증오류로 정상적으로 접근이 안됨.
+설치한 서버에서 인증서를 다운받아 접속해보아야함.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;ssl 파일을 다운받고
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife ssl fetch
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정상적으로 설치되었는지 확인.
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife ssh check
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;리스트 정상적으로 받아오는지 확인
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife client list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;cookbook의-버전을-확일할때&quot;&gt;cookbook의 버전을 확일할때&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife cookbook site show cookbookname | grep latest_version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;role-파일을-upload&quot;&gt;role 파일을 upload&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife role from file test.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;등록--등록된-서버의-ssh-키가-등록되어있을경우에동작함-없을-경우-키를-등록하거나-키를-삽입해서-사용해야함&quot;&gt;등록 : 등록된 서버의 ssh 키가 등록되어있을경우에동작함 없을 경우 키를 등록하거나 키를 삽입해서 사용해야함.&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife bootstrap &amp;lt;client server ip&amp;gt; -x &amp;lt;user&amp;gt; -N &amp;lt;node name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;등록확인&quot;&gt;등록확인&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife node list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;node-검색&quot;&gt;node 검색&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife search node &quot;fqdn:*&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;node-에-레시피-등록&quot;&gt;node 에 레시피 등록&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife node run_list add node1 'recipe[hello]'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;chef-client-실행--원격에서-노드의-클라이언트를-수행&quot;&gt;chef-client 실행 : 원격에서 노드의 클라이언트를 수행&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;knife ssh &quot;fqdn:*&quot; &quot;sudo chef-client&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;kitchen&quot;&gt;kitchen&lt;/h2&gt;
+
+&lt;p&gt;Chef에서 사용가능한 툴로 Local 에서 테스트 가능하도록 도와줌.&lt;/p&gt;
+
+&lt;p&gt;작업은 chef-repo 에서 진행&lt;/p&gt;
+
+&lt;p&gt;chef-repo
+–cookbook
+  |-쿡불들&lt;/p&gt;
+
+&lt;h2 id=&quot;쿡북을-생성하고&quot;&gt;쿡북을 생성하고&lt;/h2&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chef generate cookbook cookbooks/cookbookname
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;kitchenyml-수정&quot;&gt;.kitchen.yml 수정&lt;/h2&gt;
+
+&lt;p&gt;생성한 폴더를 보면 cookbookname/.kitchen.yml 폴더에 vagrant 환경설정파일이 존재함.&lt;/p&gt;
+
+&lt;p&gt;아래와같은 형식으로사용가능.&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;vagrant&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;provisioner&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;chef_zero&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;platforms&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-14.04&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;customize&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+       &lt;span class=&quot;na&quot;&gt;memory &lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;256&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;suites&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;default&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;run_list&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;recipe[recipe name::default]&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;list--현재-상태를-확인-가능함&quot;&gt;list : 현재 상태를 확인 가능함&lt;/h2&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kitchen list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;결과&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Instance             Driver   Provisioner  Verifier  Transport  Last Action
+default-ubuntu-1404  Vagrant  ChefZero     Busser    Ssh        &amp;lt;Not Created&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;create---vm-이생성되고kitchenyml-에서-설정한값으로&quot;&gt;create :  VM 이생성되고(kitchen.yml 에서 설정한값으로)&lt;/h2&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kitchen create
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;결과&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-----&amp;gt; Starting Kitchen (v1.4.2)
+C:/opscode/chefdk/embedded/lib/ruby/gems/2.1.0/gems/httpclient-2.6.0.1/lib/httpclient/webagent-cookie.rb:458: warning: already initialized constant HTTPClient::CookieManager
+C:/opscode/chefdk/embedded/lib/ruby/gems/2.1.0/gems/httpclient-2.6.0.1/lib/httpclient/cookie.rb:8: warning: previous definition of CookieManager was here
+-----&amp;gt; Creating &amp;lt;default-ubuntu-1404&amp;gt;...
+       Bringing machine 'default' up with 'virtualbox' provider...
+       ==&amp;gt; default: Importing base box 'opscode-ubuntu-14.04'...
+==&amp;gt; default: Matching MAC address for NAT networking...
+       ==&amp;gt; default: Setting the name of the VM: kitchen-whatap-agent-oregon-default-ubuntu-1404_default_1458803869963_74332
+       ==&amp;gt; default: Clearing any previously set network interfaces...
+       ==&amp;gt; default: Preparing network interfaces based on configuration...
+           default: Adapter 1: nat
+       ==&amp;gt; default: Forwarding ports...
+           default: 22 (guest) =&amp;gt; 2222 (host) (adapter 1)
+       ==&amp;gt; default: Running 'pre-boot' VM customizations...
+       ==&amp;gt; default: Booting VM...
+       ==&amp;gt; default: Waiting for machine to boot. This may take a few minutes...
+           default: SSH address: 127.0.0.1:2222
+           default: SSH username: vagrant
+           default: SSH auth method: private key
+           default:
+           default: Vagrant insecure key detected. Vagrant will automatically replace
+           default: this with a newly generated keypair for better security.
+           default:
+           default: Inserting generated public key within guest...
+           default: Removing insecure key from the guest if it's present...
+           default: Key inserted! Disconnecting and reconnecting using new SSH key...
+       ==&amp;gt; default: Machine booted and ready!
+       ==&amp;gt; default: Checking for guest additions in VM...
+       ==&amp;gt; default: Setting hostname...
+       ==&amp;gt; default: Machine not provisioned because `--no-provision` is specified.
+       [SSH] Established
+       Vagrant instance &amp;lt;default-ubuntu-1404&amp;gt; created.
+       Finished creating &amp;lt;default-ubuntu-1404&amp;gt; (0m44.51s).
+-----&amp;gt; Kitchen is finished. (0m49.02s)
+zlib(finalizer): the stream was freed prematurely.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;login--생성한-vm-에-접속&quot;&gt;login : 생성한 VM 에 접속&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kitchen login
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;converge--chef의-파일이-적용됨&quot;&gt;converge : Chef의 파일이 적용됨.&lt;/h2&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kitchen converge
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;destroy--vm이-삭제됨&quot;&gt;destroy : VM이 삭제됨.&lt;/h2&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kitchen destroy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;#Chef Syntax
+개인적으로 쉘스크립트를 작성후 chef 를만든다. 
+쉘스크립트와 매핑해서 사용가능한 chef Syntax 를 정리.&lt;/p&gt;
+&lt;h2 id=&quot;bash&quot;&gt;bash&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bash &quot;install zabbix&quot; do
+   user &quot;root&quot;
+   cwd &quot;/tmp&quot;
+   code &amp;lt;&amp;lt;-EOH
+     wget http://repo.zabbix.com/zabbix/2.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_2.2-1+precise_all.deb
+    sudo dpkg -i zabbix-release_2.2-1+precise_all.deb
+    sudo apt-get -qq update &amp;lt; /dev/null
+    export DEBIAN_FRONTEND=noninteractive
+    sudo apt-get -y install zabbix-server-mysql zabbix-frontend-php &amp;lt; /dev/null
+    wget http://whatap-internal.hbox.a3c.co.kr/install%2Fzabbix_server.conf -O /etc/zabbix/zabbix_server.conf
+  EOH
+   not_if { ::File.exists?('/usr/share/zabbix') }
+ end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;user : 실행할 User 정보
+cwd : 실행할 경로
+code : 실행할 스크립트들 EOH안에 해당스크립트를 입력한다.
+```shell
+&amp;lt;&amp;lt;-EOH
+bash 스크립트
+EOH 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;execute 명령어를 이용 할 수도 있음&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;execute &lt;span class=&quot;s1&quot;&gt;'apache restart'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+  &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/usr/sbin/apachectl restart'&lt;/span&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;remote_filewget&quot;&gt;remote_file(wget)&lt;/h1&gt;
+&lt;p&gt;wget 과 같이 해당파일을 다운로드 받을때 사용한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;####&lt;/span&gt;
+remote_file &lt;span class=&quot;s1&quot;&gt;'/tmp/zabbix-release_2.2-1+precise_all.deb'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+  &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;' http://repo.zabbix.com/zabbix/2.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_2.2-1+precise_all.deb'&lt;/span&gt;
+  owner &lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt;
+  group &lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt;
+  mode &lt;span class=&quot;s1&quot;&gt;'0644'&lt;/span&gt;
+  action :create
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;remote_file ‘  ‘ :  다운로드될 파일위치
+source : 원본 소스파일
+owner : 소유자&lt;br /&gt;
+group : 그룹
+mode : 실행권한
+action : create 일 경우 존재할경우 생성안하고, 없으면 생성함.&lt;/p&gt;
+
+&lt;h2 id=&quot;dpkg_packagedpkg&quot;&gt;dpkg_package(dpkg)&lt;/h2&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dpkg_package &lt;span class=&quot;s1&quot;&gt;'zabbix-release_2.2-1+precise_all.deb'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+  &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/tmp/zabbix-release_2.2-1+precise_all.deb&quot;&lt;/span&gt;
+  action :install
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;apt-get-update&quot;&gt;Apt-get Update&lt;/h2&gt;
+
+&lt;p&gt;metadata.rb 에 depends 를 추가해준후 사용가능하다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;depends &lt;span class=&quot;s1&quot;&gt;'apt'&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;'~&amp;gt; 2.9.2'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;전문&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;name &lt;span class=&quot;s1&quot;&gt;'whatap-zabbix-sh'&lt;/span&gt;
+maintainer &lt;span class=&quot;s1&quot;&gt;'Kwangmyung Kim'&lt;/span&gt;
+maintainer_email &lt;span class=&quot;s1&quot;&gt;'kwangmyung.kim@gmail.com'&lt;/span&gt;
+license &lt;span class=&quot;s1&quot;&gt;'all_rights'&lt;/span&gt;
+description &lt;span class=&quot;s1&quot;&gt;'Installs/Configures'&lt;/span&gt;
+long_description &lt;span class=&quot;s1&quot;&gt;'Installs/Configures'&lt;/span&gt;
+version &lt;span class=&quot;s1&quot;&gt;'0.1.0'&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## depends&lt;/span&gt;
+depends &lt;span class=&quot;s1&quot;&gt;'apt'&lt;/span&gt;, &lt;span class=&quot;s1&quot;&gt;'~&amp;gt; 2.9.2'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;execute 를 사용할수도 있다.
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;execute &lt;span class=&quot;s2&quot;&gt;&quot;apt-get-update-periodic&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;apt-get update&quot;&lt;/span&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;packageapt-get-install-yum-install&quot;&gt;package(apt-get install, yum install)&lt;/h2&gt;
+&lt;p&gt;package 설치&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;package &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'zabbix-server-mysql'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+  &lt;/span&gt;action :install
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;python-pip&quot;&gt;python pip&lt;/h2&gt;
+
+&lt;p&gt;python 의 pip 인스톨&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install &lt;span class=&quot;nv&quot;&gt;Django&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.6.11
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;describe pip&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Django'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+  &lt;/span&gt;it &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; should be_installed &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  its&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'version'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; should eq &lt;span class=&quot;s1&quot;&gt;'1.6.11'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;template-에서-변수설정&quot;&gt;template 에서 변수설정&lt;/h2&gt;
+&lt;p&gt;변수를 이용하려면 Attributes 에서 설정한 내용을 가지고 사용을 할수 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;attributes
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;default[&lt;span class=&quot;s1&quot;&gt;'mycookbook'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'DBHost'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'192.168.44.12'&lt;/span&gt;
+default[&lt;span class=&quot;s1&quot;&gt;'mycookbook'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'DBPassword'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'password'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;template
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ttemplate &lt;span class=&quot;s2&quot;&gt;&quot;/etc/my/test.conf&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;test.conf.erb&quot;&lt;/span&gt;
+owner &lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt;
+group &lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt;
+mode &lt;span class=&quot;s1&quot;&gt;'0644'&lt;/span&gt;
+variables&lt;span class=&quot;o&quot;&gt;({&lt;/span&gt;
+   :my_db_url &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; node[&lt;span class=&quot;s1&quot;&gt;'mycookbook'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'DBHost'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+   :my_password &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; node[&lt;span class=&quot;s1&quot;&gt;'mycookbook'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'DBPassword'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;변수의 사용은 &amp;lt;%= @my_password %&amp;gt; 형식으로 사용하면된다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/sudoers.erb&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;database&amp;gt;
+        &amp;lt;default&amp;gt;mysql://rnd:&amp;lt;%&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; @my_password %&amp;gt;@&amp;lt;%&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; @my_db_url %&amp;gt;/&amp;lt;/default&amp;gt;
+&amp;lt;/database&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;#link (ln)
+링크연결&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;# cd /etc/apache2/sites-enabled/&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# ln -s /etc/hw/apache/public.conf&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;link&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/etc/apache2/sites-enabled/public.conf'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+  &lt;/span&gt;group &lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt;
+  owner &lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt;
+  to &lt;span class=&quot;s1&quot;&gt;'/etc/hw/apache/public.conf'&lt;/span&gt;
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;#디랙토리생성&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;directory &lt;span class=&quot;s1&quot;&gt;'/etc/hw/'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+  &lt;/span&gt;owner &lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt;
+  group &lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt;
+  mode &lt;span class=&quot;s1&quot;&gt;'0755'&lt;/span&gt;
+  action :create
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;export-debian_frontendnoninteractive&quot;&gt;export DEBIAN_FRONTEND=noninteractive&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Force dpkg to not overwrite configuration files - and don't ask anything
+file '/etc/apt/apt.conf.d/force_confdef' do
+  owner 'root'
+  group 'root'
+  mode 00644
+  content 'Dpkg::Options {
+   &quot;--force-confdef&quot;;
+   &quot;--force-confold&quot;;
+}'
+  action :create
+end
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="chef" /><summary type="html">셰프는(Chef, http://www.opscode.com/chef)는 OPSCODE(http://www.opscode.com)에서 만든 오픈 소스 시스템 관리 프레임워크다. 루비(Ruby)로 작성된 프레임워크를 이용한다.</summary></entry><entry><title type="html">Ubnutu route 설정</title><link href="http://localhost:4000/ubuntu-route/" rel="alternate" type="text/html" title="Ubnutu route 설정" /><published>2017-07-21T10:50:13+09:00</published><updated>2017-07-21T10:50:13+09:00</updated><id>http://localhost:4000/ubuntu-route</id><content type="html" xml:base="http://localhost:4000/ubuntu-route/">&lt;p&gt;라우팅(Routing) - 패킷(Packet)이 목적지까지 갈 수 있도록 경로를 올바르게 설정해 주는 작업.&lt;/p&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#route-table&quot; id=&quot;markdown-toc-route-table&quot;&gt;Route table&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#route-명령는-아래와-같은-옵션들이-있다&quot; id=&quot;markdown-toc-route-명령는-아래와-같은-옵션들이-있다&quot;&gt;route 명령는 아래와 같은 옵션들이 있다.&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#라우팅-테이블-routing-table&quot; id=&quot;markdown-toc-라우팅-테이블-routing-table&quot;&gt;라우팅 테이블 (Routing Table)&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#사용-예제&quot; id=&quot;markdown-toc-사용-예제&quot;&gt;사용 예제&lt;/a&gt;            &lt;ul&gt;
+              &lt;li&gt;&lt;a href=&quot;#라우팅-정보삭제&quot; id=&quot;markdown-toc-라우팅-정보삭제&quot;&gt;라우팅 정보삭제&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;#라우팅-정보추가&quot; id=&quot;markdown-toc-라우팅-정보추가&quot;&gt;라우팅 정보추가&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;#단일-호스트에-대해서-라우팅을-추가삭제-할-때&quot; id=&quot;markdown-toc-단일-호스트에-대해서-라우팅을-추가삭제-할-때&quot;&gt;단일 호스트에 대해서 라우팅을 추가/삭제 할 때&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;#게이트웨이-추가-제거&quot; id=&quot;markdown-toc-게이트웨이-추가-제거&quot;&gt;게이트웨이 추가, 제거&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;#부팅과-함께-적용시키기&quot; id=&quot;markdown-toc-부팅과-함께-적용시키기&quot;&gt;부팅과 함께 적용시키기&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;모든 검증은 ubuntu 16.04 에서 했다. 그리고 권한은 root 권한을 가지고 작업을 해야 한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;route-table&quot;&gt;Route table&lt;/h1&gt;
+
+&lt;p&gt;HOST A가 HOST B에게 데이터를 전송하고자 할 때, 두 호스트가 같은 로컬 네트워크 상에 있다면, IP 프로토콜은 출발지와 도착지 호스트의 IP 주소를 ARP 를 사용해서 물리적 주소로 변환한다. 그리고 그 물리적 주소들은 (프레임을 만들기 위해) IP 데이터그램에 추가되고, 프레임을 이용해 두 호스트는 서로 간에 직접 통신을 한다. 그런데 두 호스트가 같은 로컬 네트워크 상에 있지 않으면 직접 통신할 수 없고 라우터를 거쳐서 통신해야 한다.&lt;/p&gt;
+
+&lt;p&gt;라우터는 특정한 경로(ROUTE)가 알려져 있지 않은 로컬 네트워크 밖의 호스트와 통신할 때 사용된다.
+두 호스트가 같은 로컬 네트워크에 있지 않다면, 호스트 A는 라우터의 라우팅 표를 체크하여 호스트 B의 로컬 네트워크에 연결될 수 있는지 살펴본다. 만약 일치하는 것을 찾지 못하면 데이터는 “디폴트 게이트웨이”로 보내진다.&lt;/p&gt;
+
+&lt;p&gt;대부분 패킷을 목적지까지 전달하기 위해 한 라우터 만을 경유하지는 않는다. 라우터는 다른 라우터로 가는 경로를 알고 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;route-명령는-아래와-같은-옵션들이-있다&quot;&gt;route 명령는 아래와 같은 옵션들이 있다.&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;라우팅 테이블을 확인하거나 수정할 수 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;활성화되어 있는 네트워크 인터페이스를 통해 정적 라우트를 설정할 수 있다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;명령어 옵션&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-F : display Forwarding Information Base(FIB) (default)
+
+-C : display routing cache instead of FIB --cache
+
+-n : don't resolve names. --numeric
+
+-e : display other/more information. --extended
+
+del : delete a route.
+
+add : add a new route.
+
+-net : 목적지 네트워트
+
+-host : 목적지 호스트
+
+netmask : 네트워크 라우트를 추가할 때, 사용 될 넷마스크
+
+gw : route packets via a gateway
+
+dev if : force the route to be associated with the specified device.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;라우팅-테이블-routing-table&quot;&gt;라우팅 테이블 (Routing Table)&lt;/h2&gt;
+
+&lt;p&gt;route 명령이 수행되었을 때 보여주는 테이블이다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Destination : 목적지 네트워트 또는 목적지 호스트 주소&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Gateway : 게이트웨이 주소, 설정되어 있지 않다면 *&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Genmask : The netmask for the destination net; ‘255.255.255.255’ for a host destination and ‘0.0.0.0’ for the default route.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Flags :&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;    U &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;route is Up&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 라우트 동작 상태
+
+    H &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;target is a Host&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 목적지 호스트 
+
+    G &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;use Gateway&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 게이트웨이 사용
+
+    R &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Reinstate route &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;dynamic routing&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+    D &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;dynamically installed by Daemon or redirect&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 데몬 또는 ICMP Redirect Message에 의해 
+    동적으로 설치된 상태
+    
+    M &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Modified from routing daemon or redirect&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 데몬 또는 ICMP Redirect Message에 의해 변경된 상태 
+    
+    A &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;installed by Addrconf&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    
+    C &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Cache entry&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;reject route&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 라우트 거부&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Metric : Target까지의 거리를 홉(Hop) 단위로 계산, 최근 커널에서는 사용하지 않으나 라우팅 데몬에 의해 사용&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ref : 현재 라우트에 대한 레퍼런스 수, 리눅스 커널에서는 사용되지 않음&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use : 라우트 탐색 수&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;iface : 패킷이 전달되는 인터페이스&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;사용-예제&quot;&gt;사용 예제&lt;/h3&gt;
+&lt;p&gt;virtual box 를 가지고 테스트를 해보려고 한다.&lt;/p&gt;
+
+&lt;p&gt;VirtualBox 2개를 생성한다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;각 VirtualBox 에는 2개의 네트워크 카드를 장착한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A Host 정보&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root@local-vm-ubuntu:~# ifconfig
+enp0s3    Link encap:Ethernet  HWaddr 08:00:27:fd:dc:d4
+          inet addr:192.168.0.108  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::a00:27ff:fefd:dcd4/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:44855 errors:0 dropped:68 overruns:0 frame:0
+          TX packets:1312 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:4875291 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4.8 MB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  TX bytes:86635 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;86.6 KB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+enp0s8    Link encap:Ethernet  HWaddr 08:00:27:8f:3c:58
+          inet addr:192.168.99.100  Bcast:192.168.99.255  Mask:255.255.255.0
+          inet6 addr: fe80::a00:27ff:fe8f:3c58/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:10295 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:6267 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:855770 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;855.7 KB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  TX bytes:995967 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;995.9 KB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+root@local-vm-ubuntu:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s3
+192.168.99.0    &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s8&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;B Host 정보&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root@local-vm-ubuntu-02:~# ifconfig
+enp0s3    Link encap:Ethernet  HWaddr 08:00:27:7b:f4:f4
+          inet addr:192.168.0.110  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::a00:27ff:fe7b:f4f4/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:44831 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:1199 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:4828633 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4.8 MB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  TX bytes:75710 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;75.7 KB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+enp0s8    Link encap:Ethernet  HWaddr 08:00:27:a2:e4:dc
+          inet addr:192.168.99.110  Bcast:192.168.99.255  Mask:255.255.255.0
+          inet6 addr: fe80::a00:27ff:fea2:e4dc/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:733 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:362 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:69794 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;69.7 KB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  TX bytes:42493 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;42.4 KB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+root@local-vm-ubuntu-02:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s3
+192.168.99.0    &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s8&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;A 에서 B로 Ping 를 날려보면 정삭적으로 Ping 이 가는것을 확인 할 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root@local-vm-ubuntu:~# ping 192.168.99.110
+PING 192.168.99.110 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;192.168.99.110&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 56&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;84&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; bytes of data.
+64 bytes from 192.168.99.110: &lt;span class=&quot;nv&quot;&gt;icmp_seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1 &lt;span class=&quot;nv&quot;&gt;ttl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;64 &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0.499 ms&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;라우팅-정보삭제&quot;&gt;라우팅 정보삭제&lt;/h4&gt;
+&lt;p&gt;그러면 라우팅 정보를 삭제해보겠다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;route del &lt;span class=&quot;nt&quot;&gt;-net&lt;/span&gt; 192.168.99.0 netmask  255.255.255.0 dev enp0s8&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;결과는 아래와 같이 해당 라우팅정보가 삭제된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root@local-vm-ubuntu:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s3&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;이제 ping 을 날려도 해당 호스트로 ping 이 안된다.&lt;/p&gt;
+
+&lt;h4 id=&quot;라우팅-정보추가&quot;&gt;라우팅 정보추가&lt;/h4&gt;
+&lt;p&gt;그럼 라우팅 정보를 추가해보겠다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;route add &lt;span class=&quot;nt&quot;&gt;-net&lt;/span&gt; 192.168.99.0 netmask  255.255.255.0 dev enp0s8&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;아래와 같이 해당 라우팅 정보가 추가된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root@local-vm-ubuntu:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s3
+192.168.99.0    &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s8&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;단일-호스트에-대해서-라우팅을-추가삭제-할-때&quot;&gt;단일 호스트에 대해서 라우팅을 추가/삭제 할 때&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;route add &lt;span class=&quot;nt&quot;&gt;-host&lt;/span&gt; 192.168.99.100 dev enp0s8
+route del &lt;span class=&quot;nt&quot;&gt;-host&lt;/span&gt; 192.168.99.100 dev enp0s8&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;게이트웨이-추가-제거&quot;&gt;게이트웨이 추가, 제거&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;route add default gw 192.168.0.1 dev enp0s3
+route del default gw 192.168.0.1 dev enp0s3&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;192.168.99.100으로 나가는 트래픽을 192.168.0.1 게이트웨이를 통하도록 할 때&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;route add &lt;span class=&quot;nt&quot;&gt;-host&lt;/span&gt; 192.168.99.100 netmask 0.0.0.0 gw 192.168.0.1 dev enp0s3
+
+root@local-vm-ubuntu:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s3
+192.168.99.0    &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s8
+192.168.99.100  dlinkrouter     255.255.255.255 UGH   0      0        0 enp0s3&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;192.168.99.0 네트워크로 나가는 트래픽을 192.168.0.1 게이트웨이를 통하도록 할 때&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;route add &lt;span class=&quot;nt&quot;&gt;-net&lt;/span&gt; 192.168.99.0 netmask 255.255.255.0 gw 192.168.0.1 dev enp0s3
+
+root@local-vm-ubuntu:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s3
+192.168.99.0    dlinkrouter     255.255.255.0   UG    0      0        0 enp0s3
+192.168.99.0    &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;               255.255.255.0   U     0      0        0 enp0s8
+192.168.99.100  dlinkrouter     255.255.255.255 UGH   0      0        0 enp0s3&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;부팅과-함께-적용시키기&quot;&gt;부팅과 함께 적용시키기&lt;/h4&gt;
+&lt;p&gt;/etc/rc.d/rc.local 파일에 라우트 설정 내용을 추가하여 네트워크 설정을 한다.&lt;/p&gt;</content><author><name></name></author><category term="Ubuntu" /><category term="route" /><category term="IP" /><summary type="html">라우팅(Routing) - 패킷(Packet)이 목적지까지 갈 수 있도록 경로를 올바르게 설정해 주는 작업.</summary></entry><entry><title type="html">Ubnutu Network 설정</title><link href="http://localhost:4000/ubuntu-network/" rel="alternate" type="text/html" title="Ubnutu Network 설정" /><published>2017-07-20T10:50:13+09:00</published><updated>2017-07-20T10:50:13+09:00</updated><id>http://localhost:4000/ubuntu-network</id><content type="html" xml:base="http://localhost:4000/ubuntu-network/">&lt;p&gt;Ubuntu 16.04 에서 네트워크 설정하는 법을 잘 생각이 나지 않아 적어놓는다…&lt;/p&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#ip-setting&quot; id=&quot;markdown-toc-ip-setting&quot;&gt;Ip Setting&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#interface-변경&quot; id=&quot;markdown-toc-interface-변경&quot;&gt;interface 변경&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#dhcp-설정&quot; id=&quot;markdown-toc-dhcp-설정&quot;&gt;DHCP 설정&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#고정아이피-설정&quot; id=&quot;markdown-toc-고정아이피-설정&quot;&gt;고정아이피 설정&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#네트워크-설정-재시작&quot; id=&quot;markdown-toc-네트워크-설정-재시작&quot;&gt;네트워크 설정 재시작&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;모든 검증은 ubuntu 16.04 에서 했다. 그리고 권한은 root 권한을 가지고 작업을 해야 한다.&lt;/p&gt;
+
+&lt;p&gt;먼저 어느 네트워크 카드가 붙어있는지 확인 해보자&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ip link show&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@local&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ubuntu&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:~&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# ip link show&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;lo: &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;LOOPBACK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;UP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;LOWER_UP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mtu&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;65536&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qdisc&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;noqueue&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;state&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;UNKNOWN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qlen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loopback&lt;/span&gt; &lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brd&lt;/span&gt; &lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;enp0s3: &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;BROADCAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MULTICAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;UP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;LOWER_UP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mtu&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1500&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qdisc&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pfifo_fast&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;state&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;UP&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qlen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ether&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:fd:dc:d4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brd&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ff&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:ff:ff:ff:ff:ff&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;enp0s8: &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;BROADCAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MULTICAST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;UP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;LOWER_UP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mtu&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1500&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qdisc&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pfifo_fast&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;state&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;UP&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qlen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ether&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;08&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;58&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brd&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ff&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:ff:ff:ff:ff:ff&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;ip-setting&quot;&gt;Ip Setting&lt;/h1&gt;
+
+&lt;p&gt;우분투를 처음 설치하면 다른 리눅스 배포판과 마찬가지로 유동아이피로 설정되어 있다.&lt;/p&gt;
+
+&lt;p&gt;아이피를 변경하기 위해서는 아래 파일을 변경해야 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;interface-변경&quot;&gt;interface 변경&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/network/ interfaces&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;dhcp-설정&quot;&gt;DHCP 설정&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;auto eth0
+iface eth0 inet dhcp&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;만약 2개의 NIC 를 이용하면 하나의 NIC 에는 Default gateway 설정을 해준다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;auto eth0
+iface eth0 inet dhcp
+post-up route add default gw 192.168.0.1
+
+auto eth1
+iface eth1 inet dhcp&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;고정아이피-설정&quot;&gt;고정아이피 설정&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;auto eth0
+iface eth0 inet static
+address xxx.xxx.xxx.xxx
+netmask xxx.xxx.xxx.xxx
+broadcast xxx.xxx.xxx.xxx
+gateway xxx.xxx.xxx.xxx
+dns-nameservers xxx.xxx.xxx.xxx&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;네트워크-설정-재시작&quot;&gt;네트워크 설정 재시작&lt;/h2&gt;
+&lt;p&gt;설정파일을 편집했으면 네트워크를 재시작해야 한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; /etc/init.d/networking restart&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;ifconfig 명령어를 통해 정상적으로 변경되었는지 확인한다. (변경이 안되었으면 reboot 후 다시 확인)&lt;/p&gt;</content><author><name></name></author><category term="Ubuntu" /><category term="Network" /><category term="IP" /><summary type="html">Ubuntu 16.04 에서 네트워크 설정하는 법을 잘 생각이 나지 않아 적어놓는다…</summary></entry><entry><title type="html">Linux Command 명령어</title><link href="http://localhost:4000/linux-command/" rel="alternate" type="text/html" title="Linux Command 명령어" /><published>2017-07-20T10:50:13+09:00</published><updated>2017-07-20T10:50:13+09:00</updated><id>http://localhost:4000/linux-command</id><content type="html" xml:base="http://localhost:4000/linux-command/">&lt;p&gt;find, grep, egrep, du-sk, ps-ef 간단사용법&lt;/p&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#파일찾기&quot; id=&quot;markdown-toc-파일찾기&quot;&gt;파일찾기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#특정파일유형에서-단어찾기&quot; id=&quot;markdown-toc-특정파일유형에서-단어찾기&quot;&gt;특정파일유형에서 단어찾기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#cron-실행정상유무확인&quot; id=&quot;markdown-toc-cron-실행정상유무확인&quot;&gt;cron 실행정상유무확인&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#같은내용에서-또다시-추릴때&quot; id=&quot;markdown-toc-같은내용에서-또다시-추릴때&quot;&gt;같은내용에서 또다시 추릴때&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#egrep-으로-2개이상의-같은-단어를-찾을때&quot; id=&quot;markdown-toc-egrep-으로-2개이상의-같은-단어를-찾을때&quot;&gt;egrep 으로 2개이상의 같은 단어를 찾을때&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#폴더내-파일의-용량별-정렬할때&quot; id=&quot;markdown-toc-폴더내-파일의-용량별-정렬할때&quot;&gt;폴더내 파일의 용량별 정렬할때&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#디랙토리별-파일의-용량확인&quot; id=&quot;markdown-toc-디랙토리별-파일의-용량확인&quot;&gt;디랙토리별 파일의 용량확인&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ps--ef-확인&quot; id=&quot;markdown-toc-ps--ef-확인&quot;&gt;ps -ef 확인&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#확인된-pid-kill-함&quot; id=&quot;markdown-toc-확인된-pid-kill-함&quot;&gt;확인된 pid kill 함&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#로그-점검시&quot; id=&quot;markdown-toc-로그-점검시&quot;&gt;로그 점검시&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#crontab-주기&quot; id=&quot;markdown-toc-crontab-주기&quot;&gt;Crontab 주기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ubuntu-repo-변경&quot; id=&quot;markdown-toc-ubuntu-repo-변경&quot;&gt;Ubuntu repo 변경&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;파일찾기&quot;&gt;파일찾기&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; core &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; rm &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;
+find / &lt;span class=&quot;nt&quot;&gt;-xdev&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-size&lt;/span&gt; +100000000c &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; ll &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;    &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; 100M이상 파일찾기&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;특정파일유형에서-단어찾기&quot;&gt;특정파일유형에서 단어찾기&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'*.sh'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-print&lt;/span&gt; |xargs &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'se jong'&lt;/span&gt;
+find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'*.sh'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-print&lt;/span&gt; |xargs &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'CSBS Hit Now('&lt;/span&gt; /home/svc/regist.sh
+find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f | xargs &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;less than 5&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;cron-실행정상유무확인&quot;&gt;cron 실행정상유무확인&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;tail &lt;span class=&quot;nt&quot;&gt;-100&lt;/span&gt; /var/adm/cron/log  &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; HP  
+tail &lt;span class=&quot;nt&quot;&gt;-100&lt;/span&gt; /var/log/cron​          &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; Linux
+﻿&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;같은내용에서-또다시-추릴때&quot;&gt;같은내용에서 또다시 추릴때&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt; &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Apr 24&quot;&lt;/span&gt; alert&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;log | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ORA-00060&quot;&lt;/span&gt;
+ &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;-i 는 대문자 소문자 상관없이 찾는 옵션.
+-c 는 “ORA-00060” 을 포함하는 줄 합계를 구하는 옵션&lt;/p&gt;
+
+&lt;h2 id=&quot;egrep-으로-2개이상의-같은-단어를-찾을때&quot;&gt;egrep 으로 2개이상의 같은 단어를 찾을때&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /var/adm/syslog/syslog.log|grep &lt;span class=&quot;s2&quot;&gt;&quot;May&quot;&lt;/span&gt; |egrep &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;error|failed|fault|EMS&quot;&lt;/span&gt;
+egrep &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'echo|discard'&lt;/span&gt; /etc/services
+vgdisplay &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; vg_ora1 | egrep &lt;span class=&quot;s1&quot;&gt;'Name|Size'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;폴더내-파일의-용량별-정렬할때&quot;&gt;폴더내 파일의 용량별 정렬할때&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;du &lt;span class=&quot;nt&quot;&gt;-sk&lt;/span&gt; ./&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; | sort &lt;span class=&quot;nt&quot;&gt;-nr&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;디랙토리별-파일의-용량확인&quot;&gt;디랙토리별 파일의 용량확인&lt;/h2&gt;
+&lt;p&gt;어느 디렉토리에서 용량을 많이 사용하고 있는지 궁금할 때가 있다. 이 때 각 디렉토리별 용량을 확인하기 위해 필요한 명령어다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;du &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--max-depth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;ps--ef-확인&quot;&gt;ps -ef 확인&lt;/h2&gt;
+&lt;p&gt;pid 값 확인&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ps &lt;span class=&quot;nt&quot;&gt;-ef&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;검색어 | awk &lt;span class=&quot;s1&quot;&gt;'{print $2}'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;확인된-pid-kill-함&quot;&gt;확인된 pid kill 함&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ps &lt;span class=&quot;nt&quot;&gt;-ef&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;검색어 | awk &lt;span class=&quot;s1&quot;&gt;'{print $2}'&lt;/span&gt;| xargs &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-9&lt;/span&gt;     &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;로그-점검시&quot;&gt;로그 점검시&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;make_ /var/opt/ignite/recovery/latest/recovery.log  &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; HP ignite백업
+&lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; error &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; fail /var/adm/syslog/syslog.log   &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; HP syslog
+tail &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; /var/adm/rc.log    &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; HP 부팅 후 프로세스가 정상수행됐는지..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;crontab-주기&quot;&gt;Crontab 주기&lt;/h2&gt;
+&lt;p&gt;크론tab의 주기를 볼수 있는 웹페이지 &lt;a href=&quot;https://crontab.guru/&quot;&gt;crontab&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ubuntu-repo-변경&quot;&gt;Ubuntu repo 변경&lt;/h2&gt;
+&lt;p&gt;느린 외국 repo 가 아닌 한국 repo로 변경
+archive.ubuntu.com(또는 kr.archive.ubuntu.com) 로 되어있는것을 ftp.daumkakao.com 로 바꿔면된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sed &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/archive.ubuntu.com/ftp.daumkakao.com/g'&lt;/span&gt; /etc/apt/sources.list
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sed &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/security.ubuntu.com/ftp.daumkakao.com/g'&lt;/span&gt; /etc/apt/sources.list
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sed &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/extras.ubuntu.com/ftp.daumkakao.com/g'&lt;/span&gt; /etc/apt/sources.list
+apt-get clean
+apt-get update&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="linux" /><category term="command" /><summary type="html">find, grep, egrep, du-sk, ps-ef 간단사용법</summary></entry><entry><title type="html">Jmeter-어떻게 쓰지-02</title><link href="http://localhost:4000/How-Can-I-Jmeter-With-Proxy/" rel="alternate" type="text/html" title="Jmeter-어떻게 쓰지-02" /><published>2017-07-03T19:02:49+09:00</published><updated>2017-07-03T19:02:49+09:00</updated><id>http://localhost:4000/How-Can-I-Jmeter-With-Proxy</id><content type="html" xml:base="http://localhost:4000/How-Can-I-Jmeter-With-Proxy/">&lt;p&gt;여러 URL 을 테스트할 경우 각각의 Http Request를 생성 하려면 시간이 많이 걸립니다. Http Request를 자동으로 생성 작성할 수는 없을까요?&lt;/p&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#test-script-recoder&quot; id=&quot;markdown-toc-test-script-recoder&quot;&gt;Test Script Recoder&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#non---test-elementshttps-test-script-recorder&quot; id=&quot;markdown-toc-non---test-elementshttps-test-script-recorder&quot;&gt;Non - Test Elements&amp;gt;Http(s) Test Script Recorder&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#logic-controllerrecoding-controller&quot; id=&quot;markdown-toc-logic-controllerrecoding-controller&quot;&gt;Logic Controller&amp;gt;Recoding Controller&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;test-script-recoder&quot;&gt;Test Script Recoder&lt;/h1&gt;
+&lt;p&gt;Test Script Recoder 기능을 이용하면, 테스트하려는 사이트를 클릭하며 돌아다니기만 해도, 필요한 요청을 자동으로 생성해줍니다.
+(이전 버전에서는 Proxy Server 였는데 이름이 바뀐거 같다.)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;현재 Jmeter 3.0 에서 테스트 하였다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;non---test-elementshttps-test-script-recorder&quot;&gt;Non - Test Elements&amp;gt;Http(s) Test Script Recorder&lt;/h4&gt;
+
+&lt;p&gt;WorkBench 에 Test Script Recorder를 추가합니다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-18.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Port를 임의로 지정한다. 여기서는 8888을 설정했다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-19.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;logic-controllerrecoding-controller&quot;&gt;Logic Controller&amp;gt;Recoding Controller&lt;/h4&gt;
+
+&lt;p&gt;Http Test Script Recoders 가 추가됐으면 Recoding Controller 가 반드시 추가되어야 하는거 같다..없을경우 아래와 같은 메세지가 나타난다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-TestScriptRecorder-Error.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+Test Plan Content 에서 Use Recoding Controller 를 설정해서 그런듯…기본으로 WorkBench &amp;gt; HTTP(S)Test Script Recoder 를 해도 되지만 Recoding Controller 를 해보겠다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-20.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Recoding Controller 를 추가해준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-20.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Start 를 누르면 레코딩이 시작된다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-21.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;인증서가 나오면 확인을 하면된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-23.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;IE 에서는 proxy 설정이 쉬으므로 패스 그리고 지금은 Mac 이라서 IE 를 쓸수 없다.&lt;/p&gt;
+
+&lt;p&gt;크롬에서 녹화를 해보겠다.&lt;/p&gt;
+
+&lt;p&gt;크롬에서 녹화를 하기위해서 proxy 설정을 해보겠다.&lt;/p&gt;
+
+&lt;p&gt;확장프로그램은 Quick &amp;amp; Dirty Proxy Flipper 를 이용해보겠다.
+쓰고싶은 다른 프로그램이 있으면 이용해도 된다.&lt;/p&gt;
+
+&lt;p&gt;확장프로그램은 알아서 받아서 설치한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/Chrome_proxy.png&quot; alt=&quot;Chrome-Proxy&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Jmeter 에서 8888 을 설정해놔서 http://localhost:8888 으로 설정해준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/Chrome_proxy-01.png&quot; alt=&quot;Chrome-Proxy&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 여기저기 돌아다녀본다. 돌아다닌후 Proxy 설정을 원래대로 바꿔주고 Jmeter 에서 녹화된것을 확인 해본다. 뭔가가 많다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-24.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;png, css 등 불필요한 파일들은 삭제해준다. 그러면 수동으로 설정한것과 같이 녹화된 것을 확인 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-25.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Threads Group를 추가하고, 녹화된 파일을 붙여준후 실행해주면 된다.&lt;/p&gt;
+
+&lt;p&gt;오늘은 여기까지 다음엔 뭘더볼까..ㅎㅎ&lt;/p&gt;</content><author><name></name></author><category term="Jmeter" /><summary type="html">여러 URL 을 테스트할 경우 각각의 Http Request를 생성 하려면 시간이 많이 걸립니다. Http Request를 자동으로 생성 작성할 수는 없을까요?</summary></entry></feed>

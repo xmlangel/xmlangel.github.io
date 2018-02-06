@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/com.alybadawy.external_links.js"></script>
+
+
+    <title>Centos 에서 Kuberenetes 설치하기 – Even Though ... 그럼에도 불구하고 열심히 – 작은 끄적거림</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="
+  목차
+
+
+" />
+    <meta property="og:description" content="
+  목차
+
+
+" />
+    
+    <meta name="author" content="Even Though ... 그럼에도 불구하고 열심히" />
+
+    
+    <meta property="og:title" content="Centos 에서 Kuberenetes 설치하기" />
+    <meta property="twitter:title" content="Centos 에서 Kuberenetes 설치하기" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Even Though ... 그럼에도 불구하고 열심히 - 작은 끄적거림" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+  
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-55180057-2', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/install-kuberenetes/',
+		  'title': 'Centos 에서 Kuberenetes 설치하기'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  <body>
+      <nav class="navbar navbar-pithy" role="navigation">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="pithy-navbar">
+                    <a href="/">home</a>
+                    <a href="/about/">about</a>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+    </nav>
+    
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="/images/xmlangel.jpg" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Even Though ... 그럼에도 불구하고 열심히</a></h1>
+            <p class="site-description">작은 끄적거림</p>
+          </div>
+        </header>
+      </div>
+    </div>
+    <div id="s_left">
+<div style="border:1px dashed; padding:5px;" ><h3>Tags</h3>
+<ul class="tag-cloud">
+
+  <span style="font-size: 83%">
+    <a href="/tags/#docker">
+      docker
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#debian">
+      debian
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#dpkg">
+      dpkg
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#SoapUI">
+      SoapUI
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 83%">
+    <a href="/tags/#Jmeter">
+      Jmeter
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#GPG">
+      GPG
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#linux">
+      linux
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#command">
+      command
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 79%">
+    <a href="/tags/#Ubuntu">
+      Ubuntu
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#Network">
+      Network
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 79%">
+    <a href="/tags/#IP">
+      IP
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#route">
+      route
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#chef">
+      chef
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#python">
+      python
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#download">
+      download
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#urllib">
+      urllib
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#PyDev">
+      PyDev
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#virtualenv">
+      virtualenv
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#Python">
+      Python
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#vscode">
+      vscode
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#kuberenetes">
+      kuberenetes
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#K8s">
+      K8s
+    </a> &nbsp;&nbsp;
+  </span>
+
+</ul></div>
+<p>
+<div style="border:1px dashed; padding:5px;"><h3>Recent</h3>
+
+  <article class="featured-list">
+    <header class="featured-header">
+      <a href="/install-kuberenetes/">Centos 에서 Kuberenetes 설치하기</a>
+    </header>
+    <div class="featured-post">
+        목차centos 에 설치하기 위해서는 master node 와 minion 에 모...
+    </div>
+    <footer>
+      <a href="/install-kuberenetes/" class="button">Read more...</a>
+    </footer>
+  </article>
+
+  <article class="featured-list">
+    <header class="featured-header">
+      <a href="/vscode/">sublim 에서 vs code 로 </a>
+    </header>
+    <div class="featured-post">
+      Sublime  에서 vs code 로 넘어왔다.  vscode 터미널에서 바로실행v...
+    </div>
+    <footer>
+      <a href="/vscode/" class="button">Read more...</a>
+    </footer>
+  </article>
+
+  <article class="featured-list">
+    <header class="featured-header">
+      <a href="/pydev-setup/">virtualenv로 Pydev 와 Django 설정 하기</a>
+    </header>
+    <div class="featured-post">
+      Eclipes 플러그인인 PyDev 를 이용한 Django 설정을 하는 법입니다.  ...
+    </div>
+    <footer>
+      <a href="/pydev-setup/" class="button">Read more...</a>
+    </footer>
+  </article>
+</div>
+</div>
+<div id="main" role="main" class="container" ><article class="post">
+  <h1>Centos 에서 Kuberenetes 설치하기</h1>
+
+  <div class="entry">
+    <ul>
+  <li>목차</li>
+</ul>
+
+<p>centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.</p>
+
+<p>본글은 아래 링크를 따라하면서 만든것입니다.</p>
+
+<p>오류가 있을시 아래 링크 참고하시면 될거 같습니다.</p>
+
+<p>https://kubernetes.io/docs/getting-started-guides/centos/centos_manual_config/</p>
+
+<p>설치할 Hosts 정보와 아이피는 아래와같다.
+virtualbox 등의 아이피를 설정해주면 된다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#centos-master = 10.128.29.105</span>
+<span class="c1">#centos-minion-1 = 10.128.29.102</span>
+<span class="c1">#centos-minion-2 = 110.128.29.104</span></code></pre></figure>
+
+<h1 id="a">a</h1>
+
+<p>그럼 본격적으로 설치를 시작해보겠다.</p>
+
+<h2 id="repo추가">repo추가</h2>
+
+<p>echo /etc/yum.repos.d/virt7-docker-common-release.repo</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">[</span><span class="n">virt7</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">common</span><span class="o">-</span><span class="n">release</span><span class="p">]</span>
+<span class="nb">name</span><span class="o">=</span><span class="n">virt7</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">common</span><span class="o">-</span><span class="n">release</span>
+<span class="n">baseurl</span><span class="o">=</span><span class="n">http</span><span class="ss">:/</span><span class="o">/</span><span class="n">cbs</span><span class="p">.</span><span class="nf">centos</span><span class="p">.</span><span class="nf">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="n">virt7</span><span class="o">-</span><span class="n">docker</span><span class="o">-</span><span class="n">common</span><span class="o">-</span><span class="n">release</span><span class="o">/</span><span class="n">x86_64</span><span class="o">/</span><span class="n">os</span><span class="o">/</span>
+<span class="n">gpgcheck</span><span class="o">=</span><span class="mi">0</span></code></pre></figure>
+
+<h2 id="설치">설치</h2>
+
+<h2 id="hosts-파일내용추가">hosts 파일내용추가</h2>
+<p>/etc/hosts</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="mf">10.128</span><span class="o">.</span><span class="mf">29.105</span> <span class="n">centos</span><span class="o">-</span><span class="n">master</span>
+<span class="mf">10.128</span><span class="o">.</span><span class="mf">29.102</span> <span class="n">centos</span><span class="o">-</span><span class="n">minion</span><span class="o">-</span><span class="mi">1</span>
+<span class="mf">10.128</span><span class="o">.</span><span class="mf">29.104</span> <span class="n">centos</span><span class="o">-</span><span class="n">minion</span><span class="o">-</span><span class="mi">2</span></code></pre></figure>
+
+<h2 id="kubernetes-환경설정">kubernetes 환경설정</h2>
+<p>/etc/kubernetes/config 파일을 수정해준다.</p>
+
+<p>모두 기본값이고 호스트에 추가한 부분만 수정해주면 된다.
+KUBE_MASTER=”–master=http://centos-master:8080”</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># logging to stderr means we get it in the systemd journal</span>
+<span class="no">KUBE_LOGTOSTDERR</span><span class="o">=</span><span class="s2">"--logtostderr=true"</span>
+
+<span class="c1"># journal message level, 0 is debug</span>
+<span class="no">KUBE_LOG_LEVEL</span><span class="o">=</span><span class="s2">"--v=0"</span>
+
+<span class="c1"># Should this cluster be allowed to run privileged docker containers</span>
+<span class="no">KUBE_ALLOW_PRIV</span><span class="o">=</span><span class="s2">"--allow-privileged=false"</span>
+
+<span class="c1"># How the replication controller and scheduler find the kube-apiserver</span>
+<span class="no">KUBE_MASTER</span><span class="o">=</span><span class="s2">"--master=http://centos-master:8080"</span></code></pre></figure>
+
+<p>#방화벽 해제
+모든 노드에 방화벽을 해제해준다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">setenforce</span> <span class="mi">0</span>
+<span class="n">systemctl</span> <span class="n">disable</span> <span class="n">iptables</span><span class="o">-</span><span class="n">services</span> <span class="n">firewalld</span>
+<span class="n">systemctl</span> <span class="n">stop</span> <span class="n">iptables</span><span class="o">-</span><span class="n">services</span> <span class="n">firewalld</span></code></pre></figure>
+
+<h1 id="master-설정변경">Master 설정변경</h1>
+
+<p>/etc/etcd/etcd.conf 파일을 수정해준다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># [member]</span>
+<span class="no">ETCD_NAME</span><span class="o">=</span><span class="n">default</span>
+<span class="no">ETCD_DATA_DIR</span><span class="o">=</span><span class="s2">"/var/lib/etcd/default.etcd"</span>
+<span class="no">ETCD_LISTEN_CLIENT_URLS</span><span class="o">=</span><span class="s2">"http://0.0.0.0:2379"</span>
+
+<span class="c1">#[cluster]</span>
+<span class="no">ETCD_ADVERTISE_CLIENT_URLS</span><span class="o">=</span><span class="s2">"http://0.0.0.0:2379"</span></code></pre></figure>
+
+<p>Edit /etc/kubernetes/apiserver to appear as such:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># The address on the local server to listen to.</span>
+<span class="no">KUBE_API_ADDRESS</span><span class="o">=</span><span class="s2">"--address=0.0.0.0"</span>
+
+<span class="c1"># The port on the local server to listen on.</span>
+<span class="no">KUBE_API_PORT</span><span class="o">=</span><span class="s2">"--port=8080"</span>
+
+<span class="c1"># Port kubelets listen on</span>
+<span class="no">KUBELET_PORT</span><span class="o">=</span><span class="s2">"--kubelet-port=10250"</span>
+
+<span class="c1"># Comma separated list of nodes in the etcd cluster</span>
+<span class="no">KUBE_ETCD_SERVERS</span><span class="o">=</span><span class="s2">"--etcd-servers=http://centos-master:2379"</span>
+
+<span class="c1"># Address range to use for services</span>
+<span class="no">KUBE_SERVICE_ADDRESSES</span><span class="o">=</span><span class="s2">"--service-cluster-ip-range=10.254.0.0/16"</span>
+
+<span class="c1"># Add your own!</span>
+<span class="no">KUBE_API_ARGS</span><span class="o">=</span><span class="s2">""</span></code></pre></figure>
+
+<h2 id="etcd-시작">ETCD 시작</h2>
+
+<p>ETCD 를시작해준다. Network overy 설정을 해주는것이고, Network overy 는 172.30.0.0 네트워크를 사용한다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">systemctl</span> <span class="n">start</span> <span class="n">etcd</span>
+<span class="n">etcdctl</span> <span class="n">mkdir</span> <span class="sr">/kube-centos/ne</span><span class="n">twork</span>
+<span class="n">etcdctl</span> <span class="n">mk</span> <span class="sr">/kube-centos/ne</span><span class="n">twork</span><span class="o">/</span><span class="n">config</span> <span class="s2">"{ </span><span class="se">\"</span><span class="s2">Network</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">172.30.0.0/16</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">SubnetLen</span><span class="se">\"</span><span class="s2">: 24, </span><span class="se">\"</span><span class="s2">Backend</span><span class="se">\"</span><span class="s2">: { </span><span class="se">\"</span><span class="s2">Type</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">vxlan</span><span class="se">\"</span><span class="s2"> } }"</span></code></pre></figure>
+
+<p>flannel overlay Docker network 설정을 해준다.</p>
+
+<p>/etc/sysconfig/flanneld</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Flanneld configuration options</span>
+
+<span class="c1"># etcd url location.  Point this to the server where etcd runs</span>
+<span class="no">FLANNEL_ETCD_ENDPOINTS</span><span class="o">=</span><span class="s2">"http://centos-master:2379"</span>
+
+<span class="c1"># etcd config key.  This is the configuration key that flannel queries</span>
+<span class="c1"># For address range assignment</span>
+<span class="no">FLANNEL_ETCD_PREFIX</span><span class="o">=</span><span class="s2">"/kube-centos/network"</span>
+
+<span class="c1"># Any additional options that you want to pass</span>
+<span class="c1">#FLANNEL_OPTIONS=""</span></code></pre></figure>
+
+<p>Start the appropriate services on master:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">for</span> <span class="no">SERVICES</span> <span class="k">in</span> <span class="n">etcd</span> <span class="n">kube</span><span class="o">-</span><span class="n">apiserver</span> <span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager</span> <span class="n">kube</span><span class="o">-</span><span class="n">scheduler</span> <span class="n">flanneld</span><span class="p">;</span> <span class="k">do</span>
+    <span class="n">systemctl</span> <span class="n">restart</span> <span class="vg">$SERVICES</span>
+    <span class="n">systemctl</span> <span class="n">enable</span> <span class="vg">$SERVICES</span>
+    <span class="n">systemctl</span> <span class="n">status</span> <span class="vg">$SERVICES</span>
+<span class="n">done</span></code></pre></figure>
+
+<h1 id="node-설정변경">Node 설정변경</h1>
+
+<p>/etc/kubernetes/kubelet 설정변경</p>
+
+<p>먼져 centos-minion-1 node 에서 설정을 해준다.</p>
+
+<p>KUBELET_HOSTNAME 만 변경하면 되는 사하으로 크게 어려움은 없을듯.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># The address for the info server to serve on</span>
+<span class="no">KUBELET_ADDRESS</span><span class="o">=</span><span class="s2">"--address=0.0.0.0"</span>
+
+<span class="c1"># The port for the info server to serve on</span>
+<span class="no">KUBELET_PORT</span><span class="o">=</span><span class="s2">"--port=10250"</span>
+
+<span class="c1"># You may leave this blank to use the actual hostname</span>
+<span class="c1"># Check the node number!</span>
+<span class="no">KUBELET_HOSTNAME</span><span class="o">=</span><span class="s2">"--hostname-override=centos-minion-1"</span>
+
+<span class="c1"># Location of the api-server</span>
+<span class="no">KUBELET_API_SERVER</span><span class="o">=</span><span class="s2">"--api-servers=http://centos-master:8080"</span>
+
+<span class="c1"># Add your own!</span>
+<span class="no">KUBELET_ARGS</span><span class="o">=</span><span class="s2">""</span></code></pre></figure>
+
+<p>다음은 centos-mast-minion-2 노드에서 설정을 해준다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># The address for the info server to serve on</span>
+<span class="no">KUBELET_ADDRESS</span><span class="o">=</span><span class="s2">"--address=0.0.0.0"</span>
+
+<span class="c1"># The port for the info server to serve on</span>
+<span class="no">KUBELET_PORT</span><span class="o">=</span><span class="s2">"--port=10250"</span>
+
+<span class="c1"># You may leave this blank to use the actual hostname</span>
+<span class="c1"># Check the node number!</span>
+<span class="no">KUBELET_HOSTNAME</span><span class="o">=</span><span class="s2">"--hostname-override=centos-minion-2"</span>
+
+<span class="c1"># Location of the api-server</span>
+<span class="no">KUBELET_API_SERVER</span><span class="o">=</span><span class="s2">"--api-servers=http://centos-master:8080"</span>
+
+<span class="c1"># Add your own!</span>
+<span class="no">KUBELET_ARGS</span><span class="o">=</span><span class="s2">""</span></code></pre></figure>
+
+<p>두 노드에서 모두 설절을 변경해준다.</p>
+
+<p>flannel to overlay Docker network  설정변경
+ /etc/sysconfig/flanneld</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Flanneld configuration options</span>
+
+<span class="c1"># etcd url location.  Point this to the server where etcd runs</span>
+<span class="no">FLANNEL_ETCD_ENDPOINTS</span><span class="o">=</span><span class="s2">"http://centos-master:2379"</span>
+
+
+<span class="c1"># etcd config key.  This is the configuration key that flannel queries</span>
+<span class="c1"># For address range assignment</span>
+<span class="no">FLANNEL_ETCD_PREFIX</span><span class="o">=</span><span class="s2">"/kube-centos/network"</span>
+
+<span class="c1"># Any additional options that you want to pass</span>
+<span class="c1">#FLANNEL_OPTIONS=""</span></code></pre></figure>
+
+<p>각노드에서 kube-proxy 설정을 해준다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">for</span> <span class="no">SERVICES</span> <span class="k">in</span> <span class="n">kube</span><span class="o">-</span><span class="n">proxy</span> <span class="n">kubelet</span> <span class="n">flanneld</span> <span class="n">docker</span><span class="p">;</span> <span class="k">do</span>
+    <span class="n">systemctl</span> <span class="n">restart</span> <span class="vg">$SERVICES</span>
+    <span class="n">systemctl</span> <span class="n">enable</span> <span class="vg">$SERVICES</span>
+    <span class="n">systemctl</span> <span class="n">status</span> <span class="vg">$SERVICES</span>
+<span class="n">done</span></code></pre></figure>
+
+<p>kubectl 설정</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">kubectl</span> <span class="n">config</span> <span class="n">set</span><span class="o">-</span><span class="n">cluster</span> <span class="n">default</span><span class="o">-</span><span class="n">cluster</span> <span class="o">--</span><span class="n">server</span><span class="o">=</span><span class="n">http</span><span class="ss">:/</span><span class="o">/</span><span class="n">centos</span><span class="o">-</span><span class="n">master</span><span class="p">:</span><span class="mi">8080</span>
+<span class="n">kubectl</span> <span class="n">config</span> <span class="n">set</span><span class="o">-</span><span class="n">context</span> <span class="n">default</span><span class="o">-</span><span class="n">context</span> <span class="o">--</span><span class="n">cluster</span><span class="o">=</span><span class="n">default</span><span class="o">-</span><span class="n">cluster</span> <span class="o">--</span><span class="n">user</span><span class="o">=</span><span class="n">default</span><span class="o">-</span><span class="n">admin</span>
+<span class="n">kubectl</span> <span class="n">config</span> <span class="n">use</span><span class="o">-</span><span class="n">context</span> <span class="n">default</span><span class="o">-</span><span class="n">context</span></code></pre></figure>
+
+<h1 id="master에서-동작확인">Master에서 동작확인.</h1>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">kubectl</span> <span class="n">get</span> <span class="n">nodes</span>
+<span class="n">root</span><span class="vi">@localhost</span> <span class="o">~</span><span class="p">]</span><span class="c1"># kubectl get nodes</span>
+<span class="no">NAME</span>              <span class="no">STATUS</span>    <span class="no">AGE</span>
+<span class="n">centos</span><span class="o">-</span><span class="n">minion</span><span class="o">-</span><span class="mi">1</span>   <span class="no">Ready</span>     <span class="mi">57</span><span class="n">s</span>
+<span class="n">centos</span><span class="o">-</span><span class="n">minion</span><span class="o">-</span><span class="mi">2</span>   <span class="no">Ready</span>     <span class="mi">54</span><span class="n">s</span></code></pre></figure>
+
+<p>참고한 URL</p>
+
+<ul>
+  <li>
+    <p>http://www.popit.kr/kubernetes-introduction/</p>
+  </li>
+  <li>
+    <p>https://kubernetes.io/docs/getting-started-guides/centos/centos_manual_config/</p>
+  </li>
+</ul>
+
+  </div>
+  <img src="/images/tag.png" alt="Tags: " class="tag-img"/><div class="post-tags">
+  
+  
+  <a href="/tags/#docker">docker</a>,
+  
+  <a href="/tags/#kuberenetes">kuberenetes</a>,
+  
+  <a href="/tags/#K8s">K8s</a>
+  
+</div>
+<br/>
+
+  <div class="date">
+    Written on February  3, 2018
+  </div>
+  <div class="comments">
+	  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'xmlangel-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </div>
+</article>
+</div>
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:kwangmyung.kim@gmail.com"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/xmlangel"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+        </footer>
+      </div>
+</div>
+  </body>
+</html>

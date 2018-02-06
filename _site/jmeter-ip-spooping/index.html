@@ -5,7 +5,7 @@
 <script type="text/javascript" src="http://localhost:4000/js/com.alybadawy.external_links.js"></script>
 
 
-    <title>openvpn 설치해보기 – Even Though ... 그럼에도 불구하고 열심히 – 작은 끄적거림</title>
+    <title>Jmeter-IP Spooping – Even Though ... 그럼에도 불구하고 열심히 – 작은 끄적거림</title>
 
         <meta charset="utf-8" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
@@ -13,18 +13,18 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
     
-    <meta name="description" content="apt-get install openvpn easy-rsa
+    <meta name="description" content="스푸핑(Spoofing)의 사전적 의미는 ‘속이다’이다. 테스트 진행시 IP 를 변경해서 테스트를 진행하고 싶을경우 어떻게 진행해야 할까?
 
 " />
-    <meta property="og:description" content="apt-get install openvpn easy-rsa
+    <meta property="og:description" content="스푸핑(Spoofing)의 사전적 의미는 ‘속이다’이다. 테스트 진행시 IP 를 변경해서 테스트를 진행하고 싶을경우 어떻게 진행해야 할까?
 
 " />
     
     <meta name="author" content="Even Though ... 그럼에도 불구하고 열심히" />
 
     
-    <meta property="og:title" content="openvpn 설치해보기" />
-    <meta property="twitter:title" content="openvpn 설치해보기" />
+    <meta property="og:title" content="Jmeter-IP Spooping" />
+    <meta property="twitter:title" content="Jmeter-IP Spooping" />
     
 
     <!--[if lt IE 9]>
@@ -46,8 +46,8 @@
 
 		ga('create', 'UA-55180057-2', 'auto');
 		ga('send', 'pageview', {
-		  'page': '/openvpn/',
-		  'title': 'openvpn 설치해보기'
+		  'page': '/jmeter-ip-spooping/',
+		  'title': 'Jmeter-IP Spooping'
 		});
 	</script>
 	<!-- End Google Analytics -->
@@ -255,24 +255,72 @@
 </div>
 </div>
 <div id="main" role="main" class="container" ><article class="post">
-  <h1>openvpn 설치해보기</h1>
+  <h1>Jmeter-IP Spooping</h1>
 
   <div class="entry">
-    apt-get install openvpn easy-rsa
+    <p>스푸핑(Spoofing)의 사전적 의미는 ‘속이다’이다. 테스트 진행시 IP 를 변경해서 테스트를 진행하고 싶을경우 어떻게 진행해야 할까?</p>
 
-make-cadir /home/vagrant/openvpn-ca
-cd /home/vagrant/openvpn-ca
-source vars
+<ul id="markdown-toc">
+  <li><a href="#ip-spooping-하는법" id="markdown-toc-ip-spooping-하는법">IP Spooping 하는법</a>    <ul>
+      <li><a href="#alias-하기" id="markdown-toc-alias-하기">alias 하기</a></li>
+      <li><a href="#alias-삭제" id="markdown-toc-alias-삭제">alias 삭제</a></li>
+      <li><a href="#csv-data-set-config" id="markdown-toc-csv-data-set-config">CSV Data Set Config</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="ip-spooping-하는법">IP Spooping 하는법</h1>
+<p>Mac 을 이용해서 다른부분은 일단 Pass 하고 mac 에서 하는법</p>
+
+<h4 id="alias-하기">alias 하기</h4>
+<p>ifconfig 로 아이피확인후 비슷한 아이피대역으로 alias 를 걸어주면된다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">sudo</span> <span class="n">ifconfig</span> <span class="n">en0</span> <span class="k">alias</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">0.12</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.0</span></code></pre></figure>
+
+<p><img src="http://localhost:4000/assets/images/jmeter-ipspooping.png" alt="Jmeter-ipspooping" width="100%" height="100%" /></p>
+
+<h4 id="alias-삭제">alias 삭제</h4>
+<p>alias 삭제하는 법은 아래와같다.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">sudo</span> <span class="n">ifconfig</span> <span class="n">en0</span> <span class="o">-</span><span class="k">alias</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">0.12</span></code></pre></figure>
+
+<p>IP 를 추가했으므로, 이제 Jmeter 에서 IP 를 지정해서 테스트를 할 수 있다.</p>
+
+<p>HTTP Request 의 Advanced 에서 아이피를 지정 하면 된다.
+<img src="http://localhost:4000/assets/images/jmeter-ipspooping-01.png" alt="Jmeter-ipspooping-01" width="100%" height="100%" /></p>
+
+<h4 id="csv-data-set-config">CSV Data Set Config</h4>
+<p>CSV 를 이용해서 할 수도 있다.
+<img src="http://localhost:4000/assets/images/jmeter-ipspooping-02.png" alt="Jmeter-ipspooping-02" width="100%" height="100%" /></p>
+
+<p>먼저 CSV 파일을 생성해놓는다.</p>
+
+<p><img src="http://localhost:4000/assets/images/jmeter-ipspooping-03.png" alt="Jmeter-ipspooping-03" width="50%" height="50%" /></p>
+
+<p>CSV Data Set Config 설정을 한다. 
+File 경로와 변수설정을 해놓는다. 여기서는 변수가 IP 이다.</p>
+
+<p><img src="http://localhost:4000/assets/images/jmeter-ipspooping-04.png" alt="Jmeter-ipspooping-04" width="100%" height="100%" /></p>
+
+<p>설정한 변수를 HTTPS Request 의 IP 에 할당한다.</p>
+
+<p><img src="http://localhost:4000/assets/images/jmeter-ipspooping-05.png" alt="Jmeter-ipspooping-05" width="100%" height="100%" /></p>
+
+<p>테스트를 실행하면 Request 에 설정한 값들로 IP 가 적용된것을 확인 해볼 수 있다.
+<img src="http://localhost:4000/assets/images/jmeter-ipspooping-06.png" alt="Jmeter-ipspooping-06" width="100%" height="100%" /></p>
+
 
   </div>
   <img src="/images/tag.png" alt="Tags: " class="tag-img"/><div class="post-tags">
   
   
+  <a href="/tags/#Jmeter">Jmeter</a>
+  
 </div>
 <br/>
 
   <div class="date">
-    Written on March 17, 2017
+    Written on July  1, 2017
   </div>
   <div class="comments">
 	  

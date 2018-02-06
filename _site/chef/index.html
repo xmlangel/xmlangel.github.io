@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/com.alybadawy.external_links.js"></script>
+
+
+    <title>Chef 명령어! – Even Though ... 그럼에도 불구하고 열심히 – 작은 끄적거림</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="셰프는(Chef, http://www.opscode.com/chef)는 OPSCODE(http://www.opscode.com)에서 만든 오픈 소스 시스템 관리 프레임워크다. 루비(Ruby)로 작성된 프레임워크를 이용한다.
+
+" />
+    <meta property="og:description" content="셰프는(Chef, http://www.opscode.com/chef)는 OPSCODE(http://www.opscode.com)에서 만든 오픈 소스 시스템 관리 프레임워크다. 루비(Ruby)로 작성된 프레임워크를 이용한다.
+
+" />
+    
+    <meta name="author" content="Even Though ... 그럼에도 불구하고 열심히" />
+
+    
+    <meta property="og:title" content="Chef 명령어!" />
+    <meta property="twitter:title" content="Chef 명령어!" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Even Though ... 그럼에도 불구하고 열심히 - 작은 끄적거림" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+  
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-55180057-2', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/chef/',
+		  'title': 'Chef 명령어!'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  <body>
+      <nav class="navbar navbar-pithy" role="navigation">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="pithy-navbar">
+                    <a href="/">home</a>
+                    <a href="/about/">about</a>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+    </nav>
+    
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="/images/xmlangel.jpg" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Even Though ... 그럼에도 불구하고 열심히</a></h1>
+            <p class="site-description">작은 끄적거림</p>
+          </div>
+        </header>
+      </div>
+    </div>
+    <div id="s_left">
+<div style="border:1px dashed; padding:5px;" ><h3>Tags</h3>
+<ul class="tag-cloud">
+
+  <span style="font-size: 83%">
+    <a href="/tags/#docker">
+      docker
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#debian">
+      debian
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#dpkg">
+      dpkg
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#SoapUI">
+      SoapUI
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 83%">
+    <a href="/tags/#Jmeter">
+      Jmeter
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#GPG">
+      GPG
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#linux">
+      linux
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#command">
+      command
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 79%">
+    <a href="/tags/#Ubuntu">
+      Ubuntu
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#Network">
+      Network
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 79%">
+    <a href="/tags/#IP">
+      IP
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#route">
+      route
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#chef">
+      chef
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#python">
+      python
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#download">
+      download
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#urllib">
+      urllib
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#PyDev">
+      PyDev
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#virtualenv">
+      virtualenv
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#Python">
+      Python
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#vscode">
+      vscode
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#kuberenetes">
+      kuberenetes
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#K8s">
+      K8s
+    </a> &nbsp;&nbsp;
+  </span>
+
+</ul></div>
+<p>
+<div style="border:1px dashed; padding:5px;"><h3>Recent</h3>
+
+  <article class="featured-list">
+    <header class="featured-header">
+      <a href="/install-kuberenetes/">Centos 에서 Kuberenetes 설치하기</a>
+    </header>
+    <div class="featured-post">
+      * 목차{:toc}centos 에 설치하기 위해서는 master node 와 mini...
+    </div>
+    <footer>
+      <a href="/install-kuberenetes/" class="button">Read more...</a>
+    </footer>
+  </article>
+
+  <article class="featured-list">
+    <header class="featured-header">
+      <a href="/vscode/">sublim 에서 vs code 로 </a>
+    </header>
+    <div class="featured-post">
+      Sublime  에서 vs code 로 넘어왔다.* 목차{:toc}# vscode 터...
+    </div>
+    <footer>
+      <a href="/vscode/" class="button">Read more...</a>
+    </footer>
+  </article>
+
+  <article class="featured-list">
+    <header class="featured-header">
+      <a href="/pydev-setup/">virtualenv로 Pydev 와 Django 설정 하기</a>
+    </header>
+    <div class="featured-post">
+      Eclipes 플러그인인 PyDev 를 이용한 Django 설정을 하는 법입니다.* ...
+    </div>
+    <footer>
+      <a href="/pydev-setup/" class="button">Read more...</a>
+    </footer>
+  </article>
+</div>
+</div>
+<div id="main" role="main" class="container" ><article class="post">
+  <h1>Chef 명령어!</h1>
+
+  <div class="entry">
+    <p>셰프는(Chef, http://www.opscode.com/chef)는 OPSCODE(http://www.opscode.com)에서 만든 오픈 소스 시스템 관리 프레임워크다. 루비(Ruby)로 작성된 프레임워크를 이용한다.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#chef" id="markdown-toc-chef">Chef</a>    <ul>
+      <li><a href="#create-the-cookbook" id="markdown-toc-create-the-cookbook">Create the cookbook</a></li>
+      <li><a href="#upload-cookbook" id="markdown-toc-upload-cookbook">Upload cookbook</a></li>
+      <li><a href="#bootstrap-your-node" id="markdown-toc-bootstrap-your-node">Bootstrap your node</a></li>
+      <li><a href="#의존cookbook이-있을경우-berks-로" id="markdown-toc-의존cookbook이-있을경우-berks-로">의존cookbook이 있을경우 berks 로</a></li>
+      <li><a href="#recipe-추가" id="markdown-toc-recipe-추가">recipe 추가</a></li>
+      <li><a href="#file-추가" id="markdown-toc-file-추가">file 추가</a></li>
+      <li><a href="#attribute-추가" id="markdown-toc-attribute-추가">attribute 추가</a></li>
+      <li><a href="#template-추가" id="markdown-toc-template-추가">template 추가</a></li>
+    </ul>
+  </li>
+  <li><a href="#knife" id="markdown-toc-knife">Knife</a>    <ul>
+      <li><a href="#chef-server-를-local-에-설치한-경우-해줘야하는-사항" id="markdown-toc-chef-server-를-local-에-설치한-경우-해줘야하는-사항">Chef Server 를 Local 에 설치한 경우 해줘야하는 사항</a></li>
+      <li><a href="#cookbook의-버전을-확일할때" id="markdown-toc-cookbook의-버전을-확일할때">cookbook의 버전을 확일할때</a></li>
+      <li><a href="#role-파일을-upload" id="markdown-toc-role-파일을-upload">role 파일을 upload</a></li>
+      <li><a href="#등록--등록된-서버의-ssh-키가-등록되어있을경우에동작함-없을-경우-키를-등록하거나-키를-삽입해서-사용해야함" id="markdown-toc-등록--등록된-서버의-ssh-키가-등록되어있을경우에동작함-없을-경우-키를-등록하거나-키를-삽입해서-사용해야함">등록 : 등록된 서버의 ssh 키가 등록되어있을경우에동작함 없을 경우 키를 등록하거나 키를 삽입해서 사용해야함.</a></li>
+      <li><a href="#등록확인" id="markdown-toc-등록확인">등록확인</a></li>
+      <li><a href="#node-검색" id="markdown-toc-node-검색">node 검색</a></li>
+      <li><a href="#node-에-레시피-등록" id="markdown-toc-node-에-레시피-등록">node 에 레시피 등록</a></li>
+      <li><a href="#chef-client-실행--원격에서-노드의-클라이언트를-수행" id="markdown-toc-chef-client-실행--원격에서-노드의-클라이언트를-수행">chef-client 실행 : 원격에서 노드의 클라이언트를 수행</a></li>
+      <li><a href="#kitchen" id="markdown-toc-kitchen">kitchen</a></li>
+      <li><a href="#쿡북을-생성하고" id="markdown-toc-쿡북을-생성하고">쿡북을 생성하고</a></li>
+      <li><a href="#kitchenyml-수정" id="markdown-toc-kitchenyml-수정">.kitchen.yml 수정</a></li>
+      <li><a href="#list--현재-상태를-확인-가능함" id="markdown-toc-list--현재-상태를-확인-가능함">list : 현재 상태를 확인 가능함</a></li>
+      <li><a href="#create---vm-이생성되고kitchenyml-에서-설정한값으로" id="markdown-toc-create---vm-이생성되고kitchenyml-에서-설정한값으로">create :  VM 이생성되고(kitchen.yml 에서 설정한값으로)</a></li>
+      <li><a href="#login--생성한-vm-에-접속" id="markdown-toc-login--생성한-vm-에-접속">login : 생성한 VM 에 접속</a></li>
+      <li><a href="#converge--chef의-파일이-적용됨" id="markdown-toc-converge--chef의-파일이-적용됨">converge : Chef의 파일이 적용됨.</a></li>
+      <li><a href="#destroy--vm이-삭제됨" id="markdown-toc-destroy--vm이-삭제됨">destroy : VM이 삭제됨.</a></li>
+      <li><a href="#bash" id="markdown-toc-bash">bash</a></li>
+    </ul>
+  </li>
+  <li><a href="#remote_filewget" id="markdown-toc-remote_filewget">remote_file(wget)</a>    <ul>
+      <li><a href="#dpkg_packagedpkg" id="markdown-toc-dpkg_packagedpkg">dpkg_package(dpkg)</a></li>
+      <li><a href="#apt-get-update" id="markdown-toc-apt-get-update">Apt-get Update</a></li>
+      <li><a href="#packageapt-get-install-yum-install" id="markdown-toc-packageapt-get-install-yum-install">package(apt-get install, yum install)</a></li>
+      <li><a href="#python-pip" id="markdown-toc-python-pip">python pip</a></li>
+      <li><a href="#template-에서-변수설정" id="markdown-toc-template-에서-변수설정">template 에서 변수설정</a></li>
+    </ul>
+  </li>
+  <li><a href="#export-debian_frontendnoninteractive" id="markdown-toc-export-debian_frontendnoninteractive">export DEBIAN_FRONTEND=noninteractive</a></li>
+</ul>
+
+<p>셰프(Chef, http://www.opscode.com/chef)는 OPSCODE(http://www.opscode.com)에서 만든 오픈 소스 시스템 관리 프레임워크다.</p>
+
+<p>셰프는 루비(Ruby)로 작성된 프레임워크를 이용한다. 
+단점으로는 일부 유닉스/리눅스, Mac OS X 계열만 지원한다는 것이다(윈도우에서도 되기는 하지만 일부 제약이 있는거 같다.)</p>
+
+<p>기타 배경및 및 프레임워크에 대한 자세한 것은 아래내용참고하길</p>
+<ul>
+  <li>https://www.ibm.com/developerworks/community/blogs/9e635b49-09e9-4c23-8999-a4d461aeace2/entry/215?lang=en</li>
+</ul>
+
+<p>내가 이해하는 바는 시스템 배포를 자동화하고 손쉽게 관리 할수 있는 것 정도로 이해한다.</p>
+
+<p>간단한 명령어들을 나열해보려고한다.</p>
+
+<h1 id="chef">Chef</h1>
+
+<h2 id="create-the-cookbook">Create the cookbook</h2>
+<p>Cookbook 을 만들수 있다. chef 명령어로 생성할 수 있다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>chef-repo
+mkdir cookbooks 
+chef generate cookbook cookbooks/cookbookname</code></pre></figure>
+
+<p>기본 수정은 default.rb 에서 작성하면된다.
+Edit default.rb</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/chef-repo/cookbooks/cookbookname/recipes/default.rb</code></pre></figure>
+
+<h2 id="upload-cookbook">Upload cookbook</h2>
+<p>Upload 는 knife 를 이용한다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">knife cookbook upload cookbookname
+knife cookbook list</code></pre></figure>
+
+<h2 id="bootstrap-your-node">Bootstrap your node</h2>
+<p>identity file 이용</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>knife bootstrap AddressIP  <span class="nt">-N</span> nodeName--ssh-user root <span class="nt">--sudo</span> <span class="nt">--identity-file</span> ~/.ssh/my.pem <span class="nt">--node-name</span> node1 <span class="nt">--run-list</span> <span class="s1">'recipe[cookbookname]'</span>
+</code></pre></div></div>
+<p>id/pw 이용</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife bootstrap AddressIP <span class="nt">-N</span> nodeName <span class="nt">-x</span> userID <span class="nt">-P</span> userPassword <span class="nt">--sudo</span>
+</code></pre></div></div>
+
+<h2 id="의존cookbook이-있을경우-berks-로">의존cookbook이 있을경우 berks 로</h2>
+<p>cookbook 함께 upload 가능
+cookbook recipe 폴더에서</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>berks install
+berks upload --ssl-verify=false
+</code></pre></div></div>
+<h2 id="recipe-추가">recipe 추가</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chef generate recipe cookbooks/cookbookname recipename
+</code></pre></div></div>
+
+<h2 id="file-추가">file 추가</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chef generate file cookbooks/cookbookname filename
+</code></pre></div></div>
+
+<h2 id="attribute-추가">attribute 추가</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chef generate attribute cookbooks/cookbookname default
+</code></pre></div></div>
+
+<h2 id="template-추가">template 추가</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chef generate template cookbooks/cookbookname templatename
+</code></pre></div></div>
+<h1 id="knife">Knife</h1>
+<p>Knife 는 Chef 에서 이용할수 있는 툴임.</p>
+
+<h2 id="chef-server-를-local-에-설치한-경우-해줘야하는-사항">Chef Server 를 Local 에 설치한 경우 해줘야하는 사항</h2>
+<p>Chef 서버를 직접 구축해서 운영하면 SSL 인증오류로 정상적으로 접근이 안됨.
+설치한 서버에서 인증서를 다운받아 접속해보아야함.</p>
+
+<ol>
+  <li>ssl 파일을 다운받고
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife ssl fetch
+</code></pre></div>    </div>
+  </li>
+  <li>정상적으로 설치되었는지 확인.
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife ssh check
+</code></pre></div>    </div>
+  </li>
+  <li>리스트 정상적으로 받아오는지 확인
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife client list
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="cookbook의-버전을-확일할때">cookbook의 버전을 확일할때</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife cookbook site show cookbookname | grep latest_version
+</code></pre></div></div>
+
+<h2 id="role-파일을-upload">role 파일을 upload</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife role from file test.json
+</code></pre></div></div>
+
+<h2 id="등록--등록된-서버의-ssh-키가-등록되어있을경우에동작함-없을-경우-키를-등록하거나-키를-삽입해서-사용해야함">등록 : 등록된 서버의 ssh 키가 등록되어있을경우에동작함 없을 경우 키를 등록하거나 키를 삽입해서 사용해야함.</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife bootstrap &lt;client server ip&gt; -x &lt;user&gt; -N &lt;node name&gt;
+</code></pre></div></div>
+<h2 id="등록확인">등록확인</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife node list
+</code></pre></div></div>
+
+<h2 id="node-검색">node 검색</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife search node "fqdn:*"
+</code></pre></div></div>
+<h2 id="node-에-레시피-등록">node 에 레시피 등록</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife node run_list add node1 'recipe[hello]'
+</code></pre></div></div>
+<h2 id="chef-client-실행--원격에서-노드의-클라이언트를-수행">chef-client 실행 : 원격에서 노드의 클라이언트를 수행</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knife ssh "fqdn:*" "sudo chef-client"
+</code></pre></div></div>
+<h2 id="kitchen">kitchen</h2>
+
+<p>Chef에서 사용가능한 툴로 Local 에서 테스트 가능하도록 도와줌.</p>
+
+<p>작업은 chef-repo 에서 진행</p>
+
+<p>chef-repo
+–cookbook
+  |-쿡불들</p>
+
+<h2 id="쿡북을-생성하고">쿡북을 생성하고</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chef generate cookbook cookbooks/cookbookname
+</code></pre></div></div>
+
+<h2 id="kitchenyml-수정">.kitchen.yml 수정</h2>
+
+<p>생성한 폴더를 보면 cookbookname/.kitchen.yml 폴더에 vagrant 환경설정파일이 존재함.</p>
+
+<p>아래와같은 형식으로사용가능.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">driver</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vagrant</span>
+
+<span class="na">provisioner</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">chef_zero</span>
+
+<span class="na">platforms</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ubuntu-14.04</span>
+    <span class="na">driver</span><span class="pi">:</span>
+      <span class="na">customize</span><span class="pi">:</span>
+       <span class="na">memory </span><span class="pi">:</span> <span class="s">256</span>
+
+<span class="na">suites</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">default</span>
+    <span class="na">run_list</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">recipe[recipe name::default]</span>
+    <span class="na">attributes</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h2 id="list--현재-상태를-확인-가능함">list : 현재 상태를 확인 가능함</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kitchen list
+</code></pre></div></div>
+<p>결과</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Instance             Driver   Provisioner  Verifier  Transport  Last Action
+default-ubuntu-1404  Vagrant  ChefZero     Busser    Ssh        &lt;Not Created&gt;
+</code></pre></div></div>
+<h2 id="create---vm-이생성되고kitchenyml-에서-설정한값으로">create :  VM 이생성되고(kitchen.yml 에서 설정한값으로)</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kitchen create
+</code></pre></div></div>
+<p>결과</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-----&gt; Starting Kitchen (v1.4.2)
+C:/opscode/chefdk/embedded/lib/ruby/gems/2.1.0/gems/httpclient-2.6.0.1/lib/httpclient/webagent-cookie.rb:458: warning: already initialized constant HTTPClient::CookieManager
+C:/opscode/chefdk/embedded/lib/ruby/gems/2.1.0/gems/httpclient-2.6.0.1/lib/httpclient/cookie.rb:8: warning: previous definition of CookieManager was here
+-----&gt; Creating &lt;default-ubuntu-1404&gt;...
+       Bringing machine 'default' up with 'virtualbox' provider...
+       ==&gt; default: Importing base box 'opscode-ubuntu-14.04'...
+==&gt; default: Matching MAC address for NAT networking...
+       ==&gt; default: Setting the name of the VM: kitchen-whatap-agent-oregon-default-ubuntu-1404_default_1458803869963_74332
+       ==&gt; default: Clearing any previously set network interfaces...
+       ==&gt; default: Preparing network interfaces based on configuration...
+           default: Adapter 1: nat
+       ==&gt; default: Forwarding ports...
+           default: 22 (guest) =&gt; 2222 (host) (adapter 1)
+       ==&gt; default: Running 'pre-boot' VM customizations...
+       ==&gt; default: Booting VM...
+       ==&gt; default: Waiting for machine to boot. This may take a few minutes...
+           default: SSH address: 127.0.0.1:2222
+           default: SSH username: vagrant
+           default: SSH auth method: private key
+           default:
+           default: Vagrant insecure key detected. Vagrant will automatically replace
+           default: this with a newly generated keypair for better security.
+           default:
+           default: Inserting generated public key within guest...
+           default: Removing insecure key from the guest if it's present...
+           default: Key inserted! Disconnecting and reconnecting using new SSH key...
+       ==&gt; default: Machine booted and ready!
+       ==&gt; default: Checking for guest additions in VM...
+       ==&gt; default: Setting hostname...
+       ==&gt; default: Machine not provisioned because `--no-provision` is specified.
+       [SSH] Established
+       Vagrant instance &lt;default-ubuntu-1404&gt; created.
+       Finished creating &lt;default-ubuntu-1404&gt; (0m44.51s).
+-----&gt; Kitchen is finished. (0m49.02s)
+zlib(finalizer): the stream was freed prematurely.
+</code></pre></div></div>
+<h2 id="login--생성한-vm-에-접속">login : 생성한 VM 에 접속</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kitchen login
+</code></pre></div></div>
+
+<h2 id="converge--chef의-파일이-적용됨">converge : Chef의 파일이 적용됨.</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kitchen converge
+</code></pre></div></div>
+<h2 id="destroy--vm이-삭제됨">destroy : VM이 삭제됨.</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kitchen destroy
+</code></pre></div></div>
+
+<p>#Chef Syntax
+개인적으로 쉘스크립트를 작성후 chef 를만든다. 
+쉘스크립트와 매핑해서 사용가능한 chef Syntax 를 정리.</p>
+<h2 id="bash">bash</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash "install zabbix" do
+   user "root"
+   cwd "/tmp"
+   code &lt;&lt;-EOH
+     wget http://repo.zabbix.com/zabbix/2.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_2.2-1+precise_all.deb
+    sudo dpkg -i zabbix-release_2.2-1+precise_all.deb
+    sudo apt-get -qq update &lt; /dev/null
+    export DEBIAN_FRONTEND=noninteractive
+    sudo apt-get -y install zabbix-server-mysql zabbix-frontend-php &lt; /dev/null
+    wget http://whatap-internal.hbox.a3c.co.kr/install%2Fzabbix_server.conf -O /etc/zabbix/zabbix_server.conf
+  EOH
+   not_if { ::File.exists?('/usr/share/zabbix') }
+ end
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user : 실행할 User 정보
+cwd : 실행할 경로
+code : 실행할 스크립트들 EOH안에 해당스크립트를 입력한다.
+```shell
+&lt;&lt;-EOH
+bash 스크립트
+EOH 
+</code></pre></div></div>
+<p>execute 명령어를 이용 할 수도 있음</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>execute <span class="s1">'apache restart'</span> <span class="k">do
+  </span><span class="nb">command</span> <span class="s1">'/usr/sbin/apachectl restart'</span>
+end
+</code></pre></div></div>
+<h1 id="remote_filewget">remote_file(wget)</h1>
+<p>wget 과 같이 해당파일을 다운로드 받을때 사용한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">####</span>
+remote_file <span class="s1">'/tmp/zabbix-release_2.2-1+precise_all.deb'</span> <span class="k">do
+  </span><span class="nb">source</span> <span class="s1">' http://repo.zabbix.com/zabbix/2.2/ubuntu/pool/main/z/zabbix-release/zabbix-release_2.2-1+precise_all.deb'</span>
+  owner <span class="s1">'root'</span>
+  group <span class="s1">'root'</span>
+  mode <span class="s1">'0644'</span>
+  action :create
+end
+</code></pre></div></div>
+
+<p>remote_file ‘  ‘ :  다운로드될 파일위치
+source : 원본 소스파일
+owner : 소유자<br />
+group : 그룹
+mode : 실행권한
+action : create 일 경우 존재할경우 생성안하고, 없으면 생성함.</p>
+
+<h2 id="dpkg_packagedpkg">dpkg_package(dpkg)</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dpkg_package <span class="s1">'zabbix-release_2.2-1+precise_all.deb'</span> <span class="k">do
+  </span><span class="nb">source</span> <span class="s2">"/tmp/zabbix-release_2.2-1+precise_all.deb"</span>
+  action :install
+end
+</code></pre></div></div>
+
+<h2 id="apt-get-update">Apt-get Update</h2>
+
+<p>metadata.rb 에 depends 를 추가해준후 사용가능하다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>depends <span class="s1">'apt'</span>, <span class="s1">'~&gt; 2.9.2'</span>
+</code></pre></div></div>
+<p>전문</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name <span class="s1">'whatap-zabbix-sh'</span>
+maintainer <span class="s1">'Kwangmyung Kim'</span>
+maintainer_email <span class="s1">'kwangmyung.kim@gmail.com'</span>
+license <span class="s1">'all_rights'</span>
+description <span class="s1">'Installs/Configures'</span>
+long_description <span class="s1">'Installs/Configures'</span>
+version <span class="s1">'0.1.0'</span>
+
+<span class="c">## depends</span>
+depends <span class="s1">'apt'</span>, <span class="s1">'~&gt; 2.9.2'</span>
+</code></pre></div></div>
+<ul>
+  <li>execute 를 사용할수도 있다.
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>execute <span class="s2">"apt-get-update-periodic"</span> <span class="k">do
+</span><span class="nb">command</span> <span class="s2">"apt-get update"</span>
+end
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="packageapt-get-install-yum-install">package(apt-get install, yum install)</h2>
+<p>package 설치</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package <span class="o">[</span><span class="s1">'zabbix-server-mysql'</span><span class="o">]</span> <span class="k">do
+  </span>action :install
+end
+</code></pre></div></div>
+
+<h2 id="python-pip">python pip</h2>
+
+<p>python 의 pip 인스톨</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install <span class="nv">Django</span><span class="o">==</span>1.6.11
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>describe pip<span class="o">(</span><span class="s1">'Django'</span><span class="o">)</span> <span class="k">do
+  </span>it <span class="o">{</span> should be_installed <span class="o">}</span>
+  its<span class="o">(</span><span class="s1">'version'</span><span class="o">)</span> <span class="o">{</span> should eq <span class="s1">'1.6.11'</span> <span class="o">}</span>
+end
+</code></pre></div></div>
+<h2 id="template-에서-변수설정">template 에서 변수설정</h2>
+<p>변수를 이용하려면 Attributes 에서 설정한 내용을 가지고 사용을 할수 있다.</p>
+
+<ul>
+  <li>attributes
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>default[<span class="s1">'mycookbook'</span><span class="o">][</span><span class="s1">'DBHost'</span><span class="o">]</span> <span class="o">=</span> <span class="s1">'192.168.44.12'</span>
+default[<span class="s1">'mycookbook'</span><span class="o">][</span><span class="s1">'DBPassword'</span><span class="o">]</span> <span class="o">=</span> <span class="s1">'password'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>template
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ttemplate <span class="s2">"/etc/my/test.conf"</span> <span class="k">do
+</span><span class="nb">source</span> <span class="s2">"test.conf.erb"</span>
+owner <span class="s1">'root'</span>
+group <span class="s1">'root'</span>
+mode <span class="s1">'0644'</span>
+variables<span class="o">({</span>
+   :my_db_url <span class="o">=&gt;</span> node[<span class="s1">'mycookbook'</span><span class="o">][</span><span class="s1">'DBHost'</span><span class="o">]</span>,
+   :my_password <span class="o">=&gt;</span> node[<span class="s1">'mycookbook'</span><span class="o">][</span><span class="s1">'DBPassword'</span><span class="o">]</span>
+<span class="o">})</span>
+end
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>변수의 사용은 &lt;%= @my_password %&gt; 형식으로 사용하면된다.</p>
+
+<ul>
+  <li>/sudoers.erb</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;database&gt;
+        &lt;default&gt;mysql://rnd:&lt;%<span class="o">=</span> @my_password %&gt;@&lt;%<span class="o">=</span> @my_db_url %&gt;/&lt;/default&gt;
+&lt;/database&gt;
+</code></pre></div></div>
+
+<p>#link (ln)
+링크연결</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># cd /etc/apache2/sites-enabled/</span>
+ <span class="c"># ln -s /etc/hw/apache/public.conf</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>link<span class="o">(</span><span class="s1">'/etc/apache2/sites-enabled/public.conf'</span><span class="o">)</span> <span class="k">do
+  </span>group <span class="s1">'root'</span>
+  owner <span class="s1">'root'</span>
+  to <span class="s1">'/etc/hw/apache/public.conf'</span>
+end
+</code></pre></div></div>
+<p>#디랙토리생성</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>directory <span class="s1">'/etc/hw/'</span> <span class="k">do
+  </span>owner <span class="s1">'root'</span>
+  group <span class="s1">'root'</span>
+  mode <span class="s1">'0755'</span>
+  action :create
+end
+</code></pre></div></div>
+<h1 id="export-debian_frontendnoninteractive">export DEBIAN_FRONTEND=noninteractive</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Force dpkg to not overwrite configuration files - and don't ask anything
+file '/etc/apt/apt.conf.d/force_confdef' do
+  owner 'root'
+  group 'root'
+  mode 00644
+  content 'Dpkg::Options {
+   "--force-confdef";
+   "--force-confold";
+}'
+  action :create
+end
+
+</code></pre></div></div>
+
+  </div>
+  <img src="/images/tag.png" alt="Tags: " class="tag-img"/><div class="post-tags">
+  
+  
+  <a href="/tags/#chef">chef</a>
+  
+</div>
+<br/>
+
+  <div class="date">
+    Written on July 23, 2017
+  </div>
+  <div class="comments">
+	  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'xmlangel-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </div>
+</article>
+</div>
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:kwangmyung.kim@gmail.com"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/xmlangel"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+        </footer>
+      </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/com.alybadawy.external_links.js"></script>
+
+
+    <title>Ubnutu route 설정 – Even Though ... 그럼에도 불구하고 열심히 – 작은 끄적거림</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="라우팅(Routing) - 패킷(Packet)이 목적지까지 갈 수 있도록 경로를 올바르게 설정해 주는 작업.
+
+" />
+    <meta property="og:description" content="라우팅(Routing) - 패킷(Packet)이 목적지까지 갈 수 있도록 경로를 올바르게 설정해 주는 작업.
+
+" />
+    
+    <meta name="author" content="Even Though ... 그럼에도 불구하고 열심히" />
+
+    
+    <meta property="og:title" content="Ubnutu route 설정" />
+    <meta property="twitter:title" content="Ubnutu route 설정" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Even Though ... 그럼에도 불구하고 열심히 - 작은 끄적거림" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+  
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-55180057-2', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/ubuntu-route/',
+		  'title': 'Ubnutu route 설정'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  <body>
+      <nav class="navbar navbar-pithy" role="navigation">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="pithy-navbar">
+                    <a href="/">home</a>
+                    <a href="/about/">about</a>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+    </nav>
+    
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="/images/xmlangel.jpg" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Even Though ... 그럼에도 불구하고 열심히</a></h1>
+            <p class="site-description">작은 끄적거림</p>
+          </div>
+        </header>
+      </div>
+    </div>
+    <div id="s_left">
+<div style="border:1px dashed; padding:5px;" ><h3>Tags</h3>
+<ul class="tag-cloud">
+
+  <span style="font-size: 83%">
+    <a href="/tags/#docker">
+      docker
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#debian">
+      debian
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#dpkg">
+      dpkg
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#SoapUI">
+      SoapUI
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 83%">
+    <a href="/tags/#Jmeter">
+      Jmeter
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#GPG">
+      GPG
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#linux">
+      linux
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#command">
+      command
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 79%">
+    <a href="/tags/#Ubuntu">
+      Ubuntu
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#Network">
+      Network
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 79%">
+    <a href="/tags/#IP">
+      IP
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#route">
+      route
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#chef">
+      chef
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#python">
+      python
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#download">
+      download
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#urllib">
+      urllib
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#PyDev">
+      PyDev
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#virtualenv">
+      virtualenv
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#Python">
+      Python
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#vscode">
+      vscode
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#kuberenetes">
+      kuberenetes
+    </a> &nbsp;&nbsp;
+  </span>
+
+  <span style="font-size: 74%">
+    <a href="/tags/#K8s">
+      K8s
+    </a> &nbsp;&nbsp;
+  </span>
+
+</ul></div>
+<p>
+<div style="border:1px dashed; padding:5px;"><h3>Recent</h3>
+
+  <article class="featured-list">
+    <header class="featured-header">
+      <a href="/install-kuberenetes/">Centos 에서 Kuberenetes 설치하기</a>
+    </header>
+    <div class="featured-post">
+      * 목차{:toc}centos 에 설치하기 위해서는 master node 와 mini...
+    </div>
+    <footer>
+      <a href="/install-kuberenetes/" class="button">Read more...</a>
+    </footer>
+  </article>
+
+  <article class="featured-list">
+    <header class="featured-header">
+      <a href="/vscode/">sublim 에서 vs code 로 </a>
+    </header>
+    <div class="featured-post">
+      Sublime  에서 vs code 로 넘어왔다.* 목차{:toc}# vscode 터...
+    </div>
+    <footer>
+      <a href="/vscode/" class="button">Read more...</a>
+    </footer>
+  </article>
+
+  <article class="featured-list">
+    <header class="featured-header">
+      <a href="/pydev-setup/">virtualenv로 Pydev 와 Django 설정 하기</a>
+    </header>
+    <div class="featured-post">
+      Eclipes 플러그인인 PyDev 를 이용한 Django 설정을 하는 법입니다.* ...
+    </div>
+    <footer>
+      <a href="/pydev-setup/" class="button">Read more...</a>
+    </footer>
+  </article>
+</div>
+</div>
+<div id="main" role="main" class="container" ><article class="post">
+  <h1>Ubnutu route 설정</h1>
+
+  <div class="entry">
+    <p>라우팅(Routing) - 패킷(Packet)이 목적지까지 갈 수 있도록 경로를 올바르게 설정해 주는 작업.</p>
+<ul id="markdown-toc">
+  <li><a href="#route-table" id="markdown-toc-route-table">Route table</a>    <ul>
+      <li><a href="#route-명령는-아래와-같은-옵션들이-있다" id="markdown-toc-route-명령는-아래와-같은-옵션들이-있다">route 명령는 아래와 같은 옵션들이 있다.</a></li>
+      <li><a href="#라우팅-테이블-routing-table" id="markdown-toc-라우팅-테이블-routing-table">라우팅 테이블 (Routing Table)</a>        <ul>
+          <li><a href="#사용-예제" id="markdown-toc-사용-예제">사용 예제</a>            <ul>
+              <li><a href="#라우팅-정보삭제" id="markdown-toc-라우팅-정보삭제">라우팅 정보삭제</a></li>
+              <li><a href="#라우팅-정보추가" id="markdown-toc-라우팅-정보추가">라우팅 정보추가</a></li>
+              <li><a href="#단일-호스트에-대해서-라우팅을-추가삭제-할-때" id="markdown-toc-단일-호스트에-대해서-라우팅을-추가삭제-할-때">단일 호스트에 대해서 라우팅을 추가/삭제 할 때</a></li>
+              <li><a href="#게이트웨이-추가-제거" id="markdown-toc-게이트웨이-추가-제거">게이트웨이 추가, 제거</a></li>
+              <li><a href="#부팅과-함께-적용시키기" id="markdown-toc-부팅과-함께-적용시키기">부팅과 함께 적용시키기</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>모든 검증은 ubuntu 16.04 에서 했다. 그리고 권한은 root 권한을 가지고 작업을 해야 한다.</p>
+
+<h1 id="route-table">Route table</h1>
+
+<p>HOST A가 HOST B에게 데이터를 전송하고자 할 때, 두 호스트가 같은 로컬 네트워크 상에 있다면, IP 프로토콜은 출발지와 도착지 호스트의 IP 주소를 ARP 를 사용해서 물리적 주소로 변환한다. 그리고 그 물리적 주소들은 (프레임을 만들기 위해) IP 데이터그램에 추가되고, 프레임을 이용해 두 호스트는 서로 간에 직접 통신을 한다. 그런데 두 호스트가 같은 로컬 네트워크 상에 있지 않으면 직접 통신할 수 없고 라우터를 거쳐서 통신해야 한다.</p>
+
+<p>라우터는 특정한 경로(ROUTE)가 알려져 있지 않은 로컬 네트워크 밖의 호스트와 통신할 때 사용된다.
+두 호스트가 같은 로컬 네트워크에 있지 않다면, 호스트 A는 라우터의 라우팅 표를 체크하여 호스트 B의 로컬 네트워크에 연결될 수 있는지 살펴본다. 만약 일치하는 것을 찾지 못하면 데이터는 “디폴트 게이트웨이”로 보내진다.</p>
+
+<p>대부분 패킷을 목적지까지 전달하기 위해 한 라우터 만을 경유하지는 않는다. 라우터는 다른 라우터로 가는 경로를 알고 있다.</p>
+
+<h2 id="route-명령는-아래와-같은-옵션들이-있다">route 명령는 아래와 같은 옵션들이 있다.</h2>
+
+<ul>
+  <li>
+    <p>라우팅 테이블을 확인하거나 수정할 수 있다.</p>
+  </li>
+  <li>
+    <p>활성화되어 있는 네트워크 인터페이스를 통해 정적 라우트를 설정할 수 있다.</p>
+  </li>
+</ul>
+
+<p>명령어 옵션</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-F : display Forwarding Information Base(FIB) (default)
+
+-C : display routing cache instead of FIB --cache
+
+-n : don't resolve names. --numeric
+
+-e : display other/more information. --extended
+
+del : delete a route.
+
+add : add a new route.
+
+-net : 목적지 네트워트
+
+-host : 목적지 호스트
+
+netmask : 네트워크 라우트를 추가할 때, 사용 될 넷마스크
+
+gw : route packets via a gateway
+
+dev if : force the route to be associated with the specified device.
+</code></pre></div></div>
+
+<h2 id="라우팅-테이블-routing-table">라우팅 테이블 (Routing Table)</h2>
+
+<p>route 명령이 수행되었을 때 보여주는 테이블이다.</p>
+
+<ul>
+  <li>
+    <p>Destination : 목적지 네트워트 또는 목적지 호스트 주소</p>
+  </li>
+  <li>
+    <p>Gateway : 게이트웨이 주소, 설정되어 있지 않다면 *</p>
+  </li>
+  <li>
+    <p>Genmask : The netmask for the destination net; ‘255.255.255.255’ for a host destination and ‘0.0.0.0’ for the default route.</p>
+  </li>
+  <li>
+    <p>Flags :</p>
+  </li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">    U <span class="o">(</span>route is Up<span class="o">)</span> 라우트 동작 상태
+
+    H <span class="o">(</span>target is a Host<span class="o">)</span> 목적지 호스트 
+
+    G <span class="o">(</span>use Gateway<span class="o">)</span> 게이트웨이 사용
+
+    R <span class="o">(</span>Reinstate route <span class="k">for </span>dynamic routing<span class="o">)</span>
+
+    D <span class="o">(</span>dynamically installed by Daemon or redirect<span class="o">)</span> 데몬 또는 ICMP Redirect Message에 의해 
+    동적으로 설치된 상태
+    
+    M <span class="o">(</span>Modified from routing daemon or redirect<span class="o">)</span> 데몬 또는 ICMP Redirect Message에 의해 변경된 상태 
+    
+    A <span class="o">(</span>installed by Addrconf<span class="o">)</span>
+    
+    C <span class="o">(</span>Cache entry<span class="o">)</span>
+    
+    <span class="o">!</span> <span class="o">(</span>reject route<span class="o">)</span> 라우트 거부</code></pre></figure>
+
+<ul>
+  <li>
+    <p>Metric : Target까지의 거리를 홉(Hop) 단위로 계산, 최근 커널에서는 사용하지 않으나 라우팅 데몬에 의해 사용</p>
+  </li>
+  <li>
+    <p>Ref : 현재 라우트에 대한 레퍼런스 수, 리눅스 커널에서는 사용되지 않음</p>
+  </li>
+  <li>
+    <p>Use : 라우트 탐색 수</p>
+  </li>
+  <li>
+    <p>iface : 패킷이 전달되는 인터페이스</p>
+  </li>
+</ul>
+
+<h3 id="사용-예제">사용 예제</h3>
+<p>virtual box 를 가지고 테스트를 해보려고 한다.</p>
+
+<p>VirtualBox 2개를 생성한다.</p>
+<ul>
+  <li>
+    <p>각 VirtualBox 에는 2개의 네트워크 카드를 장착한다.</p>
+  </li>
+  <li>
+    <p>A Host 정보</p>
+  </li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">root@local-vm-ubuntu:~# ifconfig
+enp0s3    Link encap:Ethernet  HWaddr 08:00:27:fd:dc:d4
+          inet addr:192.168.0.108  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::a00:27ff:fefd:dcd4/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:44855 errors:0 dropped:68 overruns:0 frame:0
+          TX packets:1312 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:4875291 <span class="o">(</span>4.8 MB<span class="o">)</span>  TX bytes:86635 <span class="o">(</span>86.6 KB<span class="o">)</span>
+
+enp0s8    Link encap:Ethernet  HWaddr 08:00:27:8f:3c:58
+          inet addr:192.168.99.100  Bcast:192.168.99.255  Mask:255.255.255.0
+          inet6 addr: fe80::a00:27ff:fe8f:3c58/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:10295 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:6267 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:855770 <span class="o">(</span>855.7 KB<span class="o">)</span>  TX bytes:995967 <span class="o">(</span>995.9 KB<span class="o">)</span>
+root@local-vm-ubuntu:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s3
+192.168.99.0    <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s8</code></pre></figure>
+
+<ul>
+  <li>B Host 정보</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">root@local-vm-ubuntu-02:~# ifconfig
+enp0s3    Link encap:Ethernet  HWaddr 08:00:27:7b:f4:f4
+          inet addr:192.168.0.110  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::a00:27ff:fe7b:f4f4/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:44831 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:1199 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:4828633 <span class="o">(</span>4.8 MB<span class="o">)</span>  TX bytes:75710 <span class="o">(</span>75.7 KB<span class="o">)</span>
+
+enp0s8    Link encap:Ethernet  HWaddr 08:00:27:a2:e4:dc
+          inet addr:192.168.99.110  Bcast:192.168.99.255  Mask:255.255.255.0
+          inet6 addr: fe80::a00:27ff:fea2:e4dc/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:733 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:362 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:69794 <span class="o">(</span>69.7 KB<span class="o">)</span>  TX bytes:42493 <span class="o">(</span>42.4 KB<span class="o">)</span>
+
+root@local-vm-ubuntu-02:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s3
+192.168.99.0    <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s8</code></pre></figure>
+
+<p>A 에서 B로 Ping 를 날려보면 정삭적으로 Ping 이 가는것을 확인 할 수 있다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">root@local-vm-ubuntu:~# ping 192.168.99.110
+PING 192.168.99.110 <span class="o">(</span>192.168.99.110<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from 192.168.99.110: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.499 ms</code></pre></figure>
+
+<h4 id="라우팅-정보삭제">라우팅 정보삭제</h4>
+<p>그러면 라우팅 정보를 삭제해보겠다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">route del <span class="nt">-net</span> 192.168.99.0 netmask  255.255.255.0 dev enp0s8</code></pre></figure>
+
+<p>결과는 아래와 같이 해당 라우팅정보가 삭제된다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">root@local-vm-ubuntu:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s3</code></pre></figure>
+
+<p>이제 ping 을 날려도 해당 호스트로 ping 이 안된다.</p>
+
+<h4 id="라우팅-정보추가">라우팅 정보추가</h4>
+<p>그럼 라우팅 정보를 추가해보겠다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">route add <span class="nt">-net</span> 192.168.99.0 netmask  255.255.255.0 dev enp0s8</code></pre></figure>
+
+<p>아래와 같이 해당 라우팅 정보가 추가된다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">root@local-vm-ubuntu:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s3
+192.168.99.0    <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s8</code></pre></figure>
+
+<h4 id="단일-호스트에-대해서-라우팅을-추가삭제-할-때">단일 호스트에 대해서 라우팅을 추가/삭제 할 때</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">route add <span class="nt">-host</span> 192.168.99.100 dev enp0s8
+route del <span class="nt">-host</span> 192.168.99.100 dev enp0s8</code></pre></figure>
+
+<h4 id="게이트웨이-추가-제거">게이트웨이 추가, 제거</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">route add default gw 192.168.0.1 dev enp0s3
+route del default gw 192.168.0.1 dev enp0s3</code></pre></figure>
+
+<p>192.168.99.100으로 나가는 트래픽을 192.168.0.1 게이트웨이를 통하도록 할 때</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">route add <span class="nt">-host</span> 192.168.99.100 netmask 0.0.0.0 gw 192.168.0.1 dev enp0s3
+
+root@local-vm-ubuntu:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s3
+192.168.99.0    <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s8
+192.168.99.100  dlinkrouter     255.255.255.255 UGH   0      0        0 enp0s3</code></pre></figure>
+
+<p>192.168.99.0 네트워크로 나가는 트래픽을 192.168.0.1 게이트웨이를 통하도록 할 때</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">route add <span class="nt">-net</span> 192.168.99.0 netmask 255.255.255.0 gw 192.168.0.1 dev enp0s3
+
+root@local-vm-ubuntu:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
+192.168.0.0     <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s3
+192.168.99.0    dlinkrouter     255.255.255.0   UG    0      0        0 enp0s3
+192.168.99.0    <span class="k">*</span>               255.255.255.0   U     0      0        0 enp0s8
+192.168.99.100  dlinkrouter     255.255.255.255 UGH   0      0        0 enp0s3</code></pre></figure>
+
+<h4 id="부팅과-함께-적용시키기">부팅과 함께 적용시키기</h4>
+<p>/etc/rc.d/rc.local 파일에 라우트 설정 내용을 추가하여 네트워크 설정을 한다.</p>
+
+  </div>
+  <img src="/images/tag.png" alt="Tags: " class="tag-img"/><div class="post-tags">
+  
+  
+  <a href="/tags/#Ubuntu">Ubuntu</a>,
+  
+  <a href="/tags/#route">route</a>,
+  
+  <a href="/tags/#IP">IP</a>
+  
+</div>
+<br/>
+
+  <div class="date">
+    Written on July 21, 2017
+  </div>
+  <div class="comments">
+	  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'xmlangel-github-io';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+  </div>
+</article>
+</div>
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:kwangmyung.kim@gmail.com"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/xmlangel"><i class="svg-icon github"></i></a>
+
+
+
+
+
+
+
+
+        </footer>
+      </div>
+</div>
+  </body>
+</html>

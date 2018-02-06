@@ -3,14 +3,13 @@ layout: post
 title:  "Centos 에서 Kuberenetes 설치하기"
 date:   2018-02-3 11:11:13 +0900
 categories: jekyll update
-comments: true
 tags:
 - docker
 - kuberenetes
 - K8s
 ---
 
-목차
+* 목차
 
 {:toc}
 
@@ -30,6 +29,7 @@ virtualbox 등의 아이피를 설정해주면 된다.
 #centos-minion-1 = 10.128.29.102
 #centos-minion-2 = 110.128.29.104
 {% endhighlight %}
+# a
 
 그럼 본격적으로 설치를 시작해보겠다.
 
