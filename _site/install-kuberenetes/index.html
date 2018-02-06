@@ -298,8 +298,38 @@
 
 <p>https://kubernetes.io/docs/getting-started-guides/centos/centos_manual_config/</p>
 
-<p>설치할 Hosts 정보와 아이피는 아래와같다.
-virtualbox 등의 아이피를 설정해주면 된다.</p>
+<p>설치할 Hosts 정보와 아이피는 아래와 같습니다.</p>
+
+<h1 id="kuberenetes-구성">Kuberenetes 구성</h1>
+<p>Kubernetes 구성은 아래와 같다.</p>
+<ul>
+  <li>Kubernetes master</li>
+  <li>Kubernetes nodes</li>
+  <li>etcd</li>
+  <li>Overlay network(flannel)</li>
+</ul>
+
+<p>Kubernetes master 는 Http 또는 Https 를 통해서 etcd 로 접속해서 데이터를 저장하고, Flannel 을 통해서 접근하고,
+Kubernetes nodes 는 Kubernetes maste 로 부터 명령을 받고, 상테를 전송하는 구조 인듯.</p>
+
+<p><img src="http://localhost:4000/assets/images/Kubernetes-01.png" alt="Kuberneties" width="100%" height="100%" /></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>etcd는 간단하게 키체인을 저장하는 저장소와 같은 것으로
+
+여러대의 OS가 클러스터로 구성되어 있는 상황에서 
+
+하나의 OS 인스턴스를 리더로 하여, 
+
+한곳에서 키 값이 변경될 경우 약 1초에 1000개의 키를 동기화 할 수 있도록 빠른 서비스를 제공합니다.
+
+일반적으로 etcd 는 기본 컨트롤러로 제공되는 etcdctl을 이용해서 기능 사용이 가능하다고 한다.
+
+etcd 웹 페이지 : https://github.com/coreos/etcd
+
+
+</code></pre></div></div>
+
+<p>구성은 VirtualBox 를 이용해서 할예정이고, 아래와 같은 아이피는 아래와 같은 설정으로 구성했다.</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#centos-master = 10.128.29.105</span>
 <span class="c1">#centos-minion-1 = 10.128.29.102</span>
@@ -490,13 +520,92 @@ KUBE_MASTER=”–master=http://centos-master:8080”</p>
 <span class="n">kubectl</span> <span class="n">config</span> <span class="n">set</span><span class="o">-</span><span class="n">context</span> <span class="n">default</span><span class="o">-</span><span class="n">context</span> <span class="o">--</span><span class="n">cluster</span><span class="o">=</span><span class="n">default</span><span class="o">-</span><span class="n">cluster</span> <span class="o">--</span><span class="n">user</span><span class="o">=</span><span class="n">default</span><span class="o">-</span><span class="n">admin</span>
 <span class="n">kubectl</span> <span class="n">config</span> <span class="n">use</span><span class="o">-</span><span class="n">context</span> <span class="n">default</span><span class="o">-</span><span class="n">context</span></code></pre></figure>
 
-<h1 id="master에서-동작확인">Master에서 동작확인.</h1>
+<h1 id="동작확인">동작확인.</h1>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="err">$</span> <span class="n">kubectl</span> <span class="n">get</span> <span class="n">nodes</span>
-<span class="n">root</span><span class="vi">@localhost</span> <span class="o">~</span><span class="p">]</span><span class="c1"># kubectl get nodes</span>
+<h2 id="component-상태">Component 상태</h2>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># kubectl get cs</span>
+<span class="no">NAME</span>                 <span class="no">STATUS</span>    <span class="no">MESSAGE</span>              <span class="no">ERROR</span>
+<span class="n">controller</span><span class="o">-</span><span class="n">manager</span>   <span class="no">Healthy</span>   <span class="n">ok</span>
+<span class="n">scheduler</span>            <span class="no">Healthy</span>   <span class="n">ok</span>
+<span class="n">etcd</span><span class="o">-</span><span class="mi">0</span>               <span class="no">Healthy</span>   <span class="p">{</span><span class="s2">"health"</span><span class="p">:</span> <span class="s2">"true"</span><span class="p">}</span></code></pre></figure>
+
+<h2 id="node-상태">Node 상태</h2>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># kubectl get nodes</span>
 <span class="no">NAME</span>              <span class="no">STATUS</span>    <span class="no">AGE</span>
 <span class="n">centos</span><span class="o">-</span><span class="n">minion</span><span class="o">-</span><span class="mi">1</span>   <span class="no">Ready</span>     <span class="mi">57</span><span class="n">s</span>
 <span class="n">centos</span><span class="o">-</span><span class="n">minion</span><span class="o">-</span><span class="mi">2</span>   <span class="no">Ready</span>     <span class="mi">54</span><span class="n">s</span></code></pre></figure>
+
+<p>Node 의 Capacity 확인</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># kubectl get nodes -o json | jq '.items[] | {name: .metadata.name, capacity: .status.capacity}'</span>
+<span class="p">{</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"centos-minion-1"</span><span class="p">,</span>
+  <span class="s2">"capacity"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"alpha.kubernetes.io/nvidia-gpu"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"cpu"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
+    <span class="s2">"memory"</span><span class="p">:</span> <span class="s2">"8167736Ki"</span><span class="p">,</span>
+    <span class="s2">"pods"</span><span class="p">:</span> <span class="s2">"110"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">{</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"centos-minion-2"</span><span class="p">,</span>
+  <span class="s2">"capacity"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"alpha.kubernetes.io/nvidia-gpu"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"cpu"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
+    <span class="s2">"memory"</span><span class="p">:</span> <span class="s2">"8167736Ki"</span><span class="p">,</span>
+    <span class="s2">"pods"</span><span class="p">:</span> <span class="s2">"110"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li>jq 가 없을 경우 아래 명령어로 설치가능</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">wget</span> <span class="o">-</span><span class="no">O</span> <span class="n">jq</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">github</span><span class="p">.</span><span class="nf">com</span><span class="o">/</span><span class="n">stedolan</span><span class="o">/</span><span class="n">jq</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">jq</span><span class="o">-</span><span class="mf">1.5</span><span class="o">/</span><span class="n">jq</span><span class="o">-</span><span class="n">linux64</span>
+<span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="p">.</span><span class="nf">/</span><span class="n">jq</span>
+<span class="n">cp</span> <span class="n">jq</span> <span class="sr">/usr/</span><span class="n">bin</span></code></pre></figure>
+
+<h2 id="master-iptables">Master iptables</h2>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># iptables -t nat -S</span>
+<span class="o">-</span><span class="no">P</span> <span class="no">PREROUTING</span> <span class="no">ACCEPT</span>
+<span class="o">-</span><span class="no">P</span> <span class="no">INPUT</span> <span class="no">ACCEPT</span>
+<span class="o">-</span><span class="no">P</span> <span class="no">OUTPUT</span> <span class="no">ACCEPT</span>
+<span class="o">-</span><span class="no">P</span> <span class="no">POSTROUTING</span> <span class="no">ACCEPT</span></code></pre></figure>
+
+<h2 id="node-iptables">Node iptables</h2>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># iptables -t nat -S</span>
+<span class="o">-</span><span class="no">P</span> <span class="no">PREROUTING</span> <span class="no">ACCEPT</span>
+<span class="o">-</span><span class="no">P</span> <span class="no">INPUT</span> <span class="no">ACCEPT</span>
+<span class="o">-</span><span class="no">P</span> <span class="no">OUTPUT</span> <span class="no">ACCEPT</span>
+<span class="o">-</span><span class="no">P</span> <span class="no">POSTROUTING</span> <span class="no">ACCEPT</span>
+<span class="o">-</span><span class="no">N</span> <span class="no">DOCKER</span>
+<span class="o">-</span><span class="no">N</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">MARK</span><span class="o">-</span><span class="no">DROP</span>
+<span class="o">-</span><span class="no">N</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">MARK</span><span class="o">-</span><span class="no">MASQ</span>
+<span class="o">-</span><span class="no">N</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">NODEPORTS</span>
+<span class="o">-</span><span class="no">N</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">POSTROUTING</span>
+<span class="o">-</span><span class="no">N</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SEP</span><span class="o">-</span><span class="mi">3</span><span class="no">X2QJUW2ZWG6VVDC</span>
+<span class="o">-</span><span class="no">N</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SERVICES</span>
+<span class="o">-</span><span class="no">N</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SVC</span><span class="o">-</span><span class="no">NPX46M4PTMTKRN6Y</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">PREROUTING</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"kubernetes service portals"</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SERVICES</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">PREROUTING</span> <span class="o">-</span><span class="n">m</span> <span class="n">addrtype</span> <span class="o">--</span><span class="n">dst</span><span class="o">-</span><span class="n">type</span> <span class="no">LOCAL</span> <span class="o">-</span><span class="n">j</span> <span class="no">DOCKER</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">OUTPUT</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"kubernetes service portals"</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SERVICES</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">OUTPUT</span> <span class="o">!</span> <span class="o">-</span><span class="n">d</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">8</span> <span class="o">-</span><span class="n">m</span> <span class="n">addrtype</span> <span class="o">--</span><span class="n">dst</span><span class="o">-</span><span class="n">type</span> <span class="no">LOCAL</span> <span class="o">-</span><span class="n">j</span> <span class="no">DOCKER</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">POSTROUTING</span> <span class="o">-</span><span class="n">s</span> <span class="mf">172.30</span><span class="o">.</span><span class="mf">94.0</span><span class="o">/</span><span class="mi">24</span> <span class="o">!</span> <span class="o">-</span><span class="n">o</span> <span class="n">docker0</span> <span class="o">-</span><span class="n">j</span> <span class="no">MASQUERADE</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">POSTROUTING</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"kubernetes postrouting rules"</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">POSTROUTING</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">DOCKER</span> <span class="o">-</span><span class="n">i</span> <span class="n">docker0</span> <span class="o">-</span><span class="n">j</span> <span class="no">RETURN</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">MARK</span><span class="o">-</span><span class="no">DROP</span> <span class="o">-</span><span class="n">j</span> <span class="no">MARK</span> <span class="o">--</span><span class="n">set</span><span class="o">-</span><span class="n">xmark</span> <span class="mh">0x8000</span><span class="o">/</span><span class="mh">0x8000</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">MARK</span><span class="o">-</span><span class="no">MASQ</span> <span class="o">-</span><span class="n">j</span> <span class="no">MARK</span> <span class="o">--</span><span class="n">set</span><span class="o">-</span><span class="n">xmark</span> <span class="mh">0x4000</span><span class="o">/</span><span class="mh">0x4000</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">POSTROUTING</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"kubernetes service traffic requiring SNAT"</span> <span class="o">-</span><span class="n">m</span> <span class="n">mark</span> <span class="o">--</span><span class="n">mark</span> <span class="mh">0x4000</span><span class="o">/</span><span class="mh">0x4000</span> <span class="o">-</span><span class="n">j</span> <span class="no">MASQUERADE</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SEP</span><span class="o">-</span><span class="mi">3</span><span class="no">X2QJUW2ZWG6VVDC</span> <span class="o">-</span><span class="n">s</span> <span class="mf">10.128</span><span class="o">.</span><span class="mf">29.105</span><span class="o">/</span><span class="mi">32</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"default/kubernetes:https"</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">MARK</span><span class="o">-</span><span class="no">MASQ</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SEP</span><span class="o">-</span><span class="mi">3</span><span class="no">X2QJUW2ZWG6VVDC</span> <span class="o">-</span><span class="nb">p</span> <span class="n">tcp</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"default/kubernetes:https"</span> <span class="o">-</span><span class="n">m</span> <span class="n">recent</span> <span class="o">--</span><span class="n">set</span> <span class="o">--</span><span class="nb">name</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SEP</span><span class="o">-</span><span class="mi">3</span><span class="no">X2QJUW2ZWG6VVDC</span> <span class="o">--</span><span class="n">mask</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.255</span> <span class="o">--</span><span class="n">rsource</span> <span class="o">-</span><span class="n">m</span> <span class="n">tcp</span> <span class="o">-</span><span class="n">j</span> <span class="no">DNAT</span> <span class="o">--</span><span class="n">to</span><span class="o">-</span><span class="n">destination</span> <span class="mf">10.128</span><span class="o">.</span><span class="mf">29.105</span><span class="p">:</span><span class="mi">6443</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SERVICES</span> <span class="o">-</span><span class="n">d</span> <span class="mf">10.254</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="mi">32</span> <span class="o">-</span><span class="nb">p</span> <span class="n">tcp</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"default/kubernetes:https cluster IP"</span> <span class="o">-</span><span class="n">m</span> <span class="n">tcp</span> <span class="o">--</span><span class="n">dport</span> <span class="mi">443</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SVC</span><span class="o">-</span><span class="no">NPX46M4PTMTKRN6Y</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SERVICES</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"kubernetes service nodeports; NOTE: this must be the last rule in this chain"</span> <span class="o">-</span><span class="n">m</span> <span class="n">addrtype</span> <span class="o">--</span><span class="n">dst</span><span class="o">-</span><span class="n">type</span> <span class="no">LOCAL</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">NODEPORTS</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SVC</span><span class="o">-</span><span class="no">NPX46M4PTMTKRN6Y</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"default/kubernetes:https"</span> <span class="o">-</span><span class="n">m</span> <span class="n">recent</span> <span class="o">--</span><span class="n">rcheck</span> <span class="o">--</span><span class="n">seconds</span> <span class="mi">10800</span> <span class="o">--</span><span class="n">reap</span> <span class="o">--</span><span class="nb">name</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SEP</span><span class="o">-</span><span class="mi">3</span><span class="no">X2QJUW2ZWG6VVDC</span> <span class="o">--</span><span class="n">mask</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.255</span> <span class="o">--</span><span class="n">rsource</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SEP</span><span class="o">-</span><span class="mi">3</span><span class="no">X2QJUW2ZWG6VVDC</span>
+<span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SVC</span><span class="o">-</span><span class="no">NPX46M4PTMTKRN6Y</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"default/kubernetes:https"</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SEP</span><span class="o">-</span><span class="mi">3</span><span class="no">X2QJUW2ZWG6VVDC</span></code></pre></figure>
 
 <p>참고한 URL</p>
 
