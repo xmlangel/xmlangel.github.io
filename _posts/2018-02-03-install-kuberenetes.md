@@ -31,6 +31,8 @@ Kubernetes nodes 는 Kubernetes maste 로 부터 명령을 받고, 상테를 전
 
 ![Kuberneties]({{ site.url }}/assets/images/Kubernetes-01.png){: width="100%" height="100%"}
 
+ - etcd
+
 ```
 etcd는 간단하게 키체인을 저장하는 저장소와 같은 것으로
 
@@ -44,6 +46,12 @@ etcd는 간단하게 키체인을 저장하는 저장소와 같은 것으로
 
 etcd 웹 페이지 : https://github.com/coreos/etcd
 
+```
+ - Flannel
+
+```
+Flannel is a simple and easy way to configure a layer 3 network fabric designed for Kubernetes
+https://github.com/coreos/flannel
 
 ```
 
@@ -377,6 +385,127 @@ cp jq /usr/bin
 -A KUBE-SVC-NPX46M4PTMTKRN6Y -m comment --comment "default/kubernetes:https" -j KUBE-SEP-3X2QJUW2ZWG6VVDC
 
 {% endhighlight %}
+
+# 첫 삽뜨기
+Master 에서 먼저 정상적으로 동작하는지 확인해본다.
+```
+# kubectl cluster-info
+
+Kubernetes master is running at http://localhost:8080
+```
+
+만약 정상실행이 되고 있지 않으면 실행해준다.
+
+```
+/etc/init.d/kubernetes-master start.
+
+```
+node 가 정상적으로 실행되고 있는지 확인.
+```
+# kubectl get nodes
+NAME              STATUS    AGE
+centos-minion-1   Ready     3d
+centos-minion-2   Ready     3d
+```
+실행되고 있지 않으면 node 에서 아래 명령어들을 실행해준다.
+
+```
+service docker start 
+service kubernetes-node start
+```
+
+모두 정상적으로 실행되고 있다. 
+
+이제 도커 레지트리에서 정상적으로 hub.docker.io 에서 받아보는지 Node 에서 테스트 해보겠다.
+
+```
+# docker pull nginx
+Using default tag: latest
+Trying to pull repository docker.io/library/nginx ...
+latest: Pulling from docker.io/library/nginx
+e7bb522d92ff: Pull complete
+6edc05228666: Pull complete
+cd866a17e81f: Pull complete
+Digest: sha256:285b49d42c703fdf257d1e2422765c4ba9d3e37768d6ea83d7fe2043dad6e63d
+```
+잘받아진다.
+private registry 를 이용하려면 아래 경로에 로그인 정보를 설정해준다.
+
+```
+# put the credential of docker registry
+$ cat /var/lib/kubelet/.dockercfg
+{
+"<docker registry endpoint>": {
+"auth": "SAMPLEAUTH=",
+"email": "noreply@sample.com"
+}
+}
+```
+
+## Nginx 실행
+
+실행은 아래 와 같은 형식으로 해준다.
+```
+kubectl run <replication controller name> --image=<image name> --replicas=
+<number of replicas> [--port=<exposing port>]
+```
+자 이제 실행한다.
+
+my-first-nginx 라는 이름으로 deploryment 를 생성하고 80 port 를 열어준다.
+
+```
+# Pull the nginx image and run with 2 replicas, and expose the container port 80
+# kubectl run my-first-nginx --image=nginx --replicas=2 --port=80 
+deployment "my-first-nginx" created
+```
+
+정상적인 경우 아래와 같이 deployments 와 pods 를 확인 가능하다.
+
+```
+# kubectl get deployments
+NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+my-first-nginx   2         2         2            2           7m
+```
+
+```
+# kubectl get pods
+NAME                              READY     STATUS    RESTARTS   AGE
+my-first-nginx-3504586902-ht4dx   1/1       Running   0          13m
+my-first-nginx-3504586902-nc9wk   1/1       Running   0          13m
+```
+
+
+
+# 오류해결
+
+- No resources found.
+
+kubectl get pods 실행시 
+
+
+ServiceAccount Account 를 삭제해준다.
+
+```
+$ cat /etc/kubernetes/apiserver
+find the “KUBE_ADMISSION_CONTROL="--admission_control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota"
+
+second: delete "ServiceAccount"
+finnaly: restart kube-apiserver service
+
+you try "kubectl get pods"
+```
+
+- redhat-ca.crt error
+
+kubectl run 이 올라오지 않고, image pull failed 발생시
+
+https://github.com/candlepin/subscription-manager/tree/master/etc-conf/ca
+
+```
+Error syncing pod, skipping: failed to "StartContainer" for "POD" with ErrImagePull: "image pull failed for registry.access.redhat.com/rhel7/pod-infrastructure:latest, this may be because there are no credentials on this request.  details: (open /etc/docker/certs.d/registry.access.redhat.com/redhat-ca.crt: no such file or directory)"
+
+
+```
 
 참고한 URL
 

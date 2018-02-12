@@ -314,6 +314,10 @@ Kubernetes nodes 는 Kubernetes maste 로 부터 명령을 받고, 상테를 전
 
 <p><img src="http://localhost:4000/assets/images/Kubernetes-01.png" alt="Kuberneties" width="100%" height="100%" /></p>
 
+<ul>
+  <li>etcd</li>
+</ul>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>etcd는 간단하게 키체인을 저장하는 저장소와 같은 것으로
 
 여러대의 OS가 클러스터로 구성되어 있는 상황에서 
@@ -326,6 +330,13 @@ Kubernetes nodes 는 Kubernetes maste 로 부터 명령을 받고, 상테를 전
 
 etcd 웹 페이지 : https://github.com/coreos/etcd
 
+</code></pre></div></div>
+<ul>
+  <li>Flannel</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Flannel is a simple and easy way to configure a layer 3 network fabric designed for Kubernetes
+https://github.com/coreos/flannel
 
 </code></pre></div></div>
 
@@ -606,6 +617,116 @@ KUBE_MASTER=”–master=http://centos-master:8080”</p>
 <span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SERVICES</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"kubernetes service nodeports; NOTE: this must be the last rule in this chain"</span> <span class="o">-</span><span class="n">m</span> <span class="n">addrtype</span> <span class="o">--</span><span class="n">dst</span><span class="o">-</span><span class="n">type</span> <span class="no">LOCAL</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">NODEPORTS</span>
 <span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SVC</span><span class="o">-</span><span class="no">NPX46M4PTMTKRN6Y</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"default/kubernetes:https"</span> <span class="o">-</span><span class="n">m</span> <span class="n">recent</span> <span class="o">--</span><span class="n">rcheck</span> <span class="o">--</span><span class="n">seconds</span> <span class="mi">10800</span> <span class="o">--</span><span class="n">reap</span> <span class="o">--</span><span class="nb">name</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SEP</span><span class="o">-</span><span class="mi">3</span><span class="no">X2QJUW2ZWG6VVDC</span> <span class="o">--</span><span class="n">mask</span> <span class="mf">255.255</span><span class="o">.</span><span class="mf">255.255</span> <span class="o">--</span><span class="n">rsource</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SEP</span><span class="o">-</span><span class="mi">3</span><span class="no">X2QJUW2ZWG6VVDC</span>
 <span class="o">-</span><span class="no">A</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SVC</span><span class="o">-</span><span class="no">NPX46M4PTMTKRN6Y</span> <span class="o">-</span><span class="n">m</span> <span class="n">comment</span> <span class="o">--</span><span class="n">comment</span> <span class="s2">"default/kubernetes:https"</span> <span class="o">-</span><span class="n">j</span> <span class="no">KUBE</span><span class="o">-</span><span class="no">SEP</span><span class="o">-</span><span class="mi">3</span><span class="no">X2QJUW2ZWG6VVDC</span></code></pre></figure>
+
+<h1 id="첫-삽뜨기">첫 삽뜨기</h1>
+<p>Master 에서 먼저 정상적으로 동작하는지 확인해본다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># kubectl cluster-info
+
+Kubernetes master is running at http://localhost:8080
+</code></pre></div></div>
+
+<p>만약 정상실행이 되고 있지 않으면 실행해준다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/init.d/kubernetes-master start.
+
+</code></pre></div></div>
+<p>node 가 정상적으로 실행되고 있는지 확인.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># kubectl get nodes
+NAME              STATUS    AGE
+centos-minion-1   Ready     3d
+centos-minion-2   Ready     3d
+</code></pre></div></div>
+<p>실행되고 있지 않으면 node 에서 아래 명령어들을 실행해준다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service docker start 
+service kubernetes-node start
+</code></pre></div></div>
+
+<p>모두 정상적으로 실행되고 있다.</p>
+
+<p>이제 도커 레지트리에서 정상적으로 hub.docker.io 에서 받아보는지 Node 에서 테스트 해보겠다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># docker pull nginx
+Using default tag: latest
+Trying to pull repository docker.io/library/nginx ...
+latest: Pulling from docker.io/library/nginx
+e7bb522d92ff: Pull complete
+6edc05228666: Pull complete
+cd866a17e81f: Pull complete
+Digest: sha256:285b49d42c703fdf257d1e2422765c4ba9d3e37768d6ea83d7fe2043dad6e63d
+</code></pre></div></div>
+<p>잘받아진다.
+private registry 를 이용하려면 아래 경로에 로그인 정보를 설정해준다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># put the credential of docker registry
+$ cat /var/lib/kubelet/.dockercfg
+{
+"&lt;docker registry endpoint&gt;": {
+"auth": "SAMPLEAUTH=",
+"email": "noreply@sample.com"
+}
+}
+</code></pre></div></div>
+
+<h2 id="nginx-실행">Nginx 실행</h2>
+
+<p>실행은 아래 와 같은 형식으로 해준다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl run &lt;replication controller name&gt; --image=&lt;image name&gt; --replicas=
+&lt;number of replicas&gt; [--port=&lt;exposing port&gt;]
+</code></pre></div></div>
+<p>자 이제 실행한다.</p>
+
+<p>my-first-nginx 라는 이름으로 deploryment 를 생성하고 80 port 를 열어준다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Pull the nginx image and run with 2 replicas, and expose the container port 80
+# kubectl run my-first-nginx --image=nginx --replicas=2 --port=80 
+deployment "my-first-nginx" created
+</code></pre></div></div>
+
+<p>정상적인 경우 아래와 같이 deployments 와 pods 를 확인 가능하다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># kubectl get deployments
+NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+my-first-nginx   2         2         2            2           7m
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># kubectl get pods
+NAME                              READY     STATUS    RESTARTS   AGE
+my-first-nginx-3504586902-ht4dx   1/1       Running   0          13m
+my-first-nginx-3504586902-nc9wk   1/1       Running   0          13m
+</code></pre></div></div>
+
+<h1 id="오류해결">오류해결</h1>
+
+<ul>
+  <li>No resources found.</li>
+</ul>
+
+<p>kubectl get pods 실행시</p>
+
+<p>ServiceAccount Account 를 삭제해준다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat /etc/kubernetes/apiserver
+find the “KUBE_ADMISSION_CONTROL="--admission_control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota"
+
+second: delete "ServiceAccount"
+finnaly: restart kube-apiserver service
+
+you try "kubectl get pods"
+</code></pre></div></div>
+
+<ul>
+  <li>redhat-ca.crt error</li>
+</ul>
+
+<p>kubectl run 이 올라오지 않고, image pull failed 발생시</p>
+
+<p>https://github.com/candlepin/subscription-manager/tree/master/etc-conf/ca</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error syncing pod, skipping: failed to "StartContainer" for "POD" with ErrImagePull: "image pull failed for registry.access.redhat.com/rhel7/pod-infrastructure:latest, this may be because there are no credentials on this request.  details: (open /etc/docker/certs.d/registry.access.redhat.com/redhat-ca.crt: no such file or directory)"
+
+
+</code></pre></div></div>
 
 <p>참고한 URL</p>
 
