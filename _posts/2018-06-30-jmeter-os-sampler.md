@@ -33,6 +33,16 @@ Jmeter 에서 jar 파일을 실행해보려고 한다.
 그럼 시작해보겠다.
 
 jar 파일은 미리 생성해놓길바란다.(다른부분을 잘모르고 api.bithumb.com 에서 제공 하고 있는 Java Api Client 를 이용 한다.)
+# Jar 파일준비
+전체적인 설명은 못하고 간단하게 요약해서 설명한다.
+왜 난 개발자가아니라서 개발관련사항들은 잘모른다. 그냥 가져다 쓸뿐
+
+- private Api 를 이용하려면 미리 API 를 생성해야한다.
+- API 를 생성후 ApiKey 와 ScretKey를 기록해두어야한다.
+- 다운받은 Api Cliet 에 Apikey 와 secretKey를 저장후 Jar 파일을 만들어준다.
+- jar 파일은 runable jar 파일로 만들어준다.
+![jmeter]({{ site.url }}/assets/images/jmeter-29.png){: width="100%" height="100%"}
+
 
 # 필요한 플러그인
 기본 CSV Data set 을 이용해도 되지만 Random 으로 데이터를 불러오는 Random CSV data set 을 이용한다.
