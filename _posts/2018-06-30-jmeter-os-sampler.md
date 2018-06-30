@@ -23,15 +23,16 @@ Jmeter 에서 jar 파일을 실행해보려고 한다.
 
 시나리오는 아래와 같다. 
 
-요즘 한물간건진 모르겠지만 암호화패 API 를 이용하려고 한다 사이트에서 제공하는 APIClient 를 이용해서 이용해보려고한다.
-1. Java ApiClient Jar 파일 생성
-2. CSV 파일로 Coin 종류를 입력받아 BTC 이면 실행한다.
-3. Json 형태로 출력된 결과값을 확인한다.
-4. 정상적으로 호출이되었는지 확인한다.
+1. 거래소 암호화폐 API 를 이용하려고 한다 
+2. 해당 사이트에서 제공하는 APIClient 를 이용해서 한다.
+3. Java ApiClient Jar 파일을 생성한다.
+4. CSV 파일로 암호화폐 종류를 입력받아 원하는 암호화폐이면 jar 파일을 실행한다.
+5. 출력된 값을 확인 한다.
+6. 정상적으로 호출이되었는지 확인한다.
 
 그럼 시작해보겠다.
 
-jar 파일은 미리 생성해놓길바란다.(다른부분을 잘모르고 api.bithumb.com 에서 제공 하고 있는 Java Api Client 를 이용해보려고한다.)
+jar 파일은 미리 생성해놓길바란다.(다른부분을 잘모르고 api.bithumb.com 에서 제공 하고 있는 Java Api Client 를 이용 한다.)
 
 # 필요한 플러그인
 기본 CSV Data set 을 이용해도 되지만 Random 으로 데이터를 불러오는 Random CSV data set 을 이용한다.
