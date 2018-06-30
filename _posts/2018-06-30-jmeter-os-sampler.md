@@ -59,7 +59,17 @@ jar 파일은 미리 생성해놓길바란다.(다른부분을 잘모르고 api.
 ![jmeter]({{ site.url }}/assets/images/jmeter-27.png){: width="100%" height="100%"}
 ![jmeter]({{ site.url }}/assets/images/jmeter-28.png){: width="100%" height="100%"}
 
-# OS Sampler 추가
+# OS Process Sampler 추가
+OS Process Sampler 는 Local Machine의 Command 를 실행할수 있게 해주는 Sampler 이다. 
+
+OS process Sampler 를 추가해준다.
+
+![jmeter]({{ site.url }}/assets/images/jmeter-30.png){: width="100%" height="100%"}
+Command 입력창에 cmd 를 입력후 Value 항목에 파라미터 값들을 넣어주면 된다.
+
+준비한 Jar 파일의 경로를 Working 디렉토리로 설정해주면 실행가능하다.
+
+![jmeter]({{ site.url }}/assets/images/jmeter-29.png){: width="100%" height="100%"}
 
 # JSON Extractor
 
