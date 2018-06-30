@@ -69,8 +69,14 @@ Command 입력창에 cmd 를 입력후 Value 항목에 파라미터 값들을 �
 
 준비한 Jar 파일의 경로를 Working 디렉토리로 설정해주면 실행가능하다.
 
-![jmeter]({{ site.url }}/assets/images/jmeter-29.png){: width="100%" height="100%"}
+![jmeter]({{ site.url }}/assets/images/jmeter-31.png){: width="100%" height="100%"}
 
-# JSON Extractor
+실행이 되는지 수행을 해본다.
+
+# Random으로 CSV 파일 읽어오기
+
+# 특정암호화폐인지 확인
+
+# JSON Extractor 결과추출
 
 # View Result Tree 결과확인
