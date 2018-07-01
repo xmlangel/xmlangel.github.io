@@ -8,14 +8,12 @@ tags:
 - os sampler
 - json
 ---
+Jmeter 에서 jar 파일을 실행해보려고 한다. 결론은 간단하다 하지만 해맨시간을 생각하면 약간은 허무하다.
+
+Command 입력창에 Cmd 를 입력후 Command Parameter Value 항목에 파라미터 값들을 넣어주면 된다.
 
 간만에 야근을 하지 않아 시간이 남아서 기록을 다시 시작한다.
 
-Jmeter 에서 jar 파일을 실행해보려고 한다.
-
-결론은 간단하다 하지만 해맨시간을 생각하면 약간은 허무하다.
-
-결론부터 보여주면 Command 입력창에 Cmd 를 입력후 Command Parameter Value 항목에 파라미터 값들을 넣어주면 된다.
 
 ![jmeter]({{ site.url }}/assets/images/jmeter-26.png){: width="100%" height="100%"}
 
