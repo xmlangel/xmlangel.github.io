@@ -97,7 +97,27 @@ Random CSV는 미리 파일이 정상적으로 읽어지는지 Test 가 확인�
 - random order : random으로 읽이들이기 체크를 하지않으면, 순서대로 읽는다.
 ![jmeter]({{ site.url }}/assets/images/jmeter-35.png){: width="100%" height="100%"}
 
+OS process Sampler 에서 변수 coin으로 지정한 값을 변경해준다.
+![jmeter]({{ site.url }}/assets/images/jmeter-36.png){: width="100%" height="100%"}
+
+
 # 특정암호화폐인지 확인
+BTC 일경우에만 실행하도록 If controller를 추가해준다.
+![jmeter]({{ site.url }}/assets/images/jmeter-37.png){: width="100%" height="100%"}
+
+조건에 Coin 이 btc 일경우에만 실행하도록 입력해준다.
+![jmeter]({{ site.url }}/assets/images/jmeter-38.png){: width="100%" height="100%"}
 
 # JSON Extractor 결과추출
+결과값에서 buy_price 를 추출해서 확인할 수 있다.
+![jmeter]({{ site.url }}/assets/images/jmeter-39.png){: width="100%" height="100%"}
+
+- Variable name : 변수이름
+- JSON Path expressions : Json path 경로설정
+![jmeter]({{ site.url }}/assets/images/jmeter-40.png){: width="100%" height="100%"}
+
+Beanshell 에서 해당 내용을 확인해볼수 있다.
+![jmeter]({{ site.url }}/assets/images/jmeter-41.png){: width="100%" height="100%"}
+
+간단하게 jar 파일을 실행하고 결과를 추출하는 것을 해보았다. 
 
