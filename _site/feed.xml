@@ -1,4 +1,145 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-12T12:27:49+09:00</updated><id>http://localhost:4000/</id><title type="html">Even Though … 그럼에도 불구하고 열심히</title><subtitle>작은 끄적거림</subtitle><entry><title type="html">Centos 에서 Kuberenetes 설치하기</title><link href="http://localhost:4000/install-kuberenetes/" rel="alternate" type="text/html" title="Centos 에서 Kuberenetes 설치하기" /><published>2018-02-03T11:11:13+09:00</published><updated>2018-02-03T11:11:13+09:00</updated><id>http://localhost:4000/install-kuberenetes</id><content type="html" xml:base="http://localhost:4000/install-kuberenetes/">&lt;p&gt;centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-07-20T15:19:14+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Even Though … 그럼에도 불구하고 열심히</title><subtitle>작은 끄적거림</subtitle><entry><title type="html">Jmeter-Response Data 저장하기</title><link href="http://localhost:4000/jmeter-save-response-data/" rel="alternate" type="text/html" title="Jmeter-Response Data 저장하기" /><published>2019-07-20T09:00:13+09:00</published><updated>2019-07-20T09:00:13+09:00</updated><id>http://localhost:4000/jmeter-save-response-data</id><content type="html" xml:base="http://localhost:4000/jmeter-save-response-data/">&lt;p&gt;API 테스트나 성능 테스트를 진행할때 서버 응답값을 가지고 테스트를 수행할수 있다.
+이때 응답받은 데이터를 변수화(various)해서 저장 하는 방법은 아래와 같이 하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vars.put(&quot;response&quot;, prev.getResponseDataAsString());
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;이미지로 보면 아래와 같다.
+&lt;img src=&quot;http://localhost:4000/assets/images/Jmeter-Response Data-01.png&quot; alt=&quot;jmeter&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그럼 설정을 해보겠다.
+쓰래드를 생성하고, 더미 Sampler 를 이용해서 더미 데이터 결과를 만들수 있게 해준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/Jmeter-Response Data-02.png&quot; alt=&quot;jmeter&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 더미를 실행하면 응답으로 토큰값을 보내준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/Jmeter-Response Data-03.png&quot; alt=&quot;jmeter&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Post Processor인 JSR223으로 생성 해준다. 아래 언어 형식은 JAVA 이다. 다른 언어를 선택해줘도 된다.&lt;br /&gt;
+&lt;img src=&quot;http://localhost:4000/assets/images/Jmeter-Response Data-04.png&quot; alt=&quot;jmeter&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Debug Sampler 를 이용해서 결과값을 보면 아래와 같이 TOKEN 값이 저장된것을 확인 할 수있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/Jmeter-Response Data-05.png&quot; alt=&quot;jmeter&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="jmeter" /><category term="sava Data" /><summary type="html">API 테스트나 성능 테스트를 진행할때 서버 응답값을 가지고 테스트를 수행할수 있다. 이때 응답받은 데이터를 변수화(various)해서 저장 하는 방법은 아래와 같이 하면 된다.</summary></entry><entry><title type="html">Jmeter-OS Sampler 로 jar 파일 실행해보기</title><link href="http://localhost:4000/jmeter-os-sampler/" rel="alternate" type="text/html" title="Jmeter-OS Sampler 로 jar 파일 실행해보기" /><published>2018-06-30T23:00:13+09:00</published><updated>2018-06-30T23:00:13+09:00</updated><id>http://localhost:4000/jmeter-os-sampler</id><content type="html" xml:base="http://localhost:4000/jmeter-os-sampler/">&lt;p&gt;Jmeter 에서 jar 파일을 실행해보려고 한다. 결론은 간단하다 하지만 해맨시간을 생각하면 약간은 허무하다.&lt;/p&gt;
+
+&lt;p&gt;Command 입력창에 Cmd 를 입력후 Command Parameter Value 항목에 파라미터 값들을 넣어주면 된다.&lt;/p&gt;
+
+&lt;p&gt;간만에 야근을 하지 않아 시간이 남아서 기록을 다시 시작한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-26.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그럼 설정을 해보겠다.&lt;/p&gt;
+
+&lt;p&gt;시나리오는 아래와 같다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;거래소 암호화폐 API 를 이용하려고 한다&lt;/li&gt;
+  &lt;li&gt;해당 사이트에서 제공하는 APIClient 를 이용해서 한다.&lt;/li&gt;
+  &lt;li&gt;Java ApiClient Jar 파일을 생성한다.&lt;/li&gt;
+  &lt;li&gt;CSV 파일로 암호화폐 종류를 입력받아 원하는 암호화폐이면 jar 파일을 실행한다.&lt;/li&gt;
+  &lt;li&gt;출력된 값을 확인 한다.&lt;/li&gt;
+  &lt;li&gt;정상적으로 호출이되었는지 확인한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;그럼 시작해보겠다.&lt;/p&gt;
+
+&lt;p&gt;jar 파일은 미리 생성해놓길바란다.(다른부분을 잘모르고 api.bithumb.com 에서 제공 하고 있는 Java Api Client 를 이용 한다.)&lt;/p&gt;
+&lt;h1 id=&quot;jar-파일준비&quot;&gt;Jar 파일준비&lt;/h1&gt;
+&lt;p&gt;전체적인 설명은 못하고 간단하게 요약해서 설명한다.
+왜 난 개발자가아니라서 개발관련사항들은 잘모른다. 그냥 가져다 쓸뿐&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;private Api 를 이용하려면 미리 API 를 생성해야한다.&lt;/li&gt;
+  &lt;li&gt;API 를 생성후 ApiKey 와 ScretKey를 기록해두어야한다.&lt;/li&gt;
+  &lt;li&gt;다운받은 Api Cliet 에 Apikey 와 secretKey를 저장후 Jar 파일을 만들어준다.&lt;/li&gt;
+  &lt;li&gt;jar 파일은 runable jar 파일로 만들어준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-29.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;필요한-플러그인&quot;&gt;필요한 플러그인&lt;/h1&gt;
+&lt;p&gt;기본 CSV Data set 을 이용해도 되지만 Random 으로 데이터를 불러오는 Random CSV data set 을 이용한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Random CSV Data Set&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Vendor: BlazeMeter&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;cumentation: https://github.com/Blazemeter/jmeter-bzm-plugins/blob/master/random-csv-data-set/RandomCSVDataSetConfig.md&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;thread-group-생성&quot;&gt;Thread Group 생성&lt;/h1&gt;
+&lt;p&gt;알다시피 Jmeter 의 기본인 Thread Group 부터 생성해야 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-27.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-28.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;os-process-sampler-추가&quot;&gt;OS Process Sampler 추가&lt;/h1&gt;
+&lt;p&gt;OS Process Sampler 는 Local Machine의 Command 를 실행할수 있게 해주는 Sampler 이다.&lt;/p&gt;
+
+&lt;p&gt;OS process Sampler 를 추가해준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-30.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+Command 입력창에 cmd 를 입력후 Value 항목에 파라미터 값들을 넣어주면 된다.&lt;/p&gt;
+
+&lt;p&gt;준비한 Jar 파일의 경로를 Working 디렉토리로 설정해주면 실행가능하다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-31.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;실행이 되는지 수행을 해본다.&lt;/p&gt;
+
+&lt;h1 id=&quot;view-result-tree-결과확인&quot;&gt;View Result Tree 결과확인&lt;/h1&gt;
+&lt;p&gt;실행결과를 보기위해 View Result Tree 를 추가해준다.&lt;/p&gt;
+
+&lt;p&gt;추가후 실행을 하면 Request 에 보면 어떻게 실행이 되었는지 확인할 수 있다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-33.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Response Data 를 보면 정상적으로 호출이 들어가서 에러없니 수행된내용 확인이 가능하다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-32.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;random으로-csv-파일-읽어오기&quot;&gt;Random으로 CSV 파일 읽어오기&lt;/h1&gt;
+&lt;p&gt;이제 입력값들을 무작위로 받아들이기 위해 CSV 파일에서 읽어들일 수 있는 Random CSV를 추가해준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-34.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;CSV 파일은 coin.csv 로 설정하고, 파일은 3가지 Coin 을 추가해준다.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;etc
+btc
+eth
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Random CSV는 미리 파일이 정상적으로 읽어지는지 Test 가 확인이 가능하다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;filename : 읽어들일 파일이름&lt;/li&gt;
+  &lt;li&gt;Delimeiter : 구분자&lt;/li&gt;
+  &lt;li&gt;variable names : 변수이름지정&lt;/li&gt;
+  &lt;li&gt;random order : random으로 읽이들이기 체크를 하지않으면, 순서대로 읽는다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-35.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;OS process Sampler 에서 변수 coin으로 지정한 값을 변경해준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-36.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;특정암호화폐인지-확인&quot;&gt;특정암호화폐인지 확인&lt;/h1&gt;
+&lt;p&gt;BTC 일경우에만 실행하도록 If controller를 추가해준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-37.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;조건에 Coin 이 btc 일경우에만 실행하도록 입력해준다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-38.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;json-extractor-결과추출&quot;&gt;JSON Extractor 결과추출&lt;/h1&gt;
+&lt;p&gt;결과값에서 buy_price 를 추출해서 확인할 수 있다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-39.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Variable name : 변수이름&lt;/li&gt;
+  &lt;li&gt;JSON Path expressions : Json path 경로설정
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-40.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Beanshell 에서 해당 내용을 확인해볼수 있다.
+&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-41.png&quot; alt=&quot;jmeter&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;간단하게 jar 파일을 실행하고 결과를 추출하는 것을 해보았다.&lt;/p&gt;</content><author><name></name></author><category term="jmeter" /><category term="os sampler" /><category term="json" /><summary type="html">Jmeter 에서 jar 파일을 실행해보려고 한다. 결론은 간단하다 하지만 해맨시간을 생각하면 약간은 허무하다.</summary></entry><entry><title type="html">Centos 에서 Kuberenetes 설치하기</title><link href="http://localhost:4000/install-kuberenetes/" rel="alternate" type="text/html" title="Centos 에서 Kuberenetes 설치하기" /><published>2018-02-03T11:11:13+09:00</published><updated>2018-02-03T11:11:13+09:00</updated><id>http://localhost:4000/install-kuberenetes</id><content type="html" xml:base="http://localhost:4000/install-kuberenetes/">&lt;p&gt;centos 에 설치하기 위해서는 master node 와 minion 에 모두 cent OS 7 이상이 설치되어 있어야합니다.&lt;/p&gt;
 
 &lt;p&gt;본글은 아래 링크를 따라하면서 만든것입니다.&lt;/p&gt;
 
@@ -648,14 +789,14 @@ virtualenv 폴더의 bin 경로를 지정해준다.
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib.request&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# URL 저장 경로 지정하기&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://xmlangel.github.io/images/xmlangel.jpg&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# URL 저장 경로 지정하기
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://xmlangel.github.io/images/xmlangel.jpg&quot;&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# 저장할 파일이름&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;download.jpg&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 저장할 파일이름
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;download.jpg&quot;&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# 다운로드&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlretrieve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 다운로드
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlretrieve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;저장완료&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;메모리로-저장--urlopen&quot;&gt;메모리로 저장 : urlopen()&lt;/h3&gt;
@@ -665,18 +806,18 @@ virtualenv 폴더의 bin 경로를 지정해준다.
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib.request&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# URL 저장 경로 지정하기&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://xmlangel.github.io/images/xmlangel.jpg&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# URL 저장 경로 지정하기
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://xmlangel.github.io/images/xmlangel.jpg&quot;&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# 저장할 파일이름&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;download2.jpg&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 저장할 파일이름
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;download2.jpg&quot;&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;##다운로드&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;memory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlopen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;##다운로드
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;memory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlopen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;memory 에 저장&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;#파일로 저장&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#파일로 저장
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;savename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
 	&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;저장완료&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
@@ -689,7 +830,7 @@ https://www.crummy.com/software/BeautifulSoup/&lt;/p&gt;
 
 &lt;p&gt;pip를 이용해서 간단히 설치가 가능하다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pip install beautifulsoup4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;beautifulsoup4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;find&quot;&gt;find()&lt;/h3&gt;
 &lt;p&gt;요소추출&lt;/p&gt;
@@ -714,28 +855,28 @@ and they lived at the bottom of a well.&amp;lt;/p&amp;gt;
 &quot;&quot;&quot;&lt;/span&gt;
 
 &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html_doc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'html.parser'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#기본&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;title1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#기본
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# 1개요소&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 1개요소
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# 여러개&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;links&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 여러개
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;links&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# 링크목록&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 링크목록
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
 	&lt;span class=&quot;n&quot;&gt;heaf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attrs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'href'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 	&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
 	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heaf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;결과
 &amp;lt;&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@python&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# python beautifulsoup-find.py&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dormouse&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'s story&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# python beautifulsoup-find.py
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dormouse&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'s story&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;The Dormouse'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;story&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elsie&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Elsie&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lacie&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Lacie&lt;/span&gt;
@@ -757,7 +898,7 @@ http://www.kma.go.kr/weather/lifenindustry/sevice_rss.jsp&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=109&quot;&gt;서울&lt;/a&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root@python:/home# pip install beautifulsoup4
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root@python:/home# pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;beautifulsoup4
 Collecting beautifulsoup4
 Installing collected packages: beautifulsoup4
 Successfully installed beautifulsoup4-4.6.0&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
@@ -767,40 +908,40 @@ Successfully installed beautifulsoup4-4.6.0&lt;/code&gt;&lt;/pre&gt;&lt;/figure&
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib.parse&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;bs4&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# 지역명을 입력받는다.(지역명이 없을경우 Error 를 보여준다.)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 지역명을 입력받는다.(지역명이 없을경우 Error 를 보여준다.)
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
 	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Error: 지역이름을 입력하세요&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 	&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;regionNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;#RSS Site 주소&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;siteURL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#RSS Site 주소
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;siteURL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp&quot;&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# 지역명이름을 위한 변수&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 지역명이름을 위한 변수
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 	&lt;span class=&quot;s&quot;&gt;'stnId'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;regionNumber&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# 매개변수를 URL 인코딩을 해준다.&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlencode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 매개변수를 URL 인코딩을 해준다.
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlencode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# RSS URL을 파라미터와 조합&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;RSSurl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;siteURL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;?&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# RSS URL을 파라미터와 조합
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSSurl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;siteURL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;?&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;url=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSSurl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;#RSS 정보를 메모리에 저장&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sitedata&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlopen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSSurl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#RSS 정보를 메모리에 저장
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sitedata&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlopen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSSurl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# utf-8 형식으로 decode&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;RSStext&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sitedata&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# utf-8 형식으로 decode
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSStext&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sitedata&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# BeautifulSoup 으로 분석&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSStext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;html.parser&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# BeautifulSoup 으로 분석
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSStext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;html.parser&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;#정보추출&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;title_list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#정보추출
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title_list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;wf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
@@ -875,7 +1016,7 @@ Successfully installed beautifulsoup4-4.6.0&lt;/code&gt;&lt;/pre&gt;&lt;/figure&
 &lt;p&gt;Cookbook 을 만들수 있다. chef 명령어로 생성할 수 있다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;chef-repo
-mkdir cookbooks 
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;cookbooks 
 chef generate cookbook cookbooks/cookbookname&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;기본 수정은 default.rb 에서 작성하면된다.
@@ -1159,7 +1300,7 @@ end
 &lt;h2 id=&quot;python-pip&quot;&gt;python pip&lt;/h2&gt;
 
 &lt;p&gt;python 의 pip 인스톨&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install &lt;span class=&quot;nv&quot;&gt;Django&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.6.11
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Django&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.6.11
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;describe pip&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Django'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
@@ -1209,7 +1350,7 @@ end
  &lt;span class=&quot;c&quot;&gt;# ln -s /etc/hw/apache/public.conf&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;link&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/etc/apache2/sites-enabled/public.conf'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/etc/apache2/sites-enabled/public.conf'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
   &lt;/span&gt;group &lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt;
   owner &lt;span class=&quot;s1&quot;&gt;'root'&lt;/span&gt;
   to &lt;span class=&quot;s1&quot;&gt;'/etc/hw/apache/public.conf'&lt;/span&gt;
@@ -1512,7 +1653,7 @@ default         dlinkrouter     0.0.0.0         UG    0      0        0 enp0s3
 
 &lt;p&gt;먼저 어느 네트워크 카드가 붙어있는지 확인 해보자&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ip link show&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ip &lt;span class=&quot;nb&quot;&gt;link &lt;/span&gt;show&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@local&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ubuntu&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:~&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# ip link show&lt;/span&gt;
 &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;lo: &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;LOOPBACK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;UP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;LOWER_UP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mtu&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;65536&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qdisc&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;noqueue&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;state&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;UNKNOWN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qlen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
@@ -1561,155 +1702,4 @@ dns-nameservers xxx.xxx.xxx.xxx&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; /etc/init.d/networking restart&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;ifconfig 명령어를 통해 정상적으로 변경되었는지 확인한다. (변경이 안되었으면 reboot 후 다시 확인)&lt;/p&gt;</content><author><name></name></author><category term="Ubuntu" /><category term="Network" /><category term="IP" /><summary type="html">Ubuntu 16.04 에서 네트워크 설정하는 법을 잘 생각이 나지 않아 적어놓는다…</summary></entry><entry><title type="html">Linux Command 명령어</title><link href="http://localhost:4000/linux-command/" rel="alternate" type="text/html" title="Linux Command 명령어" /><published>2017-07-20T10:50:13+09:00</published><updated>2017-07-20T10:50:13+09:00</updated><id>http://localhost:4000/linux-command</id><content type="html" xml:base="http://localhost:4000/linux-command/">&lt;p&gt;find, grep, egrep, du-sk, ps-ef 간단사용법&lt;/p&gt;
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#파일찾기&quot; id=&quot;markdown-toc-파일찾기&quot;&gt;파일찾기&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#특정파일유형에서-단어찾기&quot; id=&quot;markdown-toc-특정파일유형에서-단어찾기&quot;&gt;특정파일유형에서 단어찾기&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#cron-실행정상유무확인&quot; id=&quot;markdown-toc-cron-실행정상유무확인&quot;&gt;cron 실행정상유무확인&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#같은내용에서-또다시-추릴때&quot; id=&quot;markdown-toc-같은내용에서-또다시-추릴때&quot;&gt;같은내용에서 또다시 추릴때&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#egrep-으로-2개이상의-같은-단어를-찾을때&quot; id=&quot;markdown-toc-egrep-으로-2개이상의-같은-단어를-찾을때&quot;&gt;egrep 으로 2개이상의 같은 단어를 찾을때&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#폴더내-파일의-용량별-정렬할때&quot; id=&quot;markdown-toc-폴더내-파일의-용량별-정렬할때&quot;&gt;폴더내 파일의 용량별 정렬할때&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#디랙토리별-파일의-용량확인&quot; id=&quot;markdown-toc-디랙토리별-파일의-용량확인&quot;&gt;디랙토리별 파일의 용량확인&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#ps--ef-확인&quot; id=&quot;markdown-toc-ps--ef-확인&quot;&gt;ps -ef 확인&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#확인된-pid-kill-함&quot; id=&quot;markdown-toc-확인된-pid-kill-함&quot;&gt;확인된 pid kill 함&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#로그-점검시&quot; id=&quot;markdown-toc-로그-점검시&quot;&gt;로그 점검시&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#crontab-주기&quot; id=&quot;markdown-toc-crontab-주기&quot;&gt;Crontab 주기&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#ubuntu-repo-변경&quot; id=&quot;markdown-toc-ubuntu-repo-변경&quot;&gt;Ubuntu repo 변경&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;파일찾기&quot;&gt;파일찾기&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; core &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; rm &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;
-find / &lt;span class=&quot;nt&quot;&gt;-xdev&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-size&lt;/span&gt; +100000000c &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; ll &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;    &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; 100M이상 파일찾기&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;특정파일유형에서-단어찾기&quot;&gt;특정파일유형에서 단어찾기&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'*.sh'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-print&lt;/span&gt; |xargs &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'se jong'&lt;/span&gt;
-find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'*.sh'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-print&lt;/span&gt; |xargs &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'CSBS Hit Now('&lt;/span&gt; /home/svc/regist.sh
-find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f | xargs &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;less than 5&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;cron-실행정상유무확인&quot;&gt;cron 실행정상유무확인&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;tail &lt;span class=&quot;nt&quot;&gt;-100&lt;/span&gt; /var/adm/cron/log  &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; HP  
-tail &lt;span class=&quot;nt&quot;&gt;-100&lt;/span&gt; /var/log/cron​          &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; Linux
-﻿&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;같은내용에서-또다시-추릴때&quot;&gt;같은내용에서 또다시 추릴때&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt; &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Apr 24&quot;&lt;/span&gt; alert&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;log | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ORA-00060&quot;&lt;/span&gt;
- &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;-i 는 대문자 소문자 상관없이 찾는 옵션.
--c 는 “ORA-00060” 을 포함하는 줄 합계를 구하는 옵션&lt;/p&gt;
-
-&lt;h2 id=&quot;egrep-으로-2개이상의-같은-단어를-찾을때&quot;&gt;egrep 으로 2개이상의 같은 단어를 찾을때&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /var/adm/syslog/syslog.log|grep &lt;span class=&quot;s2&quot;&gt;&quot;May&quot;&lt;/span&gt; |egrep &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;error|failed|fault|EMS&quot;&lt;/span&gt;
-egrep &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'echo|discard'&lt;/span&gt; /etc/services
-vgdisplay &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; vg_ora1 | egrep &lt;span class=&quot;s1&quot;&gt;'Name|Size'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;폴더내-파일의-용량별-정렬할때&quot;&gt;폴더내 파일의 용량별 정렬할때&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;du &lt;span class=&quot;nt&quot;&gt;-sk&lt;/span&gt; ./&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; | sort &lt;span class=&quot;nt&quot;&gt;-nr&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;디랙토리별-파일의-용량확인&quot;&gt;디랙토리별 파일의 용량확인&lt;/h2&gt;
-&lt;p&gt;어느 디렉토리에서 용량을 많이 사용하고 있는지 궁금할 때가 있다. 이 때 각 디렉토리별 용량을 확인하기 위해 필요한 명령어다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;du &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--max-depth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;ps--ef-확인&quot;&gt;ps -ef 확인&lt;/h2&gt;
-&lt;p&gt;pid 값 확인&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ps &lt;span class=&quot;nt&quot;&gt;-ef&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;검색어 | awk &lt;span class=&quot;s1&quot;&gt;'{print $2}'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;확인된-pid-kill-함&quot;&gt;확인된 pid kill 함&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ps &lt;span class=&quot;nt&quot;&gt;-ef&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;검색어 | awk &lt;span class=&quot;s1&quot;&gt;'{print $2}'&lt;/span&gt;| xargs &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-9&lt;/span&gt;     &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;로그-점검시&quot;&gt;로그 점검시&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;make_ /var/opt/ignite/recovery/latest/recovery.log  &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; HP ignite백업
-&lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; error &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; fail /var/adm/syslog/syslog.log   &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; HP syslog
-tail &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; /var/adm/rc.log    &amp;lt;&lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; HP 부팅 후 프로세스가 정상수행됐는지..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;crontab-주기&quot;&gt;Crontab 주기&lt;/h2&gt;
-&lt;p&gt;크론tab의 주기를 볼수 있는 웹페이지 &lt;a href=&quot;https://crontab.guru/&quot;&gt;crontab&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ubuntu-repo-변경&quot;&gt;Ubuntu repo 변경&lt;/h2&gt;
-&lt;p&gt;느린 외국 repo 가 아닌 한국 repo로 변경
-archive.ubuntu.com(또는 kr.archive.ubuntu.com) 로 되어있는것을 ftp.daumkakao.com 로 바꿔면된다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sed &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/archive.ubuntu.com/ftp.daumkakao.com/g'&lt;/span&gt; /etc/apt/sources.list
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sed &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/security.ubuntu.com/ftp.daumkakao.com/g'&lt;/span&gt; /etc/apt/sources.list
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sed &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/extras.ubuntu.com/ftp.daumkakao.com/g'&lt;/span&gt; /etc/apt/sources.list
-apt-get clean
-apt-get update&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="linux" /><category term="command" /><summary type="html">find, grep, egrep, du-sk, ps-ef 간단사용법</summary></entry><entry><title type="html">Jmeter-어떻게 쓰지-02</title><link href="http://localhost:4000/How-Can-I-Jmeter-With-Proxy/" rel="alternate" type="text/html" title="Jmeter-어떻게 쓰지-02" /><published>2017-07-03T19:02:49+09:00</published><updated>2017-07-03T19:02:49+09:00</updated><id>http://localhost:4000/How-Can-I-Jmeter-With-Proxy</id><content type="html" xml:base="http://localhost:4000/How-Can-I-Jmeter-With-Proxy/">&lt;p&gt;여러 URL 을 테스트할 경우 각각의 Http Request를 생성 하려면 시간이 많이 걸립니다. Http Request를 자동으로 생성 작성할 수는 없을까요?&lt;/p&gt;
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#test-script-recoder&quot; id=&quot;markdown-toc-test-script-recoder&quot;&gt;Test Script Recoder&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#non---test-elementshttps-test-script-recorder&quot; id=&quot;markdown-toc-non---test-elementshttps-test-script-recorder&quot;&gt;Non - Test Elements&amp;gt;Http(s) Test Script Recorder&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#logic-controllerrecoding-controller&quot; id=&quot;markdown-toc-logic-controllerrecoding-controller&quot;&gt;Logic Controller&amp;gt;Recoding Controller&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;test-script-recoder&quot;&gt;Test Script Recoder&lt;/h1&gt;
-&lt;p&gt;Test Script Recoder 기능을 이용하면, 테스트하려는 사이트를 클릭하며 돌아다니기만 해도, 필요한 요청을 자동으로 생성해줍니다.
-(이전 버전에서는 Proxy Server 였는데 이름이 바뀐거 같다.)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;현재 Jmeter 3.0 에서 테스트 하였다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;non---test-elementshttps-test-script-recorder&quot;&gt;Non - Test Elements&amp;gt;Http(s) Test Script Recorder&lt;/h4&gt;
-
-&lt;p&gt;WorkBench 에 Test Script Recorder를 추가합니다.
-&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-18.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Port를 임의로 지정한다. 여기서는 8888을 설정했다.
-&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-19.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;logic-controllerrecoding-controller&quot;&gt;Logic Controller&amp;gt;Recoding Controller&lt;/h4&gt;
-
-&lt;p&gt;Http Test Script Recoders 가 추가됐으면 Recoding Controller 가 반드시 추가되어야 하는거 같다..없을경우 아래와 같은 메세지가 나타난다.
-&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-TestScriptRecorder-Error.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
-Test Plan Content 에서 Use Recoding Controller 를 설정해서 그런듯…기본으로 WorkBench &amp;gt; HTTP(S)Test Script Recoder 를 해도 되지만 Recoding Controller 를 해보겠다.
-&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-20.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Recoding Controller 를 추가해준다.
-&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-20.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Start 를 누르면 레코딩이 시작된다.
-&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-21.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;인증서가 나오면 확인을 하면된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-23.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;IE 에서는 proxy 설정이 쉬으므로 패스 그리고 지금은 Mac 이라서 IE 를 쓸수 없다.&lt;/p&gt;
-
-&lt;p&gt;크롬에서 녹화를 해보겠다.&lt;/p&gt;
-
-&lt;p&gt;크롬에서 녹화를 하기위해서 proxy 설정을 해보겠다.&lt;/p&gt;
-
-&lt;p&gt;확장프로그램은 Quick &amp;amp; Dirty Proxy Flipper 를 이용해보겠다.
-쓰고싶은 다른 프로그램이 있으면 이용해도 된다.&lt;/p&gt;
-
-&lt;p&gt;확장프로그램은 알아서 받아서 설치한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/Chrome_proxy.png&quot; alt=&quot;Chrome-Proxy&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Jmeter 에서 8888 을 설정해놔서 http://localhost:8888 으로 설정해준다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/Chrome_proxy-01.png&quot; alt=&quot;Chrome-Proxy&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 여기저기 돌아다녀본다. 돌아다닌후 Proxy 설정을 원래대로 바꿔주고 Jmeter 에서 녹화된것을 확인 해본다. 뭔가가 많다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-24.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;png, css 등 불필요한 파일들은 삭제해준다. 그러면 수동으로 설정한것과 같이 녹화된 것을 확인 할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/jmeter-25.png&quot; alt=&quot;Jmeter-Test-Script-Recoder&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Threads Group를 추가하고, 녹화된 파일을 붙여준후 실행해주면 된다.&lt;/p&gt;
-
-&lt;p&gt;오늘은 여기까지 다음엔 뭘더볼까..ㅎㅎ&lt;/p&gt;</content><author><name></name></author><category term="Jmeter" /><summary type="html">여러 URL 을 테스트할 경우 각각의 Http Request를 생성 하려면 시간이 많이 걸립니다. Http Request를 자동으로 생성 작성할 수는 없을까요?</summary></entry></feed>
+&lt;p&gt;ifconfig 명령어를 통해 정상적으로 변경되었는지 확인한다. (변경이 안되었으면 reboot 후 다시 확인)&lt;/p&gt;</content><author><name></name></author><category term="Ubuntu" /><category term="Network" /><category term="IP" /><summary type="html">Ubuntu 16.04 에서 네트워크 설정하는 법을 잘 생각이 나지 않아 적어놓는다…</summary></entry></feed>
