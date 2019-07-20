@@ -8,7 +8,7 @@ tags:
 - sava Data
 ---
 API 테스트나 성능 테스트를 진행할때 서버 응답값을 가지고 테스트를 수행할수 있다.
-이때 응답받은 데이터를 변수화(various)해서 저장 하는 방법은 아래와 같이 하면 된다.
+이때 응답받은 데이터를 변수화(variable)해서 저장 하는 방법은 아래와 같이 하면 된다.
 
 ```
 vars.put("response", prev.getResponseDataAsString());
