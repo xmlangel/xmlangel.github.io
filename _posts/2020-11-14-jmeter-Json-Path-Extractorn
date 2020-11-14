@@ -1,0 +1,43 @@
+---
+layout: post
+title:  "Json Path Extractor"
+date:   2020-11-14 23:31:13 +0900
+categories: jekyll update
+comments: true
+---
+* 목차
+{:toc}
+
+기존에 잘되던건데 안돼서 다른것으로 변경함귀찬아..
+
+{% highlight ruby %}
+</div>
+  <!-- 추가 코드 -->
+      </div>
+    </div>
+    
+    <!-- 추가 코드 -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+     var tag = null;
+     $("h1,h2,h3,h4,h5,h6").not(".subtitle").not(".post-title").not(".index").each(function(i,item){
+       tag = $(item).get(0).localName;
+       $(item).attr("id","content_"+i);
+       $("#toc").append('<a class="new'+tag+'" href="#content_'+i+'">'+$(this).text()+'</a></br>');
+     });
+ 
+     if(tag !=null ){
+       $(".newh1").css("margin-left",0);
+       $(".newh2").css("margin-left",20);
+       $(".newh3").css("margin-left",40);
+       $(".newh4").css("margin-left",60);
+       $(".newh5").css("margin-left",80);
+       $(".newh6").css("margin-left",100);
+ 
+       $("#toc").attr('hidden', false);
+     }
+  });
+ </script>
+ <!-- 추가 코드 -->
+{% endhighlight %}
