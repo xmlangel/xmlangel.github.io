@@ -3,8 +3,7 @@ layout: default
 ---
 <section>
   <ul class="posts">
-    <!-- This loops through the paginated posts -->
-
+    <!-- 페이지 포스트 타이틀 This loops through the paginated posts -->
     {% for post in paginator.posts %}
       <li>
         <h2>
@@ -27,7 +26,7 @@ layout: default
     {% endfor %}
   </ul>
 
-  <!-- Pagination links -->
+  <!-- 페이지링크 Pagination links -->
   <ul class="pagination clearfix">
     {% if paginator.previous_page %}
       {% if paginator.previous_page == 1 %}
