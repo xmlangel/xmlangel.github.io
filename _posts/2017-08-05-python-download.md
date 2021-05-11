@@ -10,7 +10,7 @@ tags :
 - urllib
 ---
 
-내가 이글을 적는 이유는 웹사이트에 있는 특정 정보를 추출하기 위해 스크레이핑(Scraping)을 하기 위해서이다. 
+내가 이글을 적는 이유는 웹사이트에 있는 특정 정보를 추출하기 위해 스크레이핑(Scraping)을 하기 위해서이다. ![scraping]({{ site.url }}/assets/images/python-download-scraping.jpg){: width="100%" height="100%"}
 
 가장먼저 python 을 이용해서 다운로드 하는 부분을 알아보고 있다. 
 
