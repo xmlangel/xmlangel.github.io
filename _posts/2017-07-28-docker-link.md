@@ -2,7 +2,7 @@
 layout: post
 title:  "docker link"
 date:   2017-07-28 05:50:13 +0900
-categories: jekyll update
+categories: etc update
 comments: true
 tags :
 - docker

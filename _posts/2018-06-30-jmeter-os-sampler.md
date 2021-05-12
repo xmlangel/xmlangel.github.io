@@ -2,7 +2,7 @@
 layout: post
 title:  "Jmeter-OS Sampler 로 jar 파일 실행해보기"
 date:   2018-06-30 23:00:13 +0900
-categories: jekyll update
+categories: jmeter update
 tags:
 - jmeter
 - os sampler

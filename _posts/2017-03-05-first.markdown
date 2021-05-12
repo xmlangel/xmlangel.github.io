@@ -2,7 +2,7 @@
 layout: post
 title:  "나의 첫 블로그!"
 date:   2017-03-05 14:31:13 +0900
-categories: jekyll update
+categories: diary update
 comments: true
 ---
 * 목차

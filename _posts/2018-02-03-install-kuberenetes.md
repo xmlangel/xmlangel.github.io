@@ -2,7 +2,7 @@
 layout: post
 title:  "Centos 에서 Kuberenetes 설치하기"
 date:   2018-02-3 11:11:13 +0900
-categories: jekyll update
+categories: etc update
 tags:
 - docker
 - kuberenetes

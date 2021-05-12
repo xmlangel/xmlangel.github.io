@@ -85,3 +85,5 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+# https://blog.devari.kr/2019/jekyll/jekyll-category-setting 카테고리추가관련
+category_list: [ jmeter, qa, tip, diary, linux ]

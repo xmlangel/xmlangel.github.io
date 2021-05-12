@@ -2,7 +2,7 @@
 layout: post
 title:  "python file download"
 date:   2017-08-05 12:10:13 +0900
-categories: jekyll update
+categories: etc update
 comments: true
 tags :
 - python

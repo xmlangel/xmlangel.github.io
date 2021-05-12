@@ -2,7 +2,7 @@
 layout: post
 title:  "Jmeter-자주사용하는 스크립트 정리"
 date:   2019-07-21 00:05:13 +0900
-categories: jekyll update
+categories: jmeter update
 tags:
 - jmeter
 - tip

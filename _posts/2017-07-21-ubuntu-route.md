@@ -2,7 +2,7 @@
 layout: post
 title:  "Ubnutu route 설정"
 date:   2017-07-21 10:50:13 +0900
-categories: jekyll update
+categories: linux update
 comments: true
 tags :
 - Ubuntu

@@ -2,7 +2,7 @@
 layout: post
 title:  "Jmeter-어떻게 쓰지-02"
 date:   2017-07-03 19:02:49 +0900
-categories: jekyll update
+categories: jmeter update
 tags:
 - Jmeter
 ---

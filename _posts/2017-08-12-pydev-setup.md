@@ -2,7 +2,7 @@
 layout: post
 title:  "virtualenv로 Pydev 와 Django 설정 하기"
 date:   2017-08-12 00:20:13 +0900
-categories: jekyll update
+categories: etc update
 comments: true
 tags:
 - PyDev

@@ -2,7 +2,7 @@
 layout: post
 title:  "Jmeter-Response Data 저장하기"
 date:   2019-07-20 09:00:13 +0900
-categories: jekyll update
+categories: jmeter update
 tags:
 - jmeter
 - sava Data

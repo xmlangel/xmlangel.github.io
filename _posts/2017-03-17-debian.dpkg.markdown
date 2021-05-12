@@ -2,7 +2,7 @@
 layout: post
 title:  "dpkg 를 사용하여 소프트웨어 관리해보기"
 date:   2017-03-17 14:00:13 +0900
-categories: jekyll update
+categories: linux update
 comments: true
 tags:
 - debian

@@ -2,7 +2,7 @@
 layout: post
 title:  "Ubnutu Network 설정"
 date:   2017-07-20 10:50:13 +0900
-categories: jekyll update
+categories: linux update
 comments: true
 tags :
 - Ubuntu

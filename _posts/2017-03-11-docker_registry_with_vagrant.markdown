@@ -2,7 +2,7 @@
 layout: post
 title:  "Docker registry 로 개인 Docker 구축해보기"
 date:   2017-03-11 08:49:43 +0900
-categories: jekyll update
+categories: etc update
 tags :
 - docker
 ---
