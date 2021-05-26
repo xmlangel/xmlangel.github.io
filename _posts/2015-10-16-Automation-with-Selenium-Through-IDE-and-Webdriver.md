@@ -7,6 +7,8 @@ author: 김광명
 profile: kmkim.png
 ---
 
+- 본글은 와탭 테크 블로그에 시리즈물로 작성했던글입니다.
+
 앞서 저희는 Selenium 이 무엇인가와 Selenium IDE 를 한번 사용해 보았습니다.
 이번 시간에는 Selenium IDE 를 조금더 사용해보고, WebDriver 를 이용해서 테스트 케이스를 작성하는 방법에대해서 알아 보도록 하겠습니다.
 

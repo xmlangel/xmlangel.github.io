@@ -7,6 +7,8 @@ categories: qa update
 profile: kmkim.png
 ---
 
+- 본글은 와탭 테크 블로그에 시리즈물로 작성했던글입니다.
+
 오늘날 웹 기반 응용 프로그램으로 작성된 소프트웨어 응용프로그램은 Chrome, Internet Explorer, Firefox 와 같은 인터넷 브라우저에서 실행됩니다.
 그리고 조직들은 점차 애자일 방법론의 일부 양식 혹은 전부를 도입하여 운영 하는 추세입니다. 
 
