@@ -3,6 +3,7 @@ layout: post
 title:  "Selenium 을 이용한 Web 어플리케이션 테스트 자동화(3) - TestNG를 이용한 데이터 주도(Data-driven) 테스트 맛보기"
 date:   2015-12-11 06:00:00
 author: 김광명
+categories: qa update
 profile: kmkim.png
 ---
 "데이터 주도 테스트" 많이들 들어 보셨을 것입니다. 말 그대로 데이터 기반의 테스트를 진행한다는 의미입니다. 
@@ -94,9 +95,9 @@ TestNG 에서 제공하는 DataProvider Annotation 을 이용해서 저희는 �
     }
   }
   {% endhighlight %}
-  
+
 @DataProvider에 6개의 Object가 총 6번의 테스트를 수행하게 됩니다.
-  
+
 이상으로 TestNG를 이용해서 Data-Driven 테스트를 수행해 보았습니다.
 
 조금더 쉬운 이해를위해 전체 Code 를 참고해보시기 바랍니다.
@@ -106,9 +107,9 @@ TestNG 에서 제공하는 DataProvider Annotation 을 이용해서 저희는 �
 1. 로그인 하기
 
 2. 사용자 초대 하기
-   
+
 감사합니다.
- 
+
 {% highlight java %}
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
@@ -198,4 +199,3 @@ public class InviteUser {
   }
 }
 {% endhighlight %}
-  

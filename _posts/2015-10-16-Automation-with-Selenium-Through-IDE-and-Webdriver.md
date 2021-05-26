@@ -2,6 +2,7 @@
 layout: post
 title:  "Selenium 을 이용한 Web 어플리케이션 테스트 자동화(2) - IDE 와 Webdriver기능 맛보기"
 date:   2015-10-16 10:00:00
+categories: qa update
 author: 김광명
 profile: kmkim.png
 ---
@@ -29,7 +30,7 @@ Test Case를  작성한후에 저장하기 를 통해서 Test Case 를 저장가
 저장하는 방법은 파일>Save Test Case 로 저장하면 Html 파일 형식으로 저장됩니다.
 
 이전 편에서 사용한  계정생성한 Test Case 의 경우 내용은 아래와 같습니다.
- 
+
 {% highlight Html %}
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -357,7 +358,7 @@ public class CreateUser {
 		baseUrl = "https://www.whatap.io/";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
-
+	
 	@Test
 	public void testCreateUser() throws Exception {
 		driver.get(baseUrl + "/ko.html");
@@ -374,7 +375,7 @@ public class CreateUser {
 		driver.findElement(By.id("agreementPrivacyPolicy")).click();
 		driver.findElement(By.id("create")).click();
 	}
-
+	
 	@AfterMethod
 	public void tearDown() throws Exception {
 		driver.quit();
