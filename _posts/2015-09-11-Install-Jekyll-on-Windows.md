@@ -8,7 +8,6 @@ profile: kmkim.png
 tags:
 - jekyll
 ---
-- 본글은 와탭 테크 블로그에  작성했던 글입니다.
 
 안녕하세요 오늘은 Jekyll(제킬 이하 제킬)을 윈도우에 설치해서 사용해보 도록 하겠습니다.
 
@@ -409,3 +408,5 @@ highlighter: pygments
 > http://jekyllrb-ko.github.io/
 
 감사합니다.
+
+- 본글은 와탭 테크 블로그에  작성했던 글입니다.
