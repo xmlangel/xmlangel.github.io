@@ -5,6 +5,8 @@ date:   2015-09-11 10:45:15
 author: 김광명
 categories: etc update
 profile: kmkim.png
+tags:
+- jekyll
 ---
 - 본글은 와탭 테크 블로그에  작성했던 글입니다.
 
