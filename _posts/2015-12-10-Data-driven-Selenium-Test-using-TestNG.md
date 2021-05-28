@@ -9,7 +9,13 @@ tags:
 - selenium
 ---
 "데이터 주도 테스트" 많이들 들어 보셨을 것입니다. 말 그대로 데이터 기반의 테스트를 진행한다는 의미입니다. 
+
+* 목차
+{:toc}
+
+"데이터 주도 테스트" 많이들 들어 보셨을 것입니다. 말 그대로 데이터 기반의 테스트를 진행한다는 의미입니다. 
 Selenium 을 이용해서 Regression Test 와 기능 테스트등을 수행할 때 같은 기능들을 여러번 수행하거나 같은 스텝의 기능에 입력값 만 바뀌는 시나리오들이 있을 수 있습니다. 
+
 다량의 데이터를 기반으로 데이터만 바꿔서 테스트 하는 데이터 주도 테스트 접근법을 사용할때 CSV, Excel, DataBase 등 을 Data Source로입력 받아 테스트를 수행할 수있습니다.
 
 아쉽게도 셀레늄에서는 데이터 주도 테스트를 할 수 있는 API를 제공하지 않고 있습니다.
@@ -203,6 +209,7 @@ public class InviteUser {
 {% endhighlight %}
 
 - 본글은 와탭 테크 블로그에 시리즈물로 작성했던글입니다.
+
 Selenium 을 이용한 Web 어플리케이션 테스트 자동화
 
   [1. What is Selenium](https://xmlangel.github.io/Automation-with-Selenium/)

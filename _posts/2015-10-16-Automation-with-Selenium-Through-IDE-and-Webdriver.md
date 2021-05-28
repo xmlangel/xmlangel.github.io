@@ -8,6 +8,11 @@ profile: kmkim.png
 tags:
 - selenium
 ---
+WebDriver 를 이용해서 테스트 케이스를 작성하는 방법에대해서 알아 보도록 하겠습니다.
+
+* 목차
+{:toc}
+
 앞서 저희는 Selenium 이 무엇인가와 Selenium IDE 를 한번 사용해 보았습니다.
 이번 시간에는 Selenium IDE 를 조금더 사용해보고, WebDriver 를 이용해서 테스트 케이스를 작성하는 방법에대해서 알아 보도록 하겠습니다.
 
@@ -401,6 +406,7 @@ Eclipse 에서 TestNG를 이용해서 실행하면 계정생성하는 스크립�
 감사합니다.
 
 - 본글은 와탭 테크 블로그에 시리즈물로 작성했던글입니다.
+
 Selenium 을 이용한 Web 어플리케이션 테스트 자동화
 
   [1. What is Selenium](https://xmlangel.github.io/Automation-with-Selenium/)
