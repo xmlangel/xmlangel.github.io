@@ -401,3 +401,10 @@ Eclipse 에서 TestNG를 이용해서 실행하면 계정생성하는 스크립�
 감사합니다.
 
 - 본글은 와탭 테크 블로그에 시리즈물로 작성했던글입니다.
+Selenium 을 이용한 Web 어플리케이션 테스트 자동화
+
+  [1. What is Selenium](https://xmlangel.github.io/Automation-with-Selenium/)
+
+  [2. IDE 와 Webdriver기능 맛보기](https://xmlangel.github.io/Automation-with-Selenium-Through-IDE-and-Webdriver/)
+
+  [3. TestNG를 이용한 데이터 주도(Data-driven) 테스트 맛보기](https://xmlangel.github.io/Data-driven-Selenium-Test-using-TestNG/)

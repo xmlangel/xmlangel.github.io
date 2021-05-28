@@ -8,11 +8,10 @@ profile: kmkim.png
 tags:
 - selenium
 ---
-
-오늘날 웹 기반 응용 프로그램으로 작성된 소프트웨어 응용프로그램은 Chrome, Internet Explorer, Firefox 와 같은 인터넷 브라우저에서 실행됩니다.
-그리고 조직들은 점차 애자일 방법론의 일부 양식 혹은 전부를 도입하여 운영 하는 추세입니다. 
-
 애자일 방법론에서는 짧은 개발주기와, 빠른 피드백을 제공하기 위해서 테스트 자동화를 권장하고 있습니다. 
+
+웹 기반 응용 프로그램으로 작성된 소프트웨어 응용프로그램은 Chrome, Internet Explorer, Firefox 와 같은 인터넷 브라우저에서 실행됩니다.
+그리고 조직들은 점차 애자일 방법론의 일부 양식 혹은 전부를 도입하여 운영 하는 추세입니다. 
 
 테스트 자동화는 소프트웨어 팀의 테스트 프로세스의 장기 효율을 개선하기 위해 특정한 이점들을 가질수 있도록 도와줍니다.
 
@@ -201,3 +200,11 @@ Selenium Grid 는 WebDriver 를 이용해 여러 브라우저 또는 운영 체�
 감사합니다.
 
 - 본글은 와탭 테크 블로그에 시리즈물로 작성했던글입니다.
+
+Selenium 을 이용한 Web 어플리케이션 테스트 자동화
+
+  [1. What is Selenium](https://xmlangel.github.io/Automation-with-Selenium/)
+
+  [2. IDE 와 Webdriver기능 맛보기](https://xmlangel.github.io/Automation-with-Selenium-Through-IDE-and-Webdriver/)
+
+  [3. TestNG를 이용한 데이터 주도(Data-driven) 테스트 맛보기](https://xmlangel.github.io/Data-driven-Selenium-Test-using-TestNG/)
