@@ -18,7 +18,7 @@ WebDriver 를 이용해서 테스트 케이스를 작성하는 방법에대해�
 
 그럼 Selenium IDE의 제어 버튼에 대해서 조금더 알아보고 본격적으로 JAVA 를 이용해서 Webdriver 를 사용하는 방법에 대해서 알아보겠습니다.
 
-###제어버튼
+## 제어버튼
 많이 사용하는 제어 버튼에 대해서 설명해드리겠습니다.
 
 ![Selenium-IDE-UI-ControlMenu.jpg](/assets/images/kmkim/2015-10-16/Selenium-IDE-UI-ControlMenu.jpg)
@@ -105,7 +105,7 @@ Test Case를  작성한후에 저장하기 를 통해서 Test Case 를 저장가
 실제 파일을 실행해보면 테이블 형식으로 표현되어 Selenium IDE에서 보는 내용을 그대로 보실수 있습니다.
 ![Selenium-IDE-SaveTestcase.jpg](/assets/images/kmkim/2015-10-16/Selenium-IDE-SaveTestcase.jpg)
 
-##WebDriver 사용하기
+## WebDriver 사용하기
 
 그러면 WebDriver 를 사용하기 위한 셋팅을 준비해보겠습니다.
 
@@ -117,9 +117,9 @@ Eclipse 를 이용해서 Maven 프로잭트 파일을 만들어 필요한 모듈
 2. JAVA JDK 설치
 3. Webdriver
 
-###Eclipse 설치 및 JDK 설치
+### Eclipse 설치 및 JDK 설치
 
-####Eclipse
+#### Eclipse
 Eclipse 는 아래 경로에서 다운받을수 있습니다.
 
 <pre>
@@ -151,7 +151,7 @@ WebDriver를 실행시 TestNG를 통해서 실행을위해 TestNG Plugin 을 설
 
 ![Eclipse-newmavenproject.jpg](/assets/images/kmkim/2015-10-16/Eclipse-newmavenproject.jpg)
 
-####pom.xml dependency 설정
+#### pom.xml dependency 설정
 
 WebDriver jar 및 기타 필요한 파일들을 이용하기 위해 메이븐 pom.xml에 dependency를 추가해 라이브러리를 다운받아 습니다.
 필요한 dependency 설정을 합니다.
@@ -224,7 +224,8 @@ WebDriver jar 및 기타 필요한 파일들을 이용하기 위해 메이븐 po
 	</dependencies>
 </project>
 {% endhighlight %}
-###WebDriver 맛보기
+
+### WebDriver 맛보기
 자이제 WebDriver를 사용할 수 있을것 같습니다.
 먼저 src/test/java 에 새로운 class 를 생성해봅니다. Class name은 CreateUser로 하겠습니다.
 
