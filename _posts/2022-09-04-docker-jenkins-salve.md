@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  [docker] docker 환경에서 젠킨스(jenkins) master-slave 컨테이너 설정해서 사용하기!!"
+title:  [docker] docker 환경에서 젠킨스(jenkins) master-slave 컨테이너 설정해서 사용하기!!
 date:   2022-09-03 23:00:00 +0900
 categories: docker update
 profile: kmkim.png
