@@ -2,13 +2,14 @@
 layout: post
 title:  [docker] docker 환경에서 젠킨스(jenkins) master-slave 컨테이너 설정해서 사용하기!!"
 date:   2022-09-03 23:00:00 +0900
-categories: update docker jenkins
-comments: true
+categories: docker update
+profile: kmkim.png
 tags :
 - docker
 - jenkins
 - docker-compose
 ---
+
 Docker 를이용해서 Jenkins를 설정하고 master - slave 컨테이너를 설정하는 방법을 알아보고자합니다.
 
 * 목차
