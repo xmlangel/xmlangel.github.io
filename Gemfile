@@ -6,3 +6,5 @@ gem 'jekyll-paginate', group: :'jekyll_plugins'
 gem 'rouge'
 gem 'addressable'
 
+
+gem "webrick", "~> 1.7"
