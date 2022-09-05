@@ -11,10 +11,12 @@ tags :
 ---
 
 Docker 를이용해서 Jenkins를 설정하고 master - slave 컨테이너를 설정하는 방법을 알아보고자합니다.
+![docker-jenkins-slave-000.png](/assets/images/2022-09-04/docker-jenkins-slave-000.png)
 
 * 목차
 {:toc}
 # master 컨테이너
+
 먼져 master docker 컨테이너를 만들어준다. jenkins 에서 공식지원하는 컨테이너를 이용해서 생성 하면 된다.
 
 공식 DockerHub에는 설명이 없고 이전 hub에 있으니 그점은 참고해서 받으면 된다.
@@ -26,6 +28,7 @@ Docker 를이용해서 Jenkins를 설정하고 master - slave 컨테이너를 �
 ```
 docker run -p 8088:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins
 ```
+
 생성된 컨테이너는 8088 포트를 통해서 접속해보면 아래와 같은 화며이 나온것을 확인 할 수 있다.
 ![docker-jenkins-slave-001.png](/assets/images/2022-09-04/docker-jenkins-slave-001.png)
 
@@ -39,7 +42,6 @@ secret Key 는 shell 커맨드 창에서 확인하거나 /your/home/secrets/init
 ![docker-jenkins-slave-004.png](/assets/images/2022-09-04/docker-jenkins-slave-004.png)
 
 설치가 끝나고나면 id/password 를 설정해주면 기본적인 설정은 마무리된다.
-
 
 ![docker-jenkins-slave-005.png](/assets/images/2022-09-04/docker-jenkins-slave-005.png)
 ![docker-jenkins-slave-006.png](/assets/images/2022-09-04/docker-jenkins-slave-006.png)
@@ -131,5 +133,55 @@ services:
 - environment : 환경 설정값
 
 # Jenkins 설정
-## slave node 추가
+설치가 완료되었으니 이 master / slave 연결을 해주면 됩니다.
+
+Jenkins Slave 연결을위해서는 Slave 컨테이너에 Java위치를 알아야 합니다. 
+
+Jenkins 에서 제공한 이미지에는 이미 Java 가 설치 되어 있습니다. 
+
+컨테이너에서 Java 위치를 미리 알아놓습니다. 
+
+위에서 생성한 docker-compose 를 이용한다면 slave01에 접속해서 확인이 가능할것입니다.
+
+```
+docker exec -it slave01 which java
+
+```
+
+설정된 위치는 아래와 같음을 확인 할 수 있습니다.
+
+```
+/opt/java/openjdk/bin/java 
+```
+![docker-jenkins-slave-009.png](/assets/images/2022-09-04/docker-jenkins-slave-009.png)
+
+연결에 필요한 java 경로를 확인하였으니 이제 Jenkins 메뉴를 통해서 Slave 추가를 해 보도록 하겠습니다.
+
+## Slave Agent node 추가
+Master 젠킨스가 slave 젠킨스를 인식하 하도록 Slave Agent node 를 추가해줍니다.
+
+Manage Jenkins 페이지를 진입해 '신규 노드' 생성 항목에서 노드'(Manage nodes and Clouds New node) 를 선택해 관련 정보들을 입력해줍니다. 
+
+![docker-jenkins-slave-010.png](/assets/images/2022-09-04/docker-jenkins-slave-010.png)
+- Node name : node로 사용할 이름을 입력해준다. (ex: slave)
+- permanent Agent : permant Agent 타입을 선택해준다.
+
+입력 완료후 다음 정보들을 입력해줍니다.
+![docker-jenkins-slave-011.png](/assets/images/2022-09-04/docker-jenkins-slave-011.png)
+- name : 이름
+- Description : 설명
+- Number of executors : 한번에 실행할수 있는 수
+- Remote root directory : Agent 가 실행될 디랙토리 경로
+- Labels : 라벨
+- Usage : Use this node as much as possible 
+- Launch method : Launch agents via SSH - ssh 를 이용할것이기에 이것을 선택해준다.
+- Host : docker-compose 에서 지정해준 이름값 
+- Credentials : 아래에서 설정한 것을 선택해준다. ssh-key 생성한 값을 넣어주면된다.
+- Host key Verification Stratery : Non verifying Verification Strategy
+![docker-jenkins-slave-012.png](/assets/images/2022-09-04/docker-jenkins-slave-012.png)
+
 ## slave java 경로설정
+Agent 를 구동하려면 Java 경로를 입력해주어야 한다. 
+위에서 가져온 경로를 입력해준다.
+![docker-jenkins-slave-013.png](/assets/images/2022-09-04/docker-jenkins-slave-013.png)
+ 
