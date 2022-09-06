@@ -185,3 +185,19 @@ Agent 를 구동하려면 Java 경로를 입력해주어야 한다.
 위에서 가져온 경로를 입력해준다.
 ![docker-jenkins-slave-013.png](/assets/images/2022-09-04/docker-jenkins-slave-013.png)
  
+ ## master - slave 연결
+ 설정이 완료되고나면 연결이 됩니다.만약연결이 안될경우 Launch agent 를 눌러서 열결을 해줄수 있습니다.
+![docker-jenkins-slave-014.png](/assets/images/2022-09-04/docker-jenkins-slave-014.png)
+
+Log 를 보면 정상연결된것을 확인 할 수 있습니다.
+![docker-jenkins-slave-015.png](/assets/images/2022-09-04/docker-jenkins-slave-015.png)
+
+Dashboar와 Queue 영역에서 두개의 노드가 이용 가능한 상태임을 확인할수 있습니다.
+![docker-jenkins-slave-016.png](/assets/images/2022-09-04/docker-jenkins-slave-016.png)
+
+# 맺음말
+간단하게 Jenkins 를 설치후 Master 와 node 를 연결해보았습니다. 부하를 분산하거나 하는 용도로 사용해보면 될거같습니다.
+
+감사합니다.
+
+끝..
