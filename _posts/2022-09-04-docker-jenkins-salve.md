@@ -196,7 +196,7 @@ Dashboar와 Queue 영역에서 두개의 노드가 이용 가능한 상태임을
 ![docker-jenkins-slave-016.png](/assets/images/2022-09-04/docker-jenkins-slave-016.png)
 
 # 맺음말
-간단하게 Jenkins 를 설치후 Master 와 node 를 연결해보았습니다. 부하를 분산하거나 하는 용도로 사용해보면 될거같습니다.
+간단하게 Jenkins 를 설치후 Master 와 node 를 연결해보았습니다. 
 
 감사합니다.
 
