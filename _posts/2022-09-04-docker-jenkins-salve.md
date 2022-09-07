@@ -26,7 +26,7 @@ Docker 를이용해서 Jenkins를 설정하고 master - slave 컨테이너를 �
 
 
 ```
-docker run -p 8088:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins
+docker run -p 8088:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins/jenkins
 ```
 
 생성된 컨테이너는 8088 포트를 통해서 접속해보면 아래와 같은 화며이 나온것을 확인 할 수 있다.
