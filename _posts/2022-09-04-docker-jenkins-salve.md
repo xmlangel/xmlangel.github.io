@@ -90,8 +90,9 @@ services:
 master 에서 id_rsa.pub 의 파일의 값을 public_key 란에 입력해주면된다.
 
 ```ruby
-docker run -v /your/home:/var/jenkins_home jenkins/jenkins jenkins/ssh-agent "<public key>"
+docker run -v /your/home:/var/jenkins_home jenkins/ssh-agent "<public key>"
 ```
+
 # 최종 docker-compose
 docker-compose 를 이용해서 아래와 같이 생성해서 사용하면 기본적인 설정은 된것이다.
 
@@ -112,7 +113,7 @@ services:
       - "8082:8080"
       - "50000:50000"
     links:
-      - slave01
+      - node
   node:
     container_name: slave01
     image: jenkins/ssh-agent
