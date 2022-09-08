@@ -11,7 +11,7 @@ tags :
 ---
 
 Docker 를이용해서 Jenkins를 설정하고 master - slave 컨테이너를 설정하는 방법을 알아보고자합니다.
-![docker-jenkins-slave-000.png](/assets/images/2022-09-04/docker-jenkins-slave-000.png)
+![docker-jenkins-slave-000.png](/assets/images/2022-09-04/docker-jenkins-slave-000.png){: width="50%" height="50%"}
 
 * 목차
 {:toc}
@@ -30,25 +30,34 @@ docker run -p 8088:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins/j
 ```
 
 생성된 컨테이너는 8088 포트를 통해서 접속해보면 아래와 같은 화며이 나온것을 확인 할 수 있다.
-![docker-jenkins-slave-001.png](/assets/images/2022-09-04/docker-jenkins-slave-001.png)
+
+![docker-jenkins-slave-001.png](/assets/images/2022-09-04/docker-jenkins-slave-001.png){: width="60%" height="60%"}
 
 secret Key 는 shell 커맨드 창에서 확인하거나 /your/home/secrets/initialAdminPassword 에서 확인 하면 된다.
-![docker-jenkins-slave-002.png](/assets/images/2022-09-04/docker-jenkins-slave-002.png)
+
+![docker-jenkins-slave-002.png](/assets/images/2022-09-04/docker-jenkins-slave-002.png){: width="60%" height="60%"}
 
 - Key 를 입력한후에는 플러그인을 설치 해준다. 
-![docker-jenkins-slave-003.png](/assets/images/2022-09-04/docker-jenkins-slave-003.png)
+
+![docker-jenkins-slave-003.png](/assets/images/2022-09-04/docker-jenkins-slave-003.png){: width="60%" height="60%"}
 
 - 플러그인설치
-![docker-jenkins-slave-004.png](/assets/images/2022-09-04/docker-jenkins-slave-004.png)
+
+![docker-jenkins-slave-004.png](/assets/images/2022-09-04/docker-jenkins-slave-004.png){: width="60%" height="60%"}
 
 설치가 끝나고나면 id/password 를 설정해주면 기본적인 설정은 마무리된다.
 
-![docker-jenkins-slave-005.png](/assets/images/2022-09-04/docker-jenkins-slave-005.png)
-![docker-jenkins-slave-006.png](/assets/images/2022-09-04/docker-jenkins-slave-006.png)
+![docker-jenkins-slave-005.png](/assets/images/2022-09-04/docker-jenkins-slave-005.png){: width="60%" height="60%"}
+
+![docker-jenkins-slave-006.png](/assets/images/2022-09-04/docker-jenkins-slave-006.png){: width="60%" height="60%"}
+
 - 어드민 사용자 생성
-![docker-jenkins-slave-007.png](/assets/images/2022-09-04/docker-jenkins-slave-007.png)
+
+![docker-jenkins-slave-007.png](/assets/images/2022-09-04/docker-jenkins-slave-007.png){: width="30%" height="30%"}
+
 - 설치 완료
-![docker-jenkins-slave-008.png](/assets/images/2022-09-04/docker-jenkins-slave-008.png)
+
+![docker-jenkins-slave-008.png](/assets/images/2022-09-04/docker-jenkins-slave-008.png){: width="60%" height="60%"}
 
 기본적인 설치가 끝났다. 
 
@@ -92,7 +101,6 @@ master 에서 id_rsa.pub 의 파일의 값을 public_key 란에 입력해주면�
 ```ruby
 docker run -v /your/home:/var/jenkins_home jenkins/ssh-agent "<public key>"
 ```
-
 # 최종 docker-compose
 docker-compose 를 이용해서 아래와 같이 생성해서 사용하면 기본적인 설정은 된것이다.
 
@@ -154,7 +162,8 @@ docker exec -it slave01 which java
 ```ruby
 /opt/java/openjdk/bin/java 
 ```
-![docker-jenkins-slave-009.png](/assets/images/2022-09-04/docker-jenkins-slave-009.png)
+
+![docker-jenkins-slave-009.png](/assets/images/2022-09-04/docker-jenkins-slave-009.png){: width="60%" height="60%"}
 
 연결에 필요한 java 경로를 확인하였으니 이제 Jenkins 메뉴를 통해서 Slave 추가를 해 보도록 하겠습니다.
 
@@ -163,12 +172,15 @@ Master 젠킨스가 slave 젠킨스를 인식하 하도록 Slave Agent node 를 
 
 Manage Jenkins 페이지를 진입해 '신규 노드' 생성 항목에서 노드'(Manage nodes and Clouds New node) 를 선택해 관련 정보들을 입력해줍니다. 
 
-![docker-jenkins-slave-010.png](/assets/images/2022-09-04/docker-jenkins-slave-010.png)
+![docker-jenkins-slave-010.png](/assets/images/2022-09-04/docker-jenkins-slave-010.png){: width="60%" height="60%"}
+
 - Node name : node로 사용할 이름을 입력해준다. (ex: slave)
 - permanent Agent : permant Agent 타입을 선택해준다.
 
 입력 완료후 다음 정보들을 입력해줍니다.
-![docker-jenkins-slave-011.png](/assets/images/2022-09-04/docker-jenkins-slave-011.png)
+
+![docker-jenkins-slave-011.png](/assets/images/2022-09-04/docker-jenkins-slave-011.png){: width="60%" height="60%"}
+
 - name : 이름
 - Description : 설명
 - Number of executors : 한번에 실행할수 있는 수
@@ -179,22 +191,26 @@ Manage Jenkins 페이지를 진입해 '신규 노드' 생성 항목에서 노드
 - Host : docker-compose 에서 지정해준 이름값 
 - Credentials : 아래에서 설정한 것을 선택해준다. ssh-key 생성한 값을 넣어주면된다.
 - Host key Verification Stratery : Non verifying Verification Strategy
-![docker-jenkins-slave-012.png](/assets/images/2022-09-04/docker-jenkins-slave-012.png)
+
+![docker-jenkins-slave-012.png](/assets/images/2022-09-04/docker-jenkins-slave-012.png){: width="60%" height="60%"}
 
 ## slave java 경로설정
 Agent 를 구동하려면 Java 경로를 입력해주어야 한다. 
 위에서 가져온 경로를 입력해준다.
-![docker-jenkins-slave-013.png](/assets/images/2022-09-04/docker-jenkins-slave-013.png)
+
+![docker-jenkins-slave-013.png](/assets/images/2022-09-04/docker-jenkins-slave-013.png){: width="60%" height="60%"}
  
  ## master - slave 연결
  설정이 완료되고나면 연결이 됩니다.만약연결이 안될경우 Launch agent 를 눌러서 열결을 해줄수 있습니다.
-![docker-jenkins-slave-014.png](/assets/images/2022-09-04/docker-jenkins-slave-014.png)
+![docker-jenkins-slave-014.png](/assets/images/2022-09-04/docker-jenkins-slave-014.png){: width="60%" height="60%"}
 
 Log 를 보면 정상연결된것을 확인 할 수 있습니다.
-![docker-jenkins-slave-015.png](/assets/images/2022-09-04/docker-jenkins-slave-015.png)
+
+![docker-jenkins-slave-015.png](/assets/images/2022-09-04/docker-jenkins-slave-015.png){: width="60%" height="60%"}
 
 Dashboar와 Queue 영역에서 두개의 노드가 이용 가능한 상태임을 확인할수 있습니다.
-![docker-jenkins-slave-016.png](/assets/images/2022-09-04/docker-jenkins-slave-016.png)
+
+![docker-jenkins-slave-016.png](/assets/images/2022-09-04/docker-jenkins-slave-016.png){: width="60%" height="60%"}
 
 설치가 완료되고 설정시 할때 끔 Git clone 시 간헐적으로 verification 오류가 발생한다. 
 
