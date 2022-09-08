@@ -25,7 +25,7 @@ Docker 를이용해서 Jenkins를 설정하고 master - slave 컨테이너를 �
 - [jenkins 공식 dockerHub참고](https://hub.docker.com/r/jenkins/jenkins)
 
 
-```
+```ruby
 docker run -p 8088:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins/jenkins
 ```
 
@@ -60,13 +60,13 @@ secret Key 는 shell 커맨드 창에서 확인하거나 /your/home/secrets/init
 생성된 컨테이너의 이름을 확인후 ssh-keygen 을 통해서 생성하면된다.
 
 SSH 키는 /your/home/.ssh/id_rsa.pub 에서 확인하면된다.
-```
+```ruby
 docker ps 
 docker exec -it gracious_lewin ssh-keygen -t rsa
 ```
 ## master docker-compose 설정
 커맨드 라인으로 실행하면 되겠지만 docker-compose 를 이용하면 여러개의 작업을 할수 있으므로 docker-compose.yaml 파일을 생성해서 master jenkins 파일을 생성해놓는다.
-```
+```ruby
 version: '3'
 services:
   master:
@@ -89,7 +89,7 @@ services:
 
 master 에서 id_rsa.pub 의 파일의 값을 public_key 란에 입력해주면된다.
 
-```
+```ruby
 docker run -v /your/home:/var/jenkins_home jenkins/jenkins jenkins/ssh-agent "<public key>"
 ```
 # 최종 docker-compose
@@ -99,7 +99,7 @@ docker-compose 를 이용해서 아래와 같이 생성해서 사용하면 기�
 
 JENKINS_AGENT_SSH_PUBKEY 값을 지정해 주면 동일한 결과를 얻을 수 있다.
 
-```
+```ruby
 version: '3'
 services:
   master:
@@ -143,14 +143,14 @@ Jenkins 에서 제공한 이미지에는 이미 Java 가 설치 되어 있습니
 
 위에서 생성한 docker-compose 를 이용한다면 slave01에 접속해서 확인이 가능할것입니다.
 
-```
+```ruby
 docker exec -it slave01 which java
 
 ```
 
 설정된 위치는 아래와 같음을 확인 할 수 있습니다.
 
-```
+```ruby
 /opt/java/openjdk/bin/java 
 ```
 ![docker-jenkins-slave-009.png](/assets/images/2022-09-04/docker-jenkins-slave-009.png)
@@ -195,9 +195,22 @@ Log 를 보면 정상연결된것을 확인 할 수 있습니다.
 Dashboar와 Queue 영역에서 두개의 노드가 이용 가능한 상태임을 확인할수 있습니다.
 ![docker-jenkins-slave-016.png](/assets/images/2022-09-04/docker-jenkins-slave-016.png)
 
-# 맺음말
-간단하게 Jenkins 를 설치후 Master 와 node 를 연결해보았습니다. 
+설치가 완료되고 설정시 할때 끔 Git clone 시 간헐적으로 verification 오류가 발생한다. 
 
-감사합니다.
+아래의 방법을 통해 Git clone을 정상적으로 받을 수 있다.
+
+``` ruby
+git clone 시  `git server certificate verification failed. CAfile: none CRLfile: none` 
+```
+SSL Verify 를 하지 못해서 발생하는 사항으로 SSH verify 옵션을 Off 해주면 Clone 했을 때 잘 다운받아진다.
+
+하는 방법은  각 컨테이너에 접속해서 아래 명령어를 실행해주면 된다.
+
+
+```ruby
+git config --global http.sslVerify false
+```
+-  --global을 주어 전역적으로 설정할 수 있고, [http] 섹션에 sslVerify = false를 추가한다.
+
 
 끝..
