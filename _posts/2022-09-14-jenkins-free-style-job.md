@@ -46,7 +46,41 @@ job 을 만들려면 좌측 상단의 New Item 메뉴를 누르면됩니다.
 
 간단하게 설명하기 위해 가장 기본이 되는 Freestyle project를 만들어보겠습니다.
 
-![jenkins-job-00.jpg](/assets/images/2022-09-14/jenkins-job-01.jpg)
+프로젝트 이름을입력해주고 Freestyle Project를 선택 후 OK 를 눌러줍니다. 
+
+
+![jenkins-job-01.jpg](/assets/images/2022-09-14/jenkins-job-01.jpg)
+
+잠시후 프로젝트 설정을 할 수 있는 화면이 나타납니다.
+
+![jenkins-job-02.jpg](/assets/images/2022-09-14/jenkins-job-02.jpg)
+
+### General
+Job의 기본 적인 설정을 할수 있는 기능이 모여있는 영역입니다.
+
+### Source Code Management
+Git 과 같은 소스코드를 컨트롤 할 수 있는 영역입니다. 소스컨트롤에 따라서 플러그인을 추가로 받아야 할수도 있습니다. 설치시 기본플러그인을 설치했다면 기본적으로 설치가 되어있을것입니다.
+
+Git 을 선택하면 
+Repository URL에 job에서 사용할 github의 repository url을 입력하면 됩니다. public 저장소일경우는 설정이 필요없지만 private 저장소일 경우 credentails을 추가해  아이디를 패스워드를 입력 한다거나 SSH key 등을 입력해서 사용할 수 있습니다. 
+
+job에서 사용할 branch도 직접 선택해 사용할 수 있습니다. default branch는 master입니다.
+
+
+### Buld Triggers
+Job을 실행시킬 Triggers를 설정해줄 수 있는 영역입니다.
+
+
+### Build Environment
+Build 의 환경설정을 할 수 있는 영역입니다.
+
+
+### Build
+Job이 수행될 스크립트를 작성할 수 있는 영역입니다.
+
+### Post-build-Actions
+Job이 수행되고난이후에 수행되는 스크립트 또는 Actions을 설정해줄수 있는 영역입니다.
+
 
 
 

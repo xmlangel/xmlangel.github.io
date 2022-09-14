@@ -1,1 +1,1 @@
-docker run --name blog --volume="C:\Kmdata\git\xmlangel.github.io:/srv/jekyll" -p 4000:4000 -it jekyll/jekyll jekyll serve
+docker run --name blog --volume="C:\Kmdata\git\xmlangel.github.io:/srv/jekyll" -p 4000:4000 -it --rm jekyll/jekyll jekyll serve --incremental --watch
