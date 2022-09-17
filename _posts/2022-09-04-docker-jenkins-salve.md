@@ -11,7 +11,8 @@ tags :
 ---
 
 Docker 를이용해서 Jenkins를 설정하고 master - slave 컨테이너를 설정하는 방법을 알아보고자합니다.
-![docker-jenkins-slave-000.png](/assets/images/2022-09-04/docker-jenkins-slave-000.png){: width="50%" height="50%"}
+
+![docker-jenkins-slave-000.png](/assets/images/2022-09-04/docker-jenkins-slave-000.png){: width="30%" height="30%"}
 
 * 목차
 {:toc}
