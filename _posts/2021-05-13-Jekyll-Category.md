@@ -9,6 +9,7 @@ tags:
 - category
 ---
 Jekyll 에 Category 항목을 추가하는 법
+
 ![PICT]({{ site.url }}/assets/images/jekyll-category.jpg){: width="100%" height="100%"}
 
 * 목차
