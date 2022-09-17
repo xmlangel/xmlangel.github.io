@@ -11,6 +11,7 @@ tags:
 ---
 
 윈도우에서도 WSL 이라는 기능을 이용해서 리눅스를 이용할수 있다. 
+
 ![wsl-ubuntu-00.jpg](/assets/images/2021-05-31/wsl-ubuntu-00.jpg)
 
 * 목차
