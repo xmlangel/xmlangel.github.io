@@ -1,89 +1,122 @@
-#
-# This file contains configuration flags to customize your site
-#
+###########################################################
+# Global Configuration (https://jekyllrb.com/docs/configuration/options/)
+###########################################################
+# if you want to force HTTPS, specify the domain without the http at the start
+# set domain: "your_github_user_name.github.io"
+domain: ""
 
-# Name of your site (displayed in the header)
-name: Even Though ... 그럼에도 불구하고 열심히
+# your web site url
+# for GitHub Pages, url: "https://your_github_user_name.github.io"
+url: ""
 
-# Short bio or description (displayed in the header)
-description: 작은 끄적거림
-
-# URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: /images/xmlangel.jpg
-#
-# Flags below are optional
-#
-
-# Includes an icon in the footer for each username you enter
-footer-links:
-  dribbble:
-  email: kwangmyung.kim@gmail.com
-  facebook:
-  flickr:
-  github: xmlangel
-  instagram:
-  linkedin:
-  pinterest:
-  rss: # just type anything here for a working RSS icon
-  #twitter: jekyllrb
-  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
-  youtube: # channel/<your_long_string> or user/<user-name>
-  googleplus: # anything in your profile username that comes after plus.google.com/
-
-
-# Enter your Disqus shortname (not your username) to enable commenting on posts
-# You can find your shortname on the Settings page of your Disqus account
-disqus: xmlangel-github-io
-
-# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics: UA-55180057-2
-# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
-# Used for Sitemap.xml and your RSS feed
-url:
-
-# If you're hosting your site at a Project repository on GitHub pages
-# (http://yourusername.github.io/repository-name)
-# and NOT your User repository (http://yourusername.github.io)
-# then add in the baseurl here, like this: "/repository-name"
+# path to this site
+# if your page is located at https://your_github_user_name.github.io/blog, then set baseurl: "/blog"
 baseurl: ""
-paginate: 7
-#
-# !! You don't need to change any of the configuration flags below !!
-#
 
-permalink: /:title/
+# please use TZ database name column on the list table
+# https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#timezone: ""
 
-# The release of Jekyll Now that you're using
-version: v1.2.0
+###########################################################
+# Front Matter Defaults (https://jekyllrb.com/docs/configuration/front-matter-defaults/)
+###########################################################
+defaults:
+  # for posts
+  - scope:
+      # to separate language posts folders
+      path: "_posts"
+    values:
+      layout: "post"
+      permalink: /posts/:path
 
+  # for multilingual posts
+  - scope:
+      # to separate language posts folders
+      path: "*/_posts"
+    values:
+      hidden: true
+      layout: "post"
+      permalink: /:path
+
+  # example: enable setting for all pages. You may still need to enable some setting from _data/conf/posts.yml or _data/conf/main.yml
+  # - scope:
+  #     # an empty string here means all files in the project
+  #     path: ""
+  #   values:
+  #     image_viewer_on: true
+  #     image_lazy_loader_on: true
+
+###########################################################
+# Markdown Options (https://jekyllrb.com/docs/configuration/markdown/)
+# Configuring Jekyll in your GitHub Pages site (https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll)
+###########################################################
+# This is default for GitHub Pages sites and cannot be changed.
+highlighter: rouge
 markdown: kramdown
-
-# Jekyll 3 now only supports Kramdown for Markdown
 kramdown:
-  # Use GitHub flavored markdown, including triple backtick fenced code blocks
-  input: GFM
-  # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
+  # This is default for GitHub Pages sites and cannot be changed.
   syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    # Use existing pygments syntax highlighting css
-    css_class: 'highlight'
 
-# Set the Sass partials directory, as we're using @imports
-sass:
-  style: :expanded # You might prefer to minify using :compressed
-
-# Use the following plug-ins
-
-gems:
-  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
-  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+###########################################################
+# Plugins (Plugins supported by GitHub Pages https://pages.github.com/versions/)
+###########################################################
+plugins:
   - jekyll-paginate
-# Exclude these files from your production _site
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - README.md
-  - CNAME
-# https://blog.devari.kr/2019/jekyll/jekyll-category-setting 카테고리추가관련
-category_list: [ jmeter, qa, tip, diary, linux ]
+  - jekyll-redirect-from
+
+# since GitHub Pages runs jekyll with "--safe" flag, we need to add supported plugins in here. (only github supported plugins are allowed)
+whitelist:
+  - jekyll-paginate
+  - jekyll-redirect-from
+
+###########################################################
+# jekyll-paginate (https://jekyllrb.com/docs/pagination/)
+###########################################################
+paginate_path: "/tabs/blog/:num"
+# number of post per page
+# make sure this matches with post_query_paginator_post_per_page in _data/conf/posts.yml
+paginate: 5
+
+###########################################################
+# jekyll-redirect-from (https://github.com/jekyll/jekyll-redirect-from)
+###########################################################
+redirect_from:
+  # Disabling generation of redirects.json
+  json: false
+
+###########################################################
+# html compression (https://jch.penibelst.de)
+###########################################################
+compress_html:
+  clippings: all
+  comments: all
+  #endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    # disable this feature for development env.
+    envs: [development]
+
+###########################################################
+# js compression (for removing comments(/**/only), line breaks and spaces)
+# for debugging js files, simply set linebreak_and_space: false (in production env, this will be enabled automatically)
+# for more info about environments (https://jekyllrb.com/docs/configuration/environments/)
+###########################################################
+compress_js:
+  # enable or disable line breaks and space removal feature for development env.
+  linebreak_and_space: false
+  # disable this feature entirely for development or production env.
+  #ignore: development
+
+###########################################################
+# Sass (https://jekyllrb.com/docs/assets/)
+###########################################################
+sass:
+  sass_dir: assets/_scss
+  # enable css compression
+  style: compressed
+
+###########################################################
+# Exclude these files or folders from production site
+###########################################################
+exclude: ["Gemfile*", "README*", "LICENSE", "docs"]
