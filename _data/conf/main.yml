@@ -21,7 +21,7 @@ default_lng: en
 # to prevent adding languages with no folder
 # single language disables language switch
 # language order is linked to array order
-language_switch_lang_list: [en, ja, pt]
+language_switch_lang_list: [en]
 
 # if the opened page is not in the user's language list,
 # suggest language(s) matching with the one(s) in browser language list and user language list.
@@ -209,7 +209,8 @@ top_nav_brand_text_enable: true
 
 # set profile image
 # comment to disable the profile image
-side_nav_profile_img_path: /assets/img/posts/post_pic1.jpg
+#
+side_nav_profile_img_path: /assets/img/home/xmlangel.jpg
 
 # this adds hover effect to bottom buttons
 side_nav_bottom_buttons_hover_effect: "hover-effect"
@@ -232,7 +233,7 @@ contacts_mastodon_link_verification: false
 ###########################################################
 #                Copyright text
 ###########################################################
-# this will add current year to the end of copyright_start_year which is defined in _data/owner/[language].yml
+# this will add current year to the end lsof copyright_start_year which is defined in _data/owner/[language].yml
 copyright_add_end_year: false
 
 # this uses copyright.additional_text defined in _data/lang/[language].yml

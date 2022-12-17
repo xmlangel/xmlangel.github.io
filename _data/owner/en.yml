@@ -2,13 +2,13 @@
 # Owner's Personal Information
 ###########################################################
 # This is your brand name
-brand: "Your Brand"
+brand: "Even Though ... 그럼에도 불구하고 열심히"
 
 # text below the brand name
 brand_sub_text: "$site_sample"
 
 # used for seo meta post author (if it's not defined in post)
-name: "Your Name"
+name: "Kwangmyung.kim"
 
 # home page top header texts
 home:
@@ -48,8 +48,8 @@ meta_common_description: "Your meta description."
 # the order of the items will be shown as here.
 # comment to remove any contact item
 contacts:
-  #- github: ""
-  #- email: ""
+  - github: "xmlangel"
+  - email: "kwangmyung.kim@gmail.com"
   #- linkedin: ""
   #- twitter: ""
   #- mastodon: ""
@@ -60,11 +60,11 @@ contacts:
 #  - your_new_contact: ""
 
 # Disqus Short name, make sure comments and disqus are enabled in _data/conf/posts.yml file
-disqus_shortname: ""
+disqus_shortname: "xmlangel-github-io"
 
 # if no id is provided, this feature will be disabled.
 # make sure your environment does not match with google.analytics.ignore in _data/conf/main.yml
-google_analytics_id: ""
+google_analytics_id: "UA-55180057-2"
 
 # there are different ways to verify web page. One is adding this as meta into html.
 # make sure you set meta.google_site_verify: true in _data/conf/main.yml
