@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "openvpn 설치해보기"
+date:   2017-03-17 14:00:13 +0900
+categories: etc update
+comments: true
+---
+apt-get install openvpn easy-rsa
+
+make-cadir /home/vagrant/openvpn-ca
+cd /home/vagrant/openvpn-ca
+source vars
