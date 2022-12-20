@@ -2,10 +2,10 @@
 # Owner's Personal Information
 ###########################################################
 # This is your brand name
-brand: "Even Though ... 그럼에도 불구하고 열심히"
+brand: "Even Though"
 
 # text below the brand name
-brand_sub_text: "$site_sample"
+brand_sub_text: "그럼에도 불구하고 열심히"
 
 # used for seo meta post author (if it's not defined in post)
 name: "Kwangmyung.kim"
@@ -15,11 +15,11 @@ home:
   # you can also use $site_brand, $site_greetings, $site_welcome in line1 and line2 for replacing texts.
   top_header_line1: "$site_welcome"
   # if commented, top header will be a single line
-  top_header_line2: "$site_brand"
+  top_header_line2: "그럼에도 불구하고 열심히"
 
 # about page sub title
 about:
-  sub_title: "$site_sample"
+  sub_title: 
 
 # if you don't want to add copyright year, comment or leave it blank.
 # the year during which the claimed copyright for the work was first asserted.

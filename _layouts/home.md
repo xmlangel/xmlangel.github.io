@@ -35,7 +35,7 @@ layout: default
     </div>
   </div>
   <div class="home-intro-text markdown-style">
-    {{ content }}
+    이곳은 머리의 메모리가 휘발성이라 여기에 끄적여나가는 장소입니다.
   </div>
 </div>
 

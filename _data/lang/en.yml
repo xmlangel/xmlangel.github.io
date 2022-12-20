@@ -168,8 +168,8 @@ privacy-policy:
 # constants to be replaced for
 constants:
   greetings: Hello
-  welcome: Welcome
-  sample: Sample
+  welcome: Even Though...
+  sample: .
 
 # for cookie consent
 cookie_consent:
