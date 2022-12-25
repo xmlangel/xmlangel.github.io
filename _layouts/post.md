@@ -18,7 +18,9 @@ layout: default
     {% include post_common/pager-page-numbers.html pages = lng_pages current_page_url = page.url -%}
   {% endif -%}
 {% endif -%}
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2750098928711769"
+     crossorigin="anonymous"></script>
 {% if site.data.conf.posts.comments.enable and site.data.conf.posts.comments.disqus.enable and page.comments_disable != true %}
+
   {% include post/disqus.html %}
 {% endif %}
