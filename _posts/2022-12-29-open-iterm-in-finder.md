@@ -21,10 +21,6 @@ _
 
 시스템설정에서 설정하나만 바꿔주면 되었다.
 
-[appium sample](https://github.com/appium/appium/blob/1.x/sample-code/java/java.iml){:target="_blank"}내용을 참고해서 필요한 정보들을 추가해준다.
-
-sample 에서는 gradle 이므로 적절히 mnv 형태로 바꿔주면된다.
-
 쭉보니 별다른것은 없다. appium client 만 추가해주면되는듯하다.
 
 Mac OS 13(Ventura 기준) 하위 버전도 될듯싶다.
