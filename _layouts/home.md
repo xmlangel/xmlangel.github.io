@@ -59,4 +59,14 @@ layout: default
     </li>
   </ul>
 </div>
+<h3>adsense</h3>
+<!-- google adsense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-2750098928711769",
+          enable_page_level_ads: true
+     });
+</script>
+<!-- google adsense -->
 {% endif -%}
