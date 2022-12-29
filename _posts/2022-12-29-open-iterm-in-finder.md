@@ -21,10 +21,14 @@ _
 
 시스템설정에서 설정하나만 바꿔주면 되었다.
 
-쭉보니 별다른것은 없다. appium client 만 추가해주면되는듯하다.
-
 Mac OS 13(Ventura 기준) 하위 버전도 될듯싶다.
 
 시스템설정>키보드>키보드 단축키>서비스>파일 및 폴더 체크
 
-![open-iterm]({{ site.url }}/assets/images/open-iterm.png){: width="100%" height="100%"}
+![open-iterm]({{ site.url }}/assets/images/open-iterm.png){: width="90%" height="90%"}
+
+이제 손쉽게 finder 에서 item을 열어서 쓰면된다.
+
+![open-iterm-02]({{ site.url }}/assets/images/open-iterm-02.png){: width="40%" height="40%"}
+
+끝.
