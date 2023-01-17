@@ -55,7 +55,7 @@ I was going to make my website and thought if I did it as a template, I could sh
   - [Open Graph](https://ogp.me/)
   - [Twitter](https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary)
 - Analytics (Google Analytics)
-- Cookie consent feature
+<!-- - Cookie consent feature -->
 - Site Search feature
 - Code Compression for small footprint (`HTML` `JS` `SCSS`)
 - Mobile App support

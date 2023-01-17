@@ -155,8 +155,8 @@ comments:
       # make sure load_mode is scroll_to_load or scroll_to_load_but_mobile_click_to_load
       enable: true
       terms_url: "https://help.disqus.com/en/articles/1717102-terms-of-service"
-      privacy_url: "https://help.disqus.com/en/articles/1717103-disqus-privacy-policy"
+      # privacy_url: "https://help.disqus.com/en/articles/1717103-disqus-privacy-policy"
       settings_url: "https://disqus.com/data-sharing-settings"
       terms_replace: $terms
-      privacy_replace: $privacy_policy
+      # privacy_replace: $privacy_policy
       settings_replace: $settings_link

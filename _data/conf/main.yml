@@ -309,7 +309,7 @@ google:
 # make sure google_analytics_id is set in _data/owner/[language].yml
 # make sure your environment does not match with google.analytics.ignore
 cookie_consent:
-  enable: true
+  enable: false
   # if this is true, the consent box will be hidden even if the user does not change the switch position.
   hide_consent_bar_with_save_button: true
   gtag_default_config:
@@ -363,7 +363,7 @@ cookie_consent:
   setting_box_slide: slideBoxTopToDown
   # replace text with related cookie_consent.panel_settings.gtag_info item
   gtag_info_replace: "$gtag_info"
-  privacy_link_replace: "$privacy_link"
+  # privacy_link_replace: "$privacy_link"
   # this adds cookie setting button to side nav bottom
   side_nav_setting_button:
     enable: true
