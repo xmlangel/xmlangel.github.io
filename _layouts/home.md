@@ -59,7 +59,6 @@ layout: default
     </li>
   </ul>
 </div>
-<h3>adsense</h3>
 <!-- google adsense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2750098928711769"
      crossorigin="anonymous"></script>
