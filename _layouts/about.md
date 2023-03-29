@@ -53,32 +53,19 @@ layout: default
     <hr>
 <p>    
        ● 카쉐어링서비스(2019~onGoing) <br>
-       ✓ Socar
-<p>    
        ● 암호화페거래소(2018) <br>
-       ✓ bithumb
-
-<p>    
        ● APM(Application monitoring management) (2015~2018) <br>
-        ✓ Sass APM <br>
-        ✓ Sass Monitoring <br>       
-<p>    
-       ● 배달앱(2015) <br>
-        ✓ 요기요  <br>
-<p>    
+       ● 딜리버리서비스(2015) <br>
        ● SAP(2012~2015)<br>
         ✓ BPC 7.5,BPC 10.0 <br>
         ✓ SAP HANA<br>
-<p>
        ● CCTV 카메라 감시(2010~2012)<br>
         ✓ NVR<br>
         ✓ VIDEO INTELLIGENCE <br>
-<p>
        ● 디지털 컨텐츠 보안(2006~2010)<br>
        ✓ DRM(Digital rights management) Software<br>
        ✓ 보안USB<br>
        ✓ CC인증 <br>
-<p>
        ● 임베디드 소프트웨어(2004~2006)<br>
        ✓ MP3 player<br>
        ✓ 에어컨 공조 컨트롤러<br>
