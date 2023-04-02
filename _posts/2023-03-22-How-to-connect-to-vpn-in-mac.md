@@ -3,7 +3,7 @@ layout: post
 title: "[VPN] Mac 에서 CommandLine 으로 VPN 활성화 하는 방법"
 date:  2023-03-22 23:00:13 +0900
 categories: VPN
-
+img : "/assets/images/vpn.jpg"
 tags:
 - vpn
 - mac
@@ -13,6 +13,8 @@ tags:
 * 목차
 {:toc}
 _
+
+![mac-vpn]({{ site.url }}/assets/images/vpn.jpg){: width="50%" height="50%"}
 
 회사에서 업무를 진행하다 보면 VPN 환경에서 진행해야 하는 경우가 종종있다. 
 

@@ -5,6 +5,7 @@ date:   2021-05-31 10:36:15
 author: 김광명
 categories: windows update
 profile: kmkim.png
+img : "/assets/images/2021-05-31/wsl-ubuntu-00.jpg"
 tags:
 - wsl
 - ubuntu

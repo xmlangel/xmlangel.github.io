@@ -3,7 +3,7 @@ layout: post
 title: "[Appium][iOS] Appium iOS 환경구성"
 date:  2023-03-15 23:00:13 +0900
 categories: Appium 
-
+img : "/assets/images/appium_xcode.jpg"
 tags:
 - appium
 - iOS

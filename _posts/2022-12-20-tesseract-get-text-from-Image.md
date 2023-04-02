@@ -3,7 +3,7 @@ layout: post
 title:  "[python][자동화] tesseract를 이용해서 이미지에서 문자추출해보기"
 date:   2022-12-23 18:03:13 +0900
 categories: python tesseract
-
+img: "/assets/images/python.jpg"
 tags:
 - python
 - tesseract

@@ -3,6 +3,7 @@ layout: post
 title: "[blog] Dell Latitude 5290 2-in-1 Fan 교체를 하다."
 date:  2023-03-14 20:00:13 +0900
 categories: dell 
+img : "/assets/images/dell-fan-09.png"
 
 tags:
 - dell
