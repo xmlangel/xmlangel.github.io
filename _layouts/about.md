@@ -47,12 +47,14 @@ layout: default
 <p>
        저의 직업은 QA 입니다. 지속적으로 품질보증업무를 수행하고 있죠..
        
-      2004년 부터 쭈~욱 같은 업무를 하고 있네요..
+       쭈~욱 같은 업무를 하고 있네요..
       
       업무를 하면서 아래와 같은 제품 들을 다뤄 들을 다뤄 봤습니다. 
     <hr>
 <p>    
-       ● 카쉐어링서비스(2019~onGoing) <br>
+      
+       ● 안면인식(Facial Recognition)(2023~2024) <br>
+       ● 카쉐어링서비스(2019~2023) <br>
        ● 암호화페거래소(2018) <br>
        ● APM(Application monitoring management) (2015~2018) <br>
        ● 딜리버리서비스(2015) <br>
@@ -66,11 +68,6 @@ layout: default
        ✓ DRM(Digital rights management) Software<br>
        ✓ 보안USB<br>
        ✓ CC인증 <br>
-       ● 임베디드 소프트웨어(2004~2006)<br>
-       ✓ MP3 player<br>
-       ✓ 에어컨 공조 컨트롤러<br>
-       ✓ 냉장고 패드 컨트롤러 <br>
-       ✓ TV 셋탑박스<br>
 
 <hr>
        ● Skill set<br>
@@ -88,7 +85,6 @@ layout: default
 <hr>
         ● Licence<br>
          ✓ CISA(Certified Information System Auditor)<br>
-         ✓ PMP(Project Management Professional)<br>
          ✓ ISTQB(International Software Testing Qualifications Board)<br>
 <hr>
       </div>
