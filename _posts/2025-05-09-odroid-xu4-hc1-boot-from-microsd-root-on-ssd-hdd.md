@@ -53,7 +53,7 @@ HTTPS가 아니라서 그런가 싶기도 하고, 원인 찾기가 귀찮아서
 
 1. Odroid 공식 이미지(우분투)를 microSD에 플래싱!
 
-[https://wiki.odroid.com/odroid-n2/os_images/ubuntu](https://dn.odroid.com/5422/ODROID-XU3/Ubuntu/)
+[ODROID-X4 Ubuntu ](https://wiki.odroid.com/odroid-n2/os_images/ubuntu){:target="_blank"}{:rel="noopener noreferrer"}
 여기에서 X4 용으로 받아서..하면됨.
    
 3. Odroid에 microSD를 꽂고 정상적으로 부팅되는지 확인하세요.
