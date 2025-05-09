@@ -15,8 +15,6 @@ tags:
 {:toc}
 _
 
-# Odroid XU4/HC1에서 microSD로 부팅하고 SSD/HDD를 루트로 쓰는 꿀팁!
-
 안녕하세요!
 오늘은 Odroid XU4, HC1 같은 구형 보드에서
 **microSD는 부트용, SSD/HDD는 루트 파일시스템**으로 쓰는 방법을 정리해볼게요.
@@ -56,7 +54,10 @@ HTTPS가 아니라서 그런가 싶기도 하고, 원인 찾기가 귀찮아서
 [ODROID-XU3/XU4 Ubuntu 이미지](https://dn.odroid.com/5422/ODROID-XU3/Ubuntu/){:target="_blank"}{:rel="noopener noreferrer"}
 여기에서 X4 용으로 받아서..하면됨.
    
-3. Odroid에 microSD를 꽂고 정상적으로 부팅되는지 확인하세요.
+2. Odroid에 microSD를 꽂고 정상적으로 부팅되는지 확인하세요.
+
+부팅이 안되도 여러번 해보다보면 됨.. 안되면 될때까지.. 이미지 선택만 잘하면 실패할일 없음.
+   
 
 ---
 
