@@ -175,7 +175,9 @@ mount | grep ' / '
 - 시스템 업데이트 시 부트 파티션이 잘 마운트되게 `/etc/fstab`에 추가:
 
 ```
-/dev/mmcblk0p1 /media/boot vfat defaults 0 0
+UUID=abcd-1234-ef56-7890 / ext4 errors=remount-ro,noatime 0 1
+LABEL=boot /media/boot vfat defaults 0 1
+
 ```
 
 - 적용:
@@ -183,7 +185,6 @@ mount | grep ' / '
 ```bash
 sudo mount /media/boot
 ```
-
 
 ---
 
