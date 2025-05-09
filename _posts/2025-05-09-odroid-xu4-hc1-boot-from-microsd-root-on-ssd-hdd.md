@@ -135,24 +135,20 @@ setenv bootrootfs "console=tty1 console=ttySAC2,115200n8 root=UUID=abcd-1234-ef5
 
 ## 6. fstab도 수정!
 
-- `/mnt/ssd/etc/fstab` 파일에서
+- 시스템 업데이트 시 부트 파티션이 잘 마운트되게 `/etc/fstab`에 추가:
+
 루트(/) 파티션을 SSD/HDD로 변경해줍니다.
 
 ```
-UUID=abcd-1234-ef56-7890 / ext4 defaults,noatime 0 1
+UUID=abcd-1234-ef56-7890 / ext4 errors=remount-ro,noatime 0 1
+LABEL=boot /media/boot vfat defaults 0 1
+
 ```
-
-- 기존 `/dev/mmcblk0p2` 등은 주석 처리하거나 삭제!
-
 ---
 
 ## 7. 재부팅 \& 확인
 
 1. SSD에 파일이 잘 복사됐는지 확인!
-
-```bash
-ls /mnt/ssd
-```
 
 2. 재부팅!
 
@@ -163,28 +159,11 @@ sudo reboot
 3. 부팅 후 루트가 SSD인지 확인!
 
 ```bash
-mount | grep ' / '
-```
+mount | grep /dev/sda1
+
+/dev/sda1 on / type ext4 (rw,noatime,errors=remount-ro)```
 
 `/dev/sda1 on / type ext4` 이렇게 나오면 성공!
-
----
-
-## 8. microSD의 /boot 자동 마운트
-
-- 시스템 업데이트 시 부트 파티션이 잘 마운트되게 `/etc/fstab`에 추가:
-
-```
-UUID=abcd-1234-ef56-7890 / ext4 errors=remount-ro,noatime 0 1
-LABEL=boot /media/boot vfat defaults 0 1
-
-```
-
-- 적용:
-
-```bash
-sudo mount /media/boot
-```
 
 ---
 
