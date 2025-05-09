@@ -170,7 +170,7 @@ mount | grep ' / '
 
 ---
 
-## 8. (선택) microSD의 /boot 자동 마운트
+## 8. microSD의 /boot 자동 마운트
 
 - 시스템 업데이트 시 부트 파티션이 잘 마운트되게 `/etc/fstab`에 추가:
 
