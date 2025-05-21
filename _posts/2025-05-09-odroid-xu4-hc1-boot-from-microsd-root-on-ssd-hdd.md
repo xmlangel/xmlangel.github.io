@@ -46,6 +46,60 @@ HTTPS가 아니라서 그런가 싶기도 하고, 원인 찾기가 귀찮아서
 남는 장비들을 활용해보게 됐습니다.
 
 ---
+### 주요 특징
+Samsung Exynos ARMv7 Processor rev 3 (v7l)는 삼성의 Exynos 시리즈 SoC(System on Chip)에서 사용된 ARMv7 아키텍처 기반의 프로세서가 탑제 되어있던놈이다.
+
+이 프로세서는 주로 2010년대 초중반의 스마트폰, 태블릿 등에서 널리 사용되었다고한다.
+
+* Samsung Exynos5422 Cortex™-A15 2Ghz and Cortex™-A7 Octa core CPUs
+* Mali-T628 MP6(OpenGL ES 3.1/2.0/1.1 and OpenCL 1.2 Full profile)
+* 2Gbyte LPDDR3 RAM PoP stacked
+* eMMC5.0 HS400 Flash Storage Interface (eMMC module sold separately)
+* 2 x USB 3.0 Host, 1 x USB 2.0 Host
+* Gigabit Ethernet port
+* HDMI 1.4a for display
+* Size : 83 x 58 x 20 mm approx.(excluding cooler)
+* Power: 5V/4A input
+
+* /proc/cpuinfo 정보를 보면 아래와 같다. 
+
+```
+processor	: 7
+model name	: ARMv7 Processor rev 3 (v7l)
+BogoMIPS	: 120.00
+Features	: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm
+CPU implementer	: 0x41
+CPU architecture: 7
+CPU variant	: 0x2
+CPU part	: 0xc0f
+CPU revision	: 3
+
+Hardware	: Samsung Exynos (Flattened Device Tree)
+Revision	: 0000
+Serial		: 0000000000000000
+```
+| Benchmarks (Index Score)                         | Raspberry Pi 3 | ODROID-C1+ | ODROID-C2 | ODROID-XU4 |
+|--------------------------------------------------|:--------------:|:----------:|:---------:|:----------:|
+| Unixbench: Dhrystone-2 865.4                     | 1571.6         | 2768.2     | 5941.4    |            |
+| Unixbench: Double-Precision Whetstone (x3)       | 1113           | 1887.3     | 3076.8    | 6186.3     |
+| Nbench 2.2.3: Integer (x40)                      | 619.92         | 1173.6     | 1808.92   | 2430.52    |
+| Nbench 2.2.3: Floating-Point (x100)              | 781.8          | 1245.3     | 2300.3    | 3787.3     |
+| mbw100: Memory Bandwidth (MiB/s)                 | 542.912        | 616.339    | 1472.856  | 2591.461   |
+
+|                | SD-class10 | SD-UHS1 | eMMC 5.0 |
+|----------------|:----------:|:-------:|:--------:|
+| Write speed (MB/s) | 8.5      | 10.8    | 39.3     |
+| Read speed (MB/s)  | 18.9     | 35.9    | 140      |
+
+스팩이 위와 같으니 읽기쓰기조금은 빨라지지 않을까? 아무래도.. SSD 이니 SD 보다는 빨리지겠지...
+
+출처
+
+[ODROID-XU4 주요스팩정보](https://www.hardkernel.com/ko/shop/odroid-xu4-special-price/
+){:target="_blank"}{:rel="noopener noreferrer"}
+
+그럼 과정을 차차 보면될듯하다..
+
 
 ## 1. microSD에 OS 설치 \& 부팅 확인
 
