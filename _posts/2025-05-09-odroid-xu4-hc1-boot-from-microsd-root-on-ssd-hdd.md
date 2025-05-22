@@ -49,17 +49,32 @@ HTTPS가 아니라서 그런가 싶기도 하고, 원인 찾기가 귀찮아서
 ### 주요 특징
 Samsung Exynos ARMv7 Processor rev 3 (v7l)는 삼성의 Exynos 시리즈 SoC(System on Chip)에서 사용된 ARMv7 아키텍처 기반의 프로세서가 탑제 되어있던놈이다.
 
+사실 가진정확안 모델은 아래와 같다. 베이스가 ODROID-XU4 라고 하니 일단 넘어가자..
+
+- ODROID-HC1 : Home Cloud One
+```
+The HC1 is based on the very powerful ODROID-XU4 platform and it can run Samba, FTP, NFS, SSH, NGINX, Apache, SQL, Docker, WordPress and other server software smoothly with full Linux distributions like Ubuntu, Debian, Arch and OMV. Available and ready-to-go OS distributions are on our WiKi. Any OS for XU4 is fully compatible with the HC1. https://wiki.odroid.com/odroid-xu4/os_images/os_images
+```
+
 이 프로세서는 주로 2010년대 초중반의 스마트폰, 태블릿 등에서 널리 사용되었다고한다.
 
-* Samsung Exynos5422 Cortex™-A15 2Ghz and Cortex™-A7 Octa core CPUs
-* Mali-T628 MP6(OpenGL ES 3.1/2.0/1.1 and OpenCL 1.2 Full profile)
-* 2Gbyte LPDDR3 RAM PoP stacked
-* eMMC5.0 HS400 Flash Storage Interface (eMMC module sold separately)
-* 2 x USB 3.0 Host, 1 x USB 2.0 Host
-* Gigabit Ethernet port
-* HDMI 1.4a for display
-* Size : 83 x 58 x 20 mm approx.(excluding cooler)
-* Power: 5V/4A input
+| 항목                        | 사양 및 설명 |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CPU                         | Samsung Exynos5422 ARM® Cortex™-A15 Quad 2.0GHz / Cortex™-A7 Quad 1.4GHz |
+| DRAM Memory                  | 2Gbyte LPDDR3 RAM PoP (750MHz, 12GB/s memory bandwidth, 2x32bit bus) |
+| GPU                         | Mali™-T628 MP6, OpenGL ES 3.1 / 3.0 / 2.0 / 1.1, OpenCL 1.2 Full profile |
+| HDD / SSD SATA interface     | JMicron JMS578 USB 3.0 to SATA Bridge (UAS 지원, 최대 ~300MB/s 전송 속도), 7mm, 9mm, 12.5mm, 15mm 두께 HDD/SSD 설치 가능 |
+| Micro-SD Slot               | UHS-1 호환, 최대 128GB/SDXC 지원 |
+| USB2.0 Host                 | HighSpeed USB 표준 A타입 커넥터 x 1포트 |
+| LEDs                        | Power, System-status, SATA-status |
+| Gbit Ethernet LAN           | 10/100/1000Mbps 이더넷 (RJ-45, Auto-MDIX 지원) |
+| Power Input                 | DC Barrel Jack Socket 5.5/2.1mm, 4.8V~5.2V 입력 (5V/4A 권장) |
+| System Software             | Ubuntu 16.04 + OpenCL (Linux Kernel 4.9 LTS), Debian, DietPi, Arch-ARM, OMV 등 다양한 리눅스 배포판 지원, 전체 소스코드 Github 제공 |
+| Size                        | 147 x 85 x 29 mm (무게: 226g) |
+
+[ODROID-HC1](https://www.hardkernel.com/shop/odroid-hc1-home-cloud-one/){:target="_blank"}{:rel="noopener noreferrer"}
+표로 보면
+
 
 * /proc/cpuinfo 정보를 보면 아래와 같다. 
 
@@ -78,6 +93,9 @@ Hardware	: Samsung Exynos (Flattened Device Tree)
 Revision	: 0000
 Serial		: 0000000000000000
 ```
+
+다른 제품과의 벤치마크 정보는 아래와 같다.
+
 | Benchmarks (Index Score)                         | Raspberry Pi 3 | ODROID-C1+ | ODROID-C2 | ODROID-XU4 |
 |--------------------------------------------------|:--------------:|:----------:|:---------:|:----------:|
 | Unixbench: Dhrystone-2 865.4                     | 1571.6         | 2768.2     | 5941.4    |            |
@@ -92,14 +110,19 @@ Serial		: 0000000000000000
 | Read speed (MB/s)  | 18.9     | 35.9    | 140      |
 
 스팩이 위와 같으니 읽기쓰기조금은 빨라지지 않을까? 아무래도.. SSD 이니 SD 보다는 빨리지겠지...
-
-출처
-
 [ODROID-XU4 주요스팩정보](https://www.hardkernel.com/ko/shop/odroid-xu4-special-price/
 ){:target="_blank"}{:rel="noopener noreferrer"}
 
-그럼 과정을 차차 보면될듯하다..
 
+* 전원 정보 
+- 5V 4A 어댑터를 사용(내경은 2.1mm, 외경은 5.5mm 중앙은 양극, 외경은 음극)
+- 1~2A를 소모. USB 장치를 여러 개 연결하여 컴퓨팅 부하가 매우 높으면 최대 4A까지 소모될 수 있음.
+- USB 포트에 다른 외장 HDD를 연결하려면 5V/6A PSU를 사용
+- 12V/9V/15V PSU는 HC1과 함께 사용할 수 없음.
+
+저 전력이다.. 그냥 라즈베리파이보다 빠른놈이니.. 쓸만한놈이다.(7배 빠르다고함 근데 지금 수준에서는 그냥 저전전력으로 돌릴만한 조그마한 서버로 이용하기에는 무리없어보인다.)
+
+그럼 과정을 차차 보면될듯하다..
 
 ## 1. microSD에 OS 설치 \& 부팅 확인
 
