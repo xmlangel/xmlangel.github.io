@@ -44,7 +44,7 @@ _
 
 <table>
   <tr>
-    <td><img src="/assets/images/2025-05-28/ict01.png" alt="ICT 이미지 1" width="120"></td>
+    <td><img src="/assets/images/ict01.png" alt="ICT 이미지 1" width="120"></td>
     <td><img src="/assets/images/2025-05-28/ict02.png" alt="ICT 이미지 2" width="120"></td>
     <td><img src="/assets/images/2025-05-28/ict03.png" alt="ICT 이미지 3" width="120"></td>
     <td><img src="/assets/images/2025-05-28/ict04.png" alt="ICT 이미지 4" width="120"></td>
