@@ -44,11 +44,11 @@ _
 
 <table>
   <tr>
-    <td><img src="/assets/images/ict01.png" alt="ICT 이미지 1" width="120"></td>
-    <td><img src="/assets/images/2025-05-28/ict02.png" alt="ICT 이미지 2" width="120"></td>
-    <td><img src="/assets/images/2025-05-28/ict03.png" alt="ICT 이미지 3" width="120"></td>
-    <td><img src="/assets/images/2025-05-28/ict04.png" alt="ICT 이미지 4" width="120"></td>
-    <td><img src="/assets/images/2025-05-28/ict05.png" alt="ICT 이미지 5" width="120"></td>
+    <td><img src="/assets/images/ict01.png" alt="ICT 이미지 01" width="120"></td>
+    <td><img src="/assets/images/ict02.png" alt="ICT 이미지 02" width="120"></td>
+    <td><img src="/assets/images/ict03.png" alt="ICT 이미지 03" width="120"></td>
+    <td><img src="/assets/images/ict04.png" alt="ICT 이미지 04" width="120"></td>
+    <td><img src="/assets/images/ict05.png" alt="ICT 이미지 05" width="120"></td>
   </tr>
 </table>
 
