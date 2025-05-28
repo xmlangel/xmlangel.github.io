@@ -84,7 +84,7 @@ Cloudflare Tunnel은 서버에서 Cloudflare로 아웃바운드(나가는) 연�
 
 ---
 
-**1. 사전 준비**
+## 1. 사전 준비
 
 - Cloudflare 계정 및 도메인 보유
   (반드시 도메인이 있어야 하는지는 잘모르겠습니다. 어쨋든 나는 도메인이있으니..)
@@ -98,7 +98,7 @@ Cloudflare Tunnel은 서버에서 Cloudflare로 아웃바운드(나가는) 연�
 - Mac Pro : 2023년모델.. (벌써 이년이 흘럿구나...)
 ---
 
-**2. 서버에서 Cloudflare Tunnel 생성 및 연결**
+## 2. 서버에서 Cloudflare Tunnel 생성 및 연결
 그럼 시작해보겠습니다. 
 
 1. Cloudflare 에 로그인
@@ -210,7 +210,7 @@ cloudflared tunnel --hostname ssh.example.com --url ssh://localhost:22
 
 ---
 
-##3. Cloudflare Zero Trust에서 SSH 접근 정책 설정
+## 3. Cloudflare Zero Trust에서 SSH 접근 정책 설정
 
 - Zero Trust 대시보드에서 "Access > Applications"로 이동하여 "Add an application"을 클릭합니다.
 - "Self-hosted"를 선택하고, Application domain에 ssh.example.com을 입력합니다.
@@ -218,7 +218,7 @@ cloudflared tunnel --hostname ssh.example.com --url ssh://localhost:22
 
 ---
 
-##4. 클라이언트에서 SSH 접속 설정
+## 4. 클라이언트에서 SSH 접속 설정
 
 - 클라이언트에도 cloudflared를 설치합니다.
 - SSH 클라이언트 설정 파일(~/.ssh/config)에 아래와 같이 프록시 명령을 추가합니다:
@@ -245,7 +245,7 @@ Host odroid.qaspecialist.shop
 
 ---
 
-##5. 접속 테스트
+## 5. 접속 테스트
 
 - 아래 명령으로 SSH 접속을 시도합니다:
 
