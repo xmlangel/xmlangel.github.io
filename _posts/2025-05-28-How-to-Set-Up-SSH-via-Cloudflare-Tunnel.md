@@ -81,6 +81,7 @@ Cloudflare Access와 연동하면 SSO, MFA 등 고급 인증 정책도 적용할
 Cloudflare Tunnel은 서버에서 Cloudflare로 아웃바운드(나가는) 연결만 생성합니다. 
 
 외부에서 서버로 직접 접근하는 경로는 존재하지 않으므로, 서버의 방화벽에서 SSH 포트를 열 필요가 없습니다. 오직 Cloudflare 네트워크를 경유한 트래픽만 서버에 도달할 수 있습니다
+
 ---
 
 **1. 사전 준비**
@@ -107,7 +108,8 @@ Cloudflare Tunnel은 서버에서 Cloudflare로 아웃바운드(나가는) 연�
 5. 터널 이름을 지정하고, 안내에 따라 서버에 cloudflared를 설치합니다.
    - 저같은 경우에는 Odroid 라고 이름을 지정했어요.
    - Ubuntu 이니.. Debian 을 선택하니 아래와 같은 명령어를 입력하라고나옴.
-```
+
+```shell
 # Add cloudflare gpg key
 sudo mkdir -p --mode=0755 /usr/share/keyrings
 curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
@@ -117,6 +119,7 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudf
 
 # install cloudflared
 sudo apt-get update && sudo apt-get install cloudflared
+
 ```
 
 설치가 완료되고 난후에 서비스를 시작하는 토큰값을 넣어주면됨.
@@ -124,15 +127,18 @@ sudo apt-get update && sudo apt-get install cloudflared
 화면에 나오는데로 따라하면됨
 
 
-```
+``` shell
 sudo cloudflared service install eyJhIjo..
 
 ```
+
 정상적으로 끝나면 아래에 커낵트 아이디와 정보가 나옴.
-```
+
+```shell
 Connectors
 
 Connector ID xxxxxx-xxxxxxxx-xxxxx-xxxxxx-xxxxxx Connected  2025.5.0
+
 ```
 6. Next 를 누르면 도메인 정보와 Service를 입력하는 화면이 나타납니다. 
 
@@ -141,12 +147,15 @@ Connector ID xxxxxx-xxxxxxxx-xxxxx-xxxxxx-xxxxxx Connected  2025.5.0
 저같은 경우는 xmlangel.uk 도메인이 있으므로그걸 지정해서했습니다. 
 
 Public hostname 정보
-```
+
+``` shell
 Subdomain : 사용할서버이름
 Domain : 도메인주소(example.com)
 ```
+
 Service 에는
-```
+
+```shell
 Type : ssh
 Url : localhost:22
 ```
@@ -169,7 +178,7 @@ cloudflared tunnel --hostname ssh.example.com --url ssh://localhost:22
 중간에 WRN Erro 등이 나올수 있는데 몇번해보니 상관없는듯..합니다. 
 
 
-```
+``` shell
 |➜  ~ sudo cloudflared service install eyJhIj
 2025-05-28T13:54:36Z INF Using Systemd
 2025-05-28T13:54:37Z INF Linux service for cloudflared installed successfully
@@ -198,9 +207,10 @@ cloudflared tunnel --hostname ssh.example.com --url ssh://localhost:22
 2025/05/28 23:03:56 failed to sufficiently increase receive buffer size (was: 208 kiB, wanted: 7168 kiB, got: 416 kiB). See https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes for details.
 2025-05-28T14:03:57Z INF Registered tunnel connection connIndex=0 connection=9e3a4c86-ed8e-449e-9fdf-e44aeaa5c10a event=0 ip=198.41.200.193 location=icn05 protocol=quic
 ```
+
 ---
 
-**3. Cloudflare Zero Trust에서 SSH 접근 정책 설정**
+##3. Cloudflare Zero Trust에서 SSH 접근 정책 설정
 
 - Zero Trust 대시보드에서 "Access > Applications"로 이동하여 "Add an application"을 클릭합니다.
 - "Self-hosted"를 선택하고, Application domain에 ssh.example.com을 입력합니다.
@@ -208,26 +218,38 @@ cloudflared tunnel --hostname ssh.example.com --url ssh://localhost:22
 
 ---
 
-**4. 클라이언트에서 SSH 접속 설정**
+##4. 클라이언트에서 SSH 접속 설정
 
 - 클라이언트에도 cloudflared를 설치합니다.
 - SSH 클라이언트 설정 파일(~/.ssh/config)에 아래와 같이 프록시 명령을 추가합니다:
 
-```
+Ubuntu 나 다른 os 는 설정을 참고해서 해보길.
+일단 아래는 ubuntu
+``` shell
 Host ssh.example.com
   ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
   User <서버_유저명>
 ```
 
+난 맥이니 아래와 같이 설정했음.
+
+``` shell
+
+Host odroid.qaspecialist.shop
+        ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h
+	      User user
+```
+
 - SSH 접속 시 cloudflared가 자동으로 Cloudflare 인증을 진행하고, 터널을 통해 서버로 접속합니다.
+
 
 ---
 
-**5. 접속 테스트**
+##5. 접속 테스트
 
 - 아래 명령으로 SSH 접속을 시도합니다:
 
-```
+``` shell
 ssh [서버_유저명]@ssh.example.com
 ```
 
@@ -235,4 +257,11 @@ ssh [서버_유저명]@ssh.example.com
 
 ---
 
-이 방법을 사용하면 외부에 SSH 포트를 노출하지 않고도 안전하게 SSH로 서버를 관리할 수 있습니다.
+이 방법을 사용하면 외부에 SSH 포트를 노출하지 않고도 안전하게 SSH로 서버를 관리할 수 있다고합니다. 
+
+안전하게 접속해서 이용하면됩니다.
+
+그럼 오늘은 여기까지.
+
+끝..
+
