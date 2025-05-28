@@ -34,11 +34,7 @@ _
 
 <table>
   <tr>
-    <td><img src="/assets/images/ict01.png" alt="ICT 이미지 01" width="120"></td>
     <td><img src="/assets/images/ict02.png" alt="ICT 이미지 02" width="120"></td>
-    <td><img src="/assets/images/ict03.png" alt="ICT 이미지 03" width="120"></td>
-    <td><img src="/assets/images/ict04.png" alt="ICT 이미지 04" width="120"></td>
-    <td><img src="/assets/images/ict05.png" alt="ICT 이미지 05" width="120"></td>
   </tr>
 </table>
 
@@ -169,6 +165,9 @@ cloudflared tunnel --hostname ssh.example.com --url ssh://localhost:22
 - 여기서 ssh.example.com은 Cloudflare에 등록된 도메인 하위 도메인입니다.
 
 대충 아래와 같은 화면으로 수행이 됩니다.
+
+중간에 WRN Erro 등이 나올수 있는데 몇번해보니 상관없는듯..합니다. 
+
 
 ```
 |➜  ~ sudo cloudflared service install eyJhIj
