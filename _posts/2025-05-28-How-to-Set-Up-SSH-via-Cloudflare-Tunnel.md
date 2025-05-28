@@ -17,11 +17,20 @@ tags:
 _
 
 안녕하세요!
-저번에 Odroid 를 항시 열어놓고 있는데 가끔 회사에서 열어보고 싶을마음이 들더라고요 ..
 
-그래서 찾아보니 방법이 있어라고요.. 
+저번에 설치한 Odroid 를 열씸히 쓰고있습니다. 
 
-그래도 오늘은 찾아보고 실행한 내용을 정리해서 적어놓아요.
+개인적으로 하고있는 작업이 있는데  가끔 회사에서 열어보고 싶은 마음이 들더라고요 
+
+주말같은데 친구만나고 잠깐 시간날때 뭔가를 수정한다거 나 하는 일이 있으면 openvpn 접속하고 하는데 
+
+이런 방법이 아닌 보안이 좀더 좋은게 있더라고요.. 
+
+클라우드플에어에서 제공하는 터널 기능을 이용하면 그런 것이 있더라고요..
+
+인터넷 찾아보니 최근것은 없고 해서 2025.05.28일 기준 (내가 작업한날짜) 으로 이미지와 함께 정리해보았어요..
+
+나중에 또 찾아보기 쉽게..
 
 ---
 
@@ -32,6 +41,17 @@ _
 상용툴은 아니고 그냥 필요해서 만들어쓰는 툴입니다.
 
 일명 I Can Create Testcase 
+
+<table>
+  <tr>
+    <td><img src="/assets/images/2025-05-28/ict01.png" alt="ICT 이미지 1" width="120"></td>
+    <td><img src="/assets/images/2025-05-28/ict02.png" alt="ICT 이미지 2" width="120"></td>
+    <td><img src="/assets/images/2025-05-28/ict03.png" alt="ICT 이미지 3" width="120"></td>
+    <td><img src="/assets/images/2025-05-28/ict04.png" alt="ICT 이미지 4" width="120"></td>
+    <td><img src="/assets/images/2025-05-28/ict05.png" alt="ICT 이미지 5" width="120"></td>
+  </tr>
+</table>
+
 
 ## Cloudflare Tunnel을 통한 SSH 접속 설정 방법
 
