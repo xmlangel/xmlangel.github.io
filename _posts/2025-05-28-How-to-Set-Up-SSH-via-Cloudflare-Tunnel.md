@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Cloudflare] How to Set Up SSH via Cloudflare Tunnel
+title: "[Cloudflare] How to Set Up SSH via Cloudflare Tunnel"
 date:  2025-05-28 21:42:00 +0900
 categories: cloudflare
 How to Set Up SSH via Cloudflare Tunne
@@ -48,7 +48,7 @@ _
 
 클라우드플에어에서 제공하는 터널 기능을 그런 것이 있더라고요..
 
-인터넷 찾아보니 최근것은 없고 해서 2025.05.28일 기준 (내가 작업한날짜) 으로 이미지와 함께 정리해보았어요..
+인터넷 찾아보니 최근것은 없고 해서 2025.05.28일 기준 (내가 작업한날짜) 으로 함께 정리해보았어요..
 
 나중에 또 찾아보기 쉽게..
 
@@ -68,6 +68,7 @@ Cloudflare Tunnel(이전 명칭: Argo Tunnel)은 이런 문제를 근본적으�
 Cloudflare Tunnel을 활용해 서버의 인바운드 포트를 전혀 열지 않고도 안전하게 SSH로 접속하는 원리와 실제 적용 방법을 설명 해보겠습니다. 
 
 ### Cloudflare Tunnel이란?
+
 Cloudflare Tunnel은 Cloudflare가 제공하는 제로 트러스트 네트워크 서비스로, 서버가 직접 외부에서 접근당하지 않도록 Cloudflare 네트워크와 안전한 아웃바운드 터널을 생성합니다. 
 
 즉, 서버에서는 외부로만 접속을 열고, 외부에서 서버로 직접 들어오는 연결(인바운드 포트 개방)이 전혀 필요 없습니다.
@@ -104,26 +105,100 @@ Cloudflare Tunnel은 서버에서 Cloudflare로 아웃바운드(나가는) 연�
 그럼 시작해보겠습니다. 
 
 1. Cloudflare 에 로그인
-
 2. Zero Trust> 대시보드에 들어갑니다.
-
-<table>
-  <tr>
-    <td><img src="/assets/images/cloudflare01.png" alt="cloudflare 이미지 01" width="200"></td>
-  </tr>
-</table>   
-
-3. "Network > Tunnels"에서 "Add a tunnel"을 클릭합니다.
+3. "Network > Tunnels"에서 "Create a tunnel"을 클릭합니다.
+4. Cloudflared 를 누릅니다.(Recommended 라고하니..)
 5. 터널 이름을 지정하고, 안내에 따라 서버에 cloudflared를 설치합니다.
-6. cloudflared로 터널을 생성하고, 터널에 public hostname을 추가합니다.
-    - 예시 명령:
+   - 저같은 경우에는 Odroid 라고 이름을 지정했어요.
+   - Ubuntu 이니.. Debian 을 선택하니 아래와 같은 명령어를 입력하라고나옴.
+```
+# Add cloudflare gpg key
+sudo mkdir -p --mode=0755 /usr/share/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
 
+# Add this repo to your apt repositories
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+
+# install cloudflared
+sudo apt-get update && sudo apt-get install cloudflared
+```
+
+설치가 완료되고 난후에 서비스를 시작하는 토큰값을 넣어주면됨.
+
+화면에 나오는데로 따라하면됨
+
+
+```
+sudo cloudflared service install eyJhIjo..
+
+```
+정상적으로 끝나면 아래에 커낵트 아이디와 정보가 나옴.
+```
+Connectors
+
+Connector ID xxxxxx-xxxxxxxx-xxxxx-xxxxxx-xxxxxx Connected  2025.5.0
+```
+6. Next 를 누르면 도메인 정보와 Service를 입력하는 화면이 나타납니다. 
+
+도메인에는 본인의 도메인 정보의 하위 도메인 정보를 생성해서 만들면됩니다.
+
+저같은 경우는 xmlangel.uk 도메인이 있으므로그걸 지정해서했습니다. 
+
+Public hostname 정보
+```
+Subdomain : 사용할서버이름
+Domain : 도메인주소(example.com)
+```
+Service 에는
+```
+Type : ssh
+Url : localhost:22
+```
+7. 정보를 다 입력하고 나서 저장을 합니다.
+   
+8. 이제 cloudflared로 터널을 생성하고, 터널에 public hostname을 추가 합니다.
+
+   - 서버에서 아래 명령어로 입력하면됩니다. hostname 은 보인이 설정한 도메인정보
+   - url 은 url 에 입력한 정보를 입력하면됩니다.
+
+- 예시 명령:
 ```
 cloudflared tunnel --hostname ssh.example.com --url ssh://localhost:22
+
 ```
+- 여기서 ssh.example.com은 Cloudflare에 등록된 도메인 하위 도메인입니다.
 
-    - 여기서 ssh.example.com은 Cloudflare에 등록된 도메인 하위 도메인입니다.
+대충 아래와 같은 화면으로 수행이 됩니다.
 
+```
+|➜  ~ sudo cloudflared service install eyJhIj
+2025-05-28T13:54:36Z INF Using Systemd
+2025-05-28T13:54:37Z INF Linux service for cloudflared installed successfully
+|➜  ~ cloudflared tunnel --hostname ssh.example.com --url ssh://localhost:22
+2025-05-28T14:03:52Z INF Thank you for trying Cloudflare Tunnel. Doing so, without a Cloudflare account, is a quick way to experiment and try it out. However, be aware that these account-less Tunnels have no uptime guarantee, are subject to the Cloudflare Online Services Terms of Use (https://www.cloudflare.com/website-terms/), and Cloudflare reserves the right to investigate your use of Tunnels for violations of such terms. If you intend to use Tunnels in production you should use a pre-created named tunnel by following: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps
+2025-05-28T14:03:52Z INF Requesting new quick Tunnel on trycloudflare.com...
+2025-05-28T14:03:56Z INF +--------------------------------------------------------------------------------------------+
+2025-05-28T14:03:56Z INF |  Your quick Tunnel has been created! Visit it at (it may take some time to be reachable):  |
+2025-05-28T14:03:56Z INF |  https://xp-experiences-remix-procedures.trycloudflare.com                                 |
+2025-05-28T14:03:56Z INF +--------------------------------------------------------------------------------------------+
+2025-05-28T14:03:56Z INF Cannot determine default configuration path. No file [config.yml config.yaml] in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp /etc/cloudflared /usr/local/etc/cloudflared]
+2025-05-28T14:03:56Z INF Version 2025.5.0 (Checksum a62266fd02041374f1fca0d85694aafdf7e26e171a314467356b471d4ebb2393)
+2025-05-28T14:03:56Z INF GOOS: linux, GOVersion: go1.22.10, GoArch: amd64
+2025-05-28T14:03:56Z INF Settings: map[ha-connections:1 hostname:nas.qaspecialist.shop protocol:quic url:ssh://localhost:22]
+2025-05-28T14:03:56Z INF cloudflared will not automatically update if installed by a package manager.
+2025-05-28T14:03:56Z INF Generated Connector ID: b6f5a555-1b3e-4297-8cdb-d53d2b07eb26
+2025-05-28T14:03:56Z INF Initial protocol quic
+2025-05-28T14:03:56Z INF ICMP proxy will use 192.168.29.131 as source for IPv4
+2025-05-28T14:03:56Z INF ICMP proxy will use fe80::5020:8f:54ce:62b8 in zone enp3s0 as source for IPv6
+2025-05-28T14:03:56Z WRN The user running cloudflared process has a GID (group ID) that is not within ping_group_range. You might need to add that user to a group within that range, or instead update the range to encompass a group the user is already in by modifying /proc/sys/net/ipv4/ping_group_range. Otherwise cloudflared will not be able to ping this network error="Group ID 1000 is not between ping group 1 to 0"
+2025-05-28T14:03:56Z WRN ICMP proxy feature is disabled error="cannot create ICMPv4 proxy: Group ID 1000 is not between ping group 1 to 0 nor ICMPv6 proxy: socket: permission denied"
+2025-05-28T14:03:56Z INF ICMP proxy will use 192.168.29.131 as source for IPv4
+2025-05-28T14:03:56Z INF ICMP proxy will use fe80::5020:8f:54ce:62b8 in zone enp3s0 as source for IPv6
+2025-05-28T14:03:56Z INF Starting metrics server on 127.0.0.1:20242/metrics
+2025-05-28T14:03:56Z INF Tunnel connection curve preferences: [CurveID(4588) CurveID(25497) CurveP256] connIndex=0 event=0 ip=198.41.200.193
+2025/05/28 23:03:56 failed to sufficiently increase receive buffer size (was: 208 kiB, wanted: 7168 kiB, got: 416 kiB). See https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes for details.
+2025-05-28T14:03:57Z INF Registered tunnel connection connIndex=0 connection=9e3a4c86-ed8e-449e-9fdf-e44aeaa5c10a event=0 ip=198.41.200.193 location=icn05 protocol=quic
+```
 ---
 
 **3. Cloudflare Zero Trust에서 SSH 접근 정책 설정**
@@ -157,7 +232,7 @@ Host ssh.example.com
 ssh [서버_유저명]@ssh.example.com
 ```
 
-- 최초 접속 시 브라우저가 열리며 Cloudflare Access 인증을 요구할 수 있습니다. 인증 후 터미널에서 SSH 세션이 열립니다[^6].
+- 최초 접속 시 브라우저가 열리며 Cloudflare Access 인증을 요구할 수 있습니다. 인증 후 터미널에서 SSH 세션이 열립니다.
 
 ---
 
