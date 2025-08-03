@@ -28,7 +28,7 @@ tags:
 
 <table>
   <tr>
-    <td><img src="/assets/images/gamedata.png" alt="테스트 케이스 관리툴" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
+    <td><img src="/assets/images/d9b196cb-d401-4cb7-87a3-41748c357ba5.png" alt="테스트 케이스 관리툴" width="800" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
   </tr>
 </table>>
 
