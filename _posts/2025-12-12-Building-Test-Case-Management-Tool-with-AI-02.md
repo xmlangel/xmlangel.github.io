@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[AI 개발] 2부 제작과정 - QA 엔지니어로 일하며 AI 도구로 테스트 케이스 관리툴 만든 경험담"
-date: 2025-09-11 20:42:00 +0900
+date: 2025-12-12 20:42:00 +0900
 categories: ai-development
 tags:
 - ai
