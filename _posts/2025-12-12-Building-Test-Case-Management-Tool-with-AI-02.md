@@ -80,17 +80,7 @@ TestCaseCraft는 단순한 기록용 도구가 아니라, QA가 실제로 테스
 
 전체적인 폴더 구조와 기술 스택은 다음과 같이 잡았습니다. Spring + FastAPI + React + PostgreSQL 조합을 통해 안정성과 최신 AI 기술을 동시에 잡으려 노력했습니다.
 
-```
-┌─────────────────┐    ┌─────────────────────┐    ┌───────────────────────┐
-│   Frontend      │    │   Backend           │    │   Database            │
-│   (React)       │◄──►│(Spring Boot+FastAPI)│◄──►│  (PostgreSQL-pgvector)│
-└─────────────────┘    └─────────────────────┘    └───────────────────────┘
-         │                       │                       │
-         │              ┌─────────────────┐              │
-         └─────────────►│  Authentication │◄─────────────┘
-                        │  (JWT + Refresh)│
-                        └─────────────────┘
-```
+<img src="/assets/images/2025-12-12-testcasecraft-acr.png" alt="테스트 케이스 크래프트 스택" width="100%" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
   
 
 ### 1) Frontend (React SPA)
@@ -236,7 +226,7 @@ Integration: 현업에서 가장 많이 쓰는 JIRA 연동을 기본으로 넣�
 
 거창한 기능보다는 QA 업무에 **'꼭 필요한 기능'**부터 정의했습니다. 개발 순서는 Backend → Frontend → RAG 순으로 진행했습니다.
 
-## 프로젝트 관리 (Tree Structure)
+## 프로젝트 관리 (Project)
 여러 프로젝트를 생성하고 관리하는 구조로 쉽게 생성할수 있게 했어요 
 
 조직(Organization) → 프로젝트(Project) → 그룹(Group)으로 이어지는 위계 구조를 잡았습니다.
@@ -270,18 +260,22 @@ QA 업무의 핵심입니다. 폴더 트리 구조로 수천 개의 케이스를
 - 테그
 
 그리고 요즘 대부분 Markdown 형식이라 에디터도 Markdown 형식의 에디터를 지원하게 만들었어요.
+<table>
+   <tr>
+    <td><img src="/assets/images/2025-12-12-Testcase-form.gif" alt="TestPlan" width="700" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
+  </tr>
+</table>
+
 
 하지만 대량 입력을 하기위해서 스프레드시트 기능을 넣었습니다.
 Import/Export 하는 기능 보다는 엑셀/구글 스프레드시트에서 작업한 내용을 바로 복사 붙여 넣기 할 수 있도록 만들었어요.
 중간에 줄을 추가한다거나 삭제 한다거나 하는기능들도 만들어서 넣었죠.
 
 <table>
-  <tr>
-    <td><img src="/assets/images/2025-12-12-Testcase.gif" alt="Testcase" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
-    <td><img src="/assets/images/2025-12-12-Testcase-03.gif" alt="Testcase-01" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
+   <tr>
+    <td><img src="/assets/images/2025-12-12-Testcase-spreadsheet.gif" alt="TestPlan" width="700" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
   </tr>
-</table>
-  
+</table>  
 
 ## 테스트 플랜 (Test Plan)
 테스트케이스가 준비되면, 그다음은 실행 계획을 세워야 합니다.  
