@@ -243,7 +243,7 @@ diff -U3 /home/.../expected/aggregates.out ...
 </testsuite>
 ```
 
-Jenkins 나 OpenSouurce 인 TestcaseCraft 에서 이 JUnit XML을 읽으면:
+OpenSouurce 인 TestcaseCraft 에서 이 JUnit XML을 읽으면:
 - 테스트 이름, 상태, 실행 시간이 한눈에 보임
 - 실패 이유가 요약되어 있어서 바로 이해 가능
 - 필요하면 전체 diff도 확인 가능
