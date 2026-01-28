@@ -16,3 +16,4 @@ Gemfile.lock
 # Gemini related files
 GEMINI.md
 .gemini/
+node_modules/
