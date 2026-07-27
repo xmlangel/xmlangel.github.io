@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" role="img" aria-label="BDD 시나리오에서 시작해 Judge 채점을 거쳐 리포트로 끝나는 파이프라인">
+  <rect width="900" height="430" fill="#fbfbf9"/>
+  <text x="30" y="42" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#1a1a1a">한글 시나리오에서 대시보드까지</text>
+  <line x1="30" y1="56" x2="870" y2="56" stroke="#1a1a1a" stroke-width="2"/>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/>
+    </marker>
+  </defs>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="86" width="180" height="72" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+    <text x="44" y="106" font-size="11" fill="#888">1. 기준 정의</text>
+    <text x="44" y="126" font-size="13.5" font-weight="700" fill="#1a1a1a">.feature (한글)</text>
+    <text x="44" y="146" font-size="11" fill="#666">도메인 담당자가 고칩니다</text>
+
+    <line x1="210" y1="122" x2="252" y2="122" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#a)"/>
+
+    <rect x="256" y="86" width="180" height="72" fill="#fff" stroke="#666"/>
+    <text x="270" y="106" font-size="11" fill="#888">2. 연결</text>
+    <text x="270" y="126" font-size="13.5" font-weight="700" fill="#1a1a1a">steps/</text>
+    <text x="270" y="146" font-size="11" fill="#666">얇게 유지합니다</text>
+
+    <line x1="436" y1="122" x2="478" y2="122" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#a)"/>
+
+    <rect x="482" y="86" width="180" height="72" fill="#fff" stroke="#666"/>
+    <text x="496" y="106" font-size="11" fill="#888">3. 실행</text>
+    <text x="496" y="126" font-size="13.5" font-weight="700" fill="#1a1a1a">services/</text>
+    <text x="496" y="146" font-size="11" fill="#666">GraphRAG 호출과 시트 IO</text>
+
+    <line x1="662" y1="122" x2="704" y2="122" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#a)"/>
+
+    <rect x="708" y="86" width="162" height="72" fill="#fff" stroke="#666"/>
+    <text x="722" y="106" font-size="11" fill="#888">4. 후보답변</text>
+    <text x="722" y="126" font-size="13.5" font-weight="700" fill="#1a1a1a">candidate</text>
+    <text x="722" y="146" font-size="11" fill="#666">이걸 채점합니다</text>
+  </g>
+
+  <line x1="789" y1="158" x2="789" y2="186" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="190" width="840" height="112" fill="#f2f1ed" stroke="#1a1a1a" stroke-width="1.5"/>
+    <text x="46" y="212" font-size="12" font-weight="700" fill="#1a1a1a">5. 채점 레이어</text>
+
+    <rect x="46" y="224" width="240" height="62" fill="#fff" stroke="#666"/>
+    <text x="60" y="244" font-size="12" font-weight="700" fill="#1a1a1a">EXTRACT_GT</text>
+    <text x="60" y="262" font-size="10.5" fill="#666">규정 .md → 조항 전문 · 페이지</text>
+    <text x="60" y="277" font-size="10.5" fill="#666">정답지 없이 시작할 수 있습니다</text>
+
+    <rect x="300" y="224" width="270" height="62" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+    <text x="314" y="244" font-size="12" font-weight="700" fill="#1a1a1a">llm_judge (1~4점 + reason)</text>
+    <text x="314" y="262" font-size="10.5" fill="#666">Reference-Guided · temperature=0</text>
+    <text x="314" y="277" font-size="10.5" fill="#666">gpt-4o-mini · JSON 강제</text>
+
+    <rect x="584" y="224" width="270" height="62" fill="#fff" stroke="#999" stroke-dasharray="4 3"/>
+    <text x="598" y="244" font-size="12" font-weight="700" fill="#555">KoBERTScore (참고 지표)</text>
+    <text x="598" y="262" font-size="10.5" fill="#888">독립 신호로 뒀지만</text>
+    <text x="598" y="277" font-size="10.5" fill="#888">합불 판정에는 아직 안 씁니다</text>
+  </g>
+
+  <line x1="450" y1="302" x2="450" y2="330" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="334" width="260" height="64" fill="#fff" stroke="#666"/>
+    <text x="44" y="356" font-size="12" font-weight="700" fill="#1a1a1a">PASS</text>
+    <text x="44" y="376" font-size="11" fill="#666">자동 통과, 사람은 보지 않습니다</text>
+    <text x="44" y="391" font-size="11" fill="#666">시트와 TCC, Allure에 기록만</text>
+
+    <rect x="304" y="334" width="290" height="64" fill="#1a1a1a"/>
+    <text x="318" y="356" font-size="12" font-weight="700" fill="#fff">FAIL → 사람 검토 큐</text>
+    <text x="318" y="376" font-size="11" fill="#ccc">reason 먼저 읽고 동의하는지만 확인합니다</text>
+    <text x="318" y="391" font-size="11" fill="#ccc">FAIL 비율만큼만 사람이 봅니다</text>
+
+    <rect x="608" y="334" width="262" height="64" fill="#fff" stroke="#666"/>
+    <text x="622" y="356" font-size="12" font-weight="700" fill="#1a1a1a">CI</text>
+    <text x="622" y="376" font-size="11" fill="#666">behavex 병렬, Jenkins 정기 실행</text>
+    <text x="622" y="391" font-size="11" fill="#666">JUnit XML → TestCaseCraft</text>
+  </g>
+</svg>

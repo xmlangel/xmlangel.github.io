@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="900" height="480" role="img" aria-label="Likert 척도와 체크리스트의 평가자 간 일치도">
+  <rect width="900" height="480" fill="#fbfbf9"/>
+  <text x="30" y="40" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#1a1a1a">점수를 매기게 하면 판정이 흔들립니다</text>
+  <text x="30" y="60" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#777">출처: Lee et al., CheckEval: A reliable LLM-as-a-Judge framework using checklists, Table 1·2, §5.2 (arxiv.org/abs/2403.18771)</text>
+  <line x1="30" y1="72" x2="870" y2="72" stroke="#1a1a1a" stroke-width="2"/>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="92" width="410" height="150" fill="#fff" stroke="#999" stroke-dasharray="4 3"/>
+    <text x="46" y="114" font-size="13.5" font-weight="700" fill="#555">Likert 척도 (저희가 지금 쓰는 방식)</text>
+    <text x="46" y="136" font-size="11.5" fill="#666">"이 답변은 1~4점 중 몇 점인가?"</text>
+    <rect x="46" y="150" width="378" height="34" fill="#f2f1ed"/>
+    <text x="60" y="172" font-size="12" fill="#1a1a1a">1 · 2 · <tspan font-weight="700" fill="#b23">3</tspan> · <tspan font-weight="700" fill="#b23">4</tspan>  ← 인접 점수의 경계가 모델마다 다릅니다</text>
+    <text x="46" y="204" font-size="11.5" fill="#666">논문 지적. 평가 차원이 여러 세부 기준을 한꺼번에</text>
+    <text x="46" y="221" font-size="11.5" fill="#666">담고 있어 일관된 총점을 만들기 어렵고, 3점과 4점의</text>
+    <text x="46" y="238" font-size="11.5" fill="#666">구분이 모델 간에 보정되지 않습니다.</text>
+
+    <rect x="460" y="92" width="410" height="150" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+    <text x="476" y="114" font-size="13.5" font-weight="700" fill="#1a1a1a">체크리스트 (Boolean QA)</text>
+    <text x="476" y="136" font-size="11.5" fill="#666">"조항 번호를 정확히 인용했는가?" → 예 / 아니오</text>
+    <rect x="476" y="150" width="378" height="34" fill="#f2f1ed"/>
+    <text x="490" y="172" font-size="12" fill="#1a1a1a">✓ ✓ ✗ ✓ ✓  →  점수 = 4/5 = <tspan font-weight="700">0.8</tspan></text>
+    <text x="476" y="204" font-size="11.5" fill="#666">판정 근거가 항목 단위로 남습니다. 어떤 항목에서</text>
+    <text x="476" y="221" font-size="11.5" fill="#666">떨어졌는지가 그대로 실패 원인 분류가 됩니다.</text>
+    <text x="476" y="238" font-size="11.5" fill="#666">애매한 총점 흔들림이 없습니다.</text>
+  </g>
+
+  <text x="30" y="278" font-family="Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#1a1a1a">평가자 간 일치도 (IEA · Krippendorff α, SummEval)</text>
+  <text x="30" y="296" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#888">같은 방법론을 서로 다른 12개 모델로 돌렸을 때 점수가 일치하는 정도. 낮으면 어떤 모델을 쓰느냐에 결과가 좌우됩니다.</text>
+
+  <g font-family="Helvetica, Arial, sans-serif" font-size="11.5">
+    <text x="30" y="326" fill="#666">전체 · G-Eval</text>
+    <rect x="180" y="315" width="18" height="15" fill="#bbb"/>
+    <text x="212" y="327" font-weight="700" fill="#1a1a1a">0.09</text>
+
+    <text x="30" y="352" fill="#666">전체 · CheckEval</text>
+    <rect x="180" y="341" width="96" height="15" fill="#1a1a1a"/>
+    <text x="290" y="353" font-weight="700" fill="#1a1a1a">0.48</text>
+
+    <text x="30" y="386" fill="#666">대형 모델군 · G-Eval</text>
+    <rect x="180" y="375" width="10" height="15" fill="#bbb"/>
+    <text x="212" y="387" font-weight="700" fill="#1a1a1a">0.05</text>
+
+    <text x="30" y="412" fill="#666">대형 모델군 · CheckEval</text>
+    <rect x="180" y="401" width="134" height="15" fill="#1a1a1a"/>
+    <text x="328" y="413" font-weight="700" fill="#1a1a1a">0.67</text>
+
+    <line x1="490" y1="310" x2="490" y2="420" stroke="#ddd"/>
+    <text x="510" y="330" font-size="11.5" fill="#666">사람 평가자끼리의 일치도는 κ ≈ 0.7</text>
+    <text x="510" y="348" font-size="11.5" fill="#666">(Fabbri et al., 2021). 체크리스트의 0.67 은</text>
+    <text x="510" y="366" font-size="11.5" fill="#666">사람 검수자 여럿을 쓴 것과 비슷한 수준입니다.</text>
+    <text x="510" y="392" font-size="11.5" fill="#1a1a1a" font-weight="700">"high correlation alone does not</text>
+    <text x="510" y="409" font-size="11.5" fill="#1a1a1a" font-weight="700">guarantee reliability" (§5.2)</text>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="434" width="840" height="34" fill="#1a1a1a"/>
+    <text x="46" y="456" font-size="11.5" fill="#ccc">사람 상관도 함께 올랐습니다. Llama3.1-8B 기준 Topical-Chat에서 G-Eval ρ 0.11 → CheckEval ρ <tspan font-weight="700" fill="#fff">0.46</tspan> · Mistral-Large + CheckEval 이 전체 최고 ρ <tspan font-weight="700" fill="#fff">0.55</tspan> (Table 1)</text>
+  </g>
+</svg>

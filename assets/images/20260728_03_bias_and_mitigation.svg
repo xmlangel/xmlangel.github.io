@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 416" width="900" height="416" role="img" aria-label="MT-Bench 가 보고한 편향 네 가지와 대응 방법">
+  <rect width="900" height="416" fill="#fbfbf9"/>
+  <text x="30" y="40" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#1a1a1a">MT-Bench 가 짚은 Judge 의 맹점</text>
+  <text x="30" y="60" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#777">출처: Zheng et al., Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena (NeurIPS 2023) §3.3~3.4, Table 2·3·4 (arxiv.org/abs/2306.05685)</text>
+  <line x1="30" y1="72" x2="870" y2="72" stroke="#1a1a1a" stroke-width="2"/>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="94" width="840" height="106" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+    <text x="46" y="116" font-size="13.5" font-weight="700" fill="#1a1a1a">① Position Bias · 앞에 놓인 답변을 고릅니다</text>
+    <text x="46" y="137" font-size="11.5" fill="#555">순서만 바꿔도 판정이 뒤집힙니다. Table 2 의 Consistency(순서를 바꿔도 같은 판정을 낸 비율)</text>
+    <rect x="46" y="148" width="250" height="40" fill="#f2f1ed"/>
+    <text x="58" y="164" font-size="11" fill="#666">Claude-v1</text><text x="270" y="164" font-size="12" font-weight="700" text-anchor="end" fill="#1a1a1a">23.8%</text>
+    <text x="58" y="181" font-size="11" fill="#666">첫 답변 선호율</text><text x="270" y="181" font-size="12" font-weight="700" text-anchor="end" fill="#1a1a1a">75.0%</text>
+    <rect x="306" y="148" width="250" height="40" fill="#f2f1ed"/>
+    <text x="318" y="164" font-size="11" fill="#666">GPT-3.5</text><text x="530" y="164" font-size="12" font-weight="700" text-anchor="end" fill="#1a1a1a">46.2%</text>
+    <text x="318" y="181" font-size="11" fill="#666">GPT-4</text><text x="530" y="181" font-size="12" font-weight="700" text-anchor="end" fill="#1a1a1a">65.0%</text>
+    <rect x="566" y="148" width="288" height="40" fill="#1a1a1a"/>
+    <text x="578" y="164" font-size="11" fill="#bbb">대응: 위치를 바꿔 두 번 채점합니다</text>
+    <text x="578" y="181" font-size="11" fill="#bbb">Few-shot 예시 → 65.0% → 77.5% (비용 4배)</text>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="210" width="840" height="94" fill="#fff" stroke="#666"/>
+    <text x="46" y="232" font-size="13.5" font-weight="700" fill="#1a1a1a">② Verbosity Bias · 길이를 품질로 봅니다</text>
+    <text x="46" y="253" font-size="11.5" fill="#555">새 정보 없이 같은 목록을 앞에 붙인 repetitive list 공격. Table 3 의 성공률(23개 답변)</text>
+    <rect x="46" y="264" width="250" height="26" fill="#f2f1ed"/>
+    <text x="58" y="281" font-size="11" fill="#666">Claude-v1 / GPT-3.5</text><text x="284" y="281" font-size="12" font-weight="700" text-anchor="end" fill="#1a1a1a">91.3%</text>
+    <rect x="306" y="264" width="250" height="26" fill="#f2f1ed"/>
+    <text x="318" y="281" font-size="11" fill="#666">GPT-4</text><text x="544" y="281" font-size="12" font-weight="700" text-anchor="end" fill="#1a1a1a">8.7%</text>
+    <text x="576" y="281" font-size="11" fill="#888">모델에 따라 방어력 차이가 큽니다</text>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="314" width="410" height="86" fill="#fff" stroke="#666"/>
+    <text x="46" y="336" font-size="13.5" font-weight="700" fill="#1a1a1a">③ Self-Enhancement Bias</text>
+    <text x="46" y="356" font-size="11.5" fill="#555">GPT-4 는 자기 답변에 win rate +10%,</text>
+    <text x="46" y="373" font-size="11.5" fill="#555">Claude-v1 은 +25%. GPT-3.5 는 자기 선호가 없었습니다.</text>
+    <text x="46" y="392" font-size="11" fill="#888">논문은 데이터가 적어 단정하지 않았습니다.</text>
+
+    <rect x="460" y="314" width="410" height="86" fill="#fff" stroke="#666"/>
+    <text x="476" y="336" font-size="13.5" font-weight="700" fill="#1a1a1a">④ 수학·추론 채점 한계</text>
+    <text x="476" y="356" font-size="11.5" fill="#555">Table 4, 위치 스왑 포함 오채점 비율</text>
+    <text x="476" y="375" font-size="12" fill="#1a1a1a">기본 <tspan font-weight="700">14/20</tspan>  →  CoT <tspan font-weight="700">6/20</tspan>  →  참조 제공 <tspan font-weight="700">3/20</tspan></text>
+    <text x="476" y="393" font-size="11" fill="#888">정답을 프롬프트에 넣자 70% 가 15% 로 내려갔습니다</text>
+  </g>
+
+</svg>

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520" role="img" aria-label="BDD 테스트 스위트의 디렉터리 구조와 레이어별 책임">
+  <rect width="900" height="520" fill="#fbfbf9"/>
+  <text x="30" y="40" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#1a1a1a">누가 무엇을 고치는가</text>
+  <text x="30" y="60" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#777">tests/ 디렉터리 구조와 레이어별 책임. 위로 갈수록 도메인 담당자, 아래로 갈수록 개발자 영역입니다.</text>
+  <line x1="30" y1="72" x2="870" y2="72" stroke="#1a1a1a" stroke-width="2"/>
+
+  <defs>
+    <marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/>
+    </marker>
+  </defs>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <text x="46" y="94" font-size="11" font-weight="700" fill="#888">디렉터리</text>
+    <text x="330" y="94" font-size="11" font-weight="700" fill="#888">담는 것</text>
+    <text x="646" y="94" font-size="11" font-weight="700" fill="#888">고치는 사람</text>
+  </g>
+
+  <!-- features -->
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="104" width="840" height="66" fill="#1a1a1a"/>
+    <text x="46" y="128" font-size="13.5" font-weight="700" fill="#fff">tests/features/</text>
+    <text x="46" y="148" font-size="10.5" fill="#bbb">bert_llm_judge.feature</text>
+    <text x="46" y="163" font-size="10.5" fill="#bbb">localTest_with_eval.feature</text>
+    <text x="330" y="128" font-size="12" fill="#fff">한글 시나리오 (`# language: ko`)</text>
+    <text x="330" y="148" font-size="10.5" fill="#bbb">조건 / 만약 / 그러면</text>
+    <text x="330" y="163" font-size="10.5" fill="#bbb">@evaluate · @evaluate_rows · @thread</text>
+    <text x="646" y="132" font-size="12" font-weight="700" fill="#fff">도메인 담당자</text>
+    <text x="646" y="152" font-size="10.5" fill="#bbb">숫자·시트명만 바꾸면 됩니다</text>
+  </g>
+
+  <line x1="120" y1="170" x2="120" y2="188" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#d)"/>
+  <text x="136" y="184" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#888">문장 한 줄 = 함수 하나</text>
+
+  <!-- steps -->
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="192" width="840" height="62" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+    <text x="46" y="216" font-size="13.5" font-weight="700" fill="#1a1a1a">tests/steps/</text>
+    <text x="46" y="236" font-size="10.5" fill="#666">bert_llm_judge_steps.py · chat_with_eval_steps.py</text>
+    <text x="330" y="216" font-size="12" fill="#1a1a1a">문장과 코드를 연결하는 레이어</text>
+    <text x="330" y="236" font-size="10.5" fill="#666">`{start_row:d}` 로 타입까지 파싱합니다</text>
+    <text x="646" y="216" font-size="12" font-weight="700" fill="#1a1a1a">개발자</text>
+    <text x="646" y="236" font-size="10.5" fill="#b23">여기에 로직을 쌓지 않습니다</text>
+  </g>
+
+  <line x1="120" y1="254" x2="120" y2="272" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#d)"/>
+  <text x="136" y="268" font-family="Helvetica, Arial, sans-serif" font-size="10.5" fill="#888">호출만 넘깁니다</text>
+
+  <!-- services -->
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="276" width="840" height="62" fill="#fff" stroke="#666"/>
+    <text x="46" y="300" font-size="13.5" font-weight="700" fill="#1a1a1a">tests/services/</text>
+    <text x="46" y="320" font-size="10.5" fill="#666">post_evaluation_service.py · testcasecraft_service.py</text>
+    <text x="330" y="300" font-size="12" fill="#1a1a1a">비즈니스 로직</text>
+    <text x="330" y="320" font-size="10.5" fill="#666">GraphRAG 호출 · 시트 IO · TCC 업로드</text>
+    <text x="646" y="300" font-size="12" font-weight="700" fill="#1a1a1a">개발자</text>
+    <text x="646" y="320" font-size="10.5" fill="#666">시나리오가 바뀌어도 여기는 그대로</text>
+  </g>
+
+  <line x1="120" y1="338" x2="120" y2="356" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#d)"/>
+
+  <!-- utils/llm -->
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="360" width="840" height="76" fill="#f2f1ed" stroke="#666"/>
+    <text x="46" y="384" font-size="13.5" font-weight="700" fill="#1a1a1a">tests/utils/llm/</text>
+    <text x="46" y="404" font-size="10.5" fill="#666">config.py · evaluator.py</text>
+    <text x="46" y="419" font-size="10.5" fill="#666">services/ openai_service · kobert_service · spreadsheet_service</text>
+    <text x="330" y="384" font-size="12" fill="#1a1a1a">평가 도구</text>
+    <text x="330" y="404" font-size="10.5" fill="#666">EXTRACT_GT · llm_judge · KoBERTScore</text>
+    <text x="330" y="419" font-size="10.5" fill="#666">4개 모드를 config 로 전환합니다</text>
+    <text x="646" y="384" font-size="12" font-weight="700" fill="#1a1a1a">개발자</text>
+    <text x="646" y="404" font-size="10.5" fill="#666">채점 방식을 바꿀 때만 손댑니다</text>
+  </g>
+
+  <!-- data -->
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="444" width="410" height="40" fill="#fff" stroke="#999" stroke-dasharray="4 3"/>
+    <text x="46" y="462" font-size="12" font-weight="700" fill="#555">tests/data/</text>
+    <text x="46" y="477" font-size="10.5" fill="#888">규정 md · chat_contents_*.csv 14종</text>
+    <rect x="460" y="444" width="410" height="40" fill="#fff" stroke="#999" stroke-dasharray="4 3"/>
+    <text x="476" y="462" font-size="12" font-weight="700" fill="#555">tests/environment.py</text>
+    <text x="476" y="477" font-size="10.5" fill="#888">behave 훅 (before_all / after_all)</text>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="494" width="840" height="14" fill="none"/>
+    <text x="30" y="506" font-size="11.5" fill="#444">스텝을 얇게 두는 이유가 있습니다. 여기에 로직이 쌓이면 시나리오에 적힌 문장과 실제 동작이 어긋나고, "테스트 케이스가 곧 기획서"라는 전제가 깨집니다.</text>
+  </g>
+</svg>

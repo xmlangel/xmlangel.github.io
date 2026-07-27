@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400" role="img" aria-label="실패 케이스만 사람이 보는 구조">
+  <rect width="900" height="400" fill="#fbfbf9"/>
+  <text x="30" y="40" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#1a1a1a">검수를 없애지 않고 볼 곳을 좁혔습니다</text>
+  <line x1="30" y1="54" x2="870" y2="54" stroke="#1a1a1a" stroke-width="2"/>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <text x="30" y="86" font-size="13" font-weight="700" fill="#888">Before</text>
+    <rect x="30" y="96" width="620" height="44" fill="#e8e6e0" stroke="#999"/>
+    <text x="340" y="123" text-anchor="middle" font-size="12.5" fill="#444">전체를 사람이 확인합니다. 건당 15분, 검수자마다 기준이 달랐습니다</text>
+    <text x="666" y="123" font-size="12" fill="#888">인원 고정 → 대기열 증가</text>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <text x="30" y="184" font-size="13" font-weight="700" fill="#1a1a1a">After</text>
+
+    <rect x="30" y="194" width="150" height="52" fill="#fff" stroke="#666"/>
+    <text x="105" y="216" text-anchor="middle" font-size="12" fill="#666">전체 케이스</text>
+    <text x="105" y="235" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">배치 · 병렬</text>
+
+    <path d="M180,220 L222,220" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M222,220 L214,216 L214,224 z" fill="#1a1a1a"/>
+
+    <rect x="226" y="194" width="180" height="52" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+    <text x="316" y="216" text-anchor="middle" font-size="12" fill="#666">LLM Judge 채점</text>
+    <text x="316" y="235" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">1~4점 + reason</text>
+
+    <path d="M406,208 L452,180" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M452,180 L443,180 L447,187 z" fill="#1a1a1a"/>
+    <path d="M406,232 L452,262" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M452,262 L443,255 L447,262 z" fill="#1a1a1a"/>
+
+    <rect x="456" y="152" width="414" height="52" fill="#fff" stroke="#666"/>
+    <text x="472" y="174" font-size="13" font-weight="700" fill="#1a1a1a">PASS</text>
+    <text x="472" y="193" font-size="11.5" fill="#666">자동 통과합니다. 사람은 보지 않고 TCC와 Allure에 기록만 남습니다</text>
+
+    <rect x="456" y="236" width="414" height="66" fill="#1a1a1a"/>
+    <text x="472" y="258" font-size="13" font-weight="700" fill="#fff">FAIL만 사람 검토</text>
+    <text x="472" y="277" font-size="11.5" fill="#ccc">reason 먼저 읽고 판정에 동의하는지만 확인합니다</text>
+    <text x="472" y="294" font-size="11.5" fill="#ccc">처음부터 읽지 않으니 건당 시간이 줄어듭니다</text>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="326" width="840" height="52" fill="#f2f1ed" stroke="#666"/>
+    <text x="46" y="346" font-size="11.5" fill="#444">전량 자동화로 가지 않은 이유가 있습니다. 논문의 사람-Judge 일치도는 <tspan font-weight="700" fill="#1a1a1a">85%</tspan>입니다(사람끼리는 81%). 남은 구간을 자동 판정으로 밀면 오탐이 리포트에 그대로 남습니다.</text>
+    <text x="46" y="366" font-size="11.5" fill="#444">정상 답변을 FAIL로 찍는 오탐은 팀 신뢰를 가장 빨리 깎습니다. 그래서 사람을 없애는 대신 사람이 보는 <tspan font-weight="700" fill="#1a1a1a">범위</tspan>를 줄였습니다.</text>
+  </g>
+</svg>
