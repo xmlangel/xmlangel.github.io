@@ -1,0 +1,58 @@
+{%-comment-%}
+  방문자 카운터 스크립트 2종.
+
+  1) 집계 - GoatCounter count.js. jekyll.environment 가 ignore_env 와 같으면 넣지 않는다.
+     count.js 는 localhost·127.0.0.1·file:// 에서 스스로 집계를 건너뛴다.
+  2) 표시 - [data-gc-count] 를 찾아 카운터 API 로 숫자를 채운다.
+     같은 path 는 한 번만 요청한다. 응답은 서버에서 최대 4시간 캐시되므로
+     방금 올린 조회수는 바로 반영되지 않는다.
+{%-endcomment-%}
+
+{%- include counter/enabled.liquid -%}
+{%- if counter_on -%}
+
+{%- if jekyll.environment != site.data.conf.counter.ignore_env %}
+<script data-goatcounter="https://{{ site.data.conf.counter.code }}.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+{%- endif %}
+
+<script>
+(function () {
+  var nodes = document.querySelectorAll("[data-gc-count]");
+  if (!nodes.length || !window.fetch) return;
+
+  var base = {{ counter_base | jsonify }};
+  var pending = {};
+
+  Array.prototype.forEach.call(nodes, function (node) {
+    var path = node.getAttribute("data-gc-count");
+    if (!path) return;
+    if (pending[path]) { pending[path].push(node); return; }
+    pending[path] = [node];
+
+    fetch(base + path + ".json")
+      .then(function (res) {
+        {%- comment -%}
+          아직 조회 기록이 없는 경로는 404 + {"count":"0"} 을 돌려준다.
+          404 를 실패로 보면 새 글의 배지가 통째로 사라져 "고장인지 0인지"를 알 수 없다.
+          그래서 404 도 본문을 읽어 0 으로 표시한다. 그 밖의 상태 코드만 실패로 본다.
+        {%- endcomment -%}
+        if (res.ok || res.status === 404) return res.json();
+        return Promise.reject(res.status);
+      })
+      .then(function (data) {
+        if (data.count === undefined || data.count === null) return;
+        pending[path].forEach(function (target) {
+          target.textContent = data.count;
+          var badge = target.closest(".visitor-counter");
+          if (badge) badge.removeAttribute("hidden");
+        });
+      })
+      .catch(function () {
+        {%- comment -%} 실패 시 배지는 hidden 으로 남겨 둔다. {%- endcomment -%}
+      });
+  });
+})();
+</script>
+
+{%- endif -%}

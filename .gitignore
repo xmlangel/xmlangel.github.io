@@ -17,3 +17,15 @@ Gemfile.lock
 GEMINI.md
 .gemini/
 node_modules/
+
+# Claude Code session log infra
+.workspace/
+_workspace/
+*.log
+.DS_Store
+Thumbs.db
+CLAUDE.local.md
+CLAUDE.md
+**/CLAUDE.md
+.claude/
+~$*

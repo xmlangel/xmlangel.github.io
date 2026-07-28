@@ -1,0 +1,18 @@
+{%-comment-%}
+  방문자 카운터 배지 하나를 렌더한다.
+
+  in:
+    path  - "TOTAL" (사이트 전역 합계) 또는 "/posts/slug" (특정 글)
+    label - 숫자 앞에 붙일 말 (예: 방문자)
+    icon  - font-awesome 클래스 (예: fa fa-users)
+    tag   - 감쌀 태그. small(기본) 또는 p
+
+  숫자를 받아오기 전에는 hidden 이라 아무것도 보이지 않는다.
+  요청이 실패하면 계속 hidden 이므로 "방문자 -" 같은 빈 배지가 남지 않는다.
+{%-endcomment-%}
+
+{%- assign counter_tag = include.tag | default: 'small' -%}
+<{{ counter_tag }} class="visitor-counter" hidden>
+  {%- if include.icon %}<i class="{{ include.icon }}"></i>&nbsp;{% endif -%}
+  {{- include.label }}&nbsp;<span class="visitor-counter-num" data-gc-count="{{ include.path }}">-</span>
+</{{ counter_tag }}>

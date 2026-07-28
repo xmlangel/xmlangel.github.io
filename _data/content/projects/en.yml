@@ -33,7 +33,7 @@ page_data:
       post: |
         # Examples
 
-        This is an example page to display markdown related styles for Mr. Green Jekyll Theme.
+        This is an example page to display markdown related styles for xmlangel.uk.
 
         ### Headings (centered)
         {:data-align="center"}
@@ -100,7 +100,7 @@ page_data:
 
         ### Link
 
-        This is [Mr. Green Jekyll Theme](https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme), a simple theme built for [Jekyll](https://jekyllrb.com/).
+        This is [xmlangel.uk](https://xmlangel.uk), a blog built with [Jekyll](https://jekyllrb.com/).
 
         ### Picture
 

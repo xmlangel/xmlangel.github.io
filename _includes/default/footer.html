@@ -45,6 +45,10 @@
       {% if site.data.conf.main.main_footer -%}
         <div class="footer-text {{ footer_class }}">
           <p>{{ copyright_text_out }} </p>
+          {%- include counter/enabled.liquid -%}
+          {%- if counter_on and site.data.conf.counter.footer_total -%}
+            {% include counter/badge.liquid path="TOTAL" label=site.data.conf.counter.label_total icon="fa fa-users" %}
+          {%- endif -%}
           {%- if site.data.conf.main.creative_commons.enable -%}
             {%- assign license_url = site.data.conf.main.creative_commons.license_url
               | replace: site.data.conf.main.creative_commons.license_replace, license_type
@@ -60,7 +64,7 @@
           {%- endif -%}
         </div>
       {% endif -%}
-      <p class="footer-powered"><span>Pwrd by </span><a href="https://github.com/MrGreensWorkshop/MrGreen-JekyllTheme" target="_blank" rel="noopener noreferrer">Mr. Green</a></p>
+      <p class="footer-powered"><a href="{{ site.url }}">xmlangel.uk</a></p>
     </footer>
   </div>
 </div>

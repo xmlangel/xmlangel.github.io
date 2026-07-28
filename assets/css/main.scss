@@ -163,6 +163,10 @@
   @import "common/post-info";
 {% endif %}
 
+{% if site.data.conf.counter.enable %}
+  @import "common/visitor-counter";
+{% endif %}
+
 {% if post_exist or projects_page_exist or home_page_exist or about_page_exist %}
   @import "common/markdown-style";
 {% endif %}
@@ -218,6 +222,7 @@
 
 {% if about_page_exist %}
   @import "about/about-style";
+  @import "about/about-resume";
 
   {% if site.data.conf.others.about.show_contacts and contacts_exist %}
     @import "about/about-contact";

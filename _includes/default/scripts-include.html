@@ -183,6 +183,9 @@
   {%- include default/google-analytics.html -%}
 {% endif -%}
 
+{%- comment -%} 방문자 카운터 (GoatCounter) - _data/conf/counter.yml {%- endcomment -%}
+{%- include counter/scripts.html -%}
+
 {% if site.data.lang.size > 1 and site.data.conf.main.language_switch_lang_list.size > 1 and site.data.conf.main.language_translation_offer_box -%}
   {%- assign language_translation_offer_box = true -%}
   {%- include multi_lng/lang-offer-msg-box.html -%}

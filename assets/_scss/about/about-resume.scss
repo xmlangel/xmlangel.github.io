@@ -1,0 +1,275 @@
+/* About 페이지 이력 블록 (거쳐온 도메인 / 기술 스택 / 해온 일 / 자격)
+ *
+ * 색을 새로 정의하지 않고 currentColor 의 투명도만 조절한다.
+ * 라이트·다크 스킴 어느 쪽이든 상속받은 본문 색에 자동으로 맞춰진다.
+ */
+
+.resume {
+  --resume-line: 1px solid rgba(128, 128, 128, 0.28);
+  --resume-fill: rgba(128, 128, 128, 0.1);
+
+  margin-top: 2.4rem;
+
+  /* markdown-style 이 붙는 영역이므로 목록 기본값을 되돌린다. */
+  ul,
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* markdown-style 은 `.markdown-style li { margin-left: -15px }` 로 모든 li 를
+   * 왼쪽으로 당긴다. 그대로 두면 태그 pill 이 간격(7px)보다 크게(15px) 당겨져
+   * 앞 항목을 파고든다. 선택자를 두 단계로 써서 확실히 이긴다. */
+  ul li,
+  ol li {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.resume-section {
+  margin-bottom: 3.2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.resume-heading {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin: 0 0 1.4rem;
+  padding-bottom: 0.6rem;
+  border-bottom: var(--resume-line);
+}
+
+/* ---------- 타임라인 ---------- */
+
+/* 기간 | 선·점 거터 | 내용 — 거터를 따로 두어 라벨과 점이 겹치지 않게 한다. */
+/* 기간 라벨 폭은 넉넉하게 잡는다.
+ * 가장 긴 라벨(2023–2024)이 13px 기준 약 62px 이므로 10.5rem(105px) 이면
+ * 폰트 폴백이나 확대율이 달라져도 거터를 침범하지 않는다. */
+.resume-timeline {
+  --resume-period-w: 10.5rem;
+  --resume-gutter: 2.4rem;
+
+  /* 항목이 많아 한 줄로 세우면 너무 길다. 2단으로 흘린다.
+   * multicol 은 문서 순서대로 1단을 채운 뒤 2단으로 넘어가므로 연도 순서가 유지된다. */
+  columns: 2;
+  column-gap: 3.6rem;
+}
+
+.resume-timeline > li {
+  /* 항목이 단 경계에서 잘리지 않게 */
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+}
+
+.resume-timeline > li {
+  display: grid;
+  grid-template-columns: var(--resume-period-w) var(--resume-gutter) 1fr;
+  padding-bottom: 2.2rem;
+  position: relative;
+}
+
+.resume-timeline > li:last-child {
+  padding-bottom: 0;
+}
+
+/* 거터 가운데를 지나는 세로선 */
+.resume-timeline > li::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--resume-period-w) + (var(--resume-gutter) / 2));
+  top: 0.9rem;
+  bottom: 0;
+  border-left: var(--resume-line);
+}
+
+.resume-timeline > li:last-child::before {
+  bottom: auto;
+  height: 0;
+}
+
+/* 선 위의 점 */
+.resume-timeline > li::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--resume-period-w) + (var(--resume-gutter) / 2));
+  top: 0.55rem;
+  width: 7px;
+  height: 7px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: rgba(128, 128, 128, 0.5);
+}
+
+.resume-timeline > li.is-current::after {
+  background: var(--body-anchor-text-color, #2a7ae2);
+  box-shadow: 0 0 0 3px rgba(128, 128, 128, 0.18);
+}
+
+.resume-period {
+  grid-column: 1;
+  font-size: 1.3rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  opacity: 0.6;
+  padding-top: 0.2rem;
+  white-space: nowrap;
+  /* 라벨이 예상보다 길어져도 거터로 넘쳐 점과 겹치지 않게 가둔다. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resume-detail {
+  grid-column: 3;
+}
+
+.resume-timeline > li.is-current .resume-period {
+  opacity: 0.95;
+  font-weight: 700;
+}
+
+.resume-role {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.resume-note {
+  font-size: 1.3rem;
+  opacity: 0.5;
+  margin: 0.2rem 0 0;
+}
+
+/* ---------- 태그 ---------- */
+
+.resume-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 0.9rem !important;
+}
+
+.resume-tags > li {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  padding: 0.4rem 1.1rem;
+  border: var(--resume-line);
+  border-radius: 999px;
+  background: var(--resume-fill);
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.resume-tags.is-loose {
+  gap: 0.8rem;
+  margin-top: 0 !important;
+
+  > li {
+    font-size: 1.4rem;
+    padding: 0.55rem 1.3rem;
+  }
+}
+
+/* ---------- 해온 일 (주제별 그룹) ---------- */
+
+.resume-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+  gap: 2.4rem 3.2rem;
+}
+
+.resume-group-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin: 0 0 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: var(--resume-line);
+  opacity: 0.75;
+}
+
+.resume-list > li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 0.7rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.resume-list > li::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 0.85em;
+  width: 5px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+/* ---------- 자격 ---------- */
+
+.resume-certs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  gap: 1rem;
+}
+
+.resume-certs > li {
+  border: var(--resume-line);
+  border-radius: 8px;
+  padding: 1.1rem 1.3rem;
+  background: var(--resume-fill);
+}
+
+.resume-certs strong {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.resume-certs span {
+  display: block;
+  font-size: 1.25rem;
+  opacity: 0.55;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+/* ---------- 좁은 화면 ---------- */
+
+@media screen and (max-width: 900px) {
+  .resume-timeline {
+    columns: 1;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .resume-timeline > li {
+    grid-template-columns: 1fr;
+    padding-left: 1.6rem;
+  }
+
+  .resume-timeline > li::before,
+  .resume-timeline > li::after {
+    left: 0;
+  }
+
+  .resume-period,
+  .resume-detail {
+    grid-column: 1;
+  }
+
+  .resume-period {
+    text-align: left;
+    padding-top: 0;
+    margin-bottom: 0.3rem;
+  }
+}

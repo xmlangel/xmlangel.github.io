@@ -46,6 +46,10 @@
         {%- include default/copyright-text.liquid %}
         <p>{{ copyright_text_out }}</p>
       {% endif -%}
+      {%- include counter/enabled.liquid -%}
+      {%- if counter_on and site.data.conf.counter.side_nav_total %}
+        {% include counter/badge.liquid path="TOTAL" label=site.data.conf.counter.label_total icon="fa fa-users" tag="p" %}
+      {% endif -%}
     </div>
   </div>
   {%- include default/nav/navigation-side-nav-bottom-buttons.html -%}

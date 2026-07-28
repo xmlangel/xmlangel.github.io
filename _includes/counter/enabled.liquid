@@ -1,0 +1,15 @@
+{%-comment-%}
+  방문자 카운터 활성 여부를 판단해 counter_on 에 담는다.
+  out: counter_on (true 또는 nil), counter_base (카운터 엔드포인트 접두사)
+
+  테마의 copyright-text.liquid 와 같은 방식 — include 후 변수를 그대로 쓴다.
+{%-endcomment-%}
+
+{%- assign counter_conf = site.data.conf.counter -%}
+{%- assign counter_on = nil -%}
+{%- assign counter_base = nil -%}
+
+{%- if counter_conf.enable and counter_conf.code != nil and counter_conf.code != empty -%}
+  {%- assign counter_on = true -%}
+  {%- capture counter_base -%}https://{{ counter_conf.code }}.goatcounter.com/counter/{%- endcapture -%}
+{%- endif -%}

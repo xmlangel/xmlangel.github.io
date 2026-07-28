@@ -1,0 +1,26 @@
+/* 방문자 카운터 배지 (_data/conf/counter.yml)
+ * 숫자를 받아오기 전에는 hidden 이므로 레이아웃이 흔들리지 않는다. */
+
+.visitor-counter {
+  white-space: nowrap;
+
+  &[hidden] {
+    display: none;
+  }
+
+  .visitor-counter-num {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* 사이드내비 하단 - 저작권 문구와 같은 톤으로 맞춘다. */
+.side-nav-footer .visitor-counter {
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* 하단 푸터 - 저작권 문구 옆에 붙는다. */
+.footer-text .visitor-counter {
+  margin-left: 0.5em;
+  opacity: 0.85;
+}

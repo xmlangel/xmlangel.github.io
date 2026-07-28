@@ -13,6 +13,13 @@
   <small>
     &nbsp;&nbsp;&nbsp;<span><i class="fa fa-clock-o"></i>&nbsp;{{include.read_time}}</span>
   </small>
+  {%comment-%} view count (글 페이지에서만. 목록에서는 show_views 를 넘기지 않는다) {%-endcomment-%}
+  {%- if include.show_views -%}
+    {%- include counter/enabled.liquid -%}
+    {%- if counter_on and site.data.conf.counter.post_views %}
+  <span>&nbsp;&nbsp;&nbsp;{% include counter/badge.liquid path=include.url label=site.data.conf.counter.label_views icon="fa fa-eye" %}</span>
+    {% endif -%}
+  {%- endif -%}
   {%comment-%} comment count  {%-endcomment-%}
   {%- if site.data.conf.posts.comments.enable and site.data.conf.posts.comments.disqus.enable and site.data.conf.posts.comments.disqus.comment_count %}
   <small class="meta-link" {{include.comment_style}}>

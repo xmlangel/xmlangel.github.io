@@ -1,0 +1,33 @@
+###########################################################
+#                Visitor counter (GoatCounter)
+###########################################################
+# 방문자수 집계·표시 설정. 테마 원본 설정(main.yml)과 분리해 두어
+# 테마를 업데이트해도 이 파일은 그대로 남는다.
+#
+# 사용 전 준비 (한 번만):
+#   1. https://www.goatcounter.com/signup 에서 가입하고 Code 를 정한다.
+#      Code 가 xmlangel 이면 대시보드는 https://xmlangel.goatcounter.com
+#   2. Settings > "Allow adding visitor counts on your website" 를 켠다.
+#      (기본값 꺼짐 — 이걸 켜지 않으면 카운터 숫자를 못 읽어온다)
+#   3. 아래 code 에 그 Code 를 적는다.
+#
+# code 가 비어 있으면 집계 스크립트도 카운터 표시도 전혀 출력되지 않는다.
+
+# 기능 전체 스위치
+enable: true
+
+# GoatCounter 사이트 Code (서브도메인 앞부분만. 예: xmlangel)
+code: "xmlangel"
+
+# 이 환경에서는 집계 스크립트를 넣지 않는다 (로컬 개발 중 카운트 오염 방지)
+# jekyll serve 는 기본이 development 다.
+ignore_env: development
+
+# 표시 위치
+footer_total: true      # 하단 푸터 - 사이트 전역 누적 방문자
+post_views: true        # 글 상단 meta 줄 - 글별 조회수
+side_nav_total: true    # 사이드내비 하단 - 사이트 전역 누적 방문자
+
+# 라벨
+label_total: "방문자"
+label_views: "조회"
