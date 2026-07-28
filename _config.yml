@@ -120,4 +120,7 @@ sass:
 # Exclude these files or folders from production site
 ###########################################################
 exclude: ["Gemfile*", "README*", "LICENSE", "docs",
-          "CLAUDE.md", "CLAUDE.local.md", "GEMINI.md", ".claude", ".workspace", "node_modules"]
+          "CLAUDE.md", "CLAUDE.local.md", "GEMINI.md", ".claude", ".workspace", "node_modules",
+          # bundler 를 프로젝트 경로에 설치(BUNDLE_PATH=vendor/bundle)하면 gem 안의
+          # 샘플 포스트까지 사이트 콘텐츠로 읽혀 빌드가 죽는다.
+          "vendor", ".bundle"]

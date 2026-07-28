@@ -29,3 +29,7 @@ CLAUDE.md
 **/CLAUDE.md
 .claude/
 ~$*
+
+# bundler local install path (BUNDLE_PATH=vendor/bundle)
+vendor/
+.bundle/
