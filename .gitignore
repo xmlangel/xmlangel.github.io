@@ -10,7 +10,10 @@ _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
-Gemfile.lock
+# Gemfile.lock is tracked on purpose: without it on the default branch
+# Dependabot cannot see which gem versions are actually in use, so its
+# alerts never close and it never opens a fix PR. GitHub Pages ignores
+# this file (it builds with its own bundle), so tracking it is free.
 # # End of https://www.toptal.com/developers/gitignore/api/jekyll
 
 # Gemini related files
