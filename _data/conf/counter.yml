@@ -24,9 +24,13 @@ code: "xmlangel"
 ignore_env: development
 
 # 표시 위치
-footer_total: true      # 하단 푸터 - 사이트 전역 누적 방문자
-post_views: true        # 글 상단 meta 줄 - 글별 조회수
-side_nav_total: true    # 사이드내비 하단 - 사이트 전역 누적 방문자
+#
+# 셋 다 false 면 방문자수가 화면에 전혀 노출되지 않는다. 집계는 계속 되므로
+# 통계는 https://<code>.goatcounter.com 대시보드에서만 본다.
+# (대시보드 공개 범위는 GoatCounter Settings 의 "Dashboard viewable by" 로 정한다)
+footer_total: false     # 하단 푸터 - 사이트 전역 누적 방문자
+post_views: false       # 글 상단 meta 줄 - 글별 조회수
+side_nav_total: false   # 사이드내비 하단 - 사이트 전역 누적 방문자
 
 # 라벨
 label_total: "방문자"

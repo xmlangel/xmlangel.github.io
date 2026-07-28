@@ -16,6 +16,16 @@
         async src="//gc.zgo.at/count.js"></script>
 {%- endif %}
 
+{%-comment-%}
+  표시 위치를 전부 끈 경우(비공개 집계)에는 조회 스크립트를 아예 내보내지 않는다.
+  읽을 배지가 없으니 실을 이유가 없고, 방문자에게 카운터 엔드포인트도 드러내지 않는다.
+{%-endcomment-%}
+{%- assign counter_shown = false -%}
+{%- if site.data.conf.counter.footer_total or site.data.conf.counter.post_views or site.data.conf.counter.side_nav_total -%}
+  {%- assign counter_shown = true -%}
+{%- endif -%}
+{%- if counter_shown %}
+
 <script>
 (function () {
   var nodes = document.querySelectorAll("[data-gc-count]");
@@ -54,5 +64,6 @@
   });
 })();
 </script>
+{%- endif -%}
 
 {%- endif -%}
