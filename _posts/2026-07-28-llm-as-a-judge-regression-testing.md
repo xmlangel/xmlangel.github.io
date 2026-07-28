@@ -319,6 +319,7 @@ Return strictly JSON:
 
 특히 `EXTRACT_GT` 모드는 단순 답변 텍스트만 뽑는 것이 아니라, 근거가 숨어 있는 문서 파일명과 조항 위치까지 정확히 파싱해 줍니다.
 
+{% raw %}
 ```python
 def extract_ground_truth(self, question, context):
     prompt = f"""당신은 규정 해석 전문가입니다. [규정 내용]을 바탕으로 [질문]의 답을 추출하세요.
@@ -331,6 +332,7 @@ def extract_ground_truth(self, question, context):
 ...
 [질문]: {question}"""
 ```
+{% endraw %}
 
 여기서 조항 전문(`text`)과 요약본(`answer`)을 굳이 나누어 추출하는 파이썬 구조도 실무적인 이유 때문이었습니다. LLM Judge가 채점 기준표로 삼을 때는 생략 없는 조항 전문(`text`)이 들어가야 엄격하게 평가할 수 있고, 나중에 사람이 결과를 훑어보거나 검수할 때는 1000자 요약본(`answer`)이 훨씬 가독성이 좋았기 때문입니다.
 
