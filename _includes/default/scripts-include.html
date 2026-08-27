@@ -151,6 +151,69 @@
     $(window).bind('post-query-ready', function() {
       PostQuery.showAll();
     });
+
+    /* scroll_to_load only appends on a scroll event. When the loaded posts are
+       shorter than the window there is nothing to scroll, so no event fires and
+       the list stops early leaving blank space below. Keep appending until the
+       page is taller than the window. */
+    /* Two things stop the list too early:
+       1. with nothing to scroll no scroll event fires at all;
+       2. the page height can be set by the side column or by the container
+          min-height, so judging by document height alone passes while the post
+          list itself is still short, leaving blank space under it.
+       So keep appending until the list reaches the bottom of the page AND the
+       page is comfortably taller than the window. */
+    var listSelector = '.post-list-container > .thumbnails';
+
+    function blankSpaceBelowList() {
+      var main = document.querySelector('.post-list-main') || document.querySelector('.post-list-container');
+      if (!main) return 0;
+      var rect = main.getBoundingClientRect();
+      var listBottom = rect.bottom + window.pageYOffset;
+      return document.documentElement.scrollHeight - listBottom;
+    }
+
+    /* Fill only until the first screen is covered with no blank space under the
+       list; everything after that arrives while scrolling. Judging by document
+       height alone is not enough because the side column and the container
+       min-height also stretch the page. */
+    function listIsEnough() {
+      var pageTallEnough = document.documentElement.scrollHeight > window.innerHeight * 1.8;
+      var noBlankSpace = blankSpaceBelowList() <= 80;
+      return pageTallEnough && noBlankSpace;
+    }
+
+    /* The theme only appends when the viewport is already near the page bottom
+       (scrollTop >= docHeight - winHeight - thumbHeight). Firing a scroll event
+       at position 0 therefore appends nothing as soon as the page is a little
+       taller than the window. Jump to the bottom, fire, then jump back. */
+    function appendOne() {
+      var before = $(listSelector).length;
+      var keep = window.pageYOffset;
+      window.scrollTo(0, document.documentElement.scrollHeight);
+      $(window).trigger('scroll');
+      window.scrollTo(0, keep);
+      return $(listSelector).length > before;
+    }
+
+    $(window).bind('post-query-done', function() {
+      var guard = 0;
+      var fill = function() {
+        if (guard++ > 400) return;
+        if (listIsEnough()) return;
+        /* several per tick so the whole list lands quickly */
+        var added = false;
+        for (var i = 0; i < 8; i++) { if (appendOne()) added = true; else break; }
+        if (!added) return;
+        setTimeout(fill, 0);
+      };
+      setTimeout(fill, 0);
+    });
+
+    /* window resized taller: top up the list again */
+    $(window).on('resize', function() {
+      if (!listIsEnough()) $(window).trigger('post-query-done');
+    });
   {% endif -%}
 
   {%- if site.data.conf.main.meta.ios_ios_mobile_app_link_fix %}

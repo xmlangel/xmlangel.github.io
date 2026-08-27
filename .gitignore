@@ -36,3 +36,6 @@ CLAUDE.md
 # bundler local install path (BUNDLE_PATH=vendor/bundle)
 vendor/
 .bundle/
+
+# Playwright MCP 임시 스크린샷
+.playwright-mcp/

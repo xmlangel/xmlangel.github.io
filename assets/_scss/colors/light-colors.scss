@@ -46,6 +46,9 @@ $anchor-text-color-light: #3389de;
 }
 // default/default
 %default-colors-light {
+  --side-filter-chip-hover-background-color: rgba(0, 0, 0, 0.05);
+  --side-filter-chip-border-color: rgba(0, 0, 0, 0.12);
+  --side-filter-chip-hover-border-color: rgba(0, 0, 0, 0.3);
   --multipurpose-container-background-color: #{$container-background-light};
   --multipurpose-container-shadow: 1px 1px 0 1px #e5e2e2fb;
 }
@@ -210,7 +213,6 @@ $anchor-text-color-light: #3389de;
 %home-heading-colors-light {
   --home-heading-message-color: #fff;
   --home-intro-text-header-color: #{$header-color-light};
-  --home-heading-shadow-color: #77747455;
 }
 // layout: about
 // about/about-style

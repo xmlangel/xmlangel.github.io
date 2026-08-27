@@ -7,13 +7,13 @@
 <nav id="side-nav-container">
   <div class="side-nav">
     <div class="side-nav-brand">
-      {% include multi_lng/get-page-by-layout.liquid layout = 'home' -%}
+      
       {% if site.data.conf.main.side_nav_profile_img_path -%}
         <img src="{{ site.baseurl }}{{ site.data.conf.main.side_nav_profile_img_path }}" alt="">
       {% endif -%}
       <div class="brand-holder">
         {% if site.data.conf.main.side_nav_brand_text_enable -%}
-          <a href="{{ site.baseurl }}{{ layout_page_obj.url }}" translate="no">{{ site.data.owner[lng].brand }}</a>
+          <a href="{{ site.baseurl }}/" translate="no">{{ site.data.owner[lng].brand }}</a>
         {% endif -%}
       </div>
       <p>&nbsp;{{ site.data.owner[lng].brand_sub_text | replace: site.data.conf.main.sample_replace, site.data.lang[lng].constants.sample }}</p>

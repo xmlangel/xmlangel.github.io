@@ -1,0 +1,40 @@
+{%-comment-%}
+  Category / tag / year filters as a right hand column.
+  Reuses post-list/tab-links.html so the query links stay identical.
+{%-endcomment-%}
+
+{%- include multi_lng/get-pages-by-lng.liquid pages = site.posts -%}
+<aside class="post-side-filters">
+
+  <section class="side-filter-group">
+    <h5><i class="fa-fw {{ site.data.conf.posts.post_query_tabs_category_tab_icon }}" aria-hidden="true"></i>{{ site.data.lang[lng].post-list.upside_down_tabs.tab.categories }}</h5>
+    <ul class="side-filter-list">
+      {%-comment-%} posts use categories (plural); category is empty on this site {%-endcomment-%}
+      {%- assign _group = lng_pages | where_exp: "item", "item.categories.size > 0" | group_by: "categories" -%}
+      {% include post-list/tab-links.html type='category' list = _group -%}
+    </ul>
+  </section>
+
+  <section class="side-filter-group">
+    <h5><i class="fa-fw {{ site.data.conf.posts.post_query_tabs_tag_tab_icon }}" aria-hidden="true"></i>{{ site.data.lang[lng].post-list.upside_down_tabs.tab.tags }}</h5>
+    <ul class="side-filter-list">
+      {%- assign _group = lng_pages | where_exp: "item", "item.tags.size > 0" | group_by: "tags" -%}
+      {% include post-list/tab-links.html type='tags' list = _group -%}
+    </ul>
+  </section>
+
+  <section class="side-filter-group">
+    <h5><i class="fa-fw {{ site.data.conf.posts.post_query_tabs_year_tab_icon }}" aria-hidden="true"></i>{{ site.data.lang[lng].post-list.upside_down_tabs.tab.years }}</h5>
+    <ul class="side-filter-list">
+      {%- assign _group = lng_pages | sort: 'date' | reverse | group_by_exp:"post", "post.date | date: '%Y'" -%}
+      {% include post-list/tab-links.html type='year' list = _group -%}
+    </ul>
+  </section>
+
+  <div class="side-filter-clear">
+    <a href="javascript:void(0);" data-query-link onclick="PostQuery.showAll();">
+      <i class="fa-fw {{ site.data.conf.posts.post_query_tabs_clear_tab_icon }}" aria-hidden="true"></i>{{ site.data.lang[lng].post-list.upside_down_tabs.tab.all }}
+    </a>
+  </div>
+
+</aside>

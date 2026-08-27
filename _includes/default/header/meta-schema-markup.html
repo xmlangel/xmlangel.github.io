@@ -32,7 +32,7 @@
 {%- assign content_id = meta_page_url | append: "#content" %}
 
 {%- assign google_searchlinks_en = nil %}
-{%- if site.data.conf.main.meta.schema_markup_google_sitelinks_searchbox and page.layout == 'home' %}{%- assign google_searchlinks_en = true %}{%- endif %}
+{%- if site.data.conf.main.meta.schema_markup_google_sitelinks_searchbox and page.layout == 'post-list' %}{%- assign google_searchlinks_en = true %}{%- endif %}
 {%- assign post_en = nil %}
 {%- if site.data.conf.main.meta.schema_markup_post and page.layout == 'post' %}{%- assign post_en = true %}{%- endif %}
 
@@ -49,7 +49,7 @@
   {%- assign copyright_id = person_id %}
 {%- endif %}
 
-{%- if page.layout == 'home' %}
+{%- if page.layout == 'post-list' %}
   {%-comment-%} could be person_id or organization_id or nil {%-endcomment%}
   {%- if site.data.conf.main.meta.schema_markup_thing == "organization" %}
     {%- assign thing_id = organization_id %}
@@ -123,10 +123,10 @@
   {%- assign page_item_name = meta_title -%}
   {%- assign breadcrumb_list = '' | split: '' -%}
 
-  {%- include multi_lng/get-page-by-layout.liquid layout = 'home' -%}
-  {%- assign home_button_name = layout_page_obj.button_name | default: site.data.lang[lng]['home'].button_name -%}
+  {%- include multi_lng/get-page-by-layout.liquid layout = 'post-list' -%}
+  {%- assign home_button_name = layout_page_obj.button_name | default: site.data.lang[lng]['post-list'].button_name -%}
 
-  {%- if page.layout == 'home' %}
+  {%- if page.layout == 'post-list' %}
     {%- assign page_item_name = home_button_name -%}
   {%-else %}
     {%- assign breadcrumb_item = '' | split: '' -%}
@@ -296,7 +296,7 @@
   <script type="application/ld+json">{{ meta_ld_json }}</script>
 {%- endif %}
 
-{%- if page.layout == 'home' %}
+{%- if page.layout == 'post-list' %}
   {%- if thing_id == organization_id %}
     {%- assign thing_only_meta_ld_json = organization_meta_ld_json %}
   {%- elsif thing_id == person_id %}

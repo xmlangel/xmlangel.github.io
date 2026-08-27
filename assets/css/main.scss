@@ -19,8 +19,11 @@
   --main-container-margin: clamp(5px, calc((100vw / 100) * 3.5 ), 40px);
   /* any page bottom padding */
   --main-container-padding-bottom: calc(var(--main-container-margin) / 2);
-  --main-container-width-limit: 800px;
-  --main-container-max-width: calc(var(--main-container-width-limit) + (var(--main-container-margin) * 2));
+  /* full width: content spans the whole area next to the side nav */
+  --main-container-width-limit: 100%;
+  --main-container-max-width: 100%;
+  /* width of the filter column on the post list page */
+  --side-filters-width: 260px;
   /* space between containers */
   --multipurpose-container-margin-bottom: 20px;
   --footer-height: 27px;
@@ -125,9 +128,6 @@
 
 {% if site.posts != nil and site.posts != empty %} {% assign post_exist = true %} {% endif %}
 
-{% assign pages = site.html_pages | where_exp: "item", "item.layout == 'home'" %}
-{% if pages.size > 0 %} {% assign home_page_exist = true %} {% endif %}
-
 {% assign pages = site.html_pages | where_exp: "item", "item.layout == 'post-list'" %}
 {% if pages.size > 0 %} {% assign post_list_page_exist = true %} {% endif %}
 
@@ -167,7 +167,7 @@
   @import "common/visitor-counter";
 {% endif %}
 
-{% if post_exist or projects_page_exist or home_page_exist or about_page_exist %}
+{% if post_exist or projects_page_exist or post_list_page_exist or about_page_exist %}
   @import "common/markdown-style";
 {% endif %}
 
@@ -215,9 +215,9 @@
 * for layout specific content
 ***********************************************************/
 
-{% if home_page_exist %}
+{%- comment -%} the hero banner now lives on the post-list page {%- endcomment -%}
+{% if post_list_page_exist %}
   @import "home/home-heading";
-  @import "home/new-posts";
 {% endif %}
 
 {% if about_page_exist %}
@@ -245,6 +245,11 @@
       /*min-height: 100px;*/
     }
   {% endif %}
+{% endif %}
+
+{%-comment-%} the two column layout is shared by post-list, archives and about {%-endcomment-%}
+{% if post_list_page_exist or archives_page_exist or about_page_exist %}
+  @import "post-list/side-filters";
 {% endif %}
 
 {% if post_list_page_exist %}

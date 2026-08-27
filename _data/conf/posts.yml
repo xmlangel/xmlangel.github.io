@@ -26,7 +26,7 @@ excerpt_start_separator: <!-- outline-start -->
 thumbnail_img: true
 
 # in Blog page, if thumbnail_img is true and if no picture is provided for thumbnail, this fills with empty picture for clean look
-thumbnail_img_fill: true
+thumbnail_img_fill: false
 
 ###########################################################
 #                Post Query
@@ -41,7 +41,7 @@ post_query: true
 
 # for page load
 # if you set to scroll_to_load, comment paginate on _config.yml
-post_query_mode_startup: paginator
+post_query_mode_startup: scroll_to_load
 
 # for queries
 post_query_mode_query: scroll_to_load
@@ -114,7 +114,8 @@ share_buttons_tooltip: true
 # 3. page_numbers
 
 # pager for blog thumbnail list
-pager_navigation_post_list: page_numbers
+# commented out: the home page loads every post by infinite scroll instead
+#pager_navigation_post_list: page_numbers
 
 # pager for every post page
 pager_navigation_post: page_numbers

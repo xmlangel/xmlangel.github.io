@@ -8,12 +8,11 @@ layout: default
 ---
 {%- include multi_lng/get-lng-by-url.liquid -%}
 {%- assign lng = get_lng -%}
+<div class="two-col-layout">
+  <div class="two-col-main">
 <div class="multipurpose-container about-container">
   <div class="row about-main">
-    <div class="col-md-3 about-img">
-      <img src="{{ page.img }}" alt="">
-    </div>
-    <div class="col-md-9 about-header">
+    <div class="col-md-12 about-header">
       <h1 translate="no">{{ site.data.owner[lng].brand }}</h1>
       <div class="meta-container">
         hi!~
@@ -62,7 +61,7 @@ layout: default
 
 <div class="resume">
 
-  <section class="resume-section">
+  <section class="resume-section" id="resume-domains">
     <h2 class="resume-heading">거쳐온 도메인</h2>
     <ol class="resume-timeline">
       <li class="is-current">
@@ -142,7 +141,7 @@ layout: default
     </ol>
   </section>
 
-  <section class="resume-section">
+  <section class="resume-section" id="resume-stack">
     <h2 class="resume-heading">기술 스택</h2>
     <ul class="resume-tags is-loose">
       <li>Java</li>
@@ -170,7 +169,7 @@ layout: default
     </ul>
   </section>
 
-  <section class="resume-section">
+  <section class="resume-section" id="resume-work">
     <h2 class="resume-heading">해온 일</h2>
     <div class="resume-groups">
 
@@ -235,7 +234,7 @@ layout: default
     </div>
   </section>
 
-  <section class="resume-section">
+  <section class="resume-section" id="resume-certs">
     <h2 class="resume-heading">자격 · 인증</h2>
     <ul class="resume-certs">
       <li>
@@ -257,4 +256,19 @@ layout: default
       </div>
     </div>
   </div>
+</div>
+
+  </div>
+
+  <aside class="two-col-side">
+    <section class="side-filter-group">
+      <h5><i class="fa-fw fa fa-list-ul" aria-hidden="true"></i>목차</h5>
+      <ul class="side-filter-list is-stacked">
+        <li><a href="#resume-domains">거쳐온 도메인</a></li>
+        <li><a href="#resume-stack">기술 스택</a></li>
+        <li><a href="#resume-work">해온 일</a></li>
+        <li><a href="#resume-certs">자격 · 인증</a></li>
+      </ul>
+    </section>
+  </aside>
 </div>

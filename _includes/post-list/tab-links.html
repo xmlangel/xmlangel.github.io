@@ -25,7 +25,10 @@
 {%- for _page in include.list -%}
   {% assign grp_item = _page.name | remove: "[" | remove: "]" | remove: '"' | split: "," -%}
   {%- for item in grp_item -%}
-    {%- assign item_tmp = item | strip -%}
+    {%-comment%} queries run on lowercase values, so fold case here to merge QA and qa {%endcomment-%}
+    {%- assign item_tmp = item | strip | downcase -%}
+    {%- comment %} skip placeholders like "tags: -" {% endcomment -%}
+    {%- if item_tmp == '-' or item_tmp == '' or item_tmp == nil -%}{%- continue -%}{%- endif -%}
     {%- comment %} remove duplications {% endcomment -%}
     {%- assign item_list = item_list | push: item_tmp | uniq -%}
   {%- endfor -%}

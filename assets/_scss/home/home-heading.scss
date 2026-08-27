@@ -5,33 +5,61 @@
 
 .home-heading-container {
   @include get_scheme(home-heading-colors-);
+  /* hero fills the card top edge; container radius clips its corners */
+  overflow: hidden;
 }
 
 .home-heading {
   width: calc(100% + (var(--text-spacing) * 2));
   margin-top: calc(-1 * var(--text-spacing));
   margin-left: calc(-1 * var(--text-spacing));
-  height: calc(100vw - (50vh / 2));
-  max-height: 250px;
+  /* half of the 383px band techblog.woowahan.com uses */
+  height: clamp(120px, 13.3vw, 192px);
   background-size: cover;
-  border-radius: 10px;
-  box-shadow: inset 0 -8px 5px -1px var(--home-heading-shadow-color);
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
   /* for centering home-heading-message */
   display: table;
 }
 
+/* keeps the overlay text readable on a photographic background */
+.home-heading::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.45) 55%,
+    rgba(0, 0, 0, 0.68) 100%
+  );
+  pointer-events: none;
+}
+
 .home-heading > img {
-  border-radius: 10px;
+  border-radius: 0;
   max-width: var(--main-container-width-limit);
   width: 100%;
   height: auto;
 }
 
 .home-heading-message {
-  font-size: 4.2rem;
+  font-size: clamp(2.4rem, 4.6vw, 4.2rem);
   font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.32;
   color: var(--home-heading-message-color);
   text-align: center;
+  padding: 0 var(--text-spacing);
+  /* sits above the gradient */
+  position: relative;
+  z-index: 1;
   /* for centering home-heading-message */
   display: table-cell;
   vertical-align: middle;
@@ -39,7 +67,7 @@
 
 .home-intro-text {
   text-align: justify;
-  margin-top: calc(var(--text-spacing) - 3px);
+  margin-top: var(--text-spacing);
 }
 
 .home-intro-text > h1,

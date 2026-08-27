@@ -1,0 +1,33 @@
+{%-comment-%}
+  Renders every post grouped by year and month.
+  Shared by the archives layout and the home layout.
+  in: heading_level (optional, defaults to h1), show_header (optional)
+{%-endcomment-%}
+
+{%- include multi_lng/get-pages-by-lng.liquid pages = site.posts -%}
+{%- assign archivePostsByYear = lng_pages | sort: 'date' | reverse | group_by_exp:"post", "post.date | date: site.data.lang[lng].date.year" -%}
+<div class="archives">
+  {%- for year in archivePostsByYear %}
+  <div class="year" id="year-{{ year.name }}">
+    <h6>{{ year.name }}</h6>
+    {%- assign archivePostsByMonth = year.items | sort: 'date' | reverse | group_by_exp:"post", "post.date | date: '%m'" -%}
+    {%- for month in archivePostsByMonth -%}
+    <div class="month">
+      {%- assign monthInt = month.name | plus: 0 -%}
+      {%- assign monthInt = monthInt | minus: 1 %}
+      <h6>{{ site.data.lang[lng].date.months[monthInt] }}</h6>
+      <ul>
+      {%- for post in month.items %}
+        <li>
+          <span>{{ post.date | date: site.data.lang[lng].date.day }}</span>
+          {%- assign page_title = post.title -%}
+          {%- include util/auto-content-post-title-rename.liquid title = page_title -%}
+          <a href="{{ post.url | relative_url }}">{{ page_title }}</a>
+        </li>
+      {%- endfor %}
+      </ul>
+    </div>
+    {% endfor -%}
+  </div>
+  {%- endfor %}
+</div>

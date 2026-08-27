@@ -1,0 +1,153 @@
+/* two column layout: content on the left, a side column on the right.
+   Shared by the post list, the archive and the about page. */
+
+.post-list-layout,
+.two-col-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--multipurpose-container-margin-bottom);
+}
+
+/* the list keeps growing downwards without limit */
+.post-list-main,
+.two-col-main {
+  flex: 1 1 auto;
+  /* lets the flex item shrink below its content width */
+  min-width: 0;
+}
+
+.post-side-filters,
+.two-col-side {
+  @include get_scheme(default-colors-);
+  flex: 0 0 var(--side-filters-width);
+  width: var(--side-filters-width);
+  background-color: var(--multipurpose-container-background-color);
+  box-shadow: var(--multipurpose-container-shadow);
+  border-radius: 10px;
+  padding: var(--text-spacing);
+  margin-bottom: var(--multipurpose-container-margin-bottom);
+  /* the filter list is long; keeping it in the document flow would set the page
+     height and leave blank space under the shorter post list, which also stops
+     the infinite scroll from reaching the bottom. */
+  position: sticky;
+  top: var(--main-container-margin);
+  max-height: calc(100vh - (var(--main-container-margin) * 2));
+  overflow-y: auto;
+}
+
+.side-filter-group {
+  margin-bottom: calc(var(--text-spacing) * 0.9);
+}
+
+.side-filter-group:last-of-type {
+  margin-bottom: calc(var(--text-spacing) / 2);
+}
+
+.post-side-filters h5,
+.two-col-side h5 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.post-side-filters h5 > i,
+.two-col-side h5 > i {
+  margin-right: 6px;
+}
+
+.side-filter-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.side-filter-list > li {
+  margin: 0;
+}
+
+.side-filter-list > li > a {
+  display: inline-block;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  padding: 5px 11px;
+  border: 1px solid var(--side-filter-chip-border-color);
+  border-radius: 15px;
+  white-space: nowrap;
+}
+
+.side-filter-list > li > a:hover,
+.side-filter-list > li > a:focus {
+  border-color: var(--side-filter-chip-hover-border-color);
+  text-decoration: none;
+}
+
+.side-filter-clear {
+  border-top: 1px solid var(--side-filter-chip-border-color);
+  padding-top: calc(var(--text-spacing) / 2);
+}
+
+.side-filter-clear > a {
+  font-size: 1.3rem;
+}
+
+.side-filter-clear > a > i {
+  margin-right: 5px;
+}
+
+/* stack the filters under the list on narrow screens */
+@media screen and (max-width: 900px) {
+  .post-list-layout,
+  .two-col-layout {
+    flex-direction: column;
+  }
+
+  .post-side-filters,
+  .two-col-side {
+    flex: none;
+    width: 100%;
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+/* the header carries a 48px top margin from the days the tabs sat above the
+   list; with the filters moved to the right column it just pushed the first
+   card out of line with them. */
+.post-list-layout .post-list-header {
+  margin-top: 0;
+}
+
+.post-list-layout .post-list-header:not(:empty) {
+  margin-bottom: calc(var(--text-spacing) / 2);
+}
+
+/* stacked variant: one item per line (used by the about page contents) */
+.side-filter-list.is-stacked {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.side-filter-list.is-stacked > li > a {
+  display: block;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  white-space: normal;
+}
+
+.side-filter-list.is-stacked > li > a:hover,
+.side-filter-list.is-stacked > li > a:focus {
+  background-color: var(--side-filter-chip-hover-background-color);
+}
+
+/* post count next to a year */
+.side-filter-count {
+  margin-left: 5px;
+  opacity: 0.6;
+  font-size: 1.1rem;
+}

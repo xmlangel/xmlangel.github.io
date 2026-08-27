@@ -6,36 +6,26 @@
 layout: default
 # The Archives of posts.
 ---
+{%- comment -%} collected before the list include, which reassigns lng_pages {%- endcomment -%}
 {%- include multi_lng/get-pages-by-lng.liquid pages = site.posts -%}
-{%- assign postsByYear = lng_pages | sort: 'date' | reverse | group_by_exp:"post", "post.date | date: site.data.lang[lng].date.year" -%}
-<div class="multipurpose-container">
-  <h1>{{ site.data.lang[lng].archives.page_header }}</h1>
-  <div class="archives">
-    {%- for year in postsByYear %}
-    <div class="year">
-      <h6>{{ year.name }}</h6>
-      {%- comment %}we can directly filter days. But I wanted to leave in case list by month needs{% endcomment -%}
-      {%- assign postsByMonth = year.items | sort: 'date' | reverse | group_by_exp:"post", "post.date | date: '%m'" -%}
-      {%- for month in postsByMonth -%}
-      <div class="month">
-        {%- comment %}convert string to integer{% endcomment -%}
-        {%- assign monthInt = month.name | plus: 0 -%}
-        {%- comment %}-1, since array starts from zero index{% endcomment -%}
-        {%- assign monthInt = monthInt | minus: 1 %}
-        <h6>{{ site.data.lang[lng].date.months[monthInt] }}</h6>
-        <ul>
-        {%- for post in month.items %}
-          <li>
-            <span>{{ post.date | date: site.data.lang[lng].date.day }}</span>
-            {%- assign page_title = post.title -%}
-            {%- include util/auto-content-post-title-rename.liquid title = page_title -%}
-            <a href="{{ post.url | relative_url }}">{{ page_title }}</a>
-          </li>
-        {%- endfor %}
-        </ul>
-      </div>
-      {% endfor -%}
+{%- assign sideYears = lng_pages | sort: 'date' | reverse | group_by_exp:"post", "post.date | date: '%Y'" -%}
+
+<div class="two-col-layout">
+  <div class="two-col-main">
+    <div class="multipurpose-container">
+      <h1>{{ site.data.lang[lng].archives.page_header }}</h1>
+      {%- include util/archives-list.html -%}
     </div>
-    {%- endfor %}
   </div>
+
+  <aside class="two-col-side">
+    <section class="side-filter-group">
+      <h5><i class="fa-fw {{ site.data.conf.posts.post_query_tabs_year_tab_icon }}" aria-hidden="true"></i>{{ site.data.lang[lng].post-list.upside_down_tabs.tab.years }}</h5>
+      <ul class="side-filter-list">
+        {%- for year in sideYears %}
+        <li><a href="#year-{{ year.name }}">{{ year.name }}<span class="side-filter-count">{{ year.items.size }}</span></a></li>
+        {%- endfor %}
+      </ul>
+    </section>
+  </aside>
 </div>

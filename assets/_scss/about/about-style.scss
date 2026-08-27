@@ -5,49 +5,23 @@
 
 .about-container {
   @include get_scheme(about-style-colors-);
-  margin-top: 15%;
-  margin-left: 5%;
-  margin-right: 5%;
   padding: 0;
-}
-
-.about-container .about-main {
-  position: relative;
-}
-
-.about-container,
-.about-container .about-img img {
   border-radius: 10px;
 }
 
-.about-container .about-img img {
-  min-height: 140px;
-  min-width: 140px;
-  max-height: 140px;
-  max-width: 140px;
-  object-fit: cover;
-}
-
-.about-container .about-img {
-  float: left;
-}
-
 .about-container .about-header {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-
-  margin-left: 160px;
-  margin-right: -20px;
-  padding-right: 0px;
+  padding-top: var(--text-spacing);
+  padding-bottom: 0;
+  padding-left: calc(15px + var(--text-spacing));
+  padding-right: calc(15px + var(--text-spacing));
 }
 
 .about-container .about-header > h1 {
   font-weight: 700;
   font-size: 3.5rem;
   margin-top: 0px;
+  margin-bottom: 10px;
   color: var(--about-header-title-color);
-  width: calc((100vw - var(--side-nav-width)) / 2);
 }
 
 /* sub-title and email font */
@@ -66,8 +40,8 @@
 .about-container .about-divider hr {
   margin-top: 0px;
   margin-bottom: 0px;
-  margin-left: 175px;
-  margin-right: 35px;
+  margin-left: calc(15px + var(--text-spacing));
+  margin-right: calc(15px + var(--text-spacing));
   padding: 0px;
 }
 
@@ -95,10 +69,3 @@
   text-align: justify;
 }
 */
-
-@media screen and (max-width: 500px) {
-  .about-container {
-    margin-left: unset;
-    margin-right: unset;
-  }
-}
