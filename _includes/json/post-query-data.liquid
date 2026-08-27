@@ -12,20 +12,22 @@
   {%- include post-list/post-thumbnail-data.liquid post = post -%}
   {%- include default/img/get-img-path.liquid img_name=image layout=post.layout absolute=false -%}
   {%- capture post_query_json -%}
+  {%-comment-%} jsonify escapes backslashes and quotes; raw interpolation broke the file when a post contained \& {%-endcomment-%}
   {
-    "title"     : "{{ page_title }}"
-    ,"title_sub": "{{ title_sub }}"
-    ,"category" : "{{ post.category | downcase }}"
-    ,"tags"     : "{{ post.tags | join: ', ' | downcase }}"
-    ,"url"      : "{{ post_url }}"
-    ,"image"    : "{{ get_img_path_out }}"
-    ,"max_width": "{{ max_width }}"
-    ,"display"  : "{{ display }}"
-    ,"read_time": "{{ read_time }}"
-    ,"date"     : "{{ post_date }}"
-    ,"year"     : "{{ post.date | date: "%Y" }}"
+    "title"     : {{ page_title | jsonify }}
+    ,"title_sub": {{ title_sub | jsonify }}
+    {%-comment-%} join with ", " so filterQuery can split it, and use categories (plural) {%-endcomment-%}
+    ,"category" : {{ post.categories | join: ', ' | downcase | jsonify }}
+    ,"tags"     : {{ post.tags | join: ', ' | downcase | jsonify }}
+    ,"url"      : {{ post_url | jsonify }}
+    ,"image"    : {{ get_img_path_out | jsonify }}
+    ,"max_width": {{ max_width | jsonify }}
+    ,"display"  : {{ display | jsonify }}
+    ,"read_time": {{ read_time | jsonify }}
+    ,"date"     : {{ post_date | jsonify }}
+    ,"year"     : {{ post.date | date: "%Y" | jsonify }}
     {% if site.data.conf.posts.comments.enable and site.data.conf.posts.comments.disqus.enable and site.data.conf.posts.comments.disqus.comment_count -%}
-    ,"comment_style": "{{ comment_style }}"
+    ,"comment_style": {{ comment_style | jsonify }}
     {% endif -%}
   },
   {%- endcapture -%}

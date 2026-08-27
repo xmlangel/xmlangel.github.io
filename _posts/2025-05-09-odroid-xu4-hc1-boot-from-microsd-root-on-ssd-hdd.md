@@ -124,7 +124,7 @@ Serial		: 0000000000000000
 
 그럼 과정을 차차 보면될듯하다..
 
-## 1. microSD에 OS 설치 \& 부팅 확인
+## 1. microSD에 OS 설치 & 부팅 확인
 
 1. Odroid 공식 이미지(우분투)를 microSD에 플래싱!
 
@@ -138,7 +138,7 @@ Serial		: 0000000000000000
 
 ---
 
-## 2. SSD/HDD 연결 \& 포맷하기
+## 2. SSD/HDD 연결 & 포맷하기
 
 1. **SSD/HDD 연결**
 USB-SATA 어댑터(또는 HC1은 SATA)에 SSD/HDD를 연결합니다.
@@ -223,7 +223,7 @@ LABEL=boot /media/boot vfat defaults 0 1
 ```
 ---
 
-## 7. 재부팅 \& 확인
+## 7. 재부팅 & 확인
 
 1. SSD에 파일이 잘 복사됐는지 확인!
 
